@@ -1,40 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:marchant/app/app.router.dart';
+import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/services/state_service/onboarding_state_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import '../../../../app/app.locator.dart';
-import '../../../../services/validation_service/front_validation.dart';
+import '../../../../../services/validation_service/front_validation.dart';
 
-class SignupViewModel extends ReactiveViewModel {
+class SignupFinalViewModel extends ReactiveViewModel {
   final _navigation = locator<NavigationService>();
   final _onboardingState = locator<OnboardingStateService>();
 
   @override
   List<ListenableServiceMixin> get listenableServices => [_onboardingState];
 
-  String get signUpMsg => 'Create an Account';
+  String get passMsg => 'Create password';
 
-  TextEditingController phoneNumController = TextEditingController();
-  TextEditingController nameController = TextEditingController();
+  TextEditingController passController = TextEditingController();
+  TextEditingController confirmController = TextEditingController();
 
   double get iconSize => 15;
 
   String get phoneNumFieldHint => 'Phone number';
-  String get nameHint => 'Name';
+  String get passHint => 'password';
+  String get confirmHint => 'confirm password';
 
   String get haveAccount => 'Aready have an Account?';
 
-  onSignIn() {
-    _navigation.clearStackAndShow(Routes.loginView);
-  }
-
   onNext() {
     // navigate to the next page.
-    if (_formKey.currentState!.validate() && _formError.isEmpty) {
-      _navigation.navigateToSignupFinalView();
-    }
+    if (_formKey.currentState!.validate() && _formError.isEmpty) {}
   }
 
   //------------------ Validation --------------
@@ -44,27 +38,25 @@ class SignupViewModel extends ReactiveViewModel {
   final Map<dynamic, String> _formError = {};
   Map<dynamic, String> get formError => _formError;
 
-  // validate phone number.
-  validatePhoneNumber(String value, var controller) {
+  // validate password
+  validatePassword(String value, var controller) {
     return _setStateOfFormField(
       FrontValidation.validateFormField(
         value,
-        "Phone number",
-        minLength: 10,
-        maxLength: 10,
+        "Password",
+        minLength: 6,
+        maxLength: 20,
       ),
       controller,
     );
   }
 
   // a method to validate password field.
-  validateAText(String value, var controller) {
+  validateConfirmPass(String value, String password, var controller) {
     return _setStateOfFormField(
-      FrontValidation.validateFormField(
-        value,
-        "Name",
-        minLength: 3,
-        maxLength: 20,
+      FrontValidation.confirmPassword(
+        password: password,
+        confirmPass: value,
       ),
       controller,
     );

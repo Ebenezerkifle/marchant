@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marchant/ui/common/app_colors.dart';
 import 'package:marchant/ui/common/app_text_style.dart';
 import 'package:marchant/ui/common/ui_helpers.dart';
 import 'package:marchant/ui/views/widgets/custome_button.dart';
-import 'package:marchant/ui/views/widgets/input_field.dart';
 import 'package:stacked/stacked.dart';
 
-import 'signup_viewmodel.dart';
+import '../../../widgets/input_field.dart';
+import 'signup_final_viewmodel.dart';
 
-class SignupView extends StackedView<SignupViewModel> {
-  const SignupView({Key? key}) : super(key: key);
+class SignupFinalView extends StackedView<SignupFinalViewModel> {
+  const SignupFinalView({Key? key}) : super(key: key);
 
   @override
   Widget builder(
     BuildContext context,
-    SignupViewModel viewModel,
+    SignupFinalViewModel viewModel,
     Widget? child,
   ) {
     return Scaffold(
@@ -30,44 +29,43 @@ class SignupView extends StackedView<SignupViewModel> {
                   key: viewModel.formKey,
                   child: Column(
                     children: [
-                      Text(viewModel.signUpMsg, style: AppTextStyle.h2Bold),
+                      Text(viewModel.passMsg, style: AppTextStyle.h2Bold),
                       verticalSpaceMiddle,
-                      // Name field
+                      // Password field
                       InputField(
-                        validator: (value) => viewModel.validateAText(
-                            value, viewModel.nameController),
-                        controller: viewModel.nameController,
+                        validator: (value) => viewModel.validatePassword(
+                          value,
+                          viewModel.passController,
+                        ),
+                        controller: viewModel.passController,
                         error: viewModel.formError
-                            .containsKey(viewModel.nameController),
+                            .containsKey(viewModel.passController),
                         prefixIcon: Icon(
-                          FontAwesomeIcons.solidUser,
+                          FontAwesomeIcons.lock,
                           color: kcPrimaryColorDark,
                           size: viewModel.iconSize,
                         ),
-                        hint: viewModel.nameHint,
+                        hint: viewModel.passHint,
                       ),
                       verticalSpaceMiddle,
-                      // phone number field
+                      // Confirm password field
                       InputField(
-                        validator: (value) => viewModel.validatePhoneNumber(
-                            value, viewModel.phoneNumController),
-                        controller: viewModel.phoneNumController,
+                        validator: (value) => viewModel.validateConfirmPass(
+                          value,
+                          viewModel.passController.text,
+                          viewModel.confirmController,
+                        ),
+                        controller: viewModel.confirmController,
                         error: viewModel.formError
-                            .containsKey(viewModel.phoneNumController),
-                        inputType: TextInputType.phone,
-                        charLength: 10,
-                        inputFormatter: [
-                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                        ],
+                            .containsKey(viewModel.confirmController),
                         prefixIcon: Icon(
-                          FontAwesomeIcons.phone,
+                          FontAwesomeIcons.lock,
                           color: kcPrimaryColorDark,
                           size: viewModel.iconSize,
                         ),
-                        hint: viewModel.phoneNumFieldHint,
+                        hint: viewModel.confirmHint,
                       ),
                       verticalSpaceMiddle,
-
                       // error message widget
                       viewModel.formError.isNotEmpty
                           ? Column(
@@ -90,7 +88,7 @@ class SignupView extends StackedView<SignupViewModel> {
                           : verticalSpaceMedium,
                       // proceed button comes next!
                       CustomeButton(
-                        text: 'Next',
+                        text: 'Submit',
                         onTap: viewModel.onNext,
                         width: double.infinity,
                         loading: viewModel.isBusy,
@@ -100,27 +98,6 @@ class SignupView extends StackedView<SignupViewModel> {
                         ),
                       ),
                       verticalSpaceMiddle,
-                      // Register text button
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            viewModel.haveAccount,
-                            style: AppTextStyle.h4Normal,
-                          ),
-                          horizontalSpaceSmall,
-                          InkWell(
-                            onTap: viewModel.onSignIn,
-                            child: Text(
-                              'Sign in',
-                              style: AppTextStyle.withColor(
-                                color: kcPrimaryColor,
-                                style: AppTextStyle.h3Bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
                     ],
                   ),
                 ),
@@ -131,8 +108,8 @@ class SignupView extends StackedView<SignupViewModel> {
   }
 
   @override
-  SignupViewModel viewModelBuilder(
+  SignupFinalViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      SignupViewModel();
+      SignupFinalViewModel();
 }
