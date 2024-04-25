@@ -40,8 +40,8 @@ class HomeView extends StackedView<HomeViewModel> {
       ),
       drawer: Drawer(
         width: screenWidth(context) * .7,
-        backgroundColor: kcPrimaryColorDark,
-        child: Column(),
+        backgroundColor: kcDarkGreyColor,
+        child: const Column(),
       ),
       body: const SafeArea(
         top: true,
