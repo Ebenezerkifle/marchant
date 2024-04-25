@@ -36,7 +36,7 @@ class ImageBuilder extends StatelessWidget {
             ? DecorationImage(image: NetworkImage(image), fit: fit)
             : DecorationImage(
                 image: AssetImage(
-                  image != '' ? image : 'assets/images/student.jpg',
+                  image != '' ? image : 'assets/images/order_delivery.png',
                 ),
                 fit: fit,
               ),

@@ -36,7 +36,7 @@ class LoginViewModel extends BaseViewModel {
   }
 
   onRegister() {
-    _navigationService.navigateToSignupView();
+    _navigationService.replaceWithSignupView();
   }
 
   //------------------ Validation --------------

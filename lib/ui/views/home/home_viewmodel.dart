@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:marchant/app/app.bottomsheets.dart';
 import 'package:marchant/app/app.dialogs.dart';
 import 'package:marchant/app/app.locator.dart';
@@ -8,6 +9,9 @@ import 'package:stacked_services/stacked_services.dart';
 class HomeViewModel extends BaseViewModel {
   final _dialogService = locator<DialogService>();
   final _bottomSheetService = locator<BottomSheetService>();
+
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
+  get scaffoldKey => _key;
 
   String get counterLabel => 'Counter is: $_counter';
 

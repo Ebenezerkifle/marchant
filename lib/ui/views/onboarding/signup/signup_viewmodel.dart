@@ -18,13 +18,17 @@ class SignupViewModel extends ReactiveViewModel {
 
   TextEditingController phoneNumController = TextEditingController();
   TextEditingController nameController = TextEditingController();
+  TextEditingController locationController = TextEditingController();
 
   double get iconSize => 15;
 
   String get phoneNumFieldHint => 'Phone number';
   String get nameHint => 'Name';
+  String get locationHint => 'Location';
 
   String get haveAccount => 'Aready have an Account?';
+
+  String get image => 'assets/images/order_delivery.png';
 
   onSignIn() {
     _navigation.clearStackAndShow(Routes.loginView);
@@ -58,13 +62,19 @@ class SignupViewModel extends ReactiveViewModel {
   }
 
   // a method to validate password field.
-  validateAText(String value, var controller) {
+  validateAText(
+    String value,
+    String name,
+    var controller, {
+    int? maxLength,
+    int? minLength,
+  }) {
     return _setStateOfFormField(
       FrontValidation.validateFormField(
         value,
-        "Name",
-        minLength: 3,
-        maxLength: 20,
+        name,
+        minLength: minLength,
+        maxLength: maxLength,
       ),
       controller,
     );

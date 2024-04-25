@@ -8,6 +8,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:marchant/ui/views/onboarding/login/login_view.dart';
 import 'package:marchant/ui/views/onboarding/signup/signup_view.dart';
 import 'package:marchant/ui/views/onboarding/signup/signup_final/signup_final_view.dart';
+import 'package:marchant/ui/views/signup//choose_catagory/choose_catagory_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -17,6 +18,7 @@ import 'package:marchant/ui/views/onboarding/signup/signup_final/signup_final_vi
     MaterialRoute(page: LoginView),
     MaterialRoute(page: SignupView),
     MaterialRoute(page: SignupFinalView),
+    MaterialRoute(page: ChooseCatagoryView),
 // @stacked-route
   ],
   dependencies: [

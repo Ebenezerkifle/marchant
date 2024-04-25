@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marchant/app/app.locator.dart';
+import 'package:marchant/app/app.router.dart';
 import 'package:marchant/services/state_service/onboarding_state_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -14,6 +15,7 @@ class SignupFinalViewModel extends ReactiveViewModel {
   List<ListenableServiceMixin> get listenableServices => [_onboardingState];
 
   String get passMsg => 'Create password';
+  get image => 'assets/images/order_delivery.png';
 
   TextEditingController passController = TextEditingController();
   TextEditingController confirmController = TextEditingController();
@@ -28,7 +30,9 @@ class SignupFinalViewModel extends ReactiveViewModel {
 
   onNext() {
     // navigate to the next page.
-    if (_formKey.currentState!.validate() && _formError.isEmpty) {}
+    if (_formKey.currentState!.validate() && _formError.isEmpty) {
+      _navigation.navigateToChooseCatagoryView();
+    }
   }
 
   //------------------ Validation --------------
