@@ -9,3 +9,4 @@ const Color kcVeryLightGrey = Color(0xFFE3E3E3);
 const Color kcBackgroundColor = kcDarkGreyColor;
 const Color kcDanger = Colors.red;
 const Color kcWhite = Colors.white;
+const Color kcCardColor = Colors.white54;

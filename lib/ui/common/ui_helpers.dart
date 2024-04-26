@@ -13,6 +13,7 @@ const double iconSize = 18;
 
 const Widget horizontalSpaceTiny = SizedBox(width: tinySize);
 const Widget horizontalSpaceSmall = SizedBox(width: smallSize);
+const Widget horizontalSpaceMiddle = SizedBox(width: middleSize);
 const Widget horizontalSpaceMedium = SizedBox(width: mediumSize);
 const Widget horizontalSpaceLarge = SizedBox(width: largeSize);
 

@@ -26,6 +26,7 @@ class CustomeListTile extends StatelessWidget {
     this.duration = 1,
     this.stackWidget,
     this.noPrice = false,
+    this.bgdColor,
   });
   final String title;
   final String? imageUrl;
@@ -47,12 +48,13 @@ class CustomeListTile extends StatelessWidget {
   final int duration;
   final Widget? stackWidget;
   final bool noPrice;
+  final Color? bgdColor;
 
   @override
   Widget build(BuildContext context) {
     double tileWidth = width ?? MediaQuery.of(context).size.width * .9;
     Color forgroundColor = dark ? kcWhite : kcPrimaryColorDark;
-    Color backgroundColor = dark ? kcPrimaryColorDark : kcWhite;
+    Color backgroundColor = bgdColor ?? (dark ? kcPrimaryColorDark : kcWhite);
     double contentWidth = noImage ? tileWidth * .9 : tileWidth * .63;
     return GestureDetector(
       onTap: onTap,

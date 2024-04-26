@@ -46,6 +46,12 @@ class AppTextStyle {
     fontWeight: FontWeight.bold,
     color: kcDarkGreyColor,
   );
+  static const TextStyle h3Normal = TextStyle(
+    //fontFamily: 'Helvetica',
+    fontSize: 16,
+    fontWeight: FontWeight.normal,
+    color: kcDarkGreyColor,
+  );
   static const TextStyle h4Bold = TextStyle(
     //fontFamily: 'Helvetica',
     fontSize: 14,

@@ -7,7 +7,7 @@ import 'package:stacked_services/stacked_services.dart';
 import '../../../../app/app.locator.dart';
 import '../../../../services/validation_service/front_validation.dart';
 
-class SignupViewModel extends ReactiveViewModel {
+class SignupViewModel extends FormViewModel {
   final _navigation = locator<NavigationService>();
   final _onboardingState = locator<OnboardingStateService>();
 

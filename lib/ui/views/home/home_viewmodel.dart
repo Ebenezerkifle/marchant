@@ -1,40 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:marchant/app/app.bottomsheets.dart';
-import 'package:marchant/app/app.dialogs.dart';
 import 'package:marchant/app/app.locator.dart';
-import 'package:marchant/ui/common/app_strings.dart';
+import 'package:marchant/app/app.router.dart';
+import 'package:marchant/models/product_model.dart';
+import 'package:marchant/services/state_service/product_state_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class HomeViewModel extends BaseViewModel {
-  final _dialogService = locator<DialogService>();
-  final _bottomSheetService = locator<BottomSheetService>();
+class HomeViewModel extends ReactiveViewModel {
+  final _navigation = locator<NavigationService>();
+  final _productState = locator<ProductStateService>();
+
+  @override
+  List<ListenableServiceMixin> get listenableServices => [_productState];
 
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   get scaffoldKey => _key;
 
-  String get counterLabel => 'Counter is: $_counter';
+  Map<String, String> get catagories => _productState.categories;
+  Map<String, String> get topCategory => _productState.topCategories;
 
-  int _counter = 0;
+  Map<String, ProductModel> get products => _productState.products;
 
-  void incrementCounter() {
-    _counter++;
-    rebuildUi();
+  onSelected(var key) => _productState.onCategorySelected(key);
+  get selected => _productState.selected;
+
+  onItemSelecte(ProductModel product) {
+    _navigation.navigateToProductDetailView(product: product);
   }
 
-  void showDialog() {
-    _dialogService.showCustomDialog(
-      variant: DialogType.infoAlert,
-      title: 'Stacked Rocks!',
-      description: 'Give stacked $_counter stars on Github',
-    );
-  }
-
-  void showBottomSheet() {
-    _bottomSheetService.showCustomSheet(
-      variant: BottomSheetType.notice,
-      title: ksHomeBottomSheetTitle,
-      description: ksHomeBottomSheetDescription,
-    );
+  onMoreCategory() {
+    _navigation.navigateToCategoryListView();
   }
 }
