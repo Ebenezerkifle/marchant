@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/app/app.router.dart';
+import 'package:marchant/models/cart_model.dart';
 import 'package:marchant/models/product_model.dart';
 import 'package:marchant/services/state_service/cart_state_service.dart';
 import 'package:marchant/services/state_service/product_state_service.dart';
@@ -24,7 +25,7 @@ class HomeViewModel extends ReactiveViewModel {
 
   Map<String, ProductModel> get products => _productState.products;
 
-  Map<String, ProductModel> get cartItems => _cartState.cartItems;
+  Map<String, CartModel> get cartItems => _cartState.cartItems;
 
   onSelected(var key) => _productState.onCategorySelected(key);
   get selected => _productState.selected;

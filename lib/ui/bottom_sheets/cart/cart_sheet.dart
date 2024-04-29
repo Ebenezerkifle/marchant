@@ -54,8 +54,8 @@ class CartSheet extends StackedView<CartSheetModel> {
             ),
             verticalSpaceMiddle,
             CartCalculator(
-              controller: viewModel.controller,
-              onChange: (count) => viewModel.onChange(),
+              onChange: (count) => viewModel.onChange(count),
+              initialCount: viewModel.count.toString(),
             ),
             verticalSpaceMiddle,
             Row(
@@ -89,7 +89,7 @@ class CartSheet extends StackedView<CartSheetModel> {
                   onTap: () => completer!(
                     SheetResponse(
                       confirmed: true,
-                      data: null,
+                      data: viewModel.getCartObject(),
                     ),
                   ),
                   width: MediaQuery.of(context).size.width * .4,

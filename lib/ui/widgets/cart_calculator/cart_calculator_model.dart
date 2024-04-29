@@ -4,10 +4,13 @@ import 'package:stacked/stacked.dart';
 class CartCalculatorModel extends BaseViewModel {
   TextEditingController controller = TextEditingController();
   Function(String?) onchange;
-  CartCalculatorModel({
-    required this.controller,
+  CartCalculatorModel(
+    String? initialCount, {
     required this.onchange,
-  });
+  }) {
+    controller.text = initialCount ?? '1';
+    notifyListeners();
+  }
 
   add() {
     num count = num.parse(controller.text);

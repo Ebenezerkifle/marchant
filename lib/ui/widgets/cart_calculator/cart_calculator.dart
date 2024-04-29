@@ -8,13 +8,9 @@ import 'package:stacked/stacked.dart';
 import 'cart_calculator_model.dart';
 
 class CartCalculator extends StackedView<CartCalculatorModel> {
-  const CartCalculator({
-    super.key,
-    required this.controller,
-    required this.onChange,
-  });
-  final TextEditingController controller;
+  const CartCalculator({super.key, required this.onChange, this.initialCount});
   final Function(String?) onChange;
+  final String? initialCount;
 
   @override
   Widget builder(
@@ -63,5 +59,5 @@ class CartCalculator extends StackedView<CartCalculatorModel> {
   CartCalculatorModel viewModelBuilder(
     BuildContext context,
   ) =>
-      CartCalculatorModel(controller: controller, onchange: onChange);
+      CartCalculatorModel(initialCount, onchange: onChange);
 }
