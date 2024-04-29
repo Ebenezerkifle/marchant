@@ -44,7 +44,7 @@ class SearchWidget extends StatelessWidget {
           ),
           horizontalSpaceSmall,
           IconDecoreWidget(
-            icon: FontAwesomeIcons.filter,
+            icon: FontAwesomeIcons.sliders,
             onTap: () {},
             forgroundColor: kcWhite,
             backgroundColor: kcPrimaryColorDark,

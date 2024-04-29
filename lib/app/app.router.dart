@@ -5,9 +5,10 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i10;
+import 'package:flutter/material.dart' as _i11;
 import 'package:flutter/material.dart';
-import 'package:marchant/models/product_model.dart' as _i11;
+import 'package:marchant/models/product_model.dart' as _i12;
+import 'package:marchant/ui/views/home/cart/cart_view.dart' as _i10;
 import 'package:marchant/ui/views/home/category_list/category_list_view.dart'
     as _i8;
 import 'package:marchant/ui/views/home/home_view.dart' as _i2;
@@ -21,7 +22,7 @@ import 'package:marchant/ui/views/signup/choose_catagory/choose_catagory_view.da
     as _i7;
 import 'package:marchant/ui/views/startup/startup_view.dart' as _i3;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i12;
+import 'package:stacked_services/stacked_services.dart' as _i13;
 
 class Routes {
   static const homeView = '/home-view';
@@ -40,6 +41,8 @@ class Routes {
 
   static const productDetailView = '/product-detail-view';
 
+  static const cartView = '/cart-view';
+
   static const all = <String>{
     homeView,
     startupView,
@@ -49,6 +52,7 @@ class Routes {
     chooseCatagoryView,
     categoryListView,
     productDetailView,
+    cartView,
   };
 }
 
@@ -86,56 +90,66 @@ class StackedRouter extends _i1.RouterBase {
       Routes.productDetailView,
       page: _i9.ProductDetailView,
     ),
+    _i1.RouteDef(
+      Routes.cartView,
+      page: _i10.CartView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.HomeView: (data) {
-      return _i10.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.HomeView(),
         settings: data,
       );
     },
     _i3.StartupView: (data) {
-      return _i10.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartupView(),
         settings: data,
       );
     },
     _i4.LoginView: (data) {
-      return _i10.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.LoginView(),
         settings: data,
       );
     },
     _i5.SignupView: (data) {
-      return _i10.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.SignupView(),
         settings: data,
       );
     },
     _i6.SignupFinalView: (data) {
-      return _i10.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.SignupFinalView(),
         settings: data,
       );
     },
     _i7.ChooseCatagoryView: (data) {
-      return _i10.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.ChooseCatagoryView(),
         settings: data,
       );
     },
     _i8.CategoryListView: (data) {
-      return _i10.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.CategoryListView(),
         settings: data,
       );
     },
     _i9.ProductDetailView: (data) {
       final args = data.getArgs<ProductDetailViewArguments>(nullOk: false);
-      return _i10.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i9.ProductDetailView(key: args.key, product: args.product),
+        settings: data,
+      );
+    },
+    _i10.CartView: (data) {
+      return _i11.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i10.CartView(),
         settings: data,
       );
     },
@@ -154,9 +168,9 @@ class ProductDetailViewArguments {
     required this.product,
   });
 
-  final _i10.Key? key;
+  final _i11.Key? key;
 
-  final _i11.ProductModel product;
+  final _i12.ProductModel product;
 
   @override
   String toString() {
@@ -175,7 +189,7 @@ class ProductDetailViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i12.NavigationService {
+extension NavigatorStateExtension on _i13.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -275,8 +289,8 @@ extension NavigatorStateExtension on _i12.NavigationService {
   }
 
   Future<dynamic> navigateToProductDetailView({
-    _i10.Key? key,
-    required _i11.ProductModel product,
+    _i11.Key? key,
+    required _i12.ProductModel product,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -285,6 +299,20 @@ extension NavigatorStateExtension on _i12.NavigationService {
   }) async {
     return navigateTo<dynamic>(Routes.productDetailView,
         arguments: ProductDetailViewArguments(key: key, product: product),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToCartView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.cartView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -390,8 +418,8 @@ extension NavigatorStateExtension on _i12.NavigationService {
   }
 
   Future<dynamic> replaceWithProductDetailView({
-    _i10.Key? key,
-    required _i11.ProductModel product,
+    _i11.Key? key,
+    required _i12.ProductModel product,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -400,6 +428,20 @@ extension NavigatorStateExtension on _i12.NavigationService {
   }) async {
     return replaceWith<dynamic>(Routes.productDetailView,
         arguments: ProductDetailViewArguments(key: key, product: product),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithCartView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.cartView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

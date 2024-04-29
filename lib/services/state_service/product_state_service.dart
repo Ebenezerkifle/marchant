@@ -70,6 +70,7 @@ class ProductStateService with ListenableServiceMixin {
 
   Map<String, ProductModel> sampleProducts = {
     "a": ProductModel(
+      id: 'a',
       title: 'iPhone 15 Pro Max',
       description:
           "The latest iPhone 15 Pro Max offers everything a premium flagship smartphone should, including a brilliant 6.7-inch AMOLED display for all the media consumption -- and mobile productivity, of course. This year's model also looks and feels different than any prior Pro Max devices, as it's made of titanium instead of stainless steel and, therefore, significantly lighter in the hand. This makes the iPhone 15 Pro Max noticeably more comfortable to use, as ZDNET Editor-in-Chief Jason Hiner noted in his review.",
@@ -88,6 +89,7 @@ class ProductStateService with ListenableServiceMixin {
       provider: 'Alsam Trading plc',
     ),
     "b": ProductModel(
+      id: 'b',
       title: 'Samsung Ultra Note',
       description: 'This is th description of Samsun Ultra Note'
           ' so you better read it before you buy'
@@ -107,6 +109,7 @@ class ProductStateService with ListenableServiceMixin {
       provider: 'Alsam Trading plc',
     ),
     "c": ProductModel(
+      id: 'c',
       title: 'Samsung Galaxy S24 Ultra',
       description: 'This is th description of Samsun Ultra Note'
           ' so you better read it before you buy'
@@ -124,6 +127,7 @@ class ProductStateService with ListenableServiceMixin {
       provider: 'Alsam Trading plc',
     ), //iPhone 15 Pro Max
     "d": ProductModel(
+      id: 'd',
       title: 'iPhone 14 Pro',
       description: 'This is th description of the product'
           ' so you better read it before you buy'
@@ -140,6 +144,7 @@ class ProductStateService with ListenableServiceMixin {
       provider: 'Alsam Trading plc',
     ), //Google Pixel 8 Pro
     "e": ProductModel(
+      id: 'e',
       title: 'Google Pixel 8 Pro',
       description:
           "When it comes to camera performance, you really can't go wrong with any of the flagship devices from the big three (Apple, Samsung, and Google). Depending on your preference for color temperature and feature set, you may lean towards one manufacturer over the other. But more often than not, it's Google's Pixel camera system that satisfies the most users, and the latest Pixel 8 Pro remains a champion both for instant capturing and post-processing. ",
@@ -158,6 +163,7 @@ class ProductStateService with ListenableServiceMixin {
       provider: 'Alsam Trading plc',
     ),
     "f": ProductModel(
+      id: 'f',
       title: 'OnePlus Open',
       description:
           "The number of foldable phones on the market has never been higher, thanks to the collective effort of just about every manufacturer, including Google with its Pixel Fold, Motorola with its Razr lineup, and OnePlus with the OnePlus Open. While Samsung has held the reins of the best foldable honor for years, I'm giving the top spot right now to the OnePlus Open. ",

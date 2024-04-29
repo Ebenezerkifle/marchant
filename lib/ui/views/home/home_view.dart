@@ -33,12 +33,25 @@ class HomeView extends StackedView<HomeViewModel> {
           'Marchant',
           style: AppTextStyle.big,
         ),
-        actions: const [
+        actions: [
           Padding(
-            padding: EdgeInsets.only(right: middleSize),
-            child: Icon(
-              FontAwesomeIcons.solidBell,
-              color: kcPrimaryColor,
+            padding: const EdgeInsets.only(right: mediumSize),
+            child: GestureDetector(
+              onTap: viewModel.onCartTap,
+              child: const Icon(
+                FontAwesomeIcons.cartShopping,
+                color: kcPrimaryColor,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: middleSize),
+            child: GestureDetector(
+              onTap: () {},
+              child: const Icon(
+                FontAwesomeIcons.solidBell,
+                color: kcPrimaryColor,
+              ),
             ),
           )
         ],

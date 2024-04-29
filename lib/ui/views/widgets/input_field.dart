@@ -7,6 +7,7 @@ import '../../common/app_text_style.dart';
 class InputField extends StatelessWidget {
   const InputField({
     super.key,
+    this.height,
     this.width,
     this.hint = "hint",
     this.suffixTxt,
@@ -29,7 +30,9 @@ class InputField extends StatelessWidget {
     this.autofocus = false,
     this.inputFormatter,
     this.charLength = 40, // can be changed as needed
+    this.centerText = false,
   });
+  final double? height;
   final double? width;
   final String hint;
   final String? suffixTxt;
@@ -52,13 +55,15 @@ class InputField extends StatelessWidget {
   final bool autofocus;
   final List<TextInputFormatter>? inputFormatter;
   final int charLength;
+  final bool centerText;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: width ?? MediaQuery.of(context).size.width,
-      height: 50,
+      height: height ?? 50,
       child: TextFormField(
+        textAlign: centerText ? TextAlign.center : TextAlign.left,
         maxLength: charLength,
         focusNode: focusNode,
         onEditingComplete: onEditingComplete,
@@ -69,6 +74,7 @@ class InputField extends StatelessWidget {
         onChanged: onchange,
         readOnly: readOnly,
         autofocus: false,
+        inputFormatters: inputFormatter,
         textAlignVertical: TextAlignVertical.center,
         obscureText: hideText,
         style: darkText

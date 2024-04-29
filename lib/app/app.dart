@@ -1,3 +1,4 @@
+import 'package:marchant/services/state_service/cart_state_service.dart';
 import 'package:marchant/services/state_service/onboarding_state_service.dart';
 import 'package:marchant/services/state_service/product_state_service.dart';
 import 'package:marchant/ui/bottom_sheets/notice/notice_sheet.dart';
@@ -12,6 +13,8 @@ import 'package:marchant/ui/views/onboarding/signup/signup_final/signup_final_vi
 import 'package:marchant/ui/views/signup//choose_catagory/choose_catagory_view.dart';
 import 'package:marchant/ui/views/home//category_list/category_list_view.dart';
 import 'package:marchant/ui/views/home//product_detail/product_detail_view.dart';
+import 'package:marchant/ui/views/home//cart/cart_view.dart';
+import 'package:marchant/ui/bottom_sheets/cart/cart_sheet.dart';
 // @stacked-import
 
 @StackedApp(
@@ -24,6 +27,7 @@ import 'package:marchant/ui/views/home//product_detail/product_detail_view.dart'
     MaterialRoute(page: ChooseCatagoryView),
     MaterialRoute(page: CategoryListView),
     MaterialRoute(page: ProductDetailView),
+    MaterialRoute(page: CartView),
 // @stacked-route
   ],
   dependencies: [
@@ -32,11 +36,13 @@ import 'package:marchant/ui/views/home//product_detail/product_detail_view.dart'
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: OnboardingStateService),
     LazySingleton(classType: ProductStateService),
+    LazySingleton(classType: CartStateService),
     // @stacked-service
   ],
   bottomsheets: [
     StackedBottomsheet(classType: NoticeSheet),
-    // @stacked-bottom-sheet
+    StackedBottomsheet(classType: CartSheet),
+// @stacked-bottom-sheet
   ],
   dialogs: [
     StackedDialog(classType: InfoAlertDialog),

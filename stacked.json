@@ -13,5 +13,5 @@
     "test_widgets_path": "widget_models",
     "v1": false,
     "views_path": "ui/views/home/",
-    "widgets_path": "ui/widgets/common"
+    "widgets_path": "ui/widgets/"
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marchant/models/product_model.dart';
 import 'package:marchant/ui/common/app_colors.dart';
 import 'package:marchant/ui/common/app_text_style.dart';
@@ -128,7 +129,18 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
           vertical: smallSize,
           horizontal: smallSize,
         ),
-        child: CustomeButton(text: 'Place Order', onTap: () {}),
+        child: CustomeButton(
+          text: 'Add to Cart',
+          onTap: viewModel.onAddToCart,
+          loading: viewModel.isBusy,
+          icon: const Padding(
+            padding: EdgeInsets.only(left: smallSize),
+            child: Icon(
+              FontAwesomeIcons.cartArrowDown,
+              color: kcWhite,
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -137,5 +149,5 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
   ProductDetailViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      ProductDetailViewModel();
+      ProductDetailViewModel(product: product);
 }

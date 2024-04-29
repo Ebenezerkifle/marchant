@@ -1,4 +1,5 @@
 class ProductModel {
+  String? id;
   String? title;
   String? description;
   List<String>? details;
@@ -7,6 +8,7 @@ class ProductModel {
   List<String>? images;
 
   ProductModel({
+    this.id,
     this.title,
     this.description,
     this.details,

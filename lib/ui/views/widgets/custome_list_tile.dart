@@ -25,7 +25,7 @@ class CustomeListTile extends StatelessWidget {
     this.selected = false,
     this.duration = 1,
     this.stackWidget,
-    this.noPrice = false,
+    this.noPrice = true,
     this.bgdColor,
   });
   final String title;
@@ -146,11 +146,7 @@ class CustomeListTile extends StatelessWidget {
                                                 color: kcPrimaryColorDark,
                                                 style: AppTextStyle.h4Bold,
                                               ),
-                                            ),
-                                            Text(
-                                              ' / $duration hour',
-                                              style: AppTextStyle.thinSmall,
-                                            ),
+                                            )
                                           ],
                                         ),
                                         widget,
