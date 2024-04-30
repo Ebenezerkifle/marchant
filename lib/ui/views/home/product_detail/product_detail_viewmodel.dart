@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:marchant/app/app.bottomsheets.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/models/product_model.dart';
@@ -25,7 +26,9 @@ class ProductDetailViewModel extends BaseViewModel {
         notifyListeners();
       }
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 }

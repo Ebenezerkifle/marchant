@@ -29,6 +29,11 @@ class CartStateService with ListenableServiceMixin {
     }
   }
 
+  clearCart() {
+    _cartItems.value.clear();
+    notifyListeners();
+  }
+
   _totalPriceCalculator() {
     _totalPrice.value = 0;
     _totalCount.value = 0;

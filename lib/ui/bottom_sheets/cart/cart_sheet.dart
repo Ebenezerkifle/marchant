@@ -5,6 +5,7 @@ import 'package:marchant/ui/common/app_text_style.dart';
 import 'package:marchant/ui/common/ui_helpers.dart';
 import 'package:marchant/ui/views/widgets/custome_button.dart';
 import 'package:marchant/ui/views/widgets/image_builder.dart';
+import 'package:marchant/ui/views/widgets/multiple_buttons_widget.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -72,30 +73,27 @@ class CartSheet extends StackedView<CartSheetModel> {
               ],
             ),
             verticalSpaceLarge,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CustomeButton(
-                  text: 'Cancel',
-                  onTap: () => completer!(
-                    SheetResponse(confirmed: false),
-                  ),
-                  textColor: kcDarkGreyColor,
-                  width: MediaQuery.of(context).size.width * .4,
-                  stroke: true,
+            MultipleButtonsWidget(buttons: [
+              CustomeButton(
+                text: 'Cancel',
+                onTap: () => completer!(
+                  SheetResponse(confirmed: false),
                 ),
-                CustomeButton(
-                  text: 'Add',
-                  onTap: () => completer!(
-                    SheetResponse(
-                      confirmed: true,
-                      data: viewModel.getCartObject(),
-                    ),
+                textColor: kcDarkGreyColor,
+                width: MediaQuery.of(context).size.width * .4,
+                stroke: true,
+              ),
+              CustomeButton(
+                text: 'Add',
+                onTap: () => completer!(
+                  SheetResponse(
+                    confirmed: true,
+                    data: viewModel.getCartObject(),
                   ),
-                  width: MediaQuery.of(context).size.width * .4,
                 ),
-              ],
-            ),
+                width: MediaQuery.of(context).size.width * .4,
+              ),
+            ]),
           ],
         ),
       ),

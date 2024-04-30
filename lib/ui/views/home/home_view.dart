@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marchant/ui/common/app_colors.dart';
 import 'package:marchant/ui/common/app_text_style.dart';
 import 'package:marchant/ui/common/ui_helpers.dart';
+import 'package:marchant/ui/views/home/side_bar/side_bar_drawer.dart';
 import 'package:marchant/ui/views/widgets/category_widget.dart';
 import 'package:marchant/ui/views/widgets/custome_card_widget.dart';
 import 'package:marchant/ui/views/widgets/custome_grid_widget.dart';
@@ -56,11 +57,7 @@ class HomeView extends StackedView<HomeViewModel> {
           )
         ],
       ),
-      drawer: Drawer(
-        width: screenWidth(context) * .7,
-        backgroundColor: kcDarkGreyColor,
-        child: const Column(),
-      ),
+      drawer: sideBarDrawer(context),
       body: SafeArea(
         top: true,
         child: Column(

@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/models/cart_model.dart';
 import 'package:marchant/services/state_service/cart_state_service.dart';
+import 'package:marchant/services/state_service/snackbar_service.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class CartViewModel extends ReactiveViewModel {
   final _cartService = locator<CartStateService>();
+  final _navigation = locator<NavigationService>();
   @override
   List<ListenableServiceMixin> get listenableServices => [_cartService];
 
@@ -33,5 +36,21 @@ class CartViewModel extends ReactiveViewModel {
   onRemove(String cartKey) {
     // on remove.
     _cartService.removeFromCart(cartKey);
+  }
+
+  onClearCart() {
+    // clear the cart items.
+    _cartService.clearCart();
+    SnackBarService.showSnackBar(content: 'Successfully cleared.');
+  }
+
+  onPlaceOrder() async {
+    // place order.....
+    setBusy(true);
+    await Future.delayed(const Duration(seconds: 3));
+    _cartService.clearCart();
+    SnackBarService.showSnackBar(content: 'Successfully Ordered.');
+    setBusy(false);
+    _navigation.back();
   }
 }

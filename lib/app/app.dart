@@ -15,6 +15,7 @@ import 'package:marchant/ui/views/home//category_list/category_list_view.dart';
 import 'package:marchant/ui/views/home//product_detail/product_detail_view.dart';
 import 'package:marchant/ui/views/home//cart/cart_view.dart';
 import 'package:marchant/ui/bottom_sheets/cart/cart_sheet.dart';
+import 'package:marchant/ui/views/home//side_bar/side_bar_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -28,6 +29,7 @@ import 'package:marchant/ui/bottom_sheets/cart/cart_sheet.dart';
     MaterialRoute(page: CategoryListView),
     MaterialRoute(page: ProductDetailView),
     MaterialRoute(page: CartView),
+    MaterialRoute(page: SideBarView),
 // @stacked-route
   ],
   dependencies: [
