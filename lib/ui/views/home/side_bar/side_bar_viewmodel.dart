@@ -2,6 +2,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/app/app.router.dart';
 import 'package:marchant/models/setting_model.dart';
+import 'package:marchant/services/storage_service.dart/session.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -34,5 +35,10 @@ class SideBarViewModel extends BaseViewModel {
       case Setting.history:
         break;
     }
+  }
+
+  onLogout() {
+    SessionService.clearAll();
+    _navigation.clearStackAndShow(Routes.loginView);
   }
 }

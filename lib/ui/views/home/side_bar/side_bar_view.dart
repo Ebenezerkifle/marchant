@@ -59,10 +59,11 @@ class SideBarView extends StackedView<SideBarViewModel> {
             padding: const EdgeInsets.symmetric(
                 vertical: mediumSize, horizontal: middleSize),
             child: SettingItem(
-                title: 'Logout',
-                icon: FontAwesomeIcons.rightFromBracket,
-                forgroundColor: Colors.white,
-                onTap: () {}),
+              title: 'Logout',
+              icon: FontAwesomeIcons.rightFromBracket,
+              forgroundColor: Colors.white,
+              onTap: viewModel.onLogout,
+            ),
           ),
         ],
       ),
