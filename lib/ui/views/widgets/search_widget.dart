@@ -6,8 +6,9 @@ import 'package:marchant/ui/common/ui_helpers.dart';
 import 'package:marchant/ui/views/widgets/icon_decore_widget.dart';
 
 class SearchWidget extends StatelessWidget {
-  const SearchWidget({super.key, this.width});
+  const SearchWidget({super.key, this.width, this.onFilter});
   final double? width;
+  final VoidCallback? onFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,7 @@ class SearchWidget extends StatelessWidget {
           horizontalSpaceSmall,
           IconDecoreWidget(
             icon: FontAwesomeIcons.sliders,
-            onTap: () {},
+            onTap: onFilter ?? () {},
             forgroundColor: kcWhite,
             backgroundColor: kcPrimaryColorDark,
             roundness: 5,

@@ -5,8 +5,10 @@ import 'package:marchant/ui/common/app_text_style.dart';
 import 'package:marchant/ui/common/ui_helpers.dart';
 import 'package:marchant/ui/views/home/side_bar/side_bar_drawer.dart';
 import 'package:marchant/ui/views/widgets/category_widget.dart';
+import 'package:marchant/ui/views/widgets/custome_app_bar.dart';
 import 'package:marchant/ui/views/widgets/custome_card_widget.dart';
 import 'package:marchant/ui/views/widgets/custome_grid_widget.dart';
+import 'package:marchant/ui/views/widgets/icon_decore_widget.dart';
 import 'package:marchant/ui/views/widgets/search_widget.dart';
 import 'package:stacked/stacked.dart';
 
@@ -24,50 +26,74 @@ class HomeView extends StackedView<HomeViewModel> {
     return Scaffold(
       key: viewModel.scaffoldKey,
       backgroundColor: kcWhite,
-      appBar: AppBar(
-        leading: GestureDetector(
-            onTap: () => viewModel.scaffoldKey.currentState!.openDrawer(),
-            child: const Icon(
-              FontAwesomeIcons.bars,
-            )),
-        title: const Text(
-          'Marchant',
-          style: AppTextStyle.big,
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: mediumSize),
-            child: GestureDetector(
-              onTap: viewModel.onCartTap,
-              child: const Icon(
-                FontAwesomeIcons.cartShopping,
-                color: kcPrimaryColor,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: middleSize),
-            child: GestureDetector(
-              onTap: () {},
-              child: const Icon(
-                FontAwesomeIcons.solidBell,
-                color: kcPrimaryColor,
-              ),
-            ),
-          )
-        ],
-      ),
       drawer: sideBarDrawer(context),
       body: SafeArea(
         top: true,
         child: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(
+            CustomeAppBar(
+              title: 'Marchant',
+              back: false,
+              leading: GestureDetector(
+                onTap: () => viewModel.scaffoldKey.currentState!.openDrawer(),
+                child: const Icon(
+                  FontAwesomeIcons.bars,
+                ),
+              ),
+              widget: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: mediumSize),
+                    child: GestureDetector(
+                      onTap: viewModel.onCartTap,
+                      child: Stack(
+                        children: [
+                          IconDecoreWidget(
+                            icon: FontAwesomeIcons.cartShopping,
+                            onTap: viewModel.onCartTap,
+                            backgroundColor: kcWhite,
+                            forgroundColor: kcPrimaryColor,
+                          ),
+                          if (viewModel.cartItems.isNotEmpty)
+                            Positioned(
+                              top: 0,
+                              right: 0,
+                              child: Container(
+                                padding: const EdgeInsets.all(3),
+                                decoration: const BoxDecoration(
+                                  color: kcPrimaryColorDark,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Text(
+                                  viewModel.cartItems.length.toString(),
+                                  style: AppTextStyle.withColor(
+                                      color: kcWhite,
+                                      style: AppTextStyle.thinSmall),
+                                ),
+                              ),
+                            )
+                        ],
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: const Icon(
+                      FontAwesomeIcons.solidBell,
+                      color: kcPrimaryColor,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
                 horizontal: middleSize,
                 vertical: middleSize,
               ),
-              child: SearchWidget(),
+              child: SearchWidget(
+                onFilter: viewModel.onFilter,
+              ),
             ),
             verticalSpaceSmall,
             SingleChildScrollView(

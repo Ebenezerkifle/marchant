@@ -1,3 +1,4 @@
+import 'package:marchant/models/order_model.dart';
 import 'package:marchant/models/product_model.dart';
 import 'package:stacked/stacked.dart';
 
@@ -20,6 +21,9 @@ class ProductStateService with ListenableServiceMixin {
 
   final _selected = ReactiveValue<Map<String, String>>({});
   Map<String, String> get selected => _selected.value;
+
+  final _activeOrders = ReactiveValue<Map<String, OrderModel>>({});
+  Map<String, OrderModel> get activeOrders => _activeOrders.value;
 
   onCategorySelected(var key) {
     _selected.value.clear();
@@ -55,6 +59,11 @@ class ProductStateService with ListenableServiceMixin {
     for (var ele in sampleProducts.entries) {
       _products.value[ele.key] = ele.value;
     }
+    notifyListeners();
+  }
+
+  placeOrder(OrderModel order) {
+    _activeOrders.value[order.id] = order;
     notifyListeners();
   }
 

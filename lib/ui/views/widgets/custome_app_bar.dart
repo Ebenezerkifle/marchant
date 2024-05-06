@@ -17,6 +17,7 @@ class CustomeAppBar extends StatelessWidget {
     this.back = true,
     this.textStyle,
     this.widget,
+    this.leading,
   });
   final String title;
   final Color bgColor;
@@ -25,6 +26,7 @@ class CustomeAppBar extends StatelessWidget {
   final bool back;
   final TextStyle? textStyle;
   final Widget? widget;
+  final Widget? leading;
 
   final _navigationService = locator<NavigationService>();
 
@@ -41,14 +43,15 @@ class CustomeAppBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(children: [
-            back
-                ? GestureDetector(
-                    onTap: onBack ?? () => _navigationService.back(),
-                    child: Icon(
-                      FontAwesomeIcons.arrowLeft,
-                      color: textColor,
-                    ))
-                : const SizedBox(),
+            leading ?? Container(),
+            if (back)
+              GestureDetector(
+                onTap: onBack ?? () => _navigationService.back(),
+                child: Icon(
+                  FontAwesomeIcons.arrowLeft,
+                  color: textColor,
+                ),
+              ),
             horizontalSpaceMiddle,
             Text(
               title,

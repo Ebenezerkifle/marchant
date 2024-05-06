@@ -16,6 +16,8 @@ import 'package:marchant/ui/views/home//product_detail/product_detail_view.dart'
 import 'package:marchant/ui/views/home//cart/cart_view.dart';
 import 'package:marchant/ui/bottom_sheets/cart/cart_sheet.dart';
 import 'package:marchant/ui/views/home//side_bar/side_bar_view.dart';
+import 'package:marchant/ui/views//my_orders/my_orders_view.dart';
+import 'package:marchant/ui/bottom_sheets/filter/filter_sheet.dart';
 // @stacked-import
 
 @StackedApp(
@@ -30,6 +32,7 @@ import 'package:marchant/ui/views/home//side_bar/side_bar_view.dart';
     MaterialRoute(page: ProductDetailView),
     MaterialRoute(page: CartView),
     MaterialRoute(page: SideBarView),
+    MaterialRoute(page: MyOrdersView),
 // @stacked-route
   ],
   dependencies: [
@@ -44,6 +47,7 @@ import 'package:marchant/ui/views/home//side_bar/side_bar_view.dart';
   bottomsheets: [
     StackedBottomsheet(classType: NoticeSheet),
     StackedBottomsheet(classType: CartSheet),
+    StackedBottomsheet(classType: FilterSheet),
 // @stacked-bottom-sheet
   ],
   dialogs: [

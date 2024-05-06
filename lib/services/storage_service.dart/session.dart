@@ -1,9 +1,10 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-enum SessionKey { token }
+enum SessionKey { token, newUser }
 
 Map<SessionKey, String> sessionMap = {
   SessionKey.token: 'token',
+  SessionKey.newUser: 'newUser',
 };
 
 class SessionService {
@@ -22,14 +23,14 @@ class SessionService {
     return prefs.getString(sessionMap[key] ?? '');
   }
 
-  static setBool(String key, bool value) async {
+  static setBool(SessionKey key, bool value) async {
     SharedPreferences prefs = await initialize();
-    prefs.setBool(key, value);
+    prefs.setBool(sessionMap[key] ?? '', value);
   }
 
-  static getBool(String key) async {
+  static getBool(SessionKey key) async {
     SharedPreferences prefs = await initialize();
-    return prefs.getBool(key);
+    return prefs.getBool(sessionMap[key] ?? '');
   }
 
   static clearAll() async {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marchant/app/app.bottomsheets.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/app/app.router.dart';
 import 'package:marchant/models/cart_model.dart';
@@ -12,6 +13,7 @@ class HomeViewModel extends ReactiveViewModel {
   final _navigation = locator<NavigationService>();
   final _productState = locator<ProductStateService>();
   final _cartState = locator<CartStateService>();
+  final _bottomSheet = locator<BottomSheetService>();
 
   @override
   List<ListenableServiceMixin> get listenableServices =>
@@ -40,5 +42,13 @@ class HomeViewModel extends ReactiveViewModel {
 
   onCartTap() {
     _navigation.navigateToCartView();
+  }
+
+  onFilter() {
+    // onfilter. show bottomsheet.
+    _bottomSheet.showCustomSheet(
+      variant: BottomSheetType.filter,
+      title: 'Filter',
+    );
   }
 }

@@ -98,6 +98,7 @@ class LoginViewModel extends BaseViewModel {
       //show progress indicator here
       setBusy(true);
       notifyListeners();
+      SessionService.setBool(SessionKey.newUser, false);
       //backend call
       var response = await _authentication.loginUser(
         LoginModel(

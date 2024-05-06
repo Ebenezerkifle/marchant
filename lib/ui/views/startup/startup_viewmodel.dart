@@ -1,3 +1,4 @@
+import 'package:marchant/services/storage_service.dart/session.dart';
 import 'package:stacked/stacked.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/app/app.router.dart';
@@ -12,7 +13,11 @@ class StartupViewModel extends BaseViewModel {
 
     // This is where you can make decisions on where your app should navigate when
     // you have custom startup logic
-
+    var newUser = await SessionService.getBool(SessionKey.newUser);
+    if (newUser != null && !newUser) {
+      _navigationService.replaceWithHomeView();
+      return;
+    }
     _navigationService.replaceWithLoginView();
   }
 }

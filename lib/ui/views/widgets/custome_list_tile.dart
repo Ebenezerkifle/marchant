@@ -29,7 +29,7 @@ class CustomeListTile extends StatelessWidget {
     this.bgdColor,
   });
   final String title;
-  final String? imageUrl;
+  final List<String>? imageUrl;
   final VoidCallback onTap;
   final num price;
   final double? width;
@@ -97,13 +97,42 @@ class CustomeListTile extends StatelessWidget {
                       children: [
                         noImage
                             ? Container()
-                            : Padding(
+                            : Container(
                                 padding: const EdgeInsets.only(right: 10.0),
-                                child: ImageBuilder(
-                                  image: imageUrl ?? '',
-                                  height: height ?? tileWidth * .3,
-                                  fit: fit ?? BoxFit.cover,
-                                ),
+                                height: height ?? tileWidth * .3,
+                                width: height ?? tileWidth * .3,
+                                child: imageUrl == null ||
+                                        (imageUrl != null &&
+                                            imageUrl!.length < 2)
+                                    ? ImageBuilder(
+                                        image: imageUrl?.first ?? '',
+                                        height: height ?? tileWidth * .3,
+                                        fit: fit ?? BoxFit.cover,
+                                      )
+                                    : Stack(
+                                        children: [
+                                          Positioned(
+                                            top: 0,
+                                            left: 0,
+                                            child: ImageBuilder(
+                                              image: imageUrl?.first ?? '',
+                                              height: height != null
+                                                  ? height! * .8
+                                                  : tileWidth * .25,
+                                            ),
+                                          ),
+                                          Positioned(
+                                            bottom: 0,
+                                            right: 0,
+                                            child: ImageBuilder(
+                                              image: imageUrl?[1] ?? '',
+                                              height: height != null
+                                                  ? height! * .8
+                                                  : tileWidth * .2,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                               ),
                         SizedBox(
                           width: contentWidth,

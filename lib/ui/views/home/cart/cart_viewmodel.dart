@@ -48,9 +48,15 @@ class CartViewModel extends ReactiveViewModel {
     // place order.....
     setBusy(true);
     await Future.delayed(const Duration(seconds: 3));
-    _cartService.clearCart();
+    _cartService.placeOrder();
     SnackBarService.showSnackBar(content: 'Successfully Ordered.');
     setBusy(false);
     _navigation.back();
+  }
+
+  getImage(CartModel cart) {
+    return (cart.product!.images != null && cart.product!.images!.isNotEmpty)
+        ? cart.product!.images!.first
+        : '';
   }
 }
