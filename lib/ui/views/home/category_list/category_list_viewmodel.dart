@@ -10,7 +10,7 @@ class CategoryListViewModel extends BaseViewModel {
   Map<String, String> get selected => _productState.selected;
 
   onSelected(String key) {
-    _productState.onCategorySelected(key);
+    _productState.onCategorySelected(key, reOrder: true);
     notifyListeners();
     _navigation.back();
   }

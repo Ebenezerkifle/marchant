@@ -25,9 +25,10 @@ class ProductStateService with ListenableServiceMixin {
   final _activeOrders = ReactiveValue<Map<String, OrderModel>>({});
   Map<String, OrderModel> get activeOrders => _activeOrders.value;
 
-  onCategorySelected(var key) {
+  onCategorySelected(var key, {bool reOrder = false}) {
     _selected.value.clear();
     _selected.value[key] = key;
+    reOrder ? _reOrderCategory(key) : null;
     notifyListeners();
   }
 
@@ -52,6 +53,21 @@ class ProductStateService with ListenableServiceMixin {
       count++;
     }
     notifyListeners();
+  }
+
+  _reOrderCategory(String key) {
+    if (_catagories.value.containsKey(key)) {
+      String selected = _catagories.value[key] ?? '';
+      Map<String, String> temp = {};
+      temp[key] = selected;
+      _catagories.value.remove(key);
+      Map<String, String> reOrdered = {...temp, ..._catagories.value};
+      _catagories.value.clear();
+      _catagories.value = reOrdered;
+      print('------------------------');
+      print(_catagories.value.values.first);
+      notifyListeners();
+    }
   }
 
   _getProducts() {
