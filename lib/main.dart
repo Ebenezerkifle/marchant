@@ -27,7 +27,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       scaffoldMessengerKey: SnackBarService.scaffoldKey,
       debugShowCheckedModeBanner: false,
-      initialRoute: Routes.homeView, // todo change to startup view.
+      initialRoute: Routes.startupView,
       onGenerateRoute: StackedRouter().onGenerateRoute,
       navigatorKey: StackedService.navigatorKey,
       navigatorObservers: [

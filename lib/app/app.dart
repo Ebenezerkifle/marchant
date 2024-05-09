@@ -10,14 +10,18 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:marchant/ui/views/onboarding/login/login_view.dart';
 import 'package:marchant/ui/views/onboarding/signup/signup_view.dart';
 import 'package:marchant/ui/views/onboarding/signup/signup_final/signup_final_view.dart';
-import 'package:marchant/ui/views/signup//choose_catagory/choose_catagory_view.dart';
+import 'package:marchant/ui/views/onboarding/signup/choose_catagory/choose_catagory_view.dart';
 import 'package:marchant/ui/views/home//category_list/category_list_view.dart';
 import 'package:marchant/ui/views/home//product_detail/product_detail_view.dart';
-import 'package:marchant/ui/views/home//cart/cart_view.dart';
+import 'package:marchant/ui/views/cart/cart_view.dart';
 import 'package:marchant/ui/bottom_sheets/cart/cart_sheet.dart';
 import 'package:marchant/ui/views/home//side_bar/side_bar_view.dart';
 import 'package:marchant/ui/views//my_orders/my_orders_view.dart';
 import 'package:marchant/ui/bottom_sheets/filter/filter_sheet.dart';
+import 'package:marchant/ui/views//landing/landing_view.dart';
+import 'package:marchant/ui/views//profile/profile_view.dart';
+import 'package:marchant/ui/views/manufacturer//manu_home/manu_home_view.dart';
+import 'package:marchant/ui/views/manufacturer//post/post_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -33,6 +37,10 @@ import 'package:marchant/ui/bottom_sheets/filter/filter_sheet.dart';
     MaterialRoute(page: CartView),
     MaterialRoute(page: SideBarView),
     MaterialRoute(page: MyOrdersView),
+    MaterialRoute(page: LandingView),
+    MaterialRoute(page: ProfileView),
+    MaterialRoute(page: ManuHomeView),
+    MaterialRoute(page: PostView),
 // @stacked-route
   ],
   dependencies: [

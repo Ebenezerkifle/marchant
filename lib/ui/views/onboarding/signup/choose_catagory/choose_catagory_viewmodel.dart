@@ -22,6 +22,6 @@ class ChooseCatagoryViewModel extends BaseViewModel {
   }
 
   onSubmit() {
-    _navigation.clearStackAndShow(Routes.homeView);
+    _navigation.clearStackAndShow(Routes.landingView);
   }
 }

@@ -22,10 +22,15 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
         top: true,
         child: Column(
           children: [
-            CustomeAppBar(title: 'My Orders'),
+            CustomeAppBar(title: 'My Orders', back: false),
             verticalSpaceMiddle,
             viewModel.activeOrders.isEmpty
-                ? const NothingFound()
+                ? const Column(
+                    children: [
+                      verticalSpaceLarge,
+                      NothingFound(),
+                    ],
+                  )
                 : Expanded(
                     child: SingleChildScrollView(
                       child: Column(

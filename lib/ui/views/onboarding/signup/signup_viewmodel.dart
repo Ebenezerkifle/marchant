@@ -23,7 +23,7 @@ class SignupViewModel extends FormViewModel {
   double get iconSize => 15;
 
   String get phoneNumFieldHint => 'Phone number';
-  String get nameHint => 'Name';
+  String get nameHint => 'Full Name';
   String get locationHint => 'Location';
 
   String get haveAccount => 'Aready have an Account?';

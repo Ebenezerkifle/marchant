@@ -107,7 +107,7 @@ class LoginViewModel extends BaseViewModel {
         ),
       );
       _navigationService
-          .clearStackAndShow(Routes.homeView); // todo change later.
+          .clearStackAndShow(Routes.landingView); // todo change later.
       // check a response
       //validate a user credential.
       if (response.statusCode == 201 || response.statusCode == 200) {

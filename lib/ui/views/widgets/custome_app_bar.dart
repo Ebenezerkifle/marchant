@@ -44,7 +44,7 @@ class CustomeAppBar extends StatelessWidget {
         children: [
           Row(children: [
             leading ?? Container(),
-            if (back)
+            if (back) ...[
               GestureDetector(
                 onTap: onBack ?? () => _navigationService.back(),
                 child: Icon(
@@ -52,7 +52,8 @@ class CustomeAppBar extends StatelessWidget {
                   color: textColor,
                 ),
               ),
-            horizontalSpaceMiddle,
+              horizontalSpaceMiddle,
+            ],
             Text(
               title,
               style: textStyle ??

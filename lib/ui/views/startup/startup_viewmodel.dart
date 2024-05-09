@@ -9,13 +9,12 @@ class StartupViewModel extends BaseViewModel {
 
   // Place anything here that needs to happen before we get into the application
   Future runStartupLogic() async {
+    var newUser = await SessionService.getBool(SessionKey.newUser);
     await Future.delayed(const Duration(seconds: 2));
-
     // This is where you can make decisions on where your app should navigate when
     // you have custom startup logic
-    var newUser = await SessionService.getBool(SessionKey.newUser);
     if (newUser != null && !newUser) {
-      _navigationService.replaceWithHomeView();
+      _navigationService.replaceWithLandingView();
       return;
     }
     _navigationService.replaceWithLoginView();

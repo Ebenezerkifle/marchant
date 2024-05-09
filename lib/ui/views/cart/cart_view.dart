@@ -35,11 +35,18 @@ class CartView extends StackedView<CartViewModel> {
         child: Column(
           children: [
             CustomeAppBar(
-                title: order != null ? 'Order details' : 'Cart details'),
-            order == null && viewModel.cartItems.isEmpty
-                ? const NothingFound(message: 'Nothing found on your cart!')
-                : Expanded(
-                    child: Column(
+              title: order != null ? 'Order details' : 'Cart details',
+              back: order != null,
+            ),
+            Expanded(
+              child: order == null && viewModel.cartItems.isEmpty
+                  ? const Column(
+                      children: [
+                        verticalSpaceLarge,
+                        NothingFound(message: 'Nothing found on your cart!'),
+                      ],
+                    )
+                  : Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
@@ -188,7 +195,7 @@ class CartView extends StackedView<CartViewModel> {
                         )
                       ],
                     ),
-                  ),
+            ),
           ],
         ),
       ),
