@@ -30,7 +30,7 @@ class SideBarViewModel extends BaseViewModel {
   onTapHandler(Setting setting) {
     switch (setting) {
       case Setting.myOrders:
-        _navigation.navigateToMyOrdersView();
+        //_navigation.navigateToMyOrdersView();
         break;
       case Setting.history:
         break;

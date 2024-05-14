@@ -75,7 +75,7 @@ class HomeView extends StackedView<HomeViewModel> {
                   //   ),
                   // ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: viewModel.changeUserRole,
                     child: const Icon(
                       FontAwesomeIcons.solidBell,
                       color: kcPrimaryColor,

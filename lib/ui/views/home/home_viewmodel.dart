@@ -5,6 +5,7 @@ import 'package:marchant/app/app.router.dart';
 import 'package:marchant/models/cart_model.dart';
 import 'package:marchant/models/product_model.dart';
 import 'package:marchant/services/state_service/cart_state_service.dart';
+import 'package:marchant/services/state_service/landing_state_servic.dart';
 import 'package:marchant/services/state_service/product_state_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -14,6 +15,7 @@ class HomeViewModel extends ReactiveViewModel {
   final _productState = locator<ProductStateService>();
   final _cartState = locator<CartStateService>();
   final _bottomSheet = locator<BottomSheetService>();
+  final _landingService = locator<LandingStateService>();
 
   @override
   List<ListenableServiceMixin> get listenableServices =>
@@ -50,5 +52,10 @@ class HomeViewModel extends ReactiveViewModel {
       variant: BottomSheetType.filter,
       title: 'Filter',
     );
+  }
+
+  changeUserRole() {
+    _landingService.changeUserRole(UserRole.manufacturor);
+    notifyListeners();
   }
 }

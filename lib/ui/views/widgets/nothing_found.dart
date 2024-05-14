@@ -5,9 +5,15 @@ import 'package:marchant/ui/common/app_text_style.dart';
 import 'package:marchant/ui/common/ui_helpers.dart';
 
 class NothingFound extends StatelessWidget {
-  const NothingFound({super.key, this.message, this.image});
+  const NothingFound({
+    super.key,
+    this.message,
+    this.image,
+    this.child,
+  });
   final String? message;
   final String? image;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +33,11 @@ class NothingFound extends StatelessWidget {
         Text(
           message ?? 'Nothing found!',
           style: AppTextStyle.h4Normal,
-        )
+        ),
+        if (child != null) ...[
+          verticalSpaceMiddle,
+          child!,
+        ]
       ],
     );
   }

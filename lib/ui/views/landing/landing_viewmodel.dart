@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:marchant/services/state_service/landing_state_servic.dart';
 import 'package:marchant/ui/views/manufacturer/manu_home/manu_home_view.dart';
 import 'package:marchant/ui/views/manufacturer/post/post_view.dart';
 import 'package:stacked/stacked.dart';
@@ -17,12 +18,22 @@ import 'widgets/bar_items.dart';
 
 class LandingViewModel extends IndexTrackingViewModel {
   final _cartState = locator<CartStateService>();
+  final _landingService = locator<LandingStateService>();
 
   @override
-  List<ListenableServiceMixin> get listenableServices => [_cartState];
+  List<ListenableServiceMixin> get listenableServices =>
+      [_cartState, _landingService];
+
+  @override
+  int get currentIndex => _landingService.currentIndex;
+
+  @override
+  void setIndex(int value) {
+    _landingService.setIndex(value);
+  }
 
   Map<String, CartModel> get cartItems => _cartState.cartItems;
-  bool retailor = true;
+  bool get retailor => _landingService.userRole == UserRole.marchant;
 
   List<Widget> get manufacturorViews => const [
         ManuHomeView(),

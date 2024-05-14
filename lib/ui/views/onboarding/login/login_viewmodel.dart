@@ -121,7 +121,7 @@ class LoginViewModel extends BaseViewModel {
         SessionService.setString(SessionKey.token, token);
 
         //navigate to the next page.
-        _navigationService.clearStackAndShow(Routes.homeView);
+        _navigationService.clearStackAndShow(Routes.landingView);
       } else {
         // not successful
         if (response.body.contains('{')) {
