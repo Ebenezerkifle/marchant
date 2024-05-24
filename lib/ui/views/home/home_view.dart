@@ -24,7 +24,6 @@ class HomeView extends StackedView<HomeViewModel> {
     return Scaffold(
       key: viewModel.scaffoldKey,
       backgroundColor: kcWhite,
-      // drawer: sideBarDrawer(context),
       body: SafeArea(
         top: true,
         child: Column(
@@ -32,48 +31,8 @@ class HomeView extends StackedView<HomeViewModel> {
             CustomeAppBar(
               title: 'Marchant',
               back: false,
-              // leading: GestureDetector(
-              //   onTap: () => viewModel.scaffoldKey.currentState!.openDrawer(),
-              //   child: const Icon(
-              //     FontAwesomeIcons.bars,
-              //   ),
-              // ),
               widget: Row(
                 children: [
-                  // Padding(
-                  //   padding: const EdgeInsets.only(right: mediumSize),
-                  //   child: GestureDetector(
-                  //     onTap: viewModel.onCartTap,
-                  //     child: Stack(
-                  //       children: [
-                  //         IconDecoreWidget(
-                  //           icon: FontAwesomeIcons.cartShopping,
-                  //           onTap: viewModel.onCartTap,
-                  //           backgroundColor: kcWhite,
-                  //           forgroundColor: kcPrimaryColor,
-                  //         ),
-                  //         if (viewModel.cartItems.isNotEmpty)
-                  //           Positioned(
-                  //             top: 0,
-                  //             right: 0,
-                  //             child: Container(
-                  //               padding: const EdgeInsets.all(3),
-                  //               decoration: const BoxDecoration(
-                  //                 color: kcPrimaryColorDark,
-                  //                 shape: BoxShape.circle,
-                  //               ),
-                  //               child: Text(
-                  //                 viewModel.cartItems.length.toString(),
-                  //                 style: AppTextStyle.withColor(
-                  //                     color: kcWhite,
-                  //                     style: AppTextStyle.thinSmall),
-                  //               ),
-                  //             ),
-                  //           )
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
                   GestureDetector(
                     onTap: viewModel.changeUserRole,
                     child: const Icon(
@@ -109,7 +68,9 @@ class HomeView extends StackedView<HomeViewModel> {
                                 child: CategoryWidget(
                                   name: e.value,
                                   selected:
-                                      viewModel.selected.containsKey(e.key),
+                                      viewModel.selected.containsKey(e.key) &&
+                                      viewModel.selected[e.key] == true,
+                                  // onTap: () => viewModel.onSelected(e.key),
                                   onTap: () => viewModel.onSelected(e.key),
                                 ),
                               ))
@@ -117,7 +78,7 @@ class HomeView extends StackedView<HomeViewModel> {
                     ),
                     CategoryWidget(
                       name: 'more',
-                      selected: true,
+                      selected: false,
                       onTap: viewModel.onMoreCategory,
                       roundness: 5,
                       hPadding: smallSize,

@@ -5,10 +5,10 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i17;
+import 'package:flutter/material.dart' as _i18;
 import 'package:flutter/material.dart';
-import 'package:marchant/models/order_model.dart' as _i19;
-import 'package:marchant/models/product_model.dart' as _i18;
+import 'package:marchant/models/order_model.dart' as _i20;
+import 'package:marchant/models/product_model.dart' as _i19;
 import 'package:marchant/ui/views/cart/cart_view.dart' as _i10;
 import 'package:marchant/ui/views/home/category_list/category_list_view.dart'
     as _i8;
@@ -29,8 +29,9 @@ import 'package:marchant/ui/views/onboarding/signup/signup_final/signup_final_vi
 import 'package:marchant/ui/views/onboarding/signup/signup_view.dart' as _i5;
 import 'package:marchant/ui/views/profile/profile_view.dart' as _i14;
 import 'package:marchant/ui/views/startup/startup_view.dart' as _i3;
+import 'package:marchant/ui/views/sub_category/sub_category_view.dart' as _i17;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i20;
+import 'package:stacked_services/stacked_services.dart' as _i21;
 
 class Routes {
   static const homeView = '/home-view';
@@ -63,6 +64,8 @@ class Routes {
 
   static const postView = '/post-view';
 
+  static const subCategoryView = '/sub-category-view';
+
   static const all = <String>{
     homeView,
     startupView,
@@ -79,6 +82,7 @@ class Routes {
     profileView,
     manuHomeView,
     postView,
+    subCategoryView,
   };
 }
 
@@ -144,54 +148,58 @@ class StackedRouter extends _i1.RouterBase {
       Routes.postView,
       page: _i16.PostView,
     ),
+    _i1.RouteDef(
+      Routes.subCategoryView,
+      page: _i17.SubCategoryView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.HomeView: (data) {
-      return _i17.MaterialPageRoute<dynamic>(
+      return _i18.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.HomeView(),
         settings: data,
       );
     },
     _i3.StartupView: (data) {
-      return _i17.MaterialPageRoute<dynamic>(
+      return _i18.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartupView(),
         settings: data,
       );
     },
     _i4.LoginView: (data) {
-      return _i17.MaterialPageRoute<dynamic>(
+      return _i18.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.LoginView(),
         settings: data,
       );
     },
     _i5.SignupView: (data) {
-      return _i17.MaterialPageRoute<dynamic>(
+      return _i18.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.SignupView(),
         settings: data,
       );
     },
     _i6.SignupFinalView: (data) {
-      return _i17.MaterialPageRoute<dynamic>(
+      return _i18.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.SignupFinalView(),
         settings: data,
       );
     },
     _i7.ChooseCatagoryView: (data) {
-      return _i17.MaterialPageRoute<dynamic>(
+      return _i18.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.ChooseCatagoryView(),
         settings: data,
       );
     },
     _i8.CategoryListView: (data) {
-      return _i17.MaterialPageRoute<dynamic>(
+      return _i18.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.CategoryListView(),
         settings: data,
       );
     },
     _i9.ProductDetailView: (data) {
       final args = data.getArgs<ProductDetailViewArguments>(nullOk: false);
-      return _i17.MaterialPageRoute<dynamic>(
+      return _i18.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i9.ProductDetailView(key: args.key, product: args.product),
         settings: data,
@@ -201,44 +209,50 @@ class StackedRouter extends _i1.RouterBase {
       final args = data.getArgs<CartViewArguments>(
         orElse: () => const CartViewArguments(),
       );
-      return _i17.MaterialPageRoute<dynamic>(
+      return _i18.MaterialPageRoute<dynamic>(
         builder: (context) => _i10.CartView(key: args.key, order: args.order),
         settings: data,
       );
     },
     _i11.SideBarView: (data) {
-      return _i17.MaterialPageRoute<dynamic>(
+      return _i18.MaterialPageRoute<dynamic>(
         builder: (context) => const _i11.SideBarView(),
         settings: data,
       );
     },
     _i12.MyOrdersView: (data) {
-      return _i17.MaterialPageRoute<dynamic>(
+      return _i18.MaterialPageRoute<dynamic>(
         builder: (context) => const _i12.MyOrdersView(),
         settings: data,
       );
     },
     _i13.LandingView: (data) {
-      return _i17.MaterialPageRoute<dynamic>(
+      return _i18.MaterialPageRoute<dynamic>(
         builder: (context) => const _i13.LandingView(),
         settings: data,
       );
     },
     _i14.ProfileView: (data) {
-      return _i17.MaterialPageRoute<dynamic>(
+      return _i18.MaterialPageRoute<dynamic>(
         builder: (context) => const _i14.ProfileView(),
         settings: data,
       );
     },
     _i15.ManuHomeView: (data) {
-      return _i17.MaterialPageRoute<dynamic>(
+      return _i18.MaterialPageRoute<dynamic>(
         builder: (context) => const _i15.ManuHomeView(),
         settings: data,
       );
     },
     _i16.PostView: (data) {
-      return _i17.MaterialPageRoute<dynamic>(
+      return _i18.MaterialPageRoute<dynamic>(
         builder: (context) => const _i16.PostView(),
+        settings: data,
+      );
+    },
+    _i17.SubCategoryView: (data) {
+      return _i18.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i17.SubCategoryView(),
         settings: data,
       );
     },
@@ -257,9 +271,9 @@ class ProductDetailViewArguments {
     required this.product,
   });
 
-  final _i17.Key? key;
+  final _i18.Key? key;
 
-  final _i18.ProductModel product;
+  final _i19.ProductModel product;
 
   @override
   String toString() {
@@ -284,9 +298,9 @@ class CartViewArguments {
     this.order,
   });
 
-  final _i17.Key? key;
+  final _i18.Key? key;
 
-  final _i19.OrderModel? order;
+  final _i20.OrderModel? order;
 
   @override
   String toString() {
@@ -305,7 +319,7 @@ class CartViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i20.NavigationService {
+extension NavigatorStateExtension on _i21.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -405,8 +419,8 @@ extension NavigatorStateExtension on _i20.NavigationService {
   }
 
   Future<dynamic> navigateToProductDetailView({
-    _i17.Key? key,
-    required _i18.ProductModel product,
+    _i18.Key? key,
+    required _i19.ProductModel product,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -422,8 +436,8 @@ extension NavigatorStateExtension on _i20.NavigationService {
   }
 
   Future<dynamic> navigateToCartView({
-    _i17.Key? key,
-    _i19.OrderModel? order,
+    _i18.Key? key,
+    _i20.OrderModel? order,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -516,6 +530,20 @@ extension NavigatorStateExtension on _i20.NavigationService {
         transition,
   ]) async {
     return navigateTo<dynamic>(Routes.postView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToSubCategoryView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.subCategoryView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -621,8 +649,8 @@ extension NavigatorStateExtension on _i20.NavigationService {
   }
 
   Future<dynamic> replaceWithProductDetailView({
-    _i17.Key? key,
-    required _i18.ProductModel product,
+    _i18.Key? key,
+    required _i19.ProductModel product,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -638,8 +666,8 @@ extension NavigatorStateExtension on _i20.NavigationService {
   }
 
   Future<dynamic> replaceWithCartView({
-    _i17.Key? key,
-    _i19.OrderModel? order,
+    _i18.Key? key,
+    _i20.OrderModel? order,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -732,6 +760,20 @@ extension NavigatorStateExtension on _i20.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.postView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithSubCategoryView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.subCategoryView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

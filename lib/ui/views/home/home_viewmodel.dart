@@ -30,9 +30,20 @@ class HomeViewModel extends ReactiveViewModel {
   Map<String, ProductModel> get products => _productState.products;
 
   Map<String, CartModel> get cartItems => _cartState.cartItems;
+  Map<String, bool> get selected => _productState.selected
+      .map((key, value) => MapEntry(key, value == 'true'));
 
-  onSelected(var key) => _productState.onCategorySelected(key);
-  get selected => _productState.selected;
+//  Updated onSelected method to navigate to SubcategoryPage
+  onSelected(var key) {
+    if (_productState.selected.containsKey(key)) {
+      _productState.selected.remove(key);
+    } else {
+      _productState.selected.clear(); // Clear previous selection
+      _productState.selected[key] = true; // Convert bool to String
+      _navigation.navigateToSubCategoryView(); // Navigate to SubcategoryPage
+    }
+    notifyListeners();
+  }
 
   onItemSelecte(ProductModel product) {
     _navigation.navigateToProductDetailView(product: product);
