@@ -71,7 +71,7 @@ class HomeView extends StackedView<HomeViewModel> {
                                       viewModel.selected.containsKey(e.key) &&
                                       viewModel.selected[e.key] == true,
                                   // onTap: () => viewModel.onSelected(e.key),
-                                  onTap: () => viewModel.onSelected(e.key),
+                                  onTap: () => viewModel.onSelected(e.value),
                                 ),
                               ))
                           .toList(),
@@ -105,7 +105,7 @@ class HomeView extends StackedView<HomeViewModel> {
                             .map(
                               (e) => CustomeCardWidget(
                                 size: screenWidth(context) * .38,
-                                onTap: () => viewModel.onItemSelecte(e.value),
+                                onTap: () => viewModel.onItemSelected(e.value),
                                 title: e.value.title ?? '',
                                 details: e.value.details ?? [],
                                 detailLimit: 3,

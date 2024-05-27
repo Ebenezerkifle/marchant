@@ -1,94 +1,3 @@
-// import 'package:flutter/material.dart';
-// import 'package:stacked/stacked.dart';
-
-// import 'sub_category_viewmodel.dart';
-
-// class SubCategoryView extends StatelessWidget {
-//   const SubCategoryView({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return ViewModelBuilder<SubCategoryViewModel>.reactive(
-//       viewModelBuilder: () => SubCategoryViewModel(),
-//       builder: (context, viewModel, child) => Scaffold(
-//         appBar: AppBar(
-//           // Add leading icon for back navigation
-//           leading: IconButton(
-//             icon: const Icon(Icons.arrow_back),
-//             onPressed: () => Navigator.of(context).pop(),
-//           ),
-//           title: const Text('Sub Category'),
-//         ),
-//         backgroundColor: Theme.of(context).colorScheme.background,
-//         body: Container(
-//           padding: const EdgeInsets.only(left: 25.0, right: 25.0),
-//           child: const Center(
-//             child: Text('Sub Category Page Content'),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-
-
-// import 'package:flutter/material.dart';
-// import 'package:stacked/stacked.dart';
-// import 'package:marchant/app/app.locator.dart';
-
-
-// import 'package:marchant/services/state_service/product_state_service.dart';
-//  // Import
-
-// class SubCategoryView extends StatelessWidget {
-//   const SubCategoryView({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return ViewModelBuilder<SubCategoryViewModel>.reactive(
-//       viewModelBuilder: () => SubCategoryViewModel(),
-//       builder: (context, viewModel, child) => Scaffold(
-//         appBar: AppBar(
-//           // ... existing AppBar code ...
-//         ),
-//         backgroundColor: Theme.of(context).colorScheme.background,
-//         body: Container(
-//           padding: const EdgeInsets.only(left: 25.0, right: 25.0),
-//           child: StreamBuilder<Map<String, List<String>>>(
-//             stream: locator<ProductStateService>().subCategories,
-//             builder: (context, snapshot) {
-//               if (snapshot.hasError) {
-//                 return Center(child: Text('Error: ${snapshot.error}'));
-//               }
-
-//               if (!snapshot.hasData) {
-//                 return const Center(child: CircularProgressIndicator());
-//               }
-
-//               final subCategories = snapshot.data!;
-
-//               return ListView.builder(
-//                 itemCount: subCategories.length,
-//                 itemBuilder: (context, index) {
-//                   final subCategoryName = subCategories.keys.elementAt(index);
-//                   final subCategoryList = subCategories.values.elementAt(index);
-
-//                   return ListTile(
-//                     title: Text(subCategoryName),
-//                     onTap: () => viewModel.onSubCategorySelected(subCategoryName, subCategoryList.first), // Handle sub category selection
-//                   );
-//                 },
-//               );
-//             },
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marchant/ui/common/app_colors.dart';
@@ -103,7 +12,8 @@ import 'package:stacked/stacked.dart';
 import 'sub_category_viewmodel.dart';
 
 class SubCategoryView extends StackedView<SubCategoryViewModel> {
-  const SubCategoryView({Key? key}) : super(key: key);
+  const SubCategoryView({Key? key, required this.categoryValue}) : super(key: key);
+  final String categoryValue;
 
   @override
   Widget builder(
@@ -119,8 +29,8 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
         child: Column(
           children: [
             CustomeAppBar(
-              title: '${viewModel.selectedCategoryOnHomepage} Category in the home page',
-              back: false,
+              title: categoryValue,
+              back: true,
             ),
             verticalSpaceSmall,
             Padding(
@@ -132,15 +42,18 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
-                        ...viewModel.selectedCategoryOnHomepage.entries.map((e) => Padding(
-                              padding: const EdgeInsets.only(right: tinySize),
-                              child: CategoryWidget(
-                                name: e.value,
-                                selected: viewModel.selected.containsKey(e.key),
-                                onTap: () => viewModel.onSelected(e.key),
-                              ),
-                            )),
+                        ...viewModel.selectedCategoryOnHomepage.entries
+                            .map((e) => Padding(
+                                  padding: const EdgeInsets.only(right: tinySize),
+                                  child: CategoryWidget(
+                                    key: UniqueKey(),  // Ensure each CategoryWidget has a unique key
+                                    name: e.value,
+                                    selected: viewModel.selected.containsKey(e.key),
+                                    onTap: () => viewModel.onSelected(e.key),
+                                  ),
+                                )),
                         CategoryWidget(
+                          key: UniqueKey(),  // Ensure this widget also has a unique key
                           name: 'more',
                           selected: false,
                           onTap: viewModel.onMoreCategory,
@@ -166,9 +79,9 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                     );
                                   },
                                   child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        right: tinySize, top: smallSize),
+                                    padding: const EdgeInsets.only(right: tinySize, top: smallSize),
                                     child: CategoryWidget(
+                                      key: UniqueKey(),  // Ensure each sub-category widget has a unique key
                                       name: subCategory,
                                       selected: viewModel.selectedSubCategory == subCategory,
                                       onTap: () {},
@@ -192,6 +105,7 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                         widgets: viewModel.products.entries
                             .map(
                               (e) => CustomeCardWidget(
+                                key: UniqueKey(),  // Ensure each card widget has a unique key
                                 size: screenWidth(context) * .38,
                                 onTap: () => viewModel.onItemSelected(e.value),
                                 title: e.value.title ?? '',

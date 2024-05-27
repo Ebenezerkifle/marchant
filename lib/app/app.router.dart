@@ -251,8 +251,10 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i17.SubCategoryView: (data) {
+      final args = data.getArgs<SubCategoryViewArguments>(nullOk: false);
       return _i18.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i17.SubCategoryView(),
+        builder: (context) => _i17.SubCategoryView(
+            key: args.key, categoryValue: args.categoryValue),
         settings: data,
       );
     },
@@ -316,6 +318,33 @@ class CartViewArguments {
   @override
   int get hashCode {
     return key.hashCode ^ order.hashCode;
+  }
+}
+
+class SubCategoryViewArguments {
+  const SubCategoryViewArguments({
+    this.key,
+    required this.categoryValue,
+  });
+
+  final _i18.Key? key;
+
+  final String categoryValue;
+
+  @override
+  String toString() {
+    return '{"key": "$key", "categoryValue": "$categoryValue"}';
+  }
+
+  @override
+  bool operator ==(covariant SubCategoryViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key && other.categoryValue == categoryValue;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode ^ categoryValue.hashCode;
   }
 }
 
@@ -536,14 +565,18 @@ extension NavigatorStateExtension on _i21.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToSubCategoryView([
+  Future<dynamic> navigateToSubCategoryView({
+    _i18.Key? key,
+    required String categoryValue,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.subCategoryView,
+        arguments:
+            SubCategoryViewArguments(key: key, categoryValue: categoryValue),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -766,14 +799,18 @@ extension NavigatorStateExtension on _i21.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithSubCategoryView([
+  Future<dynamic> replaceWithSubCategoryView({
+    _i18.Key? key,
+    required String categoryValue,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.subCategoryView,
+        arguments:
+            SubCategoryViewArguments(key: key, categoryValue: categoryValue),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
