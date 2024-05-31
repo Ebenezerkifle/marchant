@@ -1,131 +1,46 @@
-// To parse this JSON data, do
-//
-//     final allCategories = allCategoriesFromJson(jsonString);
-
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-AllCategories allCategoriesFromJson(String str) =>
-    AllCategories.fromJson(json.decode(str));
-
-String allCategoriesToJson(AllCategories data) => json.encode(data.toJson());
-
-class AllCategories {
-  String status;
-  int results;
-  Data data;
-
-  AllCategories({
-    required this.status,
-    required this.results,
-    required this.data,
-  });
-
-  factory AllCategories.fromJson(Map<String, dynamic> json) => AllCategories(
-        status: json["status"],
-        results: json["results"],
-        data: Data.fromJson(json["data"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "status": status,
-        "results": results,
-        "data": data.toJson(),
-      };
-}
-
-class Data {
-  List<Category> categories;
-
-  Data({
-    required this.categories,
-  });
-
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-        categories: List<Category>.from(
-            json["categories"].map((x) => Category.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "categories": List<dynamic>.from(categories.map((x) => x.toJson())),
-      };
-}
-
 class Category {
-  String id;
-  String name;
-  String businessCategory;
-  int v;
-  List<SubCategory> subCategories;
+  String? id;
+  String? name;
+  List<Category>? subcategory;
 
-  Category({
-    required this.id,
-    required this.name,
-    required this.businessCategory,
-    required this.v,
-    required this.subCategories,
-  });
+  Category({this.id, this.name, this.subcategory});
 
-  factory Category.fromJson(Map<String, dynamic> json) => Category(
-        id: json["_id"],
-        name: json["name"],
-        businessCategory: json["businessCategory"],
-        v: json["__v"],
-        subCategories: List<SubCategory>.from(
-            json["subCategories"].map((x) => SubCategory.fromJson(x))),
-      );
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'name': name,
+      'subCategories': subcategory?.map((x) => x.toMap()).toList(),
+    };
+  }
 
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "name": name,
-        "businessCategory": businessCategory,
-        "__v": v,
-        "subCategories":
-            List<dynamic>.from(subCategories.map((x) => x.toJson())),
-      };
-}
+  factory Category.fromMap(Map<String, dynamic> map) {
+    return Category(
+      id: map['id'] != null ? map['id'] as String : null,
+      name: map['name'] != null ? map['name'] as String : null,
+      subcategory: map['subCategories'] != null
+          ? List<Category>.from(
+              (map['subCategories'] as List<dynamic>).map<Category?>(
+                (x) => Category.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
+    );
+  }
 
-class SubCategory {
-  String name;
-  List<SubSubCategory> subSubCategories;
-  String id;
+  String toJson() => json.encode(toMap());
 
-  SubCategory({
-    required this.name,
-    required this.subSubCategories,
-    required this.id,
-  });
+  factory Category.fromJson(String source) =>
+      Category.fromMap(json.decode(source) as Map<String, dynamic>);
 
-  factory SubCategory.fromJson(Map<String, dynamic> json) => SubCategory(
-        name: json["name"],
-        subSubCategories: List<SubSubCategory>.from(
-            json["subSubCategories"].map((x) => SubSubCategory.fromJson(x))),
-        id: json["_id"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "name": name,
-        "subSubCategories":
-            List<dynamic>.from(subSubCategories.map((x) => x.toJson())),
-        "_id": id,
-      };
-}
-
-class SubSubCategory {
-  String name;
-  String id;
-
-  SubSubCategory({
-    required this.name,
-    required this.id,
-  });
-
-  factory SubSubCategory.fromJson(Map<String, dynamic> json) => SubSubCategory(
-        name: json["name"],
-        id: json["_id"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "name": name,
-        "_id": id,
-      };
+  static List<Category> listFromApi(List<dynamic> categories) {
+    List<Category> list = [];
+    for (var ele in categories) {
+      Category c = Category.fromMap(ele);
+      list.add(c);
+    }
+    return list;
+  }
 }
