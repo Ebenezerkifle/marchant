@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/app/app.router.dart';
 import 'package:marchant/models/cart_model.dart';
+import 'package:marchant/models/category_model.dart';
 import 'package:marchant/models/product_model.dart';
 import 'package:marchant/services/state_service/cart_state_service.dart';
 import 'package:marchant/services/state_service/product_state_service.dart';
@@ -20,7 +21,7 @@ class SubCategoryViewModel extends ReactiveViewModel {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   get scaffoldKey => _key;
 
-  Map<String, String> get categories => _productState.categories;
+  Map<String, Category> get categories => _productState.categories;
   Map<String, String> get topCategory => _productState.topCategories;
   Map<String, List<String>> get subCategories => _productState.subCategories;
   Map<String, bool> get selected => _productState.selected;

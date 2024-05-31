@@ -59,11 +59,14 @@ class HomeView extends StackedView<HomeViewModel> {
                   child: Column(
                     children: [
                       CustomeGrideWidget(
-                        column: 4,
-                        widgets: viewModel.topCategory.entries
+                        column: viewModel.catagories.length > 4
+                            ? 4
+                            : viewModel.catagories.length,
+                        widgets: viewModel.catagories.entries
                             .map(
                               (e) => Padding(
-                                padding: const EdgeInsets.only(right: smallSize),
+                                padding:
+                                    const EdgeInsets.only(right: smallSize),
                                 child: CustomeCardWidget(
                                   isCategory: true,
                                   onTap: () => viewModel.onSelected(e.value),
@@ -107,5 +110,6 @@ class HomeView extends StackedView<HomeViewModel> {
   @override
   HomeViewModel viewModelBuilder(
     BuildContext context,
-  ) => HomeViewModel();
+  ) =>
+      HomeViewModel();
 }

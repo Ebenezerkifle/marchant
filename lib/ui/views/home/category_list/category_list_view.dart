@@ -35,7 +35,7 @@ class CategoryListView extends StackedView<CategoryListViewModel> {
                           //vertical: smallSize,
                         ),
                         child: CustomeListTile(
-                          title: e.value,
+                          title: e.value.name ?? "",
                           noImage: true,
                           center: true,
                           onTap: () => viewModel.onSelected(e.key),

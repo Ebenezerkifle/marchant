@@ -3,6 +3,7 @@ import 'package:marchant/app/app.bottomsheets.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/app/app.router.dart';
 import 'package:marchant/models/cart_model.dart';
+import 'package:marchant/models/category_model.dart';
 import 'package:marchant/models/product_model.dart';
 import 'package:marchant/services/state_service/cart_state_service.dart';
 import 'package:marchant/services/state_service/landing_state_servic.dart';
@@ -24,7 +25,7 @@ class HomeViewModel extends ReactiveViewModel {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   get scaffoldKey => _key;
 
-  Map<String, String> get catagories => _productState.categories;
+  Map<String, Category> get catagories => _productState.categories;
   Map<String, String> get topCategory => _productState.topCategories;
 
   Map<String, ProductModel> get products => _productState.products;
