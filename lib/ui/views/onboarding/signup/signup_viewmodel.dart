@@ -23,21 +23,28 @@ class SignupViewModel extends FormViewModel {
   double get iconSize => 15;
 
   String get phoneNumFieldHint => 'Phone number';
-  String get nameHint => 'Full Name';
-  String get locationHint => 'Location';
+ 
 
   String get haveAccount => 'Aready have an Account?';
 
   String get image => 'assets/images/order_delivery.png';
+  TextEditingController passController = TextEditingController();
+  TextEditingController confirmController = TextEditingController();
+
+  // double get iconSize => 15;
+
+  // String get phoneNumFieldHint => 'Phone number';
+  String get passHint => 'password';
+  String get confirmHint => 'confirm password';
 
   onSignIn() {
     _navigation.clearStackAndShow(Routes.loginView);
   }
 
   onNext() {
-    // navigate to the next page.
+     // navigate to the next page.
     if (_formKey.currentState!.validate() && _formError.isEmpty) {
-      _navigation.navigateToSignupFinalView();
+      _navigation.navigateToChooseCatagoryView();
     }
   }
 
@@ -91,5 +98,41 @@ class SignupViewModel extends FormViewModel {
     notifyListeners();
     return;
   }
+
+   // validate password
+  validatePassword(String value, var controller) {
+    return _setStateOfFormField(
+      FrontValidation.validateFormField(
+        value,
+        "Password",
+        minLength: 6,
+        maxLength: 20,
+      ),
+      controller,
+    );
+  }
+
+  // a method to validate password field.
+  validateConfirmPass(String value, String password, var controller) {
+    return _setStateOfFormField(
+      FrontValidation.confirmPassword(
+        password: password,
+        confirmPass: value,
+      ),
+      controller,
+    );
+  }
+
+  // _setStateOfFormField(String msg, var controller) {
+  //   // takes the validation result and set the state
+  //   if (msg.isNotEmpty) {
+  //     _formError[controller] = msg;
+  //     notifyListeners();
+  //     return;
+  //   }
+  //   _formError.remove(controller);
+  //   notifyListeners();
+  //   return;
+  // }
   //--------------------------------------------
 }

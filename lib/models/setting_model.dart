@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 enum SettingOptions {
-  editProfile,
-  notification,
-  security,
-  help,
+  shortCode,
+  language,
+  myDetail,
+  credit,
+  about,
   logout,
 }
 

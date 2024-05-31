@@ -199,15 +199,6 @@
 //   };
 // }
 
-
-
-
-
-
-
-
-
-
 import 'package:marchant/models/order_model.dart';
 import 'package:marchant/models/product_model.dart';
 import 'package:stacked/stacked.dart';
@@ -272,28 +263,43 @@ class ProductStateService with ListenableServiceMixin {
 
   int categoryLimit = 3;
 
-  _getCategories() {
-    _categories.value.clear();
-    int length = samples.length > 3 ? categoryLimit : samples.length;
-    int count = 0;
-    for (var ele in samples.entries) {
-      _categories.value[ele.key] = ele.value;
-      if (count < length) {
-        _topCategories.value[ele.key] = ele.value;
-        // Mock subcategories for example purposes
-        // Each top category has different subcategories
-        if (ele.key == '1') {
-          _subCategories.value[ele.key] = ['Sub1', 'Sub2', 'Sub3', 'Sub4'];
-        } else if (ele.key == '2') {
-          _subCategories.value[ele.key] = ['Sub5', 'Sub6', 'Sub7'];
-        } else if (ele.key == '3') {
-          _subCategories.value[ele.key] = ['Sub8', 'Sub9'];
-        }
-      }
-      count++;
+void _getCategories() {
+  _categories.value.clear();
+  for (var ele in samples.entries) {
+    _categories.value[ele.key] = ele.value;
+    _topCategories.value[ele.key] = ele.value; // Always add to top categories
+    // Mock subcategories for example purposes
+    // Each top category has different subcategories
+    if (ele.key == '1') {
+      _subCategories.value[ele.key] = ['Sub1', 'Sub2', 'Sub3'];
+    } else if (ele.key == '2') {
+      _subCategories.value[ele.key] = ['Sub5', 'Sub6', 'Sub7'];
+    } else if (ele.key == '3') {
+      _subCategories.value[ele.key] = ['Sub8', 'Sub9'];
+    } else if (ele.key == '4') {
+      _subCategories.value[ele.key] = ['Sub10', 'Sub11'];
+    } else if (ele.key == '5') {
+      _subCategories.value[ele.key] = ['Sub12', 'Sub13'];
+    } else if (ele.key == '6') {
+      _subCategories.value[ele.key] = ['Sub14', 'Sub15'];
+    } else if (ele.key == '7') {
+      _subCategories.value[ele.key] = ['Sub16', 'Sub17'];
+    } else if (ele.key == '8') {
+      _subCategories.value[ele.key] = ['Sub18', 'Sub19'];
+    } else if (ele.key == '9') {
+      _subCategories.value[ele.key] = ['Sub20', 'Sub21'];
+    } else if (ele.key == '10') {
+      _subCategories.value[ele.key] = ['Sub22', 'Sub23'];
+    } else if (ele.key == '11') {
+      _subCategories.value[ele.key] = ['Sub24', 'Sub25'];
+    } else if (ele.key == '12') {
+      _subCategories.value[ele.key] = ['Sub26', 'Sub27'];
     }
-    notifyListeners();
+    // You can add more conditions for subcategories here
   }
+  notifyListeners();
+}
+
 
   _reOrderCategory(String key) {
     if (_categories.value.containsKey(key)) {
@@ -329,6 +335,11 @@ class ProductStateService with ListenableServiceMixin {
     '5': 'Stove',
     '6': 'Bread maker',
     '7': 'Air conditioner',
+    '8': 'Bread maker',
+    '9': 'Air conditioner',
+    '10': 'Bread maker',
+    '11': 'Air conditioner',
+    '12': 'Air conditioner',
   };
 
   Map<String, ProductModel> sampleProducts = {

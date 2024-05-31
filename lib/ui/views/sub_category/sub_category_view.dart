@@ -12,7 +12,8 @@ import 'package:stacked/stacked.dart';
 import 'sub_category_viewmodel.dart';
 
 class SubCategoryView extends StackedView<SubCategoryViewModel> {
-  const SubCategoryView({Key? key, required this.categoryValue}) : super(key: key);
+  const SubCategoryView({Key? key, required this.categoryValue})
+      : super(key: key);
   final String categoryValue;
 
   @override
@@ -44,16 +45,20 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                       children: [
                         ...viewModel.selectedCategoryOnHomepage.entries
                             .map((e) => Padding(
-                                  padding: const EdgeInsets.only(right: tinySize),
+                                  padding:
+                                      const EdgeInsets.only(right: tinySize),
                                   child: CategoryWidget(
-                                    key: UniqueKey(),  // Ensure each CategoryWidget has a unique key
+                                    key:
+                                        UniqueKey(), // Ensure each CategoryWidget has a unique key
                                     name: e.value,
-                                    selected: viewModel.selected.containsKey(e.key),
+                                    selected:
+                                        viewModel.selected.containsKey(e.key),
                                     onTap: () => viewModel.onSelected(e.key),
                                   ),
                                 )),
                         CategoryWidget(
-                          key: UniqueKey(),  // Ensure this widget also has a unique key
+                          key:
+                              UniqueKey(), // Ensure this widget also has a unique key
                           name: 'more',
                           selected: false,
                           onTap: viewModel.onMoreCategory,
@@ -79,11 +84,14 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                     );
                                   },
                                   child: Padding(
-                                    padding: const EdgeInsets.only(right: tinySize, top: smallSize),
+                                    padding: const EdgeInsets.only(
+                                        right: tinySize, top: smallSize),
                                     child: CategoryWidget(
-                                      key: UniqueKey(),  // Ensure each sub-category widget has a unique key
+                                      key:
+                                          UniqueKey(), // Ensure each sub-category widget has a unique key
                                       name: subCategory,
-                                      selected: viewModel.selectedSubCategory == subCategory,
+                                      selected: viewModel.selectedSubCategory ==
+                                          subCategory,
                                       onTap: () {},
                                     ),
                                   ),
@@ -100,12 +108,14 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: middleSize),
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: middleSize),
                       child: CustomeGrideWidget(
                         widgets: viewModel.products.entries
                             .map(
                               (e) => CustomeCardWidget(
-                                key: UniqueKey(),  // Ensure each card widget has a unique key
+                                key:
+                                    UniqueKey(), // Ensure each card widget has a unique key
                                 size: screenWidth(context) * .38,
                                 onTap: () => viewModel.onItemSelected(e.value),
                                 title: e.value.title ?? '',
@@ -134,5 +144,6 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
   }
 
   @override
-  SubCategoryViewModel viewModelBuilder(BuildContext context) => SubCategoryViewModel();
+  SubCategoryViewModel viewModelBuilder(BuildContext context) =>
+      SubCategoryViewModel();
 }

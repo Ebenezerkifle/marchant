@@ -40,7 +40,8 @@ class HomeViewModel extends ReactiveViewModel {
     } else {
       _productState.selected.clear(); // Clear previous selection
       // _productState.selected[key] = true; // Convert bool to String
-      _navigation.navigateToSubCategoryView(categoryValue: key); // Navigate to SubcategoryPage
+      _navigation.navigateToSubCategoryView(
+          categoryValue: key); // Navigate to SubcategoryPage
     }
     notifyListeners();
   }

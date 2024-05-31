@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/app/app.router.dart';
@@ -29,12 +28,13 @@ class SubCategoryViewModel extends ReactiveViewModel {
   Map<String, CartModel> get cartItems => _cartState.cartItems;
   String? get selectedSubCategory => _productState.selectedSubCategory;
 
-  Map<String, String> get selectedCategoryOnHomepage => _productState.topCategories; // Assuming this getter
+  Map<String, String> get selectedCategoryOnHomepage =>
+      _productState.topCategories; // Assuming this getter
 
   void onSelected(var key) => _productState.onCategorySelected(key);
   void onSubCategorySelected(String key, String subCategory) =>
       _productState.onSubCategorySelected(key, subCategory);
-  
+
   void onMoreCategory() {
     // Implementation of onMoreCategory
     // Navigate to a different view or show more categories, for example:

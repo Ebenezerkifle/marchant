@@ -39,26 +39,6 @@ class SignupView extends StackedView<SignupViewModel> {
                     children: [
                       Text(viewModel.signUpMsg, style: AppTextStyle.h2Bold),
                       verticalSpaceMiddle,
-                      // Name field
-                      InputField(
-                        validator: (value) => viewModel.validateAText(
-                          value,
-                          viewModel.nameHint,
-                          viewModel.nameController,
-                          minLength: 3,
-                          maxLength: 20,
-                        ),
-                        controller: viewModel.nameController,
-                        error: viewModel.formError
-                            .containsKey(viewModel.nameController),
-                        prefixIcon: Icon(
-                          FontAwesomeIcons.solidUser,
-                          color: kcPrimaryColorDark,
-                          size: viewModel.iconSize,
-                        ),
-                        hint: viewModel.nameHint,
-                      ),
-                      verticalSpaceMiddle,
                       // phone number field
                       InputField(
                         validator: (value) => viewModel.validatePhoneNumber(
@@ -79,28 +59,42 @@ class SignupView extends StackedView<SignupViewModel> {
                         hint: viewModel.phoneNumFieldHint,
                       ),
                       verticalSpaceMiddle,
-                      // Location field
-                      InputField(
-                        validator: (value) => viewModel.validateAText(
-                          value,
-                          viewModel.locationHint,
-                          viewModel.locationController,
-                          minLength: 5,
+                        // Password field
+                        InputField(
+                          validator: (value) => viewModel.validatePassword(
+                            value,
+                            viewModel.passController,
+                          ),
+                          controller: viewModel.passController,
+                          error: viewModel.formError
+                              .containsKey(viewModel.passController),
+                          prefixIcon: Icon(
+                            FontAwesomeIcons.lock,
+                            color: kcPrimaryColorDark,
+                            size: viewModel.iconSize,
+                          ),
+                          hint: viewModel.passHint,
                         ),
-                        controller: viewModel.locationController,
-                        error: viewModel.formError
-                            .containsKey(viewModel.locationController),
-                        inputType: TextInputType.text,
-                        charLength: 40,
-                        prefixIcon: Icon(
-                          FontAwesomeIcons.locationDot,
-                          color: kcPrimaryColorDark,
-                          size: viewModel.iconSize,
+                        verticalSpaceMiddle,
+                         // Confirm password field
+                        InputField(
+                          validator: (value) => viewModel.validateConfirmPass(
+                            value,
+                            viewModel.passController.text,
+                            viewModel.confirmController,
+                          ),
+                          controller: viewModel.confirmController,
+                          error: viewModel.formError
+                              .containsKey(viewModel.confirmController),
+                          prefixIcon: Icon(
+                            FontAwesomeIcons.lock,
+                            color: kcPrimaryColorDark,
+                            size: viewModel.iconSize,
+                          ),
+                          hint: viewModel.confirmHint,
                         ),
-                        hint: viewModel.locationHint,
-                      ),
-                      verticalSpaceMiddle,
-                      // error message widget
+                        verticalSpaceMiddle,
+                        // error message widget
                       viewModel.formError.isNotEmpty
                           ? Column(
                               crossAxisAlignment: CrossAxisAlignment.center,

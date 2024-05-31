@@ -24,6 +24,7 @@ import 'package:marchant/ui/views//profile/profile_view.dart';
 import 'package:marchant/ui/views/manufacturer//manu_home/manu_home_view.dart';
 import 'package:marchant/ui/views/manufacturer//post/post_view.dart';
 import 'package:marchant/ui/views/sub_category/sub_category_view.dart';
+import 'package:marchant/ui/views/company_profile/company_profile_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -44,6 +45,7 @@ import 'package:marchant/ui/views/sub_category/sub_category_view.dart';
     MaterialRoute(page: ManuHomeView),
     MaterialRoute(page: PostView),
     MaterialRoute(page: SubCategoryView),
+    MaterialRoute(page: CompanyProfileView),
 // @stacked-route
   ],
   dependencies: [

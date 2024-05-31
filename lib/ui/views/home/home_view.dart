@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marchant/ui/common/app_colors.dart';
 import 'package:marchant/ui/common/app_text_style.dart';
 import 'package:marchant/ui/common/ui_helpers.dart';
-import 'package:marchant/ui/views/widgets/category_widget.dart';
 import 'package:marchant/ui/views/widgets/custome_app_bar.dart';
 import 'package:marchant/ui/views/widgets/custome_card_widget.dart';
 import 'package:marchant/ui/views/widgets/custome_grid_widget.dart';
@@ -53,54 +52,28 @@ class HomeView extends StackedView<HomeViewModel> {
               ),
             ),
             verticalSpaceSmall,
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Padding(
-                padding: const EdgeInsets.only(left: middleSize),
-                child: Row(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: viewModel.topCategory.entries
-                          .map((e) => Padding(
-                                padding:
-                                    const EdgeInsets.only(right: smallSize),
-                                child: CategoryWidget(
-                                  name: e.value,
-                                  selected:
-                                      viewModel.selected.containsKey(e.key) &&
-                                      viewModel.selected[e.key] == true,
-                                  // onTap: () => viewModel.onSelected(e.key),
-                                  onTap: () => viewModel.onSelected(e.value),
-                                ),
-                              ))
-                          .toList(),
-                    ),
-                    CategoryWidget(
-                      name: 'more',
-                      selected: false,
-                      onTap: viewModel.onMoreCategory,
-                      roundness: 5,
-                      hPadding: smallSize,
-                      icon: const Icon(
-                        FontAwesomeIcons.ellipsisVertical,
-                        color: kcWhite,
-                      ),
-                    ),
-                    horizontalSpaceMiddle,
-                  ],
-                ),
-              ),
-            ),
-            verticalSpaceMedium,
             Expanded(
               child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: middleSize),
-                      child: CustomeGrideWidget(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: middleSize),
+                  child: Column(
+                    children: [
+                      CustomeGrideWidget(
+                        column: 4,
+                        widgets: viewModel.topCategory.entries
+                            .map(
+                              (e) => Padding(
+                                padding: const EdgeInsets.only(right: smallSize),
+                                child: CustomeCardWidget(
+                                  isCategory: true,
+                                  onTap: () => viewModel.onSelected(e.value),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                      verticalSpaceMedium,
+                      CustomeGrideWidget(
                         widgets: viewModel.products.entries
                             .map(
                               (e) => CustomeCardWidget(
@@ -118,9 +91,9 @@ class HomeView extends StackedView<HomeViewModel> {
                             )
                             .toList(),
                       ),
-                    ),
-                    verticalSpaceLarge,
-                  ],
+                      verticalSpaceLarge,
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -134,6 +107,5 @@ class HomeView extends StackedView<HomeViewModel> {
   @override
   HomeViewModel viewModelBuilder(
     BuildContext context,
-  ) =>
-      HomeViewModel();
+  ) => HomeViewModel();
 }
