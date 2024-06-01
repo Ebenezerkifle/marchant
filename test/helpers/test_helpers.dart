@@ -2,6 +2,9 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:marchant/services/state_service/user_service.dart';
+import 'package:marchant/services/state_service/merchant_enrollment_service.dart';
+import 'package:marchant/services/state_service/merchant_top_category_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -10,13 +13,23 @@ import 'test_helpers.mocks.dart';
   MockSpec<NavigationService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<BottomSheetService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<DialogService>(onMissingStub: OnMissingStub.returnDefault),
-  // @stacked-mock-spec
+  MockSpec<UserService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<UserService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<MerchantEnrollmentService>(
+      onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<MerchantTopCategoryService>(
+      onMissingStub: OnMissingStub.returnDefault),
+// @stacked-mock-spec
 ])
 void registerServices() {
   getAndRegisterNavigationService();
   getAndRegisterBottomSheetService();
   getAndRegisterDialogService();
-  // @stacked-mock-register
+  getAndRegisterUserService();
+  getAndRegisterUserService();
+  getAndRegisterMerchantEnrollmentService();
+  getAndRegisterMerchantTopCategoryService();
+// @stacked-mock-register
 }
 
 MockNavigationService getAndRegisterNavigationService() {
@@ -69,6 +82,26 @@ MockDialogService getAndRegisterDialogService() {
   return service;
 }
 
+MockUserService getAndRegisterUserService() {
+  _removeRegistrationIfExists<UserService>();
+  final service = MockUserService();
+  locator.registerSingleton<UserService>(service);
+  return service;
+}
+
+MockMerchantEnrollmentService getAndRegisterMerchantEnrollmentService() {
+  _removeRegistrationIfExists<MerchantEnrollmentService>();
+  final service = MockMerchantEnrollmentService();
+  locator.registerSingleton<MerchantEnrollmentService>(service);
+  return service;
+}
+
+MockMerchantTopCategoryService getAndRegisterMerchantTopCategoryService() {
+  _removeRegistrationIfExists<MerchantTopCategoryService>();
+  final service = MockMerchantTopCategoryService();
+  locator.registerSingleton<MerchantTopCategoryService>(service);
+  return service;
+}
 // @stacked-mock-create
 
 void _removeRegistrationIfExists<T extends Object>() {

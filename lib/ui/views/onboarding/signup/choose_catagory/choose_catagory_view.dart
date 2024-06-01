@@ -9,13 +9,13 @@ import 'package:stacked/stacked.dart';
 
 import 'choose_catagory_viewmodel.dart';
 
-class ChooseCatagoryView extends StackedView<ChooseCatagoryViewModel> {
+class ChooseCatagoryView extends StackedView<ChooseCategoryViewModel> {
   const ChooseCatagoryView({Key? key}) : super(key: key);
 
   @override
   Widget builder(
     BuildContext context,
-    ChooseCatagoryViewModel viewModel,
+    ChooseCategoryViewModel viewModel,
     Widget? child,
   ) {
     return Scaffold(
@@ -76,7 +76,7 @@ class ChooseCatagoryView extends StackedView<ChooseCatagoryViewModel> {
                                   padding:
                                       const EdgeInsets.only(bottom: middleSize),
                                   child: CustomeListTile(
-                                    title: e.value,
+                                    title: e.value.name ?? '',
                                     noPrice: true,
                                     onTap: () => viewModel.onSelected(e.key),
                                     height: 80,
@@ -117,8 +117,8 @@ class ChooseCatagoryView extends StackedView<ChooseCatagoryViewModel> {
   }
 
   @override
-  ChooseCatagoryViewModel viewModelBuilder(
+  ChooseCategoryViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      ChooseCatagoryViewModel();
+      ChooseCategoryViewModel();
 }

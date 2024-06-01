@@ -18,7 +18,7 @@ class CompanyProfileView extends StackedView<CompanyProfileViewModel> {
     BuildContext context,
     CompanyProfileViewModel viewModel,
     Widget? child,
-  )  {
+  ) {
     return Scaffold(
       key: viewModel.scaffoldKey,
       backgroundColor: kcWhite,
@@ -29,13 +29,13 @@ class CompanyProfileView extends StackedView<CompanyProfileViewModel> {
             children: [
               CustomeAppBar(title: 'CompanyProfile'),
               Text(
-                product.provider??"Unkown Company",
-                style:AppTextStyle.h1Bold,
+                product.provider ?? "Unkown Company",
+                style: AppTextStyle.h1Bold,
               ),
               const SizedBox(height: mediumSize),
               const Text(
                 'License Number: ABC12345',
-                  style: AppTextStyle.h4Bold,
+                style: AppTextStyle.h4Bold,
               ),
               const SizedBox(height: largeSize),
               const Text(
@@ -68,6 +68,7 @@ class CompanyProfileView extends StackedView<CompanyProfileViewModel> {
       ),
     );
   }
+
   @override
   CompanyProfileViewModel viewModelBuilder(
     BuildContext context,

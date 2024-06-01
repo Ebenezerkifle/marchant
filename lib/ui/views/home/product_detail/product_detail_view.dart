@@ -11,7 +11,6 @@ import 'package:stacked/stacked.dart';
 
 import 'product_detail_viewmodel.dart';
 
-
 class ProductDetailView extends StackedView<ProductDetailViewModel> {
   const ProductDetailView({Key? key, required this.product}) : super(key: key);
   final ProductModel product;
@@ -98,27 +97,25 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                           ),
                           Text(
                             product.provider ?? 'Unknown Provider',
-                            style: AppTextStyle
-                                .h4Normal, 
+                            style: AppTextStyle.h4Normal,
                           ),
                           TextButton(
-                            onPressed: ()=> viewModel.onPressed(),
+                            onPressed: () => viewModel.onPressed(),
                             child: Row(
                               // Use Row for horizontal layout
                               mainAxisSize:
                                   MainAxisSize.min, // Avoid unnecessary space
                               children: [
-                               const Text(
+                                const Text(
                                   'See More',
                                   style: AppTextStyle.h4Bold,
                                 ),
-                               horizontalSpaceTiny, // Add spacing between text and icon
+                                horizontalSpaceTiny, // Add spacing between text and icon
                                 Icon(
-                                  Icons.arrow_forward_ios_rounded, // Use rounded arrow icon
-                                 size: middleSize,
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .primary, 
+                                  Icons
+                                      .arrow_forward_ios_rounded, // Use rounded arrow icon
+                                  size: middleSize,
+                                  color: Theme.of(context).colorScheme.primary,
                                 ),
                               ],
                             ),
@@ -189,4 +186,3 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
   ) =>
       ProductDetailViewModel(product: product);
 }
-

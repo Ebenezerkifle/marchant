@@ -13,14 +13,13 @@ class ProductDetailViewModel extends BaseViewModel {
   final _bottomSheet = locator<BottomSheetService>();
   final _navigation = locator<NavigationService>();
 
-
   final ProductModel product;
   ProductDetailViewModel({required this.product});
 
   onPressed() {
-    _navigation.navigateToCompanyProfileView(product:product);
+    _navigation.navigateToCompanyProfileView(product: product);
   }
-       
+
   onAddToCart() async {
     var compeleter = await _bottomSheet.showCustomSheet(
       variant: BottomSheetType.cart,
@@ -39,15 +38,6 @@ class ProductDetailViewModel extends BaseViewModel {
     }
   }
 }
-
-
-
-
-
-
-
-
-
 
 // import 'package:flutter/foundation.dart';
 // import 'package:marchant/app/app.bottomsheets.dart';

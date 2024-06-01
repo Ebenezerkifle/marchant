@@ -7,46 +7,30 @@ import 'package:stacked_services/stacked_services.dart';
 import '../../../../app/app.locator.dart';
 import '../../../../services/validation_service/front_validation.dart';
 
+import 'package:marchant/services/state_service/merchant_enrollment_service.dart';
+
 class SignupViewModel extends FormViewModel {
   final _navigation = locator<NavigationService>();
   final _onboardingState = locator<OnboardingStateService>();
+  final _merchantEnrollmentService = MerchantEnrollmentService();
 
   @override
   List<ListenableServiceMixin> get listenableServices => [_onboardingState];
 
   String get signUpMsg => 'Create an Account';
 
-  TextEditingController phoneNumController = TextEditingController();
-  TextEditingController nameController = TextEditingController();
-  TextEditingController locationController = TextEditingController();
-
-  double get iconSize => 15;
-
-  String get phoneNumFieldHint => 'Phone number';
- 
-
-  String get haveAccount => 'Aready have an Account?';
-
   String get image => 'assets/images/order_delivery.png';
+
+  TextEditingController phoneNumController = TextEditingController();
   TextEditingController passController = TextEditingController();
   TextEditingController confirmController = TextEditingController();
 
-  // double get iconSize => 15;
+  double get iconSize => 15;
+  String get haveAccount => 'Aready have an Account?';
 
-  // String get phoneNumFieldHint => 'Phone number';
+  String get phoneNumFieldHint => 'Phone number';
   String get passHint => 'password';
   String get confirmHint => 'confirm password';
-
-  onSignIn() {
-    _navigation.clearStackAndShow(Routes.loginView);
-  }
-
-  onNext() {
-     // navigate to the next page.
-    if (_formKey.currentState!.validate() && _formError.isEmpty) {
-      _navigation.navigateToChooseCatagoryView();
-    }
-  }
 
   //------------------ Validation --------------
   final _formKey = GlobalKey<FormState>();
@@ -54,6 +38,9 @@ class SignupViewModel extends FormViewModel {
 
   final Map<dynamic, String> _formError = {};
   Map<dynamic, String> get formError => _formError;
+
+  bool _loading = false;
+  bool get loading => _loading;
 
   // validate phone number.
   validatePhoneNumber(String value, var controller) {
@@ -99,7 +86,7 @@ class SignupViewModel extends FormViewModel {
     return;
   }
 
-   // validate password
+  // validate password
   validatePassword(String value, var controller) {
     return _setStateOfFormField(
       FrontValidation.validateFormField(
@@ -123,6 +110,20 @@ class SignupViewModel extends FormViewModel {
     );
   }
 
+  onSignIn() {
+    _navigation.clearStackAndShow(Routes.loginView);
+  }
+
+  onNext() {
+    if (_formKey.currentState!.validate() && _formError.isEmpty) {
+      _merchantEnrollmentService.setValue(
+        phoneNumber: phoneNumController.text,
+        password: passController.text,
+      );
+
+      _navigation.navigateToChooseCatagoryView();
+    }
+  }
   // _setStateOfFormField(String msg, var controller) {
   //   // takes the validation result and set the state
   //   if (msg.isNotEmpty) {

@@ -59,42 +59,42 @@ class SignupView extends StackedView<SignupViewModel> {
                         hint: viewModel.phoneNumFieldHint,
                       ),
                       verticalSpaceMiddle,
-                        // Password field
-                        InputField(
-                          validator: (value) => viewModel.validatePassword(
-                            value,
-                            viewModel.passController,
-                          ),
-                          controller: viewModel.passController,
-                          error: viewModel.formError
-                              .containsKey(viewModel.passController),
-                          prefixIcon: Icon(
-                            FontAwesomeIcons.lock,
-                            color: kcPrimaryColorDark,
-                            size: viewModel.iconSize,
-                          ),
-                          hint: viewModel.passHint,
+                      // Password field
+                      InputField(
+                        validator: (value) => viewModel.validatePassword(
+                          value,
+                          viewModel.passController,
                         ),
-                        verticalSpaceMiddle,
-                         // Confirm password field
-                        InputField(
-                          validator: (value) => viewModel.validateConfirmPass(
-                            value,
-                            viewModel.passController.text,
-                            viewModel.confirmController,
-                          ),
-                          controller: viewModel.confirmController,
-                          error: viewModel.formError
-                              .containsKey(viewModel.confirmController),
-                          prefixIcon: Icon(
-                            FontAwesomeIcons.lock,
-                            color: kcPrimaryColorDark,
-                            size: viewModel.iconSize,
-                          ),
-                          hint: viewModel.confirmHint,
+                        controller: viewModel.passController,
+                        error: viewModel.formError
+                            .containsKey(viewModel.passController),
+                        prefixIcon: Icon(
+                          FontAwesomeIcons.lock,
+                          color: kcPrimaryColorDark,
+                          size: viewModel.iconSize,
                         ),
-                        verticalSpaceMiddle,
-                        // error message widget
+                        hint: viewModel.passHint,
+                      ),
+                      verticalSpaceMiddle,
+                      // Confirm password field
+                      InputField(
+                        validator: (value) => viewModel.validateConfirmPass(
+                          value,
+                          viewModel.passController.text,
+                          viewModel.confirmController,
+                        ),
+                        controller: viewModel.confirmController,
+                        error: viewModel.formError
+                            .containsKey(viewModel.confirmController),
+                        prefixIcon: Icon(
+                          FontAwesomeIcons.lock,
+                          color: kcPrimaryColorDark,
+                          size: viewModel.iconSize,
+                        ),
+                        hint: viewModel.confirmHint,
+                      ),
+                      verticalSpaceMiddle,
+                      // error message widget
                       viewModel.formError.isNotEmpty
                           ? Column(
                               crossAxisAlignment: CrossAxisAlignment.center,

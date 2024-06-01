@@ -48,7 +48,7 @@ class CartStateService with ListenableServiceMixin {
       count: _totalCount.value,
       totalPrice: _totalPrice.value,
     );
-    _productStateService.placeOrder(order);
+    // _productStateService.placeOrder(order);
     clearCart();
   }
 
