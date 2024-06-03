@@ -18,7 +18,7 @@ class Category {
 
   factory Category.fromMap(Map<String, dynamic> map) {
     return Category(
-      id: map['id'] != null ? map['id'] as String : null,
+      id: map['_id'] != null ? map['_id'] as String : null,
       name: map['name'] != null ? map['name'] as String : null,
       subcategory: map['subCategories'] != null
           ? List<Category>.from(

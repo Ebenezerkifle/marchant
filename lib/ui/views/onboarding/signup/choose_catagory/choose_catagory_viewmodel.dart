@@ -4,25 +4,36 @@ import 'package:marchant/app/app.router.dart';
 import 'package:marchant/models/category_model.dart';
 import 'dart:convert';
 import 'package:marchant/models/user_model.dart';
-import 'package:marchant/services/state_service/merchant_enrollment_service.dart';
-import 'package:marchant/services/state_service/merchant_top_category_service.dart';
+import 'package:marchant/services/state_service/enrollment_state_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:marchant/services/api_service/authentication.dart';
 import 'package:marchant/services/state_service/user_service.dart';
 import 'package:marchant/services/storage_service.dart/session.dart';
 
 class ChooseCategoryViewModel extends ReactiveViewModel {
   final _navigation = locator<NavigationService>();
-  final _apiService = Authentication();
   final _userService = UserService();
-  final _topCategoryState = locator<MerchantTopCategoryService>();
-  final _merchantEnrollmentService = locator<MerchantEnrollmentService>();
+  final _enrollmentService = locator<EnrollmentStateService>();
+  bool _loading = false;
+  bool get loading => _loading;
+
+  ChooseCategoryViewModel() {
+    // get a category list.
+    _init();
+  }
+
+  _init() async {
+    _loading = true;
+    notifyListeners();
+    await _enrollmentService.getTopCategories();
+    _loading = false;
+    notifyListeners();
+  }
 
   @override
-  List<ListenableServiceMixin> get listenableServices => [_topCategoryState];
+  List<ListenableServiceMixin> get listenableServices => [_enrollmentService];
 
-  Map<String, Category> get topCatagories => _topCategoryState.topCategories;
+  Map<String, Category> get topCatagories => _enrollmentService.topCategories;
 
   // Map<String, String> topCategories = {
   //   "a": "Electronics",
@@ -41,9 +52,6 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   GlobalKey<FormState> get formKey => _formKey;
 
-  bool _loading = false;
-  bool get loading => _loading;
-
   onSelected(String key) {
     selected.clear();
     selected[key] = key;
@@ -53,12 +61,10 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
   void onSubmit() async {
     // _formError.remove('response');
     if (selected.isNotEmpty) {
-      _merchantEnrollmentService.setValue(
-        CategoryId: selected.entries.first.key,
-      );
+      _enrollmentService.setUserModel(categoryId: selected.entries.first.key);
       _loading = true;
-      var response = await _apiService
-          .registerNewUser(_merchantEnrollmentService.getAnObject());
+
+      var response = await _enrollmentService.registerAuser();
       if (response.statusCode == 201 || response.statusCode == 200) {
         var body = jsonDecode(response.body);
         var merchant = body['data']['newUser'];
@@ -76,11 +82,8 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
       }
       _loading = false;
       notifyListeners();
-    }else{
+    } else {
       //todo
     }
   }
 }
-
-
-

@@ -1,4 +1,5 @@
 import 'package:marchant/services/state_service/cart_state_service.dart';
+import 'package:marchant/services/state_service/enrollment_state_service.dart';
 import 'package:marchant/services/state_service/landing_state_servic.dart';
 import 'package:marchant/services/state_service/onboarding_state_service.dart';
 import 'package:marchant/services/state_service/product_state_service.dart';
@@ -62,6 +63,7 @@ import 'package:marchant/services/state_service/merchant_top_category_service.da
     LazySingleton(classType: UserService),
     LazySingleton(classType: MerchantEnrollmentService),
     LazySingleton(classType: MerchantTopCategoryService),
+    LazySingleton(classType: EnrollmentStateService),
 // @stacked-service
   ],
   bottomsheets: [

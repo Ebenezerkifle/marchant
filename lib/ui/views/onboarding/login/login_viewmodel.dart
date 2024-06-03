@@ -15,8 +15,7 @@ import 'package:stacked_services/stacked_services.dart';
 class LoginViewModel extends BaseViewModel {
   final _authentication = Authentication();
   final _navigationService = locator<NavigationService>();
-  final _userService = UserService();
-
+  final _userService = locator<UserService>();
 
   String get welcomeMsg => 'Welcome';
   String get image => 'assets/images/order_delivery.png';

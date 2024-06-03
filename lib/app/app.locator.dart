@@ -12,6 +12,7 @@ import 'package:stacked_services/src/navigation/navigation_service.dart';
 import 'package:stacked_shared/stacked_shared.dart';
 
 import '../services/state_service/cart_state_service.dart';
+import '../services/state_service/enrollment_state_service.dart';
 import '../services/state_service/landing_state_servic.dart';
 import '../services/state_service/merchant_enrollment_service.dart';
 import '../services/state_service/merchant_top_category_service.dart';
@@ -40,4 +41,5 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => UserService());
   locator.registerLazySingleton(() => MerchantEnrollmentService());
   locator.registerLazySingleton(() => MerchantTopCategoryService());
+  locator.registerLazySingleton(() => EnrollmentStateService());
 }

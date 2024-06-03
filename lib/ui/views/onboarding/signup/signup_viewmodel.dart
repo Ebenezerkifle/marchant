@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marchant/app/app.router.dart';
+import 'package:marchant/services/state_service/enrollment_state_service.dart';
 import 'package:marchant/services/state_service/onboarding_state_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -7,12 +8,10 @@ import 'package:stacked_services/stacked_services.dart';
 import '../../../../app/app.locator.dart';
 import '../../../../services/validation_service/front_validation.dart';
 
-import 'package:marchant/services/state_service/merchant_enrollment_service.dart';
-
 class SignupViewModel extends FormViewModel {
   final _navigation = locator<NavigationService>();
   final _onboardingState = locator<OnboardingStateService>();
-  final _merchantEnrollmentService = MerchantEnrollmentService();
+  final _enrollmentService = locator<EnrollmentStateService>();
 
   @override
   List<ListenableServiceMixin> get listenableServices => [_onboardingState];
@@ -116,11 +115,10 @@ class SignupViewModel extends FormViewModel {
 
   onNext() {
     if (_formKey.currentState!.validate() && _formError.isEmpty) {
-      _merchantEnrollmentService.setValue(
+      _enrollmentService.setUserModel(
         phoneNumber: phoneNumController.text,
         password: passController.text,
       );
-
       _navigation.navigateToChooseCatagoryView();
     }
   }
