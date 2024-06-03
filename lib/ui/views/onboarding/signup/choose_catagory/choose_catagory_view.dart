@@ -71,7 +71,7 @@ class ChooseCatagoryView extends StackedView<ChooseCategoryViewModel> {
                       verticalSpaceMiddle,
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        children: viewModel.catagories.entries
+                        children: viewModel.topCatagories.entries
                             .map((e) => Padding(
                                   padding:
                                       const EdgeInsets.only(bottom: middleSize),
@@ -122,3 +122,4 @@ class ChooseCatagoryView extends StackedView<ChooseCategoryViewModel> {
   ) =>
       ChooseCategoryViewModel();
 }
+

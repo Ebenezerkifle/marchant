@@ -6,17 +6,17 @@ class MerchantTopCategoryService with ListenableServiceMixin {
   final _apiCall = CategoryApiCallService();
 
   MerchantTopCategoryService() {
-    listenToReactiveValues([_categories]);
+    listenToReactiveValues([_topCategories]);
     // add state variables which are supposed to be fired as soon as changed.
-    getCategories();
+    getTopCategories();
   }
-  final _categories = ReactiveValue<Map<String, Category>>({});
-  Map<String, Category> get categories => _categories.value;
+  final _topCategories = ReactiveValue<Map<String, Category>>({});
+  Map<String, Category> get topCategories => _topCategories.value;
 
-  getCategories() async {
-    var response = await _apiCall.getCategories();
-    _categories.value.clear();
-    _categories.value.addAll(response);
+  getTopCategories() async {
+    var response = await _apiCall.getTopCategories();
+    _topCategories.value.clear();
+    _topCategories.value.addAll(response);
     notifyListeners();
   }
 }

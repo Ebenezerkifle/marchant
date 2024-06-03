@@ -30,17 +30,17 @@ class Category {
     );
   }
 
-  String toJson() => json.encode(toMap());
+  // String toJson() => json.encode(toMap());
 
-  factory Category.fromJson(String source) =>
-      Category.fromMap(json.decode(source) as Map<String, dynamic>);
+  // factory Category.fromJson(String source) =>
+  //     Category.fromMap(json.decode(source) as Map<String, dynamic>);
 
-  static List<Category> listFromApi(List<dynamic> categories) {
-    List<Category> list = [];
-    for (var ele in categories) {
-      Category c = Category.fromMap(ele);
-      list.add(c);
-    }
-    return list;
-  }
+  // static List<Category> listFromApi(List<dynamic> categories) {
+  //   List<Category> list = [];
+  //   for (var ele in categories) {
+  //     Category c = Category.fromMap(ele);
+  //     list.add(c);
+  //   }
+  //   return list;
+  // }
 }

@@ -22,9 +22,9 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
   @override
   List<ListenableServiceMixin> get listenableServices => [_topCategoryState];
 
-  Map<String, Category> get catagories => _topCategoryState.categories;
+  Map<String, Category> get topCatagories => _topCategoryState.topCategories;
 
-  // Map<String, String> categories = {
+  // Map<String, String> topCategories = {
   //   "a": "Electronics",
   //   "b": "Restaurant",
   //   "c": "Construction",
@@ -81,3 +81,6 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
     }
   }
 }
+
+
+
