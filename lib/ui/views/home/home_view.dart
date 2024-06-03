@@ -76,24 +76,24 @@ class HomeView extends StackedView<HomeViewModel> {
                             .toList(),
                       ),
                       verticalSpaceMedium,
-                      CustomeGrideWidget(
-                        widgets: viewModel.products.entries
-                            .map(
-                              (e) => CustomeCardWidget(
-                                size: screenWidth(context) * .38,
-                                onTap: () => viewModel.onItemSelected(e.value),
-                                title: e.value.title ?? '',
-                                details: e.value.details ?? [],
-                                detailLimit: 3,
-                                image: e.value.images?.first ?? '',
-                                widget: Text(
-                                  '${e.value.price} ETB',
-                                  style: AppTextStyle.h4Bold,
-                                ),
-                              ),
-                            )
-                            .toList(),
-                      ),
+                      // CustomeGrideWidget(
+                      //   widgets: viewModel.products.entries
+                      //       .map(
+                      //         (e) => CustomeCardWidget(
+                      //           size: screenWidth(context) * .38,
+                      //           onTap: () => viewModel.onItemSelected(e.value),
+                      //           title: e.value.title ?? '',
+                      //           details: e.value.details ?? [],
+                      //           detailLimit: 3,
+                      //           image: e.value.images?.first ?? '',
+                      //           widget: Text(
+                      //             '${e.value.price} ETB',
+                      //             style: AppTextStyle.h4Bold,
+                      //           ),
+                      //         ),
+                      //       )
+                      //       .toList(),
+                      // ),
                       verticalSpaceLarge,
                     ],
                   ),
