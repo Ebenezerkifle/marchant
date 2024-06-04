@@ -27,8 +27,7 @@ import 'package:marchant/ui/views/manufacturer//post/post_view.dart';
 import 'package:marchant/ui/views/sub_category/sub_category_view.dart';
 import 'package:marchant/ui/views/company_profile/company_profile_view.dart';
 import 'package:marchant/services/state_service/user_service.dart';
-import 'package:marchant/services/state_service/merchant_enrollment_service.dart';
-import 'package:marchant/services/state_service/merchant_top_category_service.dart';
+
 // @stacked-import
 
 @StackedApp(
@@ -61,8 +60,6 @@ import 'package:marchant/services/state_service/merchant_top_category_service.da
     LazySingleton(classType: CartStateService),
     LazySingleton(classType: LandingStateService),
     LazySingleton(classType: UserService),
-    LazySingleton(classType: MerchantEnrollmentService),
-    LazySingleton(classType: MerchantTopCategoryService),
     LazySingleton(classType: EnrollmentStateService),
 // @stacked-service
   ],

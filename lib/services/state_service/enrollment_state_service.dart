@@ -1,13 +1,11 @@
+import 'package:marchant/enums/user_role.dart';
 import 'package:marchant/models/category_model.dart';
 import 'package:marchant/models/user_model.dart';
 import 'package:marchant/services/api_service/authentication.dart';
 import 'package:marchant/services/api_service/category_api_service.dart';
 import 'package:stacked/stacked.dart';
 
-enum UserRole {
-  marchant,
-  manufacturor,
-}
+
 
 class EnrollmentStateService with ListenableServiceMixin {
   EnrollmentStateService() {
@@ -15,7 +13,8 @@ class EnrollmentStateService with ListenableServiceMixin {
   }
 
   // stores the role of a user.
-  final _userRole = ReactiveValue(UserRole.marchant);
+  final _userRole = ReactiveValue(UserRole.retailor);
+  UserRole get userRole => _userRole.value; // Getter for user role
   // set user role.
   setUserRole(UserRole role) {
     _userRole.value = role;
@@ -37,6 +36,9 @@ class EnrollmentStateService with ListenableServiceMixin {
 
   // enrollment.
   registerAuser() async {
+    print(_userModel.value.categoryId);
+    print(_userModel.value.phoneNumber);
+    print(_userModel.value.password);
     var response = await Authentication().registerNewUser(_userModel.value);
     return response;
   }

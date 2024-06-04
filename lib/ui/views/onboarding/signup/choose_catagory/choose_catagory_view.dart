@@ -10,7 +10,7 @@ import 'package:stacked/stacked.dart';
 import 'choose_catagory_viewmodel.dart';
 
 class ChooseCatagoryView extends StackedView<ChooseCategoryViewModel> {
-  const ChooseCatagoryView({Key? key}) : super(key: key);
+  const ChooseCatagoryView({super.key});
 
   @override
   Widget builder(
@@ -47,13 +47,30 @@ class ChooseCatagoryView extends StackedView<ChooseCategoryViewModel> {
                       bottomRight: Radius.circular(20),
                     ),
                   ),
-                  child: const Column(
+                  child: Column(
                     children: [
                       verticalSpaceLarge,
-                      Text(
-                        'Choose the business catagory \nyou are involved on',
-                        style: AppTextStyle.h2Bold,
-                        textAlign: TextAlign.center,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          IconButton(
+                            // ignore: prefer_const_constructors
+                            icon: Icon(
+                              Icons.arrow_back,
+                              size: 30,
+                              color: Colors.black, 
+                            ),
+                            onPressed: () => viewModel.onBack(),
+                          ),
+                         const SizedBox(
+                              width: 20), 
+                          // ignore: prefer_const_constructors
+                          Text(
+                            'Choose the business catagory \nyou are involved on',
+                            style: AppTextStyle.h2Bold,
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
                       ),
                       verticalSpaceMiddle,
                     ],
@@ -64,7 +81,7 @@ class ChooseCatagoryView extends StackedView<ChooseCategoryViewModel> {
             verticalSpaceMiddle,
             Expanded(
               child: viewModel.loading
-                  ? const CircularProgressIndicator()
+                  ? const Center(child: CircularProgressIndicator())
                   : SingleChildScrollView(
                       child: Padding(
                         padding:

@@ -58,13 +58,20 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
+  onBack() {
+    _navigation.back();
+  }
+
   void onSubmit() async {
-    // _formError.remove('response');
     if (selected.isNotEmpty) {
       _enrollmentService.setUserModel(categoryId: selected.entries.first.key);
+      print('***********************************************************');
+      print(selected.entries.first.key);
       _loading = true;
 
       var response = await _enrollmentService.registerAuser();
+      print(response.statusCode);
+      print(response.body);
       if (response.statusCode == 201 || response.statusCode == 200) {
         var body = jsonDecode(response.body);
         var merchant = body['data']['newUser'];

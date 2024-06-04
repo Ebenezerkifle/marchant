@@ -24,7 +24,8 @@ class CategoryApiCallService {
       needToken: false,
     );
     Map<String, Category> topCategories = {};
-
+    print(response.statusCode);
+    print(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
       var body = jsonDecode(response.body);
       for (var ele in body['data']['categories']) {

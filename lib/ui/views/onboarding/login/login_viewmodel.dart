@@ -6,6 +6,7 @@ import 'package:marchant/app/app.router.dart';
 import 'package:marchant/models/login_model.dart';
 import 'package:marchant/models/user_model.dart';
 import 'package:marchant/services/api_service/authentication.dart';
+import 'package:marchant/services/state_service/enrollment_state_service.dart';
 import 'package:marchant/services/state_service/user_service.dart';
 import 'package:marchant/services/storage_service.dart/session.dart';
 import 'package:marchant/services/validation_service/front_validation.dart';
@@ -16,6 +17,7 @@ class LoginViewModel extends BaseViewModel {
   final _authentication = Authentication();
   final _navigationService = locator<NavigationService>();
   final _userService = locator<UserService>();
+  final _enrollmentService = locator<EnrollmentStateService>();
 
   String get welcomeMsg => 'Welcome';
   String get image => 'assets/images/order_delivery.png';
@@ -115,9 +117,12 @@ class LoginViewModel extends BaseViewModel {
       //validate a user credential.
       if (response.statusCode == 201 || response.statusCode == 200) {
         var body = jsonDecode(response.body);
-        var merchant = body['data']['user'];
+        var merchant = body['data']['userLogged'];
         var token = body['data']['token'];
+        var userRole = body['data']['user']['role'];
 
+        // Save the user role
+        _enrollmentService.setUserRole(userRole);
         // store a user data...
         UserModel user = UserModel.fromMap(merchant);
         _userService.setUserData(user);

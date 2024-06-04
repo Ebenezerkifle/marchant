@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:marchant/app/app.bottomsheets.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/app/app.router.dart';
+import 'package:marchant/enums/user_role.dart';
 import 'package:marchant/models/cart_model.dart';
 import 'package:marchant/models/category_model.dart';
 import 'package:marchant/models/product_model.dart';
@@ -68,7 +69,7 @@ class HomeViewModel extends ReactiveViewModel {
   }
 
   changeUserRole() {
-    _landingService.changeUserRole(UserRole.manufacturor);
+    _landingService.changeUserRole(UserRole.manufacturer);
     notifyListeners();
   }
 }
