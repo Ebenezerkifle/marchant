@@ -1,16 +1,20 @@
 import 'dart:convert';
 
+import 'package:marchant/enums/user_role.dart';
+
 class UserModel {
   // String? name;
   String? phoneNumber;
   String? password;
   String? categoryId;
+  UserRole? userRole;
 
   UserModel({
     // this.name,
     this.phoneNumber,
     this.password,
     this.categoryId,
+    this.userRole,
   });
 
   UserModel copywith({
@@ -41,6 +45,10 @@ class UserModel {
           map['phoneNumber'] != null ? map['phoneNumber'] as String : null,
       categoryId:
           map['CategoryId'] != null ? map['CategoryId'] as String : null,
+      userRole: map['role'] != null
+          ? //stringToUserRole[map['role']] ??
+          UserRole.retailor
+          : UserRole.retailor,
     );
   }
 

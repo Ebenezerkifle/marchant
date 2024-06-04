@@ -58,12 +58,11 @@ class ChooseCatagoryView extends StackedView<ChooseCategoryViewModel> {
                             icon: Icon(
                               Icons.arrow_back,
                               size: 30,
-                              color: Colors.black, 
+                              color: Colors.black,
                             ),
                             onPressed: () => viewModel.onBack(),
                           ),
-                         const SizedBox(
-                              width: 20), 
+                          const SizedBox(width: 20),
                           // ignore: prefer_const_constructors
                           Text(
                             'Choose the business catagory \nyou are involved on',
@@ -80,7 +79,7 @@ class ChooseCatagoryView extends StackedView<ChooseCategoryViewModel> {
             ),
             verticalSpaceMiddle,
             Expanded(
-              child: viewModel.loading
+              child: viewModel.loading && viewModel.topCatagories.isEmpty
                   ? const Center(child: CircularProgressIndicator())
                   : SingleChildScrollView(
                       child: Padding(
@@ -134,7 +133,11 @@ class ChooseCatagoryView extends StackedView<ChooseCategoryViewModel> {
           horizontal: middleSize,
           vertical: smallSize,
         ),
-        child: CustomeButton(text: 'Submit', onTap: viewModel.onSubmit),
+        child: CustomeButton(
+          text: 'Submit',
+          onTap: viewModel.onSubmit,
+          loading: viewModel.loading && viewModel.topCatagories.isNotEmpty,
+        ),
       ),
     );
   }

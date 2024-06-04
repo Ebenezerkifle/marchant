@@ -8,11 +8,10 @@ import 'package:marchant/services/state_service/enrollment_state_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:marchant/services/state_service/user_service.dart';
-import 'package:marchant/services/storage_service.dart/session.dart';
 
 class ChooseCategoryViewModel extends ReactiveViewModel {
   final _navigation = locator<NavigationService>();
-  final _userService = UserService();
+  final _userService = locator<UserService>();
   final _enrollmentService = locator<EnrollmentStateService>();
   bool _loading = false;
   bool get loading => _loading;
@@ -74,10 +73,10 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
       print(response.body);
       if (response.statusCode == 201 || response.statusCode == 200) {
         var body = jsonDecode(response.body);
-        var merchant = body['data']['newUser'];
-        var token = body['data']['token'];
+        var merchant = body['data']['retailer'][0];
+        //  var token = body['data']['token'];
         _userService.setUserData(UserModel.fromMap(merchant));
-        SessionService.setString(SessionKey.token, token);
+        // SessionService.setString(SessionKey.token, token);
         _navigation.clearStackAndShow(Routes.landingView);
       } else {
         try {

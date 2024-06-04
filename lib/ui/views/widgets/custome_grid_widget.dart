@@ -26,7 +26,7 @@ class CustomeGrideWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: List.generate(column, (index2) {
               int currentItem = index * column + index2;
-              if (currentItem == widgets.length) {
+              if (currentItem >= widgets.length) {
                 return Container();
               }
               return widgets[currentItem];

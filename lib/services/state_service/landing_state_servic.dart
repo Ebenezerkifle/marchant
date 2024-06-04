@@ -1,7 +1,6 @@
 import 'package:marchant/enums/user_role.dart';
 import 'package:stacked/stacked.dart';
 
-
 class LandingStateService with ListenableServiceMixin {
   LandingStateService() {
     listenToReactiveValues([_userRole, _currentIndex]);
@@ -9,9 +8,7 @@ class LandingStateService with ListenableServiceMixin {
 
   final _currentIndex = ReactiveValue(0);
   int get currentIndex => _currentIndex.value;
-
   bool _reverse = false;
-
   bool get reverse => _reverse;
 
   void setIndex(int value) {

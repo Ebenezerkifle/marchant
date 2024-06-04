@@ -13,10 +13,10 @@ class StartupViewModel extends BaseViewModel {
     await Future.delayed(const Duration(seconds: 2));
     // This is where you can make decisions on where your app should navigate when
     // you have custom startup logic
-    if (newUser != null && !newUser) {
-      _navigationService.replaceWithLandingView();
-      return;
-    }
+    // if (newUser != null && !newUser) {
+    //   _navigationService.replaceWithLandingView();
+    //   return;
+    // }
     _navigationService.replaceWithLoginView();
   }
 }

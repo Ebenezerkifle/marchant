@@ -43,13 +43,11 @@ class CategoryApiCallService {
     String token = await _getToken(); // Get the token
     var response = await ApiCallService.getCall(
       // '$baseUrl$categoryUrl',
-      '$baseUrl$categoryUrl$categoryId',
+      '$baseUrl$categoryUrl/$categoryId',
       token,
       needToken: false,
     );
     Map<String, Category> categories = {};
-    print(response.statusCode);
-    print(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
       // success.
       var body = jsonDecode(response.body);
