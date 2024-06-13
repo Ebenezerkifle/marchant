@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/app/app.router.dart';
 import 'package:marchant/models/login_model.dart';
+import 'package:marchant/models/user_model.dart';
 import 'package:marchant/services/api_service/authentication.dart';
+import 'package:marchant/services/state_service/landing_state_servic.dart';
+import 'package:marchant/services/state_service/user_service.dart';
 import 'package:marchant/services/storage_service.dart/session.dart';
 import 'package:marchant/services/validation_service/front_validation.dart';
 import 'package:stacked/stacked.dart';
@@ -13,6 +16,8 @@ import 'package:stacked_services/stacked_services.dart';
 class LoginViewModel extends BaseViewModel {
   final _authentication = Authentication();
   final _navigationService = locator<NavigationService>();
+  final _userService = locator<UserService>();
+  final _landingService = locator<LandingStateService>();
 
   String get welcomeMsg => 'Welcome';
   String get image => 'assets/images/order_delivery.png';
@@ -106,18 +111,16 @@ class LoginViewModel extends BaseViewModel {
           password: passwordController.text,
         ),
       );
-      _navigationService
-          .clearStackAndShow(Routes.landingView); // todo change later.
       // check a response
       //validate a user credential.
       if (response.statusCode == 201 || response.statusCode == 200) {
         var body = jsonDecode(response.body);
-        // var studnet = body['data']['user'];
-        var token = body['data']['token'];
+        var merchant = body['retailorLogged'];
+        var token = body['token'];
 
         // store a user data...
-        // UserModel user = UserModel.fromMap(studnet);
-        // _userService.setUserData(user);
+        UserModel user = UserModel.fromMap(merchant);
+        _userService.setUserData(user);
         SessionService.setString(SessionKey.token, token);
 
         //navigate to the next page.

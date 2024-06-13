@@ -39,26 +39,6 @@ class SignupView extends StackedView<SignupViewModel> {
                     children: [
                       Text(viewModel.signUpMsg, style: AppTextStyle.h2Bold),
                       verticalSpaceMiddle,
-                      // Name field
-                      InputField(
-                        validator: (value) => viewModel.validateAText(
-                          value,
-                          viewModel.nameHint,
-                          viewModel.nameController,
-                          minLength: 3,
-                          maxLength: 20,
-                        ),
-                        controller: viewModel.nameController,
-                        error: viewModel.formError
-                            .containsKey(viewModel.nameController),
-                        prefixIcon: Icon(
-                          FontAwesomeIcons.solidUser,
-                          color: kcPrimaryColorDark,
-                          size: viewModel.iconSize,
-                        ),
-                        hint: viewModel.nameHint,
-                      ),
-                      verticalSpaceMiddle,
                       // phone number field
                       InputField(
                         validator: (value) => viewModel.validatePhoneNumber(
@@ -79,25 +59,39 @@ class SignupView extends StackedView<SignupViewModel> {
                         hint: viewModel.phoneNumFieldHint,
                       ),
                       verticalSpaceMiddle,
-                      // Location field
+                      // Password field
                       InputField(
-                        validator: (value) => viewModel.validateAText(
+                        validator: (value) => viewModel.validatePassword(
                           value,
-                          viewModel.locationHint,
-                          viewModel.locationController,
-                          minLength: 5,
+                          viewModel.passController,
                         ),
-                        controller: viewModel.locationController,
+                        controller: viewModel.passController,
                         error: viewModel.formError
-                            .containsKey(viewModel.locationController),
-                        inputType: TextInputType.text,
-                        charLength: 40,
+                            .containsKey(viewModel.passController),
                         prefixIcon: Icon(
-                          FontAwesomeIcons.locationDot,
+                          FontAwesomeIcons.lock,
                           color: kcPrimaryColorDark,
                           size: viewModel.iconSize,
                         ),
-                        hint: viewModel.locationHint,
+                        hint: viewModel.passHint,
+                      ),
+                      verticalSpaceMiddle,
+                      // Confirm password field
+                      InputField(
+                        validator: (value) => viewModel.validateConfirmPass(
+                          value,
+                          viewModel.passController.text,
+                          viewModel.confirmController,
+                        ),
+                        controller: viewModel.confirmController,
+                        error: viewModel.formError
+                            .containsKey(viewModel.confirmController),
+                        prefixIcon: Icon(
+                          FontAwesomeIcons.lock,
+                          color: kcPrimaryColorDark,
+                          size: viewModel.iconSize,
+                        ),
+                        hint: viewModel.confirmHint,
                       ),
                       verticalSpaceMiddle,
                       // error message widget

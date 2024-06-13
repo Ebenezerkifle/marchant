@@ -1,4 +1,5 @@
 import 'package:marchant/services/state_service/cart_state_service.dart';
+import 'package:marchant/services/state_service/enrollment_state_service.dart';
 import 'package:marchant/services/state_service/landing_state_servic.dart';
 import 'package:marchant/services/state_service/onboarding_state_service.dart';
 import 'package:marchant/services/state_service/product_state_service.dart';
@@ -23,6 +24,10 @@ import 'package:marchant/ui/views//landing/landing_view.dart';
 import 'package:marchant/ui/views//profile/profile_view.dart';
 import 'package:marchant/ui/views/manufacturer//manu_home/manu_home_view.dart';
 import 'package:marchant/ui/views/manufacturer//post/post_view.dart';
+import 'package:marchant/ui/views/sub_category/sub_category_view.dart';
+import 'package:marchant/ui/views/company_profile/company_profile_view.dart';
+import 'package:marchant/services/state_service/user_service.dart';
+
 // @stacked-import
 
 @StackedApp(
@@ -42,6 +47,8 @@ import 'package:marchant/ui/views/manufacturer//post/post_view.dart';
     MaterialRoute(page: ProfileView),
     MaterialRoute(page: ManuHomeView),
     MaterialRoute(page: PostView),
+    MaterialRoute(page: SubCategoryView),
+    MaterialRoute(page: CompanyProfileView),
 // @stacked-route
   ],
   dependencies: [
@@ -51,8 +58,10 @@ import 'package:marchant/ui/views/manufacturer//post/post_view.dart';
     LazySingleton(classType: OnboardingStateService),
     LazySingleton(classType: ProductStateService),
     LazySingleton(classType: CartStateService),
-    LazySingleton(classType: LandingStateService)
-    // @stacked-service
+    LazySingleton(classType: LandingStateService),
+    LazySingleton(classType: UserService),
+    LazySingleton(classType: EnrollmentStateService),
+// @stacked-service
   ],
   bottomsheets: [
     StackedBottomsheet(classType: NoticeSheet),

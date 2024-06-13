@@ -9,13 +9,13 @@ import 'package:stacked/stacked.dart';
 
 import 'choose_catagory_viewmodel.dart';
 
-class ChooseCatagoryView extends StackedView<ChooseCatagoryViewModel> {
-  const ChooseCatagoryView({Key? key}) : super(key: key);
+class ChooseCatagoryView extends StackedView<ChooseCategoryViewModel> {
+  const ChooseCatagoryView({super.key});
 
   @override
   Widget builder(
     BuildContext context,
-    ChooseCatagoryViewModel viewModel,
+    ChooseCategoryViewModel viewModel,
     Widget? child,
   ) {
     return Scaffold(
@@ -47,13 +47,29 @@ class ChooseCatagoryView extends StackedView<ChooseCatagoryViewModel> {
                       bottomRight: Radius.circular(20),
                     ),
                   ),
-                  child: const Column(
+                  child: Column(
                     children: [
                       verticalSpaceLarge,
-                      Text(
-                        'Choose the business catagory \nyou are involved on',
-                        style: AppTextStyle.h2Bold,
-                        textAlign: TextAlign.center,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          IconButton(
+                            // ignore: prefer_const_constructors
+                            icon: Icon(
+                              Icons.arrow_back,
+                              size: 30,
+                              color: Colors.black,
+                            ),
+                            onPressed: () => viewModel.onBack(),
+                          ),
+                          const SizedBox(width: 20),
+                          // ignore: prefer_const_constructors
+                          Text(
+                            'Choose the business catagory \nyou are involved on',
+                            style: AppTextStyle.h2Bold,
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
                       ),
                       verticalSpaceMiddle,
                     ],
@@ -63,45 +79,51 @@ class ChooseCatagoryView extends StackedView<ChooseCatagoryViewModel> {
             ),
             verticalSpaceMiddle,
             Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: middleSize),
-                  child: Column(
-                    children: [
-                      verticalSpaceMiddle,
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: viewModel.catagories.entries
-                            .map((e) => Padding(
-                                  padding:
-                                      const EdgeInsets.only(bottom: middleSize),
-                                  child: CustomeListTile(
-                                    title: e.value,
-                                    noPrice: true,
-                                    onTap: () => viewModel.onSelected(e.key),
-                                    height: 80,
-                                    center: true,
-                                    selected:
-                                        viewModel.selected.containsKey(e.key),
-                                    stackWidget: Positioned(
-                                      top: 40,
-                                      right: smallSize,
-                                      child: Icon(
-                                        viewModel.selected.containsKey(e.key)
-                                            ? FontAwesomeIcons.solidCircleDot
-                                            : FontAwesomeIcons.circleDot,
-                                        color: kcPrimaryColor,
-                                      ),
-                                    ),
-                                  ),
-                                ))
-                            .toList(),
+              child: viewModel.loading && viewModel.topCatagories.isEmpty
+                  ? const Center(child: CircularProgressIndicator())
+                  : SingleChildScrollView(
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.symmetric(horizontal: middleSize),
+                        child: Column(
+                          children: [
+                            verticalSpaceMiddle,
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: viewModel.topCatagories.entries
+                                  .map((e) => Padding(
+                                        padding: const EdgeInsets.only(
+                                            bottom: middleSize),
+                                        child: CustomeListTile(
+                                          title: e.value.name ?? '',
+                                          noPrice: true,
+                                          onTap: () =>
+                                              viewModel.onSelected(e.key),
+                                          height: 80,
+                                          center: true,
+                                          selected: viewModel.selected
+                                              .containsKey(e.key),
+                                          stackWidget: Positioned(
+                                            top: 40,
+                                            right: smallSize,
+                                            child: Icon(
+                                              viewModel.selected
+                                                      .containsKey(e.key)
+                                                  ? FontAwesomeIcons
+                                                      .solidCircleDot
+                                                  : FontAwesomeIcons.circleDot,
+                                              color: kcPrimaryColor,
+                                            ),
+                                          ),
+                                        ),
+                                      ))
+                                  .toList(),
+                            ),
+                            verticalSpaceLarge,
+                          ],
+                        ),
                       ),
-                      verticalSpaceLarge,
-                    ],
-                  ),
-                ),
-              ),
+                    ),
             ),
           ],
         ),
@@ -111,14 +133,18 @@ class ChooseCatagoryView extends StackedView<ChooseCatagoryViewModel> {
           horizontal: middleSize,
           vertical: smallSize,
         ),
-        child: CustomeButton(text: 'Submit', onTap: viewModel.onSubmit),
+        child: CustomeButton(
+          text: 'Submit',
+          onTap: viewModel.onSubmit,
+          loading: viewModel.loading && viewModel.topCatagories.isNotEmpty,
+        ),
       ),
     );
   }
 
   @override
-  ChooseCatagoryViewModel viewModelBuilder(
+  ChooseCategoryViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      ChooseCatagoryViewModel();
+      ChooseCategoryViewModel();
 }

@@ -1,16 +1,13 @@
 import 'dart:math';
 
-import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/models/cart_model.dart';
 import 'package:marchant/models/order_model.dart';
-import 'package:marchant/services/state_service/product_state_service.dart';
 import 'package:stacked/stacked.dart';
 
 class CartStateService with ListenableServiceMixin {
   CartStateService() {
     listenToReactiveValues([]);
   }
-  final _productStateService = locator<ProductStateService>();
 
   final _cartItems = ReactiveValue<Map<String, CartModel>>({});
   Map<String, CartModel> get cartItems => _cartItems.value;
@@ -48,7 +45,7 @@ class CartStateService with ListenableServiceMixin {
       count: _totalCount.value,
       totalPrice: _totalPrice.value,
     );
-    _productStateService.placeOrder(order);
+    // _productStateService.placeOrder(order);
     clearCart();
   }
 

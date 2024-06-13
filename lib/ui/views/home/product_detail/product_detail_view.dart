@@ -87,6 +87,41 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                               )
                               .toList(),
                         ),
+                      verticalSpaceSmall,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Manufacturer: ',
+                            style: AppTextStyle.h2Bold,
+                          ),
+                          Text(
+                            product.provider ?? 'Unknown Provider',
+                            style: AppTextStyle.h4Normal,
+                          ),
+                          TextButton(
+                            onPressed: () => viewModel.onPressed(),
+                            child: Row(
+                              // Use Row for horizontal layout
+                              mainAxisSize:
+                                  MainAxisSize.min, // Avoid unnecessary space
+                              children: [
+                                const Text(
+                                  'See More',
+                                  style: AppTextStyle.h4Bold,
+                                ),
+                                horizontalSpaceTiny, // Add spacing between text and icon
+                                Icon(
+                                  Icons
+                                      .arrow_forward_ios_rounded, // Use rounded arrow icon
+                                  size: middleSize,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                       verticalSpaceMedium,
                       Container(
                         width: double.infinity,

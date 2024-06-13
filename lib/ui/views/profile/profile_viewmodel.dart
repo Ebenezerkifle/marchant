@@ -13,24 +13,28 @@ class ProfileViewModel extends BaseViewModel {
   String get image => 'assets/images/user.png';
 
   Map<SettingOptions, SettingModel> settings = {
-    SettingOptions.editProfile: SettingModel(
-      title: 'Edit Profile',
+    SettingOptions.myDetail: SettingModel(
+      title: 'My detail',
       icon: FontAwesomeIcons.user,
     ),
     // SettingOptions.payement: SettingModel(
     //   title: 'Payment',
     //   icon: FontAwesomeIcons.wallet,
     // ),
-    SettingOptions.notification: SettingModel(
-      title: 'Notification',
-      icon: FontAwesomeIcons.bell,
+    SettingOptions.shortCode: SettingModel(
+      title: 'Short code',
+      icon: FontAwesomeIcons.phone,
     ),
-    SettingOptions.security: SettingModel(
-      title: 'Security',
-      icon: FontAwesomeIcons.shieldHalved,
+    SettingOptions.credit: SettingModel(
+      title: 'Credit',
+      icon: FontAwesomeIcons.creditCard,
     ),
-    SettingOptions.help: SettingModel(
-      title: 'Help',
+    SettingOptions.language: SettingModel(
+      title: 'Language',
+      icon: FontAwesomeIcons.language,
+    ),
+    SettingOptions.about: SettingModel(
+      title: 'About',
       icon: FontAwesomeIcons.info,
     ),
     SettingOptions.logout: SettingModel(
@@ -41,13 +45,15 @@ class ProfileViewModel extends BaseViewModel {
 
   tapHandler(SettingOptions setting) {
     switch (setting) {
-      case SettingOptions.editProfile:
+      case SettingOptions.shortCode:
         break;
-      case SettingOptions.notification:
+      case SettingOptions.myDetail:
         break;
-      case SettingOptions.security:
+      case SettingOptions.credit:
         break;
-      case SettingOptions.help:
+      case SettingOptions.language:
+        break;
+      case SettingOptions.about:
         break;
       case SettingOptions.logout:
         SessionService.clearAll();

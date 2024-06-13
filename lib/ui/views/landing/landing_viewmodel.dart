@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:marchant/enums/user_role.dart';
 import 'package:marchant/services/state_service/landing_state_servic.dart';
 import 'package:marchant/ui/views/manufacturer/manu_home/manu_home_view.dart';
 import 'package:marchant/ui/views/manufacturer/post/post_view.dart';
@@ -33,7 +34,7 @@ class LandingViewModel extends IndexTrackingViewModel {
   }
 
   Map<String, CartModel> get cartItems => _cartState.cartItems;
-  bool get retailor => _landingService.userRole == UserRole.marchant;
+  bool get retailor => _landingService.userRole == UserRole.retailor;
 
   List<Widget> get manufacturorViews => const [
         ManuHomeView(),
