@@ -14,7 +14,7 @@ class ChooseCatagoryView extends StackedView<ChooseCategoryViewModel> {
 
   @override
   Widget builder(
-    BuildContext context,
+    BuildContext context,  
     ChooseCategoryViewModel viewModel,
     Widget? child,
   ) {
@@ -34,8 +34,9 @@ class ChooseCatagoryView extends StackedView<ChooseCategoryViewModel> {
                   decoration: const BoxDecoration(
                     color: kcPrimaryColorDark,
                     borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20)),
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
+                    ),
                   ),
                 ),
                 Container(
@@ -54,19 +55,16 @@ class ChooseCatagoryView extends StackedView<ChooseCategoryViewModel> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           IconButton(
-                            // ignore: prefer_const_constructors
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.arrow_back,
                               size: 30,
-                              color: Colors.black, 
+                              color: Colors.black,
                             ),
                             onPressed: () => viewModel.onBack(),
                           ),
-                         const SizedBox(
-                              width: 20), 
-                          // ignore: prefer_const_constructors
-                          Text(
-                            'Choose the business catagory \nyou are involved on',
+                          const SizedBox(width: 20),
+                          const Text(
+                            'Choose the business category \nyou are involved in',
                             style: AppTextStyle.h2Bold,
                             textAlign: TextAlign.center,
                           ),
@@ -79,69 +77,71 @@ class ChooseCatagoryView extends StackedView<ChooseCategoryViewModel> {
               ],
             ),
             verticalSpaceMiddle,
+            if (viewModel.errorMessage != null)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: middleSize),
+                child: Text(
+                  viewModel.errorMessage!,
+                  style: const TextStyle(color: Colors.red, fontSize: 16),
+                ),
+              ),
             Expanded(
               child: viewModel.loading
-                  ? const Center(child: CircularProgressIndicator())
-                  : SingleChildScrollView(
-                      child: Padding(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: middleSize),
-                        child: Column(
-                          children: [
-                            verticalSpaceMiddle,
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: viewModel.topCatagories.entries
-                                  .map((e) => Padding(
-                                        padding: const EdgeInsets.only(
-                                            bottom: middleSize),
-                                        child: CustomeListTile(
-                                          title: e.value.name ?? '',
-                                          noPrice: true,
-                                          onTap: () =>
-                                              viewModel.onSelected(e.key),
-                                          height: 80,
-                                          center: true,
-                                          selected: viewModel.selected
-                                              .containsKey(e.key),
-                                          stackWidget: Positioned(
-                                            top: 40,
-                                            right: smallSize,
-                                            child: Icon(
-                                              viewModel.selected
-                                                      .containsKey(e.key)
-                                                  ? FontAwesomeIcons
-                                                      .solidCircleDot
-                                                  : FontAwesomeIcons.circleDot,
-                                              color: kcPrimaryColor,
-                                            ),
-                                          ),
+                ? Center(child: CircularProgressIndicator())
+                : SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: middleSize),
+                      child: Column(
+                        children: [
+                          verticalSpaceMiddle,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: viewModel.topCatagories.entries
+                                .map(
+                                  (e) => Padding(
+                                    padding: const EdgeInsets.only(bottom: middleSize),
+                                    child: CustomeListTile(
+                                      title: e.value.name ?? '',
+                                      noPrice: true,
+                                      onTap: () => viewModel.onSelected(e.key),
+                                      height: 80,
+                                      center: true,
+                                      selected: viewModel.selected.containsKey(e.key),
+                                      stackWidget: Positioned(
+                                        top: 40,
+                                        right: smallSize,
+                                        child: Icon(
+                                          viewModel.selected.containsKey(e.key)
+                                              ? FontAwesomeIcons.solidCircleDot
+                                              : FontAwesomeIcons.circleDot,
+                                          color: kcPrimaryColor,
                                         ),
-                                      ))
-                                  .toList(),
-                            ),
-                            verticalSpaceLarge,
-                          ],
-                        ),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                          verticalSpaceLarge,
+                        ],
                       ),
                     ),
+                  ),
             ),
           ],
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: middleSize,
-          vertical: smallSize,
+        padding: const EdgeInsets.symmetric(horizontal: middleSize, vertical: smallSize),
+        child: CustomeButton(
+          text: 'Submit',
+          onTap: viewModel.onSubmit,
+          loading: viewModel.isBusy,
         ),
-        child: CustomeButton(text: 'Submit', onTap: viewModel.onSubmit),
       ),
     );
   }
 
   @override
-  ChooseCategoryViewModel viewModelBuilder(
-    BuildContext context,
-  ) =>
-      ChooseCategoryViewModel();
+  ChooseCategoryViewModel viewModelBuilder(BuildContext context) => ChooseCategoryViewModel();
 }

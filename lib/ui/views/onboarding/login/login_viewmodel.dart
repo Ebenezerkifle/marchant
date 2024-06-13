@@ -120,7 +120,6 @@ class LoginViewModel extends BaseViewModel {
         var merchant = body['data']['userLogged'];
         var token = body['data']['token'];
         var userRole = body['data']['user']['role'];
-
         // Save the user role
         _enrollmentService.setUserRole(userRole);
         // store a user data...

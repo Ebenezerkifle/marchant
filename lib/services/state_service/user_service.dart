@@ -1,14 +1,13 @@
 import 'package:marchant/models/user_model.dart';
 
 class UserService {
-  // ignore: prefer_typing_uninitialized_variables
-  var _userData;
+  UserModel? _userData; // Making _userData nullable
 
-  setUserData(UserModel user) {
+  void setUserData(UserModel user) {
     _userData = user;
   }
 
-  UserModel get user => _userData;
+  UserModel? get user => _userData; // Return nullable UserModel
 
   void resetState() {
     _userData = null;

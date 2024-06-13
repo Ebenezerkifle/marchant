@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:marchant/app/app.bottomsheets.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/app/app.router.dart';
-import 'package:marchant/enums/user_role.dart';
-import 'package:marchant/models/cart_model.dart';
 import 'package:marchant/models/category_model.dart';
 import 'package:marchant/models/product_model.dart';
 import 'package:marchant/services/state_service/cart_state_service.dart';
-import 'package:marchant/services/state_service/landing_state_servic.dart';
 import 'package:marchant/services/state_service/product_state_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -16,8 +12,6 @@ class HomeViewModel extends ReactiveViewModel {
   final _navigation = locator<NavigationService>();
   final _productState = locator<ProductStateService>();
   final _cartState = locator<CartStateService>();
-  final _bottomSheet = locator<BottomSheetService>();
-  final _landingService = locator<LandingStateService>();
 
   @override
   List<ListenableServiceMixin> get listenableServices =>
@@ -26,50 +20,38 @@ class HomeViewModel extends ReactiveViewModel {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   get scaffoldKey => _key;
 
-  Map<String, Category> get catagories => _productState.categories;
-  Map<String, String> get topCategory => _productState.topCategories;
-
+  Map<String, Category> get categories => _productState.categories;
   Map<String, ProductModel> get products => _productState.products;
 
-  Map<String, CartModel> get cartItems => _cartState.cartItems;
-  Map<String, bool> get selected => _productState.selected
-      .map((key, value) => MapEntry(key, value == 'true'));
-
-//  Updated onSelected method to navigate to SubcategoryPage
-  onSelected(var key) {
-    if (_productState.selected.containsKey(key)) {
-      _productState.selected.remove(key);
-    } else {
-      _productState.selected.clear(); // Clear previous selection
-      // _productState.selected[key] = true; // Convert bool to String
-      _navigation.navigateToSubCategoryView(
-          categoryValue: key); // Navigate to SubcategoryPage
-    }
-    notifyListeners();
+  // Method to navigate to SubCategoryView
+  void navigateToSubCategory(String categoryId) {
+    _navigation.navigateToSubCategoryView(categoryValue: categoryId);
+    // );
   }
 
-  onItemSelected(ProductModel product) {
+  void onItemSelected(ProductModel product) {
     _navigation.navigateToProductDetailView(product: product);
   }
 
-  onMoreCategory() {
+  void onMoreCategory() {
     _navigation.navigateToCategoryListView();
   }
 
-  onCartTap() {
+  void onCartTap() {
     _navigation.navigateToCartView();
   }
 
-  onFilter() {
-    // onfilter. show bottomsheet.
-    _bottomSheet.showCustomSheet(
-      variant: BottomSheetType.filter,
-      title: 'Filter',
-    );
+  void onFilter() {
+    // onFilter. show bottomsheet.
+    // _bottomSheet.showCustomSheet(
+    //   variant: BottomSheetType.filter,
+    //   title: 'Filter',
+    // );
   }
 
-  changeUserRole() {
-    _landingService.changeUserRole(UserRole.manufacturer);
-    notifyListeners();
+  void changeUserRole() {
+    // Your logic for changing user role
   }
 }
+
+

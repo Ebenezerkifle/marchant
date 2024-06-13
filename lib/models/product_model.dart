@@ -17,3 +17,5 @@ class ProductModel {
     this.images,
   });
 }
+
+

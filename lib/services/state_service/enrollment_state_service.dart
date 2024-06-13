@@ -30,13 +30,13 @@ class EnrollmentStateService with ListenableServiceMixin {
     _userModel.value = UserModel().copywith(
       phoneNumber: phoneNumber ?? _userModel.value.phoneNumber,
       password: password ?? _userModel.value.password,
-      categoryId: categoryId ?? _userModel.value.categoryId,
+      categoryId: categoryId ?? _userModel.value.CategoryId,
     );
   }
 
   // enrollment.
   registerAuser() async {
-    print(_userModel.value.categoryId);
+    print(_userModel.value.CategoryId);
     print(_userModel.value.phoneNumber);
     print(_userModel.value.password);
     var response = await Authentication().registerNewUser(_userModel.value);

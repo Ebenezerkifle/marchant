@@ -4,13 +4,13 @@ class UserModel {
   // String? name;
   String? phoneNumber;
   String? password;
-  String? categoryId;
+  String? CategoryId;
 
   UserModel({
     // this.name,
     this.phoneNumber,
     this.password,
-    this.categoryId,
+    this.CategoryId,
   });
 
   UserModel copywith({
@@ -21,7 +21,7 @@ class UserModel {
     return UserModel()
       ..phoneNumber = phoneNumber ?? this.phoneNumber
       ..password = password ?? this.password
-      ..categoryId = categoryId ?? categoryId;
+      ..CategoryId = categoryId ?? categoryId;
   }
 
   Map<String, dynamic> toMap() {
@@ -29,7 +29,7 @@ class UserModel {
       // 'name': name,
       'password': password,
       'phoneNumber': phoneNumber,
-      'CategoryId': categoryId,
+      'CategoryId': CategoryId,
     };
   }
 
@@ -39,7 +39,7 @@ class UserModel {
       password: map['password'] != null ? map['password'] as String : null,
       phoneNumber:
           map['phoneNumber'] != null ? map['phoneNumber'] as String : null,
-      categoryId:
+      CategoryId:
           map['CategoryId'] != null ? map['CategoryId'] as String : null,
     );
   }

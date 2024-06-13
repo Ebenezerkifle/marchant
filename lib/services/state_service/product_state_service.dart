@@ -15,7 +15,7 @@ class ProductStateService with ListenableServiceMixin {
       _selectedSubCategory,
       _products,
     ]);
-    _getCategories();
+    getCategories();
     _defaultSelected();
     _getProducts();
   }
@@ -45,8 +45,6 @@ class ProductStateService with ListenableServiceMixin {
     _selected.value.clear();
     _selected.value[key] = true;
     _selectedSubCategory.value = null; // Reset subcategory selection
-    // Reorder the category if needed
-    // reOrder ? _reOrderCategory(key) : null;
     notifyListeners();
   }
 
@@ -65,58 +63,11 @@ class ProductStateService with ListenableServiceMixin {
 
   int categoryLimit = 3;
 
-  void _getCategories() async {
+  Future<void> getCategories() async {
     _categories.value.clear();
     _categories.value.addAll(await CategoryApiCallService().getCategories());
-    print('------------------------length----------');
-    print(_categories.value.length);
-    // for (var ele in samples.entries) {
-    //   _categories.value[ele.key] = ele.value;
-    //   _topCategories.value[ele.key] = ele.value; // Always add to top categories
-    //   // Mock subcategories for example purposes
-    //   // Each top category has different subcategories
-    //   if (ele.key == '1') {
-    //     _subCategories.value[ele.key] = ['Sub1', 'Sub2', 'Sub3'];
-    //   } else if (ele.key == '2') {
-    //     _subCategories.value[ele.key] = ['Sub5', 'Sub6', 'Sub7'];
-    //   } else if (ele.key == '3') {
-    //     _subCategories.value[ele.key] = ['Sub8', 'Sub9'];
-    //   } else if (ele.key == '4') {
-    //     _subCategories.value[ele.key] = ['Sub10', 'Sub11'];
-    //   } else if (ele.key == '5') {
-    //     _subCategories.value[ele.key] = ['Sub12', 'Sub13'];
-    //   } else if (ele.key == '6') {
-    //     _subCategories.value[ele.key] = ['Sub14', 'Sub15'];
-    //   } else if (ele.key == '7') {
-    //     _subCategories.value[ele.key] = ['Sub16', 'Sub17'];
-    //   } else if (ele.key == '8') {
-    //     _subCategories.value[ele.key] = ['Sub18', 'Sub19'];
-    //   } else if (ele.key == '9') {
-    //     _subCategories.value[ele.key] = ['Sub20', 'Sub21'];
-    //   } else if (ele.key == '10') {
-    //     _subCategories.value[ele.key] = ['Sub22', 'Sub23'];
-    //   } else if (ele.key == '11') {
-    //     _subCategories.value[ele.key] = ['Sub24', 'Sub25'];
-    //   } else if (ele.key == '12') {
-    //     _subCategories.value[ele.key] = ['Sub26', 'Sub27'];
-    //   }
-    //   // You can add more conditions for subcategories here
-    // }
     notifyListeners();
   }
-
-  // _reOrderCategory(String key) {
-  //   if (_categories.value.containsKey(key)) {
-  //     String selected = _categories.value[key] ?? '';
-  //     Map<String, String> temp = {};
-  //     temp[key] = selected;
-  //     _categories.value.remove(key);
-  //     Map<String, String> reOrdered = {...temp, ..._categories.value};
-  //     _categories.value.clear();
-  //     _categories.value = reOrdered;
-  //     notifyListeners();
-  //   }
-  // }
 
   _getProducts() {
     _products.value.clear();
@@ -166,10 +117,10 @@ class ProductStateService with ListenableServiceMixin {
     "b": ProductModel(
       id: 'b',
       title: 'Samsung Ultra Note',
-      description: 'This is th description of Samsun Ultra Note'
+      description: 'This is the description of Samsung Ultra Note'
           ' so you better read it before you buy'
-          ' any thing! I think you understand me.'
-          ' Hahaha I am jokking, it is up to you!',
+          ' anything! I think you understand me.'
+          ' Haha I am joking, it is up to you!',
       price: 29000.0,
       images: ['assets/images/iphone.jpg'],
       details: [
@@ -183,10 +134,10 @@ class ProductStateService with ListenableServiceMixin {
     "c": ProductModel(
       id: 'c',
       title: 'Samsung Galaxy S24 Ultra',
-      description: 'This is th description of Samsun Ultra Note'
+      description: 'This is the description of Samsung Ultra Note'
           ' so you better read it before you buy'
-          ' any thing! I think you understand me.'
-          ' Hahaha I am jokking, it is up to you!',
+          ' anything! I think you understand me.'
+          ' Haha I am joking, it is up to you!',
       price: 29000.0,
       images: ['assets/images/iphone.jpg'],
       details: [
@@ -201,51 +152,38 @@ class ProductStateService with ListenableServiceMixin {
     "d": ProductModel(
       id: 'd',
       title: 'iPhone 14 Pro',
-      description: 'This is th description of the product'
+      description: 'This is the description of the product'
           ' so you better read it before you buy'
-          ' any thing! I think you understand me.'
-          ' Hahaha I am jokking, it is up to you!',
-      price: 92000.0,
+          ' anything! I think you understand me.'
+          ' Haha I am joking, it is up to you!',
+      price: 15000.0,
       images: ['assets/images/iphone.jpg'],
-      details: [
-        '256 GB Storage',
-        'Brand new',
-        '8 GB RAM',
-        '48,000 mAh battery power'
-      ],
-      provider: 'Alsam Trading plc',
-    ), //Google Pixel 8 Pro
+      details: ['64 GB Storage', 'New', '6 GB RAM', '48 MP', '12 MP'],
+      provider: 'Nardos Mobile',
+    ),
     "e": ProductModel(
       id: 'e',
-      title: 'Google Pixel 8 Pro',
-      description:
-          "When it comes to camera performance, you really can't go wrong with any of the flagship devices from the big three (Apple, Samsung, and Google). Depending on your preference for color temperature and feature set, you may lean towards one manufacturer over the other. But more often than not, it's Google's Pixel camera system that satisfies the most users, and the latest Pixel 8 Pro remains a champion both for instant capturing and post-processing. ",
-      price: 92000.0,
+      title: 'iPhone 15 Pro Max',
+      description: 'This is the description of the product'
+          ' so you better read it before you buy'
+          ' anything! I think you understand me.'
+          ' Haha I am joking, it is up to you!',
+      price: 19000.0,
       images: ['assets/images/iphone.jpg'],
-      details: [
-        '256 GB Storage',
-        'Brand new',
-        '8 GB RAM',
-        '5,050mAh battery with LTPO display',
-        'Quality cameras all across the board'
-      ],
-      provider: 'Alsam Trading plc',
+      details: ['64 GB Storage', 'New', '6 GB RAM', '48 MP', '12 MP'],
+      provider: 'Nardos Mobile',
     ),
     "f": ProductModel(
-      id: 'a',
-      title: 'iPhone 15 Pro Max',
-      description:
-          "The latest iPhone 15 Pro Max offers everything a premium flagship smartphone should, including a brilliant 6.7-inch AMOLED display for all the media consumption -- and mobile productivity, of course. This year's model also looks and feels different than any prior Pro Max devices, as it's made of titanium instead of stainless steel and, therefore, significantly lighter in the hand. This makes the iPhone 15 Pro Max noticeably more comfortable to use, as ZDNET Editor-in-Chief Jason Hiner noted in his review.",
-      price: 92000.0,
+      id: 'f',
+      title: 'Oppo Finder',
+      description: 'This is the description of the product'
+          ' so you better read it before you buy'
+          ' anything! I think you understand me.'
+          ' Haha I am joking, it is up to you!',
+      price: 8000.0,
       images: ['assets/images/iphone.jpg'],
-      details: [
-        '256 GB Storage',
-        'Brand new',
-        '8 GB RAM',
-        '48,000 mAh battery power',
-        '5X zoom camera for high-quality shots'
-      ],
-      provider: 'Alsam Trading plc',
+      details: ['64 GB Storage', 'New', '6 GB RAM', '48 MP', '12 MP'],
+      provider: 'Nardos Mobile',
     ),
   };
 }

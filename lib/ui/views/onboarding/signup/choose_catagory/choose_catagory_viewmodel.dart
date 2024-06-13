@@ -1,53 +1,53 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/app/app.router.dart';
 import 'package:marchant/models/category_model.dart';
-import 'dart:convert';
 import 'package:marchant/models/user_model.dart';
 import 'package:marchant/services/state_service/enrollment_state_service.dart';
-import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
 import 'package:marchant/services/state_service/user_service.dart';
 import 'package:marchant/services/storage_service.dart/session.dart';
+import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class ChooseCategoryViewModel extends ReactiveViewModel {
   final _navigation = locator<NavigationService>();
-  final _userService = UserService();
   final _enrollmentService = locator<EnrollmentStateService>();
+    final _userService = locator<UserService>();
+
   bool _loading = false;
   bool get loading => _loading;
 
   ChooseCategoryViewModel() {
-    // get a category list.
     _init();
   }
 
   _init() async {
     _loading = true;
     notifyListeners();
-    await _enrollmentService.getTopCategories();
-    _loading = false;
-    notifyListeners();
+    try {
+      await _enrollmentService.getTopCategories();
+    } catch (e) {
+      _errorMessage = 'Failed to load categories: $e';
+      print(_errorMessage);
+    } finally {
+      _loading = false;
+      notifyListeners();
+    }
   }
 
   @override
   List<ListenableServiceMixin> get listenableServices => [_enrollmentService];
 
   Map<String, Category> get topCatagories => _enrollmentService.topCategories;
-
-  // Map<String, String> topCategories = {
-  //   "a": "Electronics",
-  //   "b": "Restaurant",
-  //   "c": "Construction",
-  //   "d": "Agriculture",
-  //   "e": "Mini-market",
-  // };
-
   Map<String, String> selected = {};
 
-  // Validation of an input
   final Map<dynamic, String> _formError = {};
   Map<dynamic, String> get formError => _formError;
+
+  String? _errorMessage;
+  String? get errorMessage => _errorMessage;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   GlobalKey<FormState> get formKey => _formKey;
@@ -63,34 +63,56 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
   }
 
   void onSubmit() async {
-    if (selected.isNotEmpty) {
-      _enrollmentService.setUserModel(categoryId: selected.entries.first.key);
-      print('***********************************************************');
-      print(selected.entries.first.key);
-      _loading = true;
+  if (selected.isNotEmpty) {
+    _enrollmentService.setUserModel(categoryId: selected.entries.first.key);
+    setBusy(true);
 
+    try {
       var response = await _enrollmentService.registerAuser();
-      print(response.statusCode);
-      print(response.body);
+      print('Response: ${response.statusCode} ${response.body}');
+
       if (response.statusCode == 201 || response.statusCode == 200) {
         var body = jsonDecode(response.body);
-        var merchant = body['data']['newUser'];
-        var token = body['data']['token'];
-        _userService.setUserData(UserModel.fromMap(merchant));
-        SessionService.setString(SessionKey.token, token);
-        _navigation.clearStackAndShow(Routes.landingView);
+        // print('Body: $body');
+
+        var retailer = body['data']['retailer'];
+        var token = body['token'];
+
+        // print('Retailer: $retailer');
+        // print('Token: $token');
+
+        if (retailer != null && token != null) {
+          _userService.setUserData(UserModel.fromMap(retailer));
+          SessionService.setString(SessionKey.token, token);
+          _navigation.clearStackAndShow(Routes.landingView);
+        } else {
+          _formError['response'] = 'No retailer data found';
+          _errorMessage = _formError['response'];
+        }
       } else {
-        try {
-          var body = jsonDecode(response.body);
-          _formError['response'] = body['message'];
-        } catch (e) {
+        // Handle other status codes
+        if (response.body.contains('{')) {
+          try {
+            var body = jsonDecode(response.body);
+            var message = body['message'];
+            _formError['response'] = message;
+          } catch (e) {
+            _formError['response'] = response.body.toString();
+          }
+        } else {
           _formError['response'] = response.body.toString();
         }
+        _errorMessage = _formError['response'];
       }
-      _loading = false;
+    } catch (e) {
+      print('Error: $e');
+      _formError['response'] = 'An error occurred: $e';
+      _errorMessage = _formError['response'];
+    } finally {
+      setBusy(false);
       notifyListeners();
-    } else {
-      //todo
     }
   }
+}
+
 }
