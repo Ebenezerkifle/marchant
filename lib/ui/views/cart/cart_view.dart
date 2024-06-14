@@ -64,7 +64,7 @@ class CartView extends StackedView<CartViewModel> {
                                                   const EdgeInsets.symmetric(
                                                       vertical: smallSize),
                                               child: CustomeListTile(
-                                                  title: value.product!.title ??
+                                                  title: value.product!.productName ??
                                                       '',
                                                   description: value
                                                       .product?.description,

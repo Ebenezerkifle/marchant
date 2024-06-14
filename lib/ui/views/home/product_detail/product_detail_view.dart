@@ -36,14 +36,14 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                     children: [
                       verticalSpaceMiddle,
                       ImageBuilder(
-                        image: product.images?.first ?? '',
+                        image: product.productImage?.first ?? '',
                         height: screenWidth(context) * .7,
                         width: double.infinity,
                         fit: BoxFit.cover,
                       ),
                       verticalSpaceMiddle,
                       Text(
-                        product.title ?? '',
+                        product.productName ?? '',
                         style: AppTextStyle.big,
                       ),
                       verticalSpaceSmall,
@@ -55,7 +55,7 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                       verticalSpaceMiddle,
                       const Text('More Details', style: AppTextStyle.h2Bold),
                       verticalSpaceSmall,
-                      if (product.details != null)
+                      if (product.description != null)
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: product.details!
@@ -96,7 +96,7 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                             style: AppTextStyle.h2Bold,
                           ),
                           Text(
-                            product.provider ?? 'Unknown Provider',
+                            product.manufacturerId ?? 'Unknown Provider',
                             style: AppTextStyle.h4Normal,
                           ),
                           TextButton(
@@ -141,7 +141,7 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                               style: AppTextStyle.h4Normal,
                             ),
                             Text(
-                              '${product.price} ETB',
+                              '${product.salesPrice} ETB',
                               style: AppTextStyle.withColor(
                                 color: kcPrimaryColor,
                                 style: AppTextStyle.big,

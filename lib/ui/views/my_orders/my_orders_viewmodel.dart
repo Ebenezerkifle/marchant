@@ -23,17 +23,17 @@ class MyOrdersViewModel extends ReactiveViewModel {
     if (cartList != null) {
       for (int i = 0; i < cartList.length; i++) {
         if (i == 1) {
-          images.add(cartList[i].product?.images?.first ?? "");
+          images.add(cartList[i].product?.productImage?.first ?? "");
         }
         if (i == 0) {
-          images.add(cartList[i].product?.images?.first ?? "");
-          title = cartList[i].product?.title ?? '';
+          images.add(cartList[i].product?.productImage?.first ?? "");
+          title = cartList[i].product?.productName ?? '';
           continue;
         } else if (i == cartList.length - 1) {
-          title = '$title & ${cartList[i].product?.title}';
+          title = '$title & ${cartList[i].product?.productName}';
           continue;
         }
-        title = '$title, ${cartList[i].product?.title}';
+        title = '$title, ${cartList[i].product?.productName}';
       }
     }
     response['title'] = title;

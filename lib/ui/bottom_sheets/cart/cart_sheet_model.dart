@@ -17,7 +17,7 @@ class CartSheetModel extends ReactiveViewModel {
       _totalPrice = cartItem.totalPrice ?? _totalPrice;
       _count = cartItem.count ?? 1;
     } else {
-      _totalPrice = product.price ?? _totalPrice;
+      _totalPrice = product.salesPrice ?? _totalPrice;
     }
   }
   num _totalPrice = 0.0;
@@ -27,7 +27,7 @@ class CartSheetModel extends ReactiveViewModel {
 
   onChange(count) {
     _count = num.parse(count);
-    _totalPrice = (product.price ?? 0) * _count;
+    _totalPrice = (product.salesPrice ?? 0) * _count;
     notifyListeners();
   }
 

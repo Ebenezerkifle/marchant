@@ -29,7 +29,7 @@ class CartViewModel extends ReactiveViewModel {
     CartModel cartItem = cartItems[cartKey] ?? CartModel();
     num itemCount = num.parse(count);
     cartItem.count = itemCount;
-    cartItem.totalPrice = itemCount * (cartItem.product?.price ?? 0);
+    cartItem.totalPrice = itemCount * (cartItem.product?.salesPrice ?? 0);
     _cartService.addToCart(cartItem);
   }
 
@@ -55,8 +55,8 @@ class CartViewModel extends ReactiveViewModel {
   }
 
   getImage(CartModel cart) {
-    return (cart.product!.images != null && cart.product!.images!.isNotEmpty)
-        ? cart.product!.images!.first
+    return (cart.product!.productImage != null && cart.product!.productImage!.isNotEmpty)
+        ? cart.product!.productImage!.first
         : '';
   }
 }

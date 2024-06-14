@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:marchant/models/category_model.dart';
 import 'package:marchant/ui/common/app_colors.dart';
 import 'package:marchant/ui/common/app_text_style.dart';
 import 'package:marchant/ui/common/ui_helpers.dart';
 import 'package:marchant/ui/views/widgets/custome_app_bar.dart';
 import 'package:marchant/ui/views/widgets/custome_card_widget.dart';
 import 'package:marchant/ui/views/widgets/custome_grid_widget.dart';
-// import 'package:marchant/ui/views/widgets/custom_app_bar.dart';
-// import 'package:marchant/ui/views/widgets/custom_card_widget.dart';
-// import 'package:marchant/ui/views/widgets/custom_grid_widget.dart';
-// import 'package:marchant/ui/views/widgets/custome_app_bar.dart';
-// import 'package:marchant/ui/views/widgets/custome_card_widget.dart';
-// import 'package:marchant/ui/views/widgets/custome_grid_widget.dart';
+import 'package:marchant/ui/views/widgets/custome_circular_card_widget.dart';
+
 import 'package:stacked/stacked.dart';
 
 import 'sub_category_viewmodel.dart';
@@ -47,55 +42,63 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
             //       child: Text(
             //           'No subcategories available for category: $categoryValue'))
             // else
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: middleSize),
-                    child: Column(
-                      children: [
-                        CustomGrideWidget(
-                          column: 4,
-                          widgets: viewModel.subCategories
-                              .map(
-                                (subCategory) => Padding(
-                                  padding:
-                                      const EdgeInsets.only(right: smallSize),
-                                  child: CustomeCardWidget(
-                                    isCategory: true,
-                                    onTap: () {
-                                      // Implement any subcategory navigation if needed
-                                    },
-                                    title: subCategory.name??'', // Display subcategory name
-                                  ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: middleSize),
+                  child: Column(
+                    children: [
+                      CustomGrideWidget(
+                        column: 4,
+                        widgets: viewModel.subCategories
+                            .map(
+                              (subCategory) => Padding(
+                                padding:
+                                    const EdgeInsets.only(right: smallSize),
+                                // child: CustomeCardWidget(
+                                //   isCategory: true,
+                                //   onTap: () => viewModel.getSubProducts(
+                                //       category: subCategory.id ?? ''),
+                                //   title: subCategory.name ??
+                                //       '', // Display subcategory name
+                                // ),
+                                child: CircularCardWidget(
+                                  // isCategory: true,
+                                  onTap: () => viewModel.getSubProducts(
+                                      category: subCategory.id ?? ''),
+                                  title: subCategory.name ??'', // Display subcategory name
+                                  image:'assets/images/category.jpg', // Replace with actual image if available
+                                 
                                 ),
-                              )
-                              .toList(),
-                        ),
-                        verticalSpaceMedium,
-                         CustomeGrideWidget(
-                        widgets: viewModel.products.entries
+                              ),
+                            )
+                            .toList(),
+                      ),
+                      verticalSpaceMedium,
+                      CustomeGrideWidget(
+                        widgets: viewModel.subProducts.entries
                             .map(
                               (e) => CustomeCardWidget(
                                 size: screenWidth(context) * .38,
                                 onTap: () => viewModel.onItemSelected(e.value),
-                                title: e.value.title ?? '',
+                                title: e.value.productName ?? '',
                                 details: e.value.details ?? [],
                                 detailLimit: 3,
-                                image: e.value.images?.first ?? '',
+                                image: e.value.productImage?.first ?? '',
                                 widget: Text(
-                                  '${e.value.price} ETB',
+                                  '${e.value.salesPrice} ETB',
                                   style: AppTextStyle.h4Bold,
                                 ),
                               ),
                             )
                             .toList(),
                       ),
-                        verticalSpaceLarge,
-                      ],
-                    ),
+                      verticalSpaceLarge,
+                    ],
                   ),
                 ),
               ),
+            ),
             verticalSpaceSmall,
           ],
         ),

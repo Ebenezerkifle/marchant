@@ -44,12 +44,12 @@ class CartSheet extends StackedView<CartSheetModel> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              product.title ?? '',
+              product.productName ?? '',
               style: AppTextStyle.h1Bold,
             ),
             verticalSpaceMiddle,
             ImageBuilder(
-              image: product.images?.first ?? '',
+              image: product.productImage?.first ?? '',
               height: screenWidth(context) * .5,
               width: screenWidth(context),
             ),
