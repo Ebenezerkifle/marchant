@@ -60,9 +60,8 @@ class CartView extends StackedView<CartViewModel> {
                                   Column(
                                       children: items
                                           .map((value) => Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: smallSize),
+                                              padding: const EdgeInsets.symmetric(
+                                                  vertical: smallSize),
                                               child: CustomeListTile(
                                                   title: value.product!.productName ??
                                                       '',
@@ -73,8 +72,7 @@ class CartView extends StackedView<CartViewModel> {
                                                   ],
                                                   price: value.totalPrice ?? 0,
                                                   widget: order != null
-                                                      ? Text(
-                                                          '${value.count} Items',
+                                                      ? Text('${value.count} Items',
                                                           style: AppTextStyle
                                                               .h4Bold)
                                                       : Container(),
@@ -101,10 +99,8 @@ class CartView extends StackedView<CartViewModel> {
                                                   engagingWidget: order != null
                                                       ? null
                                                       : Padding(
-                                                          padding:
-                                                              const EdgeInsets.only(
-                                                                  top:
-                                                                      smallSize),
+                                                          padding: const EdgeInsets.only(
+                                                              top: smallSize),
                                                           child: Row(
                                                               mainAxisAlignment:
                                                                   MainAxisAlignment

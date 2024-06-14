@@ -7,6 +7,7 @@ import 'package:marchant/models/login_model.dart';
 import 'package:marchant/models/user_model.dart';
 import 'package:marchant/services/api_service/authentication.dart';
 import 'package:marchant/services/state_service/enrollment_state_service.dart';
+import 'package:marchant/services/state_service/landing_state_servic.dart';
 import 'package:marchant/services/state_service/user_service.dart';
 import 'package:marchant/services/storage_service.dart/session.dart';
 import 'package:marchant/services/validation_service/front_validation.dart';
@@ -18,6 +19,7 @@ class LoginViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _userService = locator<UserService>();
   final _enrollmentService = locator<EnrollmentStateService>();
+  final _landingStateService = locator<LandingStateService>();
 
   String get welcomeMsg => 'Welcome';
   String get image => 'assets/images/order_delivery.png';
@@ -98,53 +100,69 @@ class LoginViewModel extends BaseViewModel {
   // handles login button click.
   void onLoginButton() async {
     _formError.remove('response');
-    //show error message when a some fields are not filled
+
+    // Validate the form
     if (_formKey.currentState!.validate() && _formError.isEmpty) {
-      //show progress indicator here
+      // Show progress indicator
       setBusy(true);
       notifyListeners();
       SessionService.setBool(SessionKey.newUser, false);
-      //backend call
-      var response = await _authentication.loginUser(
-        LoginModel(
-          phoneNumber: phoneNumController.text,
-          password: passwordController.text,
-        ),
-      );
-      _navigationService
-          .clearStackAndShow(Routes.landingView); // todo change later.
-      // check a response
-      //validate a user credential.
-      if (response.statusCode == 201 || response.statusCode == 200) {
-        var body = jsonDecode(response.body);
-        var merchant = body['data']['userLogged'];
-        var token = body['data']['token'];
-        var userRole = body['data']['user']['role'];
-        // Save the user role
-        _enrollmentService.setUserRole(userRole);
-        // store a user data...
-        UserModel user = UserModel.fromMap(merchant);
-        _userService.setUserData(user);
-        SessionService.setString(SessionKey.token, token);
 
-        //navigate to the next page.
-        _navigationService.clearStackAndShow(Routes.landingView);
-      } else {
-        // not successful
-        if (response.body.contains('{')) {
-          try {
-            var body = jsonDecode(response.body);
-            var message = body['message'];
-            _formError['response'] = message;
-          } catch (e) {
+      try {
+        // Backend call to login the user
+        var response = await _authentication.loginUser(
+          LoginModel(
+            phoneNumber: phoneNumController.text,
+            password: passwordController.text,
+          ),
+        );
+
+        // Check the response status
+        if (response.statusCode == 201 || response.statusCode == 200) {
+          var body = jsonDecode(response.body);
+          var merchant = body['userLogged'];
+          var token = body['token'];
+
+          // Store user data
+          UserModel user = UserModel.fromMap(merchant);
+          _userService.setUserData(user); // Ensure user data is set here
+
+          // Print user data for debugging
+          print(
+              'User data set: ${_userService.user?.CategoryId}, ${_userService.user?.phoneNumber}');
+
+          // Save the token
+          SessionService.setString(SessionKey.token, token);
+          _landingStateService.setIndex(0);
+          // Navigate to the landing view after successful login
+
+          _navigationService.clearStackAndShow(Routes.landingView);
+        } else {
+          // Handle unsuccessful response
+          if (response.body.contains('{')) {
+            try {
+              var body = jsonDecode(response.body);
+              var message = body['message'];
+              _formError['response'] = message;
+            } catch (e) {
+              _formError['response'] = response.body.toString();
+            }
+          } else {
             _formError['response'] = response.body.toString();
           }
-        } else {
-          _formError['response'] = response.body.toString();
         }
+      } catch (e) {
+        // Handle errors during the login process
+        print('Error during login: $e');
+        _formError['response'] = 'An error occurred: $e';
+      } finally {
+        // Reset the busy state and notify listeners
+        setBusy(false);
+        notifyListeners();
       }
-      setBusy(false);
-      notifyListeners();
+    } else {
+      // Handle form validation failure
+      print('Form validation failed or form errors are present');
     }
   }
 }

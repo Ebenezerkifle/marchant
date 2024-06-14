@@ -72,89 +72,89 @@
 //     return categories;
 //   }
 
-// //   Future<Map<String, Category>> getSubCategories() async {
-// //   String token = await _getToken(); // Get the token
-// //   var response = await ApiCallService.getCall(
-// //     '$baseUrl$categoryUrl',
-// //     token,
-// //     needToken: false,
-// //   );
+//   Future<Map<String, Category>> getSubCategories() async {
+//   String token = await _getToken(); // Get the token
+//   var response = await ApiCallService.getCall(
+//     '$baseUrl$categoryUrl',
+//     token,
+//     needToken: false,
+//   );
 
-// //   Map<String, Category> categories = {};
+//   Map<String, Category> categories = {};
 
-// //   print(response.statusCode);
-// //   print(response.body);
+//   print(response.statusCode);
+//   print(response.body);
 
-// //   if (response.statusCode == 200 || response.statusCode == 201) {
-// //     // success.
-// //     var body = jsonDecode(response.body);
+//   if (response.statusCode == 200 || response.statusCode == 201) {
+//     // success.
+//     var body = jsonDecode(response.body);
 
-// //     // Iterate over each main category
-// //     for (var ele in body['data']['categories']) {
-// //       Category mainCategory = Category.fromMap(ele);
+//     // Iterate over each main category
+//     for (var ele in body['data']['categories']) {
+//       Category mainCategory = Category.fromMap(ele);
 
-// //       // Process subcategories of the main category
-// //       List<Category> subCategories = mainCategory.subcategory ?? [];
-// //       for (var sub in subCategories) {
-// //         categories[sub.id ?? ''] = sub;
+//       // Process subcategories of the main category
+//       List<Category> subCategories = mainCategory.subcategory ?? [];
+//       for (var sub in subCategories) {
+//         categories[sub.id ?? ''] = sub;
 
-// //         // Process sub-subcategories of each subcategory
-// //         List<Category> subSubCategories = sub.subcategory ?? [];
-// //         for (var subSub in subSubCategories) {
-// //           categories[subSub.id ?? ''] = subSub;
+//         // Process sub-subcategories of each subcategory
+//         List<Category> subSubCategories = sub.subcategory ?? [];
+//         for (var subSub in subSubCategories) {
+//           categories[subSub.id ?? ''] = subSub;
 
-// //           // handle further nested categories here.
-// //         }
-// //       }
-// //     }
-// //   }
+//           // handle further nested categories here.
+//         }
+//       }
+//     }
+//   }
 
-// //   return categories;
-// // }
+//   return categories;
+// }
 
-// // Future<Map<String, Category>> getSubSubCategories() async {
-// //   String token = await _getToken(); // Get the token
-// //   var response = await ApiCallService.getCall(
-// //     '$baseUrl$categoryUrl',
-// //     token,
-// //     needToken: false,
-// //   );
+// Future<Map<String, Category>> getSubSubCategories() async {
+//   String token = await _getToken(); // Get the token
+//   var response = await ApiCallService.getCall(
+//     '$baseUrl$categoryUrl',
+//     token,
+//     needToken: false,
+//   );
 
-// //   Map<String, Category> categories = {};
+//   Map<String, Category> categories = {};
 
-// //   print(response.statusCode);
-// //   print(response.body);
+//   print(response.statusCode);
+//   print(response.body);
 
-// //   if (response.statusCode == 200 || response.statusCode == 201) {
-// //     // success.
-// //     var body = jsonDecode(response.body);
+//   if (response.statusCode == 200 || response.statusCode == 201) {
+//     // success.
+//     var body = jsonDecode(response.body);
 
-// //     // Iterate over each main category
-// //     for (var ele in body['data']['categories']) {
-// //       Category mainCategory = Category.fromMap(ele);
+//     // Iterate over each main category
+//     for (var ele in body['data']['categories']) {
+//       Category mainCategory = Category.fromMap(ele);
 
-// //       // Process subcategories of the main category
-// //       List<Category> subCategories = mainCategory.subcategory ?? [];
-// //       for (var sub in subCategories) {
-// //         categories[sub.id ?? ''] = sub;
+//       // Process subcategories of the main category
+//       List<Category> subCategories = mainCategory.subcategory ?? [];
+//       for (var sub in subCategories) {
+//         categories[sub.id ?? ''] = sub;
 
-// //         // Process sub-subcategories of each subcategory
-// //         List<Category> subSubCategories = sub.subcategory ?? [];
-// //         for (var subSub in subSubCategories) {
-// //           categories[subSub.id ?? ''] = subSub;
+//         // Process sub-subcategories of each subcategory
+//         List<Category> subSubCategories = sub.subcategory ?? [];
+//         for (var subSub in subSubCategories) {
+//           categories[subSub.id ?? ''] = subSub;
 
-// //           // Process sub-sub-subcategories of each sub-subcategory
-// //           List<Category> subSubSubCategories = subSub.subcategory ?? [];
-// //           for (var subSubSub in subSubSubCategories) {
-// //             categories[subSubSub.id ?? ''] = subSubSub;
-// //           }
-// //         }
-// //       }
-// //     }
-// //   }
+//           // Process sub-sub-subcategories of each sub-subcategory
+//           List<Category> subSubSubCategories = subSub.subcategory ?? [];
+//           for (var subSubSub in subSubSubCategories) {
+//             categories[subSubSub.id ?? ''] = subSubSub;
+//           }
+//         }
+//       }
+//     }
+//   }
 
-// //   return categories;
-// // }
+//   return categories;
+// }
 // }
 
 import 'dart:convert';
@@ -197,13 +197,12 @@ class CategoryApiCallService {
   // Get Categories
   Future<Map<String, Category>> getCategories() async {
     // print('******************************************Birhanu********************');
+    print(_userService.user);
     final String categoryId =
-        _userService.user?.CategoryId ?? '6669f80b707babd982746603';
-        // '6659c65f59673dcf677ee40b';
-    //
+        _userService.user?.CategoryId ?? '666c03ce6d254900e08b5935';
+    
+    print('Category ID: $categoryId');
 
-    //  '6659c65f59673dcf677ee40b';
-    // print('Category ID: $categoryId');
     String token = await _getToken(); // Get the token
 
     var response = await ApiCallService.getCall(

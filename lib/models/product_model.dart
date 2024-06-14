@@ -70,6 +70,16 @@ class ProductModel {
       status: map['status'],
     );
   }
+
+
+
+  //  Map<String, dynamic> toJson() {
+  //   return {
+  //     'productName': productName,
+  //     'salesPrice': salesPrice,
+  //     'productImage': productImage,
+  //   };
+  // }
 }
 
 
