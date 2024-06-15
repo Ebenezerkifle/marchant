@@ -16,13 +16,16 @@ class SettingItem extends StackedView<SettingItemModel> {
     required this.onTap,
     this.arrow = false,
     this.forgroundColor,
+    this.trailing, // Add the trailing parameter
   });
+
   final String title;
   final String? description;
   final IconData icon;
   final VoidCallback onTap;
   final bool arrow;
   final Color? forgroundColor;
+  final Widget? trailing; // Add the trailing property
 
   @override
   Widget builder(
@@ -73,12 +76,12 @@ class SettingItem extends StackedView<SettingItemModel> {
                 )
               ],
             ),
-            arrow
-                ? Icon(
-                    FontAwesomeIcons.angleRight,
-                    color: forgroundColor ?? kcDarkGreyColor,
-                  )
-                : Container()
+            if (trailing != null) trailing!, // Include trailing widget if it exists
+            if (arrow)
+              Icon(
+                FontAwesomeIcons.angleRight,
+                color: forgroundColor ?? kcDarkGreyColor,
+              ),
           ],
         ),
       ),

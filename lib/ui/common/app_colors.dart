@@ -10,3 +10,4 @@ const Color kcBackgroundColor = kcDarkGreyColor;
 const Color kcDanger = Colors.red;
 const Color kcWhite = Colors.white;
 const Color kcCardColor = Colors.white54;
+const Color kcGreenColor = Colors.green;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:marchant/models/setting_model.dart';
+import 'package:marchant/ui/common/app_colors.dart';
 import 'package:stacked/stacked.dart';
-
 import '../../common/app_text_style.dart';
 import '../../common/ui_helpers.dart';
 import '../../widgets/setting_item/setting_item.dart';
@@ -62,6 +63,7 @@ class ProfileView extends StackedView<ProfileViewModel> {
                               (e) => SettingItem(
                                 title: e.value.title,
                                 icon: e.value.icon,
+                                trailing: _getTrailingWidget(e.key, viewModel),
                                 onTap: () => viewModel.tapHandler(e.key),
                               ),
                             )
@@ -78,9 +80,30 @@ class ProfileView extends StackedView<ProfileViewModel> {
     );
   }
 
+  Widget? _getTrailingWidget(SettingOptions setting, ProfileViewModel viewModel) {
+    switch (setting) {
+      case SettingOptions.shortCode:
+        return Text(
+          "12345",
+          style: AppTextStyle.h3Bold.copyWith(color: Colors.deepOrange),
+        );
+      case SettingOptions.credit:
+        return Container(
+          padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+          decoration: BoxDecoration(
+            color: Colors.green.withOpacity(0.8),
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+          child: Text(
+            viewModel.credit != null ? '${viewModel.credit}' : 'Loading...',
+            style: AppTextStyle.h3Bold.copyWith(color: Colors.white),
+          ),
+        );
+      default:
+        return null;
+    }
+  }
+
   @override
-  ProfileViewModel viewModelBuilder(
-    BuildContext context,
-  ) =>
-      ProfileViewModel();
+  ProfileViewModel viewModelBuilder(BuildContext context) => ProfileViewModel();
 }

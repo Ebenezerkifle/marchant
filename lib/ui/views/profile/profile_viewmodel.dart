@@ -1,4 +1,5 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:marchant/services/state_service/user_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -9,6 +10,7 @@ import '../../../services/storage_service.dart/session.dart';
 
 class ProfileViewModel extends BaseViewModel {
   final _navigation = locator<NavigationService>();
+  final _userService = locator<UserService>();
 
   String get image => 'assets/images/user.png';
 
@@ -42,6 +44,17 @@ class ProfileViewModel extends BaseViewModel {
       icon: FontAwesomeIcons.rightFromBracket,
     ),
   };
+
+   int? credit;
+
+  ProfileViewModel() {
+    fetchCredit();
+  }
+
+  Future<void> fetchCredit() async {
+    credit = _userService.user?.creditAvailable;
+    notifyListeners();
+  }
 
   tapHandler(SettingOptions setting) {
     switch (setting) {
