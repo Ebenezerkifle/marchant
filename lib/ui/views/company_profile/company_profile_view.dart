@@ -10,7 +10,7 @@ import './company_profile_viewmodel.dart';
 import 'package:marchant/models/product_model.dart';
 
 class CompanyProfileView extends StackedView<CompanyProfileViewModel> {
-  const CompanyProfileView({Key? key, required this.product}) : super(key: key);
+  const CompanyProfileView({super.key, required this.product});
   final ProductModel product;
 
   @override
@@ -25,44 +25,65 @@ class CompanyProfileView extends StackedView<CompanyProfileViewModel> {
       body: SafeArea(
         top: true,
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              CustomeAppBar(title: 'CompanyProfile'),
-              Text(
-                product.manufacturerId ?? "Unkown Company",
-                style: AppTextStyle.h1Bold,
-              ),
-              const SizedBox(height: mediumSize),
-              const Text(
-                'License Number: ABC12345',
-                style: AppTextStyle.h4Bold,
-              ),
-              const SizedBox(height: largeSize),
-              const Text(
-                'Products:',
-                style: AppTextStyle.h2Bold,
-              ),
-              const SizedBox(height: mediumSize),
-              verticalSpaceMedium,
-              CustomeGrideWidget(
-                widgets: viewModel.products.entries
-                    .map(
-                      (e) => CustomeCardWidget(
-                        size: screenWidth(context) * .38,
-                        title: e.value.productName ?? '',
-                        details: e.value.details ?? [],
-                        detailLimit: 3,
-                        image: e.value.productImage?.first ?? '',
-                        widget: Text(
-                          '${e.value.salesPrice} ETB',
-                          style: AppTextStyle.h4Bold,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: middleSize),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomeAppBar(title: 'Company Profile'),
+                verticalSpaceMedium,
+                Center(
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundImage: NetworkImage(
+                      product.logoImage ??
+                          'https://via.placeholder.com/100', // Placeholder image
+                    ),
+                  ),
+                ),
+                const SizedBox(height: mediumSize),
+                Center(
+                  child: Text(
+                    product.companyName ?? "Unknown Company",
+                    style: AppTextStyle.h1Bold,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                verticalSpaceSmall,
+                Center(
+                  child: Text(
+                    'TIN: ${product.TIN}',
+                    style: AppTextStyle.h4Bold,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                verticalSpaceLarge,
+                const Text(
+                  'Products:',
+                  style: AppTextStyle.h2Bold,
+                ),
+                const Divider(thickness: 2),
+                verticalSpaceMedium,
+                CustomeGrideWidget(
+                  widgets: viewModel.products.entries
+                      .map(
+                        (e) => CustomeCardWidget(
+                          size: screenWidth(context) * .42,
+                          title: e.value.productName ?? '',
+                          details: e.value.details ?? [],
+                          detailLimit: 3,
+                          image: e.value.productImage?.first ?? '',
+                          widget: Text(
+                            '${e.value.salesPrice} ETB',
+                            style: AppTextStyle.h4Bold,
+                          ),
                         ),
-                      ),
-                    )
-                    .toList(),
-              ),
-              verticalSpaceLarge,
-            ],
+                      )
+                      .toList(),
+                ),
+                const SizedBox(height: largeSize),
+              ],
+            ),
           ),
         ),
       ),

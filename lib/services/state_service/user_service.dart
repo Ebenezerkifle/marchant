@@ -5,7 +5,7 @@ class UserService {
 
   void setUserData(UserModel user) {
     _userData = user;
-    print('User data set: ${_userData?.CategoryId}, ${_userData?.phoneNumber}');
+    // print('User data set: ${_userData?.CategoryId}, ${_userData?.phoneNumber}');
   }
 
   UserModel? get user => _userData;

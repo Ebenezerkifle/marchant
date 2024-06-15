@@ -13,6 +13,10 @@ class ProductModel {
   num? quantity;
   String? soldAmount;
   String? status;
+  String? companyName;
+  String? address;
+  String? TIN;
+  String? logoImage;
 
   ProductModel({
     this.id,
@@ -28,7 +32,11 @@ class ProductModel {
     this.quantity,
     this.soldAmount,
     this.status,
-    this.details
+    this.details,
+    this.companyName,
+    this.address,
+    this.TIN,
+    this.logoImage,
   });
 
   // Optional: Add a method to convert to a map for easier printing or debugging
@@ -47,7 +55,7 @@ class ProductModel {
       'quantity': quantity,
       'soldAmount': soldAmount,
       'status': status,
-      'details':details
+      'details': details
     };
   }
 
@@ -59,7 +67,11 @@ class ProductModel {
       productTag: map['productTag'],
       productImage: List<String>.from(map['productImage'] ?? []),
       details: List<String>.from(map['details'] ?? []),
-      manufacturerId: map['manufacturerId'],
+      // manufacturerId: map['manufacturerId'],
+      companyName: map['ManufacturerId']?['companyName'],
+      address: map['ManufacturerId']?['address'],
+      TIN: map['ManufacturerId']?['TIN'],
+      logoImage: map['ManufacturerId']?['logoImage'],
       categoryId: map['categoryId'],
       subCategoryId: map['subCategoryId'],
       subSubCategoryId: map['subSubCategoryId'],
@@ -70,16 +82,6 @@ class ProductModel {
       status: map['status'],
     );
   }
-
-
-
-  //  Map<String, dynamic> toJson() {
-  //   return {
-  //     'productName': productName,
-  //     'salesPrice': salesPrice,
-  //     'productImage': productImage,
-  //   };
-  // }
 }
 
 

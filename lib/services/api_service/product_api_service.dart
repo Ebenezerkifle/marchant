@@ -32,11 +32,11 @@ class ProductApiCallService {
     Map<String, ProductModel> products = {};
     // print('Initial categories: $categories');
     // print('Response status code: ${response.statusCode}');
-    // print('Response body: ${response.body}');
+    print('Response body: ${response.body}');
     if (response.statusCode == 200 || response.statusCode == 201) {
       var body = jsonDecode(response.body);
       // print('Parsed body: $body');
-      var productData = body['data']['products'] as List<dynamic>;;
+      var productData = body['data']['products'] as List<dynamic>;
       // print('Category data: $categoryData');
       // print('Subcategories: $subCategories');
       for (var ele in productData) {
@@ -45,12 +45,12 @@ class ProductApiCallService {
         products[c.id ?? ''] = c;
         //}
       }
-      // print('Categories after processing: $categories');
+      // print('Products after processing: $products');
     } else {
-      print(
-          'Error fetching categories: ${response.statusCode} ${response.reasonPhrase}');
+      // print(
+      //     'Error fetching categories: ${response.statusCode} ${response.reasonPhrase}');
     }
-    print('Final categories: ${response.body}');
+    // print('Final products: ${response.body}');
     return products;
   }
 
@@ -76,7 +76,7 @@ class ProductApiCallService {
     if (response.statusCode == 200 || response.statusCode == 201) {
       var body = jsonDecode(response.body);
       // print('Parsed body: $body');
-      var productData = body['data']['products'] as List<dynamic>;;
+      var productData = body['data']['products'] as List<dynamic>;
       // print('Category data: $categoryData');
       // print('Subcategories: $subCategories');
       for (var ele in productData) {
@@ -87,10 +87,10 @@ class ProductApiCallService {
       }
       // print('Categories after processing: $categories');
     } else {
-      print(
-          'Error fetching categories: ${response.statusCode} ${response.reasonPhrase}');
+      // print(
+      //     'Error fetching categories: ${response.statusCode} ${response.reasonPhrase}');
     }
-    print('Final categories: ${response.body}');
+    // print('Final categories: ${response.body}');
     return subProducts;
   }
 }

@@ -32,7 +32,7 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
       await _enrollmentService.getTopCategories();
     } catch (e) {
       _errorMessage = 'Failed to load categories: $e';
-      print(_errorMessage);
+      // print(_errorMessage);
     } finally {
       _loading = false;
       notifyListeners();
@@ -71,7 +71,7 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
 
       try {
         var response = await _enrollmentService.registerAuser();
-        print('Response: ${response.statusCode} ${response.body}');
+        // print('Response: ${response.statusCode} ${response.body}');
 
         if (response.statusCode == 201 || response.statusCode == 200) {
           var body = jsonDecode(response.body);
@@ -80,8 +80,8 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
           var retailer = body['data']['retailer'];
           var token = body['token'];
 
-          print('Retailer: $retailer');
-          print('Token: $token');
+          // print('Retailer: $retailer');
+          // print('Token: $token');
 
           if (retailer != null && token != null) {
             var newUserData = UserModel.fromMap(retailer);
@@ -113,7 +113,7 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
           _errorMessage = _formError['response'];
         }
       } catch (e) {
-        print('Error: $e');
+        // print('Error: $e');
         _formError['response'] = 'An error occurred: $e';
         _errorMessage = _formError['response'];
       } finally {

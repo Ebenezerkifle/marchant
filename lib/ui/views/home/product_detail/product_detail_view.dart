@@ -12,7 +12,7 @@ import 'package:stacked/stacked.dart';
 import 'product_detail_viewmodel.dart';
 
 class ProductDetailView extends StackedView<ProductDetailViewModel> {
-  const ProductDetailView({Key? key, required this.product}) : super(key: key);
+  const ProductDetailView({super.key, required this.product});
   final ProductModel product;
 
   @override
@@ -75,11 +75,13 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                                         ),
                                       ),
                                       horizontalSpaceSmall,
-                                      Text(
-                                        e,
-                                        style: AppTextStyle.h3Normal,
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
+                                      Flexible(
+                                        child: Text(
+                                          e,
+                                          style: AppTextStyle.h3Normal,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -95,25 +97,24 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                             'Manufacturer: ',
                             style: AppTextStyle.h2Bold,
                           ),
-                          Text(
-                            product.manufacturerId ?? 'Unknown Provider',
-                            style: AppTextStyle.h4Normal,
+                          Flexible(
+                            child: Text(
+                              product.manufacturerId ?? 'Unknown Provider',
+                              style: AppTextStyle.h4Normal,
+                            ),
                           ),
                           TextButton(
                             onPressed: () => viewModel.onPressed(),
                             child: Row(
-                              // Use Row for horizontal layout
-                              mainAxisSize:
-                                  MainAxisSize.min, // Avoid unnecessary space
+                              mainAxisSize: MainAxisSize.min,
                               children: [
                                 const Text(
                                   'See More',
                                   style: AppTextStyle.h4Bold,
                                 ),
-                                horizontalSpaceTiny, // Add spacing between text and icon
+                                horizontalSpaceTiny,
                                 Icon(
-                                  Icons
-                                      .arrow_forward_ios_rounded, // Use rounded arrow icon
+                                  Icons.arrow_forward_ios_rounded,
                                   size: middleSize,
                                   color: Theme.of(context).colorScheme.primary,
                                 ),

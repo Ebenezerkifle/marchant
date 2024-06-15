@@ -42,7 +42,7 @@ class HomeViewModel extends ReactiveViewModel {
   }
 
   void onFilter() {
-    // onFilter. show bottomsheet.
+    // onFilter.showbottomsheet.
     // _bottomSheet.showCustomSheet(
     //   variant: BottomSheetType.filter,
     //   title: 'Filter',

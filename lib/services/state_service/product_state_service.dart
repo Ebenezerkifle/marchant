@@ -65,7 +65,6 @@ class ProductStateService with ListenableServiceMixin {
     }
   }
 
-  // int categoryLimit = 3;
 
   Future<void> getCategories() async {
     _categories.value.clear();
@@ -73,13 +72,6 @@ class ProductStateService with ListenableServiceMixin {
     notifyListeners();
   }
 
-  // _getProducts() {
-  // _products.value.clear();
-  // for (var ele in sampleProducts.entries) {
-  //   _products.value[ele.key] = ele.value;
-  // }
-  // notifyListeners();
-  // }
 
   Future<void> getProducts() async {
     _products.value.clear();
@@ -93,17 +85,53 @@ class ProductStateService with ListenableServiceMixin {
         .addAll(await ProductApiCallService().getSubProducts(categoryId));
     notifyListeners();
   }
-  // Future<void> getProductsBySubCategory(subCategoryId) async {
-  //   _subProducts.value.clear();
-  //   _subProducts.value
-  //       .addAll(await ProductApiCallService().getSubProducts(subCategoryId));
+  
+  // placeOrder(OrderModel order) {
+  //   _activeOrders.value[order.id] = order;
   //   notifyListeners();
   // }
+void placeOrder(OrderModel order) {
+  String orderId = order.id ?? DateTime.now().millisecondsSinceEpoch.toString();
+  OrderModel updatedOrder = OrderModel(
+    products: order.products,
+    id: orderId,
+    count: order.count,
+    totalPrice: order.totalPrice,
+  );
+  _activeOrders.value[orderId] = updatedOrder;
+  notifyListeners();
+}
 
-  placeOrder(OrderModel order) {
-    _activeOrders.value[order.id] = order;
-    notifyListeners();
-  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // final Map<String, String> samples = {
   //   '1': 'Mobile',

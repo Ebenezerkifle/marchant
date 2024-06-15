@@ -197,11 +197,11 @@ class CategoryApiCallService {
   // Get Categories
   Future<Map<String, Category>> getCategories() async {
     // print('******************************************Birhanu********************');
-    print(_userService.user);
+    // print(_userService.user);
     final String categoryId =
         _userService.user?.CategoryId ?? '666c03ce6d254900e08b5935';
     
-    print('Category ID: $categoryId');
+    // print('Category ID: $categoryId');
 
     String token = await _getToken(); // Get the token
 
@@ -233,7 +233,7 @@ class CategoryApiCallService {
       print(
           'Error fetching categories: ${response.statusCode} ${response.reasonPhrase}');
     }
-    print('Final categories: ${response.body}');
+    // print('Final categories: ${response.body}');
     return categories;
   }
 }

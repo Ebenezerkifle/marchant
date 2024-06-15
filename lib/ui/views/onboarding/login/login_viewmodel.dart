@@ -6,7 +6,6 @@ import 'package:marchant/app/app.router.dart';
 import 'package:marchant/models/login_model.dart';
 import 'package:marchant/models/user_model.dart';
 import 'package:marchant/services/api_service/authentication.dart';
-import 'package:marchant/services/state_service/enrollment_state_service.dart';
 import 'package:marchant/services/state_service/landing_state_servic.dart';
 import 'package:marchant/services/state_service/user_service.dart';
 import 'package:marchant/services/storage_service.dart/session.dart';
@@ -18,7 +17,6 @@ class LoginViewModel extends BaseViewModel {
   final _authentication = Authentication();
   final _navigationService = locator<NavigationService>();
   final _userService = locator<UserService>();
-  final _enrollmentService = locator<EnrollmentStateService>();
   final _landingStateService = locator<LandingStateService>();
 
   String get welcomeMsg => 'Welcome';
@@ -128,8 +126,8 @@ class LoginViewModel extends BaseViewModel {
           _userService.setUserData(user); // Ensure user data is set here
 
           // Print user data for debugging
-          print(
-              'User data set: ${_userService.user?.CategoryId}, ${_userService.user?.phoneNumber}');
+          // print(
+          //     'User data set: ${_userService.user?.CategoryId}, ${_userService.user?.phoneNumber}');
 
           // Save the token
           SessionService.setString(SessionKey.token, token);
@@ -153,7 +151,7 @@ class LoginViewModel extends BaseViewModel {
         }
       } catch (e) {
         // Handle errors during the login process
-        print('Error during login: $e');
+        // print('Error during login: $e');
         _formError['response'] = 'An error occurred: $e';
       } finally {
         // Reset the busy state and notify listeners
@@ -162,7 +160,7 @@ class LoginViewModel extends BaseViewModel {
       }
     } else {
       // Handle form validation failure
-      print('Form validation failed or form errors are present');
+      // print('Form validation failed or form errors are present');
     }
   }
 }

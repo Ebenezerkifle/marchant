@@ -44,28 +44,28 @@ class CartViewModel extends ReactiveViewModel {
     SnackBarService.showSnackBar(content: 'Successfully cleared.');
   }
 
-//  onPlaceOrder() async {
-//     setBusy(true);
-//     try {
-//       await _cartService.placeOrder();
-//       SnackBarService.showSnackBar(content: 'Successfully Ordered.');
-//     } catch (e) {
-//       SnackBarService.showSnackBar(content: 'Order failed: $e');
-//     } finally {
-//       setBusy(false);
-//       _navigation.back();
-//     }
-//   }
-
-  onPlaceOrder() async {
-    // place order.....
+ onPlaceOrder() async {
     setBusy(true);
-    await Future.delayed(const Duration(seconds: 3));
-    _cartService.placeOrder();
-    SnackBarService.showSnackBar(content: 'Successfully Ordered.');
-    setBusy(false);
-    _navigation.back();
+    try {
+      await _cartService.placeOrder();
+      SnackBarService.showSnackBar(content: 'Successfully Ordered.');
+    } catch (e) {
+      SnackBarService.showSnackBar(content: 'Order failed: $e');
+    } finally {
+      setBusy(false);
+      _navigation.back();
+    }
   }
+
+  // onPlaceOrder() async {
+  //   // place order.....
+  //   setBusy(true);
+  //   await Future.delayed(const Duration(seconds: 3));
+  //   _cartService.placeOrder();
+  //   SnackBarService.showSnackBar(content: 'Successfully Ordered.');
+  //   setBusy(false);
+  //   _navigation.back();
+  // }
 
   getImage(CartModel cart) {
     return (cart.product!.productImage != null && cart.product!.productImage!.isNotEmpty)

@@ -122,16 +122,4 @@ class SignupViewModel extends FormViewModel {
       _navigation.navigateToChooseCatagoryView();
     }
   }
-  // _setStateOfFormField(String msg, var controller) {
-  //   // takes the validation result and set the state
-  //   if (msg.isNotEmpty) {
-  //     _formError[controller] = msg;
-  //     notifyListeners();
-  //     return;
-  //   }
-  //   _formError.remove(controller);
-  //   notifyListeners();
-  //   return;
-  // }
-  //--------------------------------------------
 }

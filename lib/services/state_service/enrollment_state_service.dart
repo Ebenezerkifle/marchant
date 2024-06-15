@@ -36,9 +36,9 @@ class EnrollmentStateService with ListenableServiceMixin {
 
   // enrollment.
   registerAuser() async {
-    print(_userModel.value.CategoryId);
-    print(_userModel.value.phoneNumber);
-    print(_userModel.value.password);
+    // print(_userModel.value.CategoryId);
+    // print(_userModel.value.phoneNumber);
+    // print(_userModel.value.password);
     var response = await Authentication().registerNewUser(_userModel.value);
     return response;
   }
