@@ -5,7 +5,7 @@ class UserModel {
   String? phoneNumber;
   String? password;
   String? CategoryId;
-  final int? transactionAmount;
+  final double? transactionAmount;
   final int? creditAvailable;
   final int? tookCredit;
   final int? lastCreditPaid;
@@ -59,7 +59,7 @@ class UserModel {
     phoneNumber: map['phoneNumber'] as String?,
     password: map['password'] as String?,
     CategoryId: map['CategoryId'] as String?,
-    transactionAmount: map['transactionAmount'] as int?,
+    transactionAmount: map['transactionAmount'] as double?,
     creditAvailable: map['creditAvailable'] as int?,
     tookCredit: map['tookCredit'] as int?,
     lastCreditPaid: map['lastCreditPaid'] as int?,

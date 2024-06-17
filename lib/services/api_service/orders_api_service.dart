@@ -17,7 +17,7 @@ class OrdersApiService {
   Future<Map<String, OrderModel>> getOrders() async {
     String token = await _getToken();
     var response = await ApiCallService.getCall(
-      '$baseUrl$readOrderUrl',
+      '$baseUrl$readPendingOrderUrl',
       token,
       needToken: true,
     );

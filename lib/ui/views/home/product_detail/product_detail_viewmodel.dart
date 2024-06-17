@@ -4,7 +4,7 @@ import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/app/app.router.dart';
 import 'package:marchant/models/product_model.dart';
 import 'package:marchant/services/state_service/cart_state_service.dart';
-import 'package:marchant/services/state_service/landing_state_servic.dart';
+// import 'package:marchant/services/state_service/landing_state_servic.dart';
 import 'package:marchant/services/state_service/snackbar_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -13,7 +13,7 @@ class ProductDetailViewModel extends BaseViewModel {
   final _cartService = locator<CartStateService>();
   final _bottomSheet = locator<BottomSheetService>();
   final _navigation = locator<NavigationService>();
-  final _landingStateService = locator<LandingStateService>();
+  // final _landingStateService = locator<LandingStateService>();
 
 
   final ProductModel product;
