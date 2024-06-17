@@ -94,7 +94,7 @@ class ProfileView extends StackedView<ProfileViewModel> {
             borderRadius: BorderRadius.circular(16.0),
           ),
           child: Text(
-            viewModel.credit != null ? '${viewModel.credit}' : 'Loading...',
+            viewModel.credit.toString(),
             style: AppTextStyle.h3Bold.copyWith(color: Colors.white),
           ),
         );

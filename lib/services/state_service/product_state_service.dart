@@ -17,7 +17,7 @@ class ProductStateService with ListenableServiceMixin {
       _products,
     ]);
     getCategories();
-    _defaultSelected();
+    // _defaultSelected();
     getProducts();
   }
 
@@ -45,6 +45,10 @@ class ProductStateService with ListenableServiceMixin {
   final _activeOrders = ReactiveValue<Map<String, OrderModel>>({});
   Map<String, OrderModel> get activeOrders => _activeOrders.value;
 
+  final _isLoading = ReactiveValue<bool>(false);
+
+  bool get isLoading => _isLoading.value;
+
   onCategorySelected(String key, {bool reOrder = false}) {
     _selected.value.clear();
     _selected.value[key] = true;
@@ -57,21 +61,29 @@ class ProductStateService with ListenableServiceMixin {
     notifyListeners();
   }
 
-  _defaultSelected() {
-    if (_topCategories.value.isNotEmpty) {
-      var first = _topCategories.value.entries.first.key;
-      _selected.value[first] = true;
+  // _defaultSelected() {
+  //   if (_topCategories.value.isNotEmpty) {
+  //     var first = _topCategories.value.entries.first.key;
+  //     _selected.value[first] = true;
+  //     notifyListeners();
+  //   }
+  // }
+
+  Future<void> getCategories() async {
+    // _categories.value.clear();
+    // _categories.value.addAll(await CategoryApiCallService().getCategories());
+    // notifyListeners();
+    try {
+      _isLoading.value = true;
+      _categories.value.clear();
+      _categories.value.addAll(await CategoryApiCallService().getCategories());
+    } catch (e) {
+      // Handle error
+    } finally {
+      _isLoading.value = false;
       notifyListeners();
     }
   }
-
-
-  Future<void> getCategories() async {
-    _categories.value.clear();
-    _categories.value.addAll(await CategoryApiCallService().getCategories());
-    notifyListeners();
-  }
-
 
   Future<void> getProducts() async {
     _products.value.clear();
@@ -85,53 +97,23 @@ class ProductStateService with ListenableServiceMixin {
         .addAll(await ProductApiCallService().getSubProducts(categoryId));
     notifyListeners();
   }
-  
+
   // placeOrder(OrderModel order) {
   //   _activeOrders.value[order.id] = order;
   //   notifyListeners();
   // }
-void placeOrder(OrderModel order) {
-  String orderId = order.id ?? DateTime.now().millisecondsSinceEpoch.toString();
-  OrderModel updatedOrder = OrderModel(
-    products: order.products,
-    id: orderId,
-    count: order.count,
-    totalPrice: order.totalPrice,
-  );
-  _activeOrders.value[orderId] = updatedOrder;
-  notifyListeners();
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  void placeOrder(OrderModel order) {
+    String orderId =
+        order.id ?? DateTime.now().millisecondsSinceEpoch.toString();
+    OrderModel updatedOrder = OrderModel(
+      products: order.products,
+      id: orderId,
+      count: order.count,
+      totalPrice: order.totalPrice,
+    );
+    _activeOrders.value[orderId] = updatedOrder;
+    notifyListeners();
+  }
 
   // final Map<String, String> samples = {
   //   '1': 'Mobile',

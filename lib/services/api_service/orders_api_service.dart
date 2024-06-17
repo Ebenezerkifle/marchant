@@ -13,7 +13,7 @@ class OrdersApiService {
     return await SessionService.getString(SessionKey.token);
   }
 
-  // Get Top orders
+  // Get pending orders
   Future<Map<String, OrderModel>> getOrders() async {
     String token = await _getToken();
     var response = await ApiCallService.getCall(
@@ -32,6 +32,26 @@ class OrdersApiService {
       }
     }
     return orders;
+  }
+  // Get delivered orders
+  Future<Map<String, OrderModel>> getDeliveredOrders() async {
+    String token = await _getToken();
+    var response = await ApiCallService.getCall(
+      '$baseUrl$readDeliveredOrderUrl',
+      token,
+      needToken: true,
+    );
+    Map<String, OrderModel> deliveredOrders = {};
+    // print(response.statusCode);
+    print('orders ${response.body}');
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      var body = jsonDecode(response.body);
+      for (var ele in body['data']['orders']) {
+        OrderModel c = OrderModel.fromMap(ele);
+        deliveredOrders[c.id ?? ''] = c;
+      }
+    }
+    return deliveredOrders;
   }
 
 }

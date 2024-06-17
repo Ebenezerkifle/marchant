@@ -45,16 +45,9 @@ class ProfileViewModel extends BaseViewModel {
     ),
   };
 
-   int? credit;
 
-  ProfileViewModel() {
-    fetchCredit();
-  }
+double get credit => _userService.user?.creditAvailable ?? 0.0;
 
-  Future<void> fetchCredit() async {
-    credit = _userService.user?.creditAvailable;
-    notifyListeners();
-  }
 
   tapHandler(SettingOptions setting) {
     switch (setting) {
