@@ -114,7 +114,7 @@ class LoginViewModel extends BaseViewModel {
             password: passwordController.text,
           ),
         );
-        print(response.body);
+        // print(response.body);
         // Check the response status
         if (response.statusCode == 201 || response.statusCode == 200) {
           var body = jsonDecode(response.body);
