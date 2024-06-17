@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marchant/ui/common/app_colors.dart';
 import 'package:marchant/ui/common/app_text_style.dart';
 import 'package:marchant/ui/common/ui_helpers.dart';
@@ -137,18 +136,6 @@ class HomeView extends StackedView<HomeViewModel> {
             CustomeAppBar(
               title: 'Marchant',
               back: false,
-              widget: Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {},
-                    // onTap: viewModel.changeUserRole,
-                    child: const Icon(
-                      FontAwesomeIcons.solidBell,
-                      color: kcPrimaryColor,
-                    ),
-                  )
-                ],
-              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(
@@ -166,46 +153,26 @@ class HomeView extends StackedView<HomeViewModel> {
                   padding: const EdgeInsets.symmetric(horizontal: middleSize),
                   child: Column(
                     children: [
-                      // CustomGrideWidget(
-                      //   column: 4,
-                      //   widgets: viewModel.categories.entries
-                      //       .take(12) // Take only the first 12 items
-                      //       .map(
-                      //         (e) => Padding(
-                      //           padding:
-                      //               const EdgeInsets.only(right: smallSize),
-                      //           child: CustomeCardWidget(
-                      //             isCategory: true,
-                      //             onTap: () {
-                      //               // Navigate to subcategory view for the selected category
-                      //               viewModel.navigateToSubCategory(e.key);
-                      //             },
-                      //             title: e.value.name ??
-                      //                 '', // Display category name
-                      //           ),
-                      //         ),
-                      //       )
-                      //       .toList(),
-                      // ),
                       CustomGrideWidget(
                         column: 4,
                         widgets: viewModel.categories.entries
                             .take(12) // Take only the first 12 items
                             .map(
-                              (e) => Padding(
-                                padding:
-                                    const EdgeInsets.only(right: smallSize),
-                                child: CircularCardWidget(
-                                  title: e.value.name ??
-                                      '', // Display category name
-                                  image:
-                                      'assets/images/category.jpg', // Replace with actual image if available
-                                  onTap: () {
-                                    // Navigate to subcategory view for the selected category
-                                    viewModel.navigateToSubCategory(e.key);
-                                  },
-                                ),
-                              ),
+                              (e) {
+                                String truncatedTitle = truncateTitle(e.value.name ?? '');
+                                // print('Original: ${e.value.name}, Truncated: $truncatedTitle'); // Debug print
+                                return Padding(
+                                  padding: const EdgeInsets.only(right: smallSize),
+                                  child: CircularCardWidget(
+                                    title: truncatedTitle,
+                                    image: 'assets/images/category.jpg', // Replace with actual image if available
+                                    onTap: () {
+                                      // Navigate to subcategory view for the selected category
+                                      viewModel.navigateToSubCategory(e.key);
+                                    },
+                                  ),
+                                );
+                              },
                             )
                             .toList(),
                       ),
@@ -214,18 +181,20 @@ class HomeView extends StackedView<HomeViewModel> {
                       CustomeGrideWidget(
                         widgets: viewModel.products.entries
                             .map(
-                              (e) => CustomeCardWidget(
-                                size: screenWidth(context) * .38,
-                                onTap: () => viewModel.onItemSelected(e.value),
+                              (e) {
+                                return CustomeCardWidget(
+                                  size: screenWidth(context) * .38,
+                                  onTap: () => viewModel.onItemSelected(e.value),
                                 title: e.value.productName ?? '',
-                                details: e.value.details ?? [],
-                                detailLimit: 3,
-                                image: e.value.productImage?.first ?? '',
-                                widget: Text(
-                                  '${e.value.salesPrice} ETB',
-                                  style: AppTextStyle.h4Bold,
-                                ),
-                              ),
+                                  details: e.value.details ?? [],
+                                  detailLimit: 3,
+                                  image: e.value.productImage?.first ?? '',
+                                  widget: Text(
+                                    '${e.value.salesPrice} ETB',
+                                    style: AppTextStyle.h4Bold,
+                                  ),
+                                );
+                              },
                             )
                             .toList(),
                       ),
@@ -243,8 +212,10 @@ class HomeView extends StackedView<HomeViewModel> {
   }
 
   @override
-  HomeViewModel viewModelBuilder(
-    BuildContext context,
-  ) =>
-      HomeViewModel();
+  HomeViewModel viewModelBuilder(BuildContext context) => HomeViewModel();
+}
+
+String truncateTitle(String title, {int charLimit = 8}) {
+  if (title.length <= charLimit) return title;
+  return '${title.substring(0, charLimit)}...';
 }

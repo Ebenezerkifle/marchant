@@ -66,7 +66,8 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                   // isCategory: true,
                                   onTap: () => viewModel.getSubProducts(
                                       category: subCategory.id ?? ''),
-                                  title: subCategory.name ??'', // Display subcategory name
+                                  // title: subCategory.name ??'', // Display subcategory name
+                                 title: truncateTitle(subCategory.name??''),
                                   image:'assets/images/category.jpg', // Replace with actual image if available
                                  
                                 ),
@@ -109,4 +110,10 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
   @override
   SubCategoryViewModel viewModelBuilder(BuildContext context) =>
       SubCategoryViewModel(categoryId: categoryValue);
+}
+
+
+String truncateTitle(String title, {int charLimit = 6}) {
+  if (title.length <= charLimit) return title;
+  return '${title.substring(0, charLimit)}...';
 }

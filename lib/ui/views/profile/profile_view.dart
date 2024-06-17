@@ -84,7 +84,7 @@ class ProfileView extends StackedView<ProfileViewModel> {
       case SettingOptions.shortCode:
         return Text(
           "12345",
-          style: AppTextStyle.h3Bold.copyWith(color: Colors.deepOrange),
+          style: AppTextStyle.h3Bold.copyWith(color: Colors.green),
         );
       case SettingOptions.credit:
         return Container(

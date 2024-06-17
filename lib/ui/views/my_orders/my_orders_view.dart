@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:marchant/ui/common/ui_helpers.dart';
 import 'package:marchant/ui/views/my_orders/my_orders_viewmodel.dart';
+import 'package:marchant/ui/views/widgets/nothing_found.dart';
 import 'package:stacked/stacked.dart';
 import 'package:marchant/models/order_model.dart';
 
@@ -17,7 +19,12 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
         title: const Text('My Orders'),
       ),
       body: viewModel.orders.isEmpty
-          ? const Center(child: CircularProgressIndicator())
+          ? const Column(
+                    children: [
+                      verticalSpaceLarge,
+                      NothingFound(),
+                    ],
+                  )
           : ListView.builder(
               itemCount: viewModel.orders.length,
               itemBuilder: (context, index) {
@@ -36,6 +43,21 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
     viewModel.getOrders();
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class OrderCard extends StatelessWidget {
   final OrderModel order;
@@ -56,18 +78,16 @@ class OrderCard extends StatelessWidget {
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8.0),
-            // Text('Retailer: ${order.byRetailer}'),
             Text('Total Amount: ${order.totalAmount}'),
             Text('Status: ${order.status}'),
-            // Text('Activity Status: ${order.activityStatus}'),
             const SizedBox(height: 8.0),
             const Text('Products:', style: TextStyle(fontWeight: FontWeight.bold)),
             ...order.products!.map((product) {
-              return const Padding(
-                padding: EdgeInsets.symmetric(vertical: 4.0),
-                // child: Text(
-                //   'Product ID: ${product['productId']}, Quantity: ${product['quantity']}',
-                // ),
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                child: Text(
+                  'Product Name: ${product.productName}, Quantity: ${product.quantity}',
+                ),
               );
             }).toList(),
             const SizedBox(height: 8.0),
@@ -78,3 +98,12 @@ class OrderCard extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
+
+

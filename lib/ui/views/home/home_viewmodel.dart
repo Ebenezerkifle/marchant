@@ -49,9 +49,9 @@ class HomeViewModel extends ReactiveViewModel {
     // );
   }
 
-  void changeUserRole() {
-    // changing user role
-  }
+  // void changeUserRole() {
+  //   // changing user role
+  // }
 }
 
 

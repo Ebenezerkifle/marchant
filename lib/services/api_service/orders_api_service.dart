@@ -23,7 +23,7 @@ class OrdersApiService {
     );
     Map<String, OrderModel> orders = {};
     // print(response.statusCode);
-    // print(response.body);
+    print('orders ${response.body}');
     if (response.statusCode == 200 || response.statusCode == 201) {
       var body = jsonDecode(response.body);
       for (var ele in body['data']['orders']) {
