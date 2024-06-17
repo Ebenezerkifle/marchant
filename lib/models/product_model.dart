@@ -42,7 +42,7 @@ class ProductModel {
   // Optional: Add a method to convert to a map for easier printing or debugging
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
+      'productId': id,
       'productName': productName,
       'productTag': productTag,
       'productImage': productImage,

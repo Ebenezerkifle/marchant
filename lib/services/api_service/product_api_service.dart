@@ -32,7 +32,7 @@ class ProductApiCallService {
     Map<String, ProductModel> products = {};
     // print('Initial categories: $categories');
     // print('Response status code: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    // print('Response body: ${response.body}');
     if (response.statusCode == 200 || response.statusCode == 201) {
       var body = jsonDecode(response.body);
       // print('Parsed body: $body');

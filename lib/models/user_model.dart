@@ -54,7 +54,7 @@ class UserModel {
   }
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
-  print("Mapping UserModel from map: $map");
+  // print("Mapping UserModel from map: $map");
   return UserModel(
     phoneNumber: map['phoneNumber'] as String?,
     password: map['password'] as String?,

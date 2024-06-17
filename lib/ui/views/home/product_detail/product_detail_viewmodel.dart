@@ -32,8 +32,8 @@ class ProductDetailViewModel extends BaseViewModel {
       if (compeleter!.confirmed) {
         _cartService.addToCart(compeleter.data);
         SnackBarService.showSnackBar(content: 'Added to cart');
-           _landingStateService.setIndex(1);
-            _navigation.clearStackAndShow(Routes.landingView);
+          //  _landingStateService.setIndex(1);
+          //   _navigation.clearStackAndShow(Routes.landingView);
         notifyListeners();
       }
     } catch (e) {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:marchant/models/setting_model.dart';
-import 'package:marchant/ui/common/app_colors.dart';
 import 'package:stacked/stacked.dart';
 import '../../common/app_text_style.dart';
 import '../../common/ui_helpers.dart';
@@ -9,7 +8,7 @@ import '../widgets/image_builder.dart';
 import 'profile_viewmodel.dart';
 
 class ProfileView extends StackedView<ProfileViewModel> {
-  const ProfileView({Key? key}) : super(key: key);
+  const ProfileView({super.key});
 
   @override
   Widget builder(

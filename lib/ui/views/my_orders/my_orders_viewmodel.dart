@@ -1,47 +1,50 @@
-import 'package:marchant/app/app.router.dart';
-import 'package:marchant/models/cart_model.dart';
 import 'package:marchant/models/order_model.dart';
-import 'package:marchant/services/state_service/product_state_service.dart';
+import 'package:marchant/services/state_service/orders_state_service.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
-
-import '../../../app/app.locator.dart';
 
 class MyOrdersViewModel extends ReactiveViewModel {
-  final _productState = locator<ProductStateService>();
-  final _navigation = locator<NavigationService>();
+  final OrderStateService _orderState = OrderStateService();
 
   @override
-  List<ListenableServiceMixin> get listenableServices => [_productState];
+  List<ListenableServiceMixin> get listenableServices => [_orderState];
 
-  Map<String, OrderModel> get activeOrders => _productState.activeOrders;
+  Map<String, OrderModel> get orders => _orderState.orders;
 
-  Map<String, dynamic> getTitle(List<CartModel>? cartList) {
-    Map<String, dynamic> response = {};
-    String title = '';
-    List<String> images = [];
-    if (cartList != null) {
-      for (int i = 0; i < cartList.length; i++) {
-        if (i == 1) {
-          images.add(cartList[i].product?.productImage?.first ?? "");
-        }
-        if (i == 0) {
-          images.add(cartList[i].product?.productImage?.first ?? "");
-          title = cartList[i].product?.productName ?? '';
-          continue;
-        } else if (i == cartList.length - 1) {
-          title = '$title & ${cartList[i].product?.productName}';
-          continue;
-        }
-        title = '$title, ${cartList[i].product?.productName}';
-      }
-    }
-    response['title'] = title;
-    response['images'] = images;
-    return response;
-  }
-
-  onOrderTap(OrderModel e) {
-    _navigation.navigateToCartView(order: e);
+  void getOrders() {
+    _orderState.getOrders();
   }
 }
+
+
+// import 'package:marchant/models/order_model.dart';
+// import 'package:marchant/services/state_service/orders_state_service.dart';
+// import 'package:stacked/stacked.dart';
+// import '../../../app/app.locator.dart';
+
+// class MyOrdersViewModel extends ReactiveViewModel {
+//   final OrderStateService _orderState = locator<OrderStateService>();
+
+//   bool _loading = true;
+//   bool get loading => _loading;
+
+//   @override
+//   List<ListenableServiceMixin> get listenableServices => [_orderState];
+
+//   Map<String, OrderModel> get orders => _orderState.orders;
+
+//   List<OrderModel> get pendingOrders => orders.values.where((order) => order.status == 'Pending').toList();
+//   List<OrderModel> get deliveredOrders => orders.values.where((order) => order.status == 'Delivered').toList();
+
+//   Future<void> getOrders() async {
+//     _loading = true;
+//     notifyListeners();
+
+//     await _orderState.getOrders();
+
+//     _loading = false;
+//     notifyListeners();
+//   }
+// }
+
+
+

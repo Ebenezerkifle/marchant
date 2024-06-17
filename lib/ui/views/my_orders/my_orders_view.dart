@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:marchant/ui/common/app_text_style.dart';
-import 'package:marchant/ui/common/ui_helpers.dart';
-import 'package:marchant/ui/views/widgets/custome_app_bar.dart';
-import 'package:marchant/ui/views/widgets/custome_list_tile.dart';
-import 'package:marchant/ui/views/widgets/nothing_found.dart';
+import 'package:marchant/ui/views/my_orders/my_orders_viewmodel.dart';
 import 'package:stacked/stacked.dart';
-
-import 'my_orders_viewmodel.dart';
+import 'package:marchant/models/order_model.dart';
 
 class MyOrdersView extends StackedView<MyOrdersViewModel> {
-  const MyOrdersView({Key? key}) : super(key: key);
+  const MyOrdersView({super.key});
 
   @override
   Widget builder(
@@ -18,61 +13,68 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
     Widget? child,
   ) {
     return Scaffold(
-      body: SafeArea(
-        top: true,
+      appBar: AppBar(
+        title: const Text('My Orders'),
+      ),
+      body: viewModel.orders.isEmpty
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: viewModel.orders.length,
+              itemBuilder: (context, index) {
+                var order = viewModel.orders.values.elementAt(index);
+                return OrderCard(order: order);
+              },
+            ),
+    );
+  }
+
+  @override
+  MyOrdersViewModel viewModelBuilder(BuildContext context) => MyOrdersViewModel();
+
+  @override
+  void onViewModelReady(MyOrdersViewModel viewModel) {
+    viewModel.getOrders();
+  }
+}
+
+class OrderCard extends StatelessWidget {
+  final OrderModel order;
+
+  const OrderCard({super.key, required this.order});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.all(8.0),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomeAppBar(title: 'My Orders', back: false),
-            verticalSpaceMiddle,
-            viewModel.activeOrders.isEmpty
-                ? const Column(
-                    children: [
-                      verticalSpaceLarge,
-                      NothingFound(),
-                    ],
-                  )
-                : Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Column(
-                            children: viewModel.activeOrders.entries.map((e) {
-                              Map<String, dynamic> mergedData =
-                                  viewModel.getTitle(e.value.cartList);
-                              String title = mergedData['title'];
-                              List<String> images = mergedData['images'];
-                              return Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: middleSize,
-                                  vertical: smallSize,
-                                ),
-                                child: CustomeListTile(
-                                  title: title,
-                                  onTap: () => viewModel.onOrderTap(e.value),
-                                  imageUrl: images,
-                                  noPrice: false,
-                                  price: e.value.totalPrice ?? 0,
-                                  widget: Text(
-                                    '${e.value.count} Products',
-                                    style: AppTextStyle.h4Bold,
-                                  ),
-                                ),
-                              );
-                            }).toList(),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
+            Text(
+              'Order ID: ${order.id}',
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8.0),
+            // Text('Retailer: ${order.byRetailer}'),
+            Text('Total Amount: ${order.totalAmount}'),
+            Text('Status: ${order.status}'),
+            // Text('Activity Status: ${order.activityStatus}'),
+            const SizedBox(height: 8.0),
+            const Text('Products:', style: TextStyle(fontWeight: FontWeight.bold)),
+            ...order.products!.map((product) {
+              return const Padding(
+                padding: EdgeInsets.symmetric(vertical: 4.0),
+                // child: Text(
+                //   'Product ID: ${product['productId']}, Quantity: ${product['quantity']}',
+                // ),
+              );
+            }).toList(),
+            const SizedBox(height: 8.0),
+            Text('Created At: ${order.createdAt}'),
           ],
         ),
       ),
     );
   }
-
-  @override
-  MyOrdersViewModel viewModelBuilder(
-    BuildContext context,
-  ) =>
-      MyOrdersViewModel();
 }

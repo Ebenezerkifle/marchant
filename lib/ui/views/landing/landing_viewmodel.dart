@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marchant/enums/user_role.dart';
 import 'package:marchant/services/state_service/enrollment_state_service.dart';
 import 'package:marchant/services/state_service/landing_state_servic.dart';
+import 'package:marchant/services/state_service/user_service.dart';
 import 'package:marchant/ui/views/manufacturer/manu_home/manu_home_view.dart';
 import 'package:marchant/ui/views/manufacturer/post/post_view.dart';
 import 'package:stacked/stacked.dart';
@@ -18,14 +19,11 @@ import '../my_orders/my_orders_view.dart';
 import '../profile/profile_view.dart';
 import 'widgets/bar_items.dart';
 
-
-
-
 class LandingViewModel extends IndexTrackingViewModel {
   final _cartState = locator<CartStateService>();
   final _landingService = locator<LandingStateService>();
-    final _enrollmentService = locator<EnrollmentStateService>();
-
+  final _enrollmentService = locator<EnrollmentStateService>();
+  final _userService = locator<UserService>();
 
   @override
   List<ListenableServiceMixin> get listenableServices =>
@@ -42,6 +40,17 @@ class LandingViewModel extends IndexTrackingViewModel {
   Map<String, CartModel> get cartItems => _cartState.cartItems;
   bool get retailor => _enrollmentService.userRole == UserRole.retailor;
 
+  String? role;
+
+  landingViewModel() {
+    fetchRole();
+  }
+
+  Future<void> fetchRole() async {
+    role = _userService.user?.role;
+    notifyListeners();
+  }
+
   List<Widget> get manufacturorViews => const [
         ManuHomeView(),
         PostView(),
@@ -53,7 +62,7 @@ class LandingViewModel extends IndexTrackingViewModel {
         const BottomBarItem(title: 'Profile', icon: FontAwesomeIcons.solidUser),
       ];
 
-  List<Widget> get marchantViews => const [
+  List<Widget> get marchantViews => [
         HomeView(),
         CartView(),
         MyOrdersView(),
@@ -95,11 +104,3 @@ class LandingViewModel extends IndexTrackingViewModel {
         ),
       ];
 }
-
-
-
-
-
-
-
-
