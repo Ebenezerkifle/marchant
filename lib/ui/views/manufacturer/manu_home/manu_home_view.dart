@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marchant/ui/views/widgets/custome_app_bar.dart';
 import 'package:marchant/ui/views/widgets/custome_button.dart';
 import 'package:marchant/ui/views/widgets/nothing_found.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../../common/app_colors.dart';
 import 'manu_home_viewmodel.dart';
 
 class ManuHomeView extends StackedView<ManuHomeViewModel> {
@@ -25,13 +23,6 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
           CustomeAppBar(
             title: 'Marchant',
             back: false,
-            widget: GestureDetector(
-              onTap: viewModel.changeUserRole,
-              child: const Icon(
-                FontAwesomeIcons.solidBell,
-                color: kcPrimaryColor,
-              ),
-            ),
           ),
           Expanded(
             child: Column(
