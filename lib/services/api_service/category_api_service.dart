@@ -200,7 +200,7 @@ class CategoryApiCallService {
     // print(_userService.user);
     final String categoryId =
         _userService.user?.CategoryId ?? '666c03ce6d254900e08b5935';
-    
+
     // print('Category ID: $categoryId');
 
     String token = await _getToken(); // Get the token

@@ -14,12 +14,14 @@ class CircularCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width * .10; // Reduce the size of the circle
+    double width = MediaQuery.of(context).size.width *
+        .10; // Reduce the size of the circle
 
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0), // Add horizontal padding
+        padding: const EdgeInsets.symmetric(
+            horizontal: 8.0), // Add horizontal padding
         child: Column(
           children: [
             ClipOval(
@@ -45,6 +47,3 @@ class CircularCardWidget extends StatelessWidget {
     );
   }
 }
-
-
-

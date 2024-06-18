@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:marchant/ui/common/ui_helpers.dart';
 
@@ -39,8 +38,6 @@ class CustomeGrideWidget extends StatelessWidget {
   }
 }
 
-
-
 class CustomGrideWidget extends StatelessWidget {
   const CustomGrideWidget({
     super.key,
@@ -63,28 +60,35 @@ class CustomGrideWidget extends StatelessWidget {
 
     int gridCount = column * row;
     int totalGrids = (widgets.length / gridCount).ceil();
-    
+
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
         children: List.generate(totalGrids, (gridIndex) {
           int startIndex = gridIndex * gridCount;
-          int endIndex = (startIndex + gridCount) > widgets.length ? widgets.length : (startIndex + gridCount);
+          int endIndex = (startIndex + gridCount) > widgets.length
+              ? widgets.length
+              : (startIndex + gridCount);
 
           return Padding(
             padding: const EdgeInsets.only(right: 16.0), // Adjust as needed
             child: Column(
               children: List.generate(row, (rowIndex) {
                 int rowStartIndex = startIndex + (rowIndex * column);
-                int rowEndIndex = rowStartIndex + column > endIndex ? endIndex : rowStartIndex + column;
+                int rowEndIndex = rowStartIndex + column > endIndex
+                    ? endIndex
+                    : rowStartIndex + column;
 
                 return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0), // Use actual padding value
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 4.0), // Use actual padding value
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: List.generate(rowEndIndex - rowStartIndex, (index2) {
+                    children:
+                        List.generate(rowEndIndex - rowStartIndex, (index2) {
                       return Padding(
-                        padding: const EdgeInsets.only(right: 8.0), // Use actual padding value
+                        padding: const EdgeInsets.only(
+                            right: 8.0), // Use actual padding value
                         child: widgets[rowStartIndex + index2],
                       );
                     }),

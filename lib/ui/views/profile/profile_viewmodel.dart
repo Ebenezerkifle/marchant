@@ -45,9 +45,7 @@ class ProfileViewModel extends BaseViewModel {
     ),
   };
 
-
-double get credit => _userService.user?.creditAvailable ?? 0.0;
-
+  num get credit => _userService.user?.creditAvailable ?? 0;
 
   tapHandler(SettingOptions setting) {
     switch (setting) {

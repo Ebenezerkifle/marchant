@@ -50,8 +50,7 @@ class CartStateService with ListenableServiceMixin {
         // salesPrice: cartItem.product?.salesPrice,
       );
     }).toList();
-    print(
-        "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
+
     OrderModel order = OrderModel(
       products: products,
       // totalAmount: _totalPrice.value,
@@ -59,10 +58,10 @@ class CartStateService with ListenableServiceMixin {
     );
     try {
       final response = await _cartApiService.createNewOrder(order);
-      print(response.body);
       if (response.statusCode == 201) {
         _productStateService
             .placeOrder(order); // Store the order in the product state service
+        //_orderService.getOrders();
         clearCart(); // Clear cart after successful order placement
       } else {
         throw Exception('Failed to place order');

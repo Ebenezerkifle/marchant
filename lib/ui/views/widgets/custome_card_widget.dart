@@ -274,8 +274,3 @@ class CustomeCardWidget extends StatelessWidget {
     }
   }
 }
-
-
-
-
-

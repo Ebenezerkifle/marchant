@@ -38,7 +38,7 @@ class SignupViewModel extends FormViewModel {
   final Map<dynamic, String> _formError = {};
   Map<dynamic, String> get formError => _formError;
 
- final bool _loading = false;
+  final bool _loading = false;
   bool get loading => _loading;
 
   // validate phone number.

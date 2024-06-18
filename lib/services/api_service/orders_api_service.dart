@@ -1,5 +1,3 @@
-
-
 import 'dart:convert';
 import 'package:marchant/models/order_model.dart';
 import 'package:marchant/services/storage_service.dart/session.dart';
@@ -7,9 +5,8 @@ import 'api_call_service.dart';
 import 'api_constants.dart';
 
 class OrdersApiService {
-
   // Simulating a token retrieval function
- Future<String> _getToken() async {
+  Future<String> _getToken() async {
     return await SessionService.getString(SessionKey.token);
   }
 
@@ -33,6 +30,7 @@ class OrdersApiService {
     }
     return orders;
   }
+
   // Get delivered orders
   Future<Map<String, OrderModel>> getDeliveredOrders() async {
     String token = await _getToken();
@@ -53,5 +51,4 @@ class OrdersApiService {
     }
     return deliveredOrders;
   }
-
 }

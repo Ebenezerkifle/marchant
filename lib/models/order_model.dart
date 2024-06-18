@@ -1,5 +1,3 @@
-
-
 // import 'package:marchant/models/cart_model.dart';
 // import 'package:marchant/models/product_model.dart';
 
@@ -31,8 +29,6 @@
 //       'products': products,
 //     };
 //   }
-
-
 
 import 'package:marchant/models/product_model.dart';
 
@@ -66,7 +62,9 @@ class OrderModel {
   // Factory constructor to create an OrderModel from a map
   factory OrderModel.fromMap(Map<String, dynamic> map) {
     var productsList = map['products'] as List;
-    List<ProductModel> products = productsList.map((productMap) => ProductModel.fromMap(productMap)).toList();
+    List<ProductModel> products = productsList
+        .map((productMap) => ProductModel.fromMap(productMap))
+        .toList();
 
     return OrderModel(
       id: map['_id'],
@@ -99,17 +97,16 @@ class OrderModel {
   }
 
   // Method to get a list of CartModel from products
-  List<CartModel> get cartList => products?.map((product) {
-    return CartModel(
-      id: product.id,
-      count: product.quantity?.toInt() ?? 0,
-      product: product,
-    );
-  }).toList() ?? [];
+  List<CartModel> get cartList =>
+      products?.map((product) {
+        return CartModel(
+          id: product.id,
+          count: product.quantity?.toInt() ?? 0,
+          product: product,
+        );
+      }).toList() ??
+      [];
 }
-
-
-
 
 // import 'package:marchant/models/product_model.dart';
 // import 'package:marchant/models/cart_model.dart';

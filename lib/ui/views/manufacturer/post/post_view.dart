@@ -11,7 +11,7 @@ import '../../widgets/custome_app_bar.dart';
 import 'post_viewmodel.dart';
 
 class PostView extends StatelessWidget {
-  const PostView({Key? key}) : super(key: key);
+  const PostView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,27 +30,30 @@ class PostView extends StatelessWidget {
                     child: Column(
                       children: [
                         verticalSpaceMiddle,
-                        Container(
-                          padding: const EdgeInsets.symmetric(vertical: 16.0),
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: kcVeryLightGrey,
-                          ),
-                          child: const Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                FontAwesomeIcons.plus,
-                                color: kcPrimaryColor,
-                              ),
-                              verticalSpaceSmall,
-                              Text(
-                                'Add Pictures',
-                                style: AppTextStyle.h4Normal,
-                              )
-                            ],
+                        GestureDetector(
+                          onTap: viewModel.onPictureAdd,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(vertical: 16.0),
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: kcVeryLightGrey,
+                            ),
+                            child: const Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  FontAwesomeIcons.plus,
+                                  color: kcPrimaryColor,
+                                ),
+                                verticalSpaceSmall,
+                                Text(
+                                  'Add Pictures',
+                                  style: AppTextStyle.h4Normal,
+                                )
+                              ],
+                            ),
                           ),
                         ),
                         verticalSpaceMiddle,
@@ -68,17 +71,18 @@ class PostView extends StatelessWidget {
                             value: viewModel.selectedCategory,
                             hint: const Text('Choose category'),
                             onChanged: viewModel.onCategoryChanged,
-                            items: viewModel.topCategories.keys
-                                .map((String key) {
-                                  return DropdownMenuItem<String>(
-                                    value: key,
-                                    child: Text(viewModel.topCategories[key]?.name ?? ''),
-                                  );
-                                })
-                                .toList(),
+                            items:
+                                viewModel.topCategories.keys.map((String key) {
+                              return DropdownMenuItem<String>(
+                                value: key,
+                                child: Text(
+                                    viewModel.topCategories[key]?.name ?? ''),
+                              );
+                            }).toList(),
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
-                              contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                              contentPadding:
+                                  EdgeInsets.symmetric(horizontal: 10),
                             ),
                           ),
                         ),
@@ -92,15 +96,15 @@ class PostView extends StatelessWidget {
                               onChanged: viewModel.onSubCategoryChanged,
                               items: viewModel.subCategories
                                   .map((String subCategory) {
-                                    return DropdownMenuItem<String>(
-                                      value: subCategory,
-                                      child: Text(subCategory),
-                                    );
-                                  })
-                                  .toList(),
+                                return DropdownMenuItem<String>(
+                                  value: subCategory,
+                                  child: Text(subCategory),
+                                );
+                              }).toList(),
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
-                                contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                                contentPadding:
+                                    EdgeInsets.symmetric(horizontal: 10),
                               ),
                             ),
                           ),
@@ -114,15 +118,15 @@ class PostView extends StatelessWidget {
                               onChanged: viewModel.onSubSubCategoryChanged,
                               items: viewModel.subSubCategories
                                   .map((String subSubCategory) {
-                                    return DropdownMenuItem<String>(
-                                      value: subSubCategory,
-                                      child: Text(subSubCategory),
-                                    );
-                                  })
-                                  .toList(),
+                                return DropdownMenuItem<String>(
+                                  value: subSubCategory,
+                                  child: Text(subSubCategory),
+                                );
+                              }).toList(),
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
-                                contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                                contentPadding:
+                                    EdgeInsets.symmetric(horizontal: 10),
                               ),
                             ),
                           ),
@@ -192,6 +196,7 @@ class PostView extends StatelessWidget {
                           text: 'Submit',
                           onTap: viewModel.onPostProduct,
                           width: double.infinity,
+                          loading: viewModel.isBusy,
                         ),
                         verticalSpaceLarge,
                       ],

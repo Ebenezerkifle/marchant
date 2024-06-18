@@ -14,14 +14,12 @@ class ProductApiCallService {
     return 'your_token';
   }
 
- 
-
   // Get products
   Future<Map<String, ProductModel>> getProducts() async {
     // print('******************************************Birhanu********************');
     final String categoryId =
         _userService.user?.CategoryId ?? '6669f80b707babd982746603';
-    
+
     String token = await _getToken(); // Get the token
 
     var response = await ApiCallService.getCall(
@@ -41,7 +39,7 @@ class ProductApiCallService {
       // print('Subcategories: $subCategories');
       for (var ele in productData) {
         ProductModel c = ProductModel.fromMap(ele);
-        
+
         products[c.id ?? ''] = c;
         //}
       }
@@ -54,14 +52,10 @@ class ProductApiCallService {
     return products;
   }
 
-
-
-
-
   // Get sub products
   Future<Map<String, ProductModel>> getSubProducts(categoryId) async {
     // print('******************************************Birhanu********************')
-    
+
     String token = await _getToken(); // Get the token
 
     var response = await ApiCallService.getCall(
@@ -81,7 +75,7 @@ class ProductApiCallService {
       // print('Subcategories: $subCategories');
       for (var ele in productData) {
         ProductModel c = ProductModel.fromMap(ele);
-        
+
         subProducts[c.id ?? ''] = c;
         //}
       }

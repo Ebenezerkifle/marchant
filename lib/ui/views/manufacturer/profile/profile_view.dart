@@ -79,7 +79,8 @@ class ManuProfileView extends StackedView<ManuProfileViewModel> {
     );
   }
 
-  Widget? _getTrailingWidget(SettingOptions setting, ManuProfileViewModel viewModel) {
+  Widget? _getTrailingWidget(
+      SettingOptions setting, ManuProfileViewModel viewModel) {
     switch (setting) {
       case SettingOptions.shortCode:
         return Text(
@@ -92,5 +93,6 @@ class ManuProfileView extends StackedView<ManuProfileViewModel> {
   }
 
   @override
-  ManuProfileViewModel viewModelBuilder(BuildContext context) => ManuProfileViewModel();
+  ManuProfileViewModel viewModelBuilder(BuildContext context) =>
+      ManuProfileViewModel();
 }

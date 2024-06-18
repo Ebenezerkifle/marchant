@@ -146,79 +146,117 @@ class HomeView extends StackedView<HomeViewModel> {
             ),
             verticalSpaceSmall,
             Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: middleSize),
-                  child: Column(
-                    children: [
-                      // Horizontal ListView to include CustomGridWidget and CategoryWidget
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: [
-                            CustomGrideWidget(
-                              column: 4,
-                              row: 3,
-                              widgets: viewModel.categories.entries
-                                  .take(24) // Take only the first 24 items
-                                  .map(
-                                    (e) => Padding(
-                                      padding: const EdgeInsets.only(right: smallSize),
-                                      child: CircularCardWidget(
-                                        title: truncateTitle(e.value.name ?? ''),
-                                        image: 'assets/images/category.jpg',
-                                        onTap: () => viewModel.navigateToSubCategory(e.key),
-                                      ),
+              child: RefreshIndicator(
+                key: viewModel.refreshIndicatorKey,
+                displacement: 50,
+                color: Colors.white,
+                backgroundColor: kcPrimaryColor,
+                onRefresh: viewModel.refresh,
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: middleSize),
+                    child: Column(
+                      children: [
+                        // Horizontal ListView to include CustomGridWidget and CategoryWidget
+                        viewModel.categories.isEmpty
+                            ? SizedBox(
+                                height: screenHeight(context) * .3,
+                                width: double.infinity,
+                                child: const Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    CircularProgressIndicator(),
+                                  ],
+                                ),
+                              )
+                            : SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: [
+                                    CustomGrideWidget(
+                                      column: 4,
+                                      row: 3,
+                                      widgets: viewModel.categories.entries
+                                          .take(
+                                              24) // Take only the first 24 items
+                                          .map(
+                                            (e) => Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: smallSize),
+                                              child: CircularCardWidget(
+                                                title: truncateTitle(
+                                                    e.value.name ?? ''),
+                                                image:
+                                                    'assets/images/category.jpg',
+                                                onTap: () => viewModel
+                                                    .navigateToSubCategory(
+                                                        e.key),
+                                              ),
+                                            ),
+                                          )
+                                          .toList(),
                                     ),
-                                  )
-                                  .toList(),
-                            ),
-                            if (viewModel.categories.length > 24)
-                              Padding(
-                                padding: const EdgeInsets.only(left: smallSize),
-                                child: CategoryWidget(
-                                  name: 'more',
-                                  selected: true,
-                                  onTap: viewModel.onMoreCategory,
-                                  roundness: 5,
-                                  hPadding: smallSize,
-                                  icon: const Icon(
-                                    FontAwesomeIcons.ellipsisVertical,
-                                    color: kcWhite,
-                                  ),
+                                    if (viewModel.categories.length > 24)
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: smallSize),
+                                        child: CategoryWidget(
+                                          name: 'more',
+                                          selected: true,
+                                          onTap: viewModel.onMoreCategory,
+                                          roundness: 5,
+                                          hPadding: smallSize,
+                                          icon: const Icon(
+                                            FontAwesomeIcons.ellipsisVertical,
+                                            color: kcWhite,
+                                          ),
+                                        ),
+                                      ),
+                                  ],
                                 ),
                               ),
-                          ],
+                        verticalSpaceMedium,
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: middleSize),
+                          child:
+                              Text('Our Products', style: AppTextStyle.h4Bold),
                         ),
-                      ),
-                      verticalSpaceMedium,
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: middleSize),
-                        child: Text(
-                          'Our Products',
-                          style: AppTextStyle.h4Bold,
-                        ),
-                      ),
-                      CustomeGrideWidget(
-                        widgets: viewModel.products.entries
-                            .map(
-                              (e) => CustomeCardWidget(
-                                size: screenWidth(context) * .38,
-                                onTap: () => viewModel.onItemSelected(e.value),
-                                title: e.value.productName ?? '',
-                                details: e.value.details ?? [],
-                                detailLimit: 3,
-                                image: e.value.productImage?.first ?? '',
-                                widget: Text(
-                                  '${e.value.salesPrice} ETB',
-                                  style: AppTextStyle.h4Bold,
+                        viewModel.products.isEmpty
+                            ? SizedBox(
+                                height: screenHeight(context) * .4,
+                                width: double.infinity,
+                                child: const Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    CircularProgressIndicator(),
+                                  ],
                                 ),
+                              )
+                            : CustomeGrideWidget(
+                                widgets: viewModel.products.entries
+                                    .map(
+                                      (e) => CustomeCardWidget(
+                                        size: screenWidth(context) * .38,
+                                        onTap: () =>
+                                            viewModel.onItemSelected(e.value),
+                                        title: e.value.productName ?? '',
+                                        details: e.value.details ?? [],
+                                        detailLimit: 3,
+                                        image:
+                                            e.value.productImage?.first ?? '',
+                                        widget: Text(
+                                          '${e.value.salesPrice} ETB',
+                                          style: AppTextStyle.h4Bold,
+                                        ),
+                                      ),
+                                    )
+                                    .toList(),
                               ),
-                            )
-                            .toList(),
-                      ),
-                      verticalSpaceLarge,
-                    ],
+                        verticalSpaceLarge,
+                      ],
+                    ),
                   ),
                 ),
               ),

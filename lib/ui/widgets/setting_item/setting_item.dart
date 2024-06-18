@@ -76,7 +76,8 @@ class SettingItem extends StackedView<SettingItemModel> {
                 )
               ],
             ),
-            if (trailing != null) trailing!, // Include trailing widget if it exists
+            if (trailing != null)
+              trailing!, // Include trailing widget if it exists
             if (arrow)
               Icon(
                 FontAwesomeIcons.angleRight,

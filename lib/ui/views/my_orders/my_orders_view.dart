@@ -6,6 +6,8 @@ import 'package:marchant/ui/views/widgets/nothing_found.dart';
 import 'package:stacked/stacked.dart';
 import 'package:marchant/models/order_model.dart';
 
+import '../../common/app_colors.dart';
+
 class MyOrdersView extends StackedView<MyOrdersViewModel> {
   const MyOrdersView({super.key});
 
@@ -27,7 +29,8 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
             ],
             onTap: (index) {
               if (index == 1 && viewModel.deliveredOrders.isEmpty) {
-                viewModel.getDeliveredOrders(); // Fetch delivered orders when the delivered tab is tapped
+                viewModel
+                    .getDeliveredOrders(); // Fetch delivered orders when the delivered tab is tapped
               }
             },
           ),
@@ -48,15 +51,30 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
                             ],
                           ),
                         )
-                      : OrderList(
-                          orders: viewModel.pendingOrders.values.toList(),
+                      : RefreshIndicator(
+                          key: viewModel.refreshIndicatorKey,
+                          displacement: 50,
+                          color: Colors.white,
+                          backgroundColor: kcPrimaryColor,
+                          onRefresh: viewModel.refresh,
+                          child: OrderList(
+                            orders: viewModel.pendingOrders.values.toList(),
+                          ),
                         ),
                   viewModel.deliveredOrders.isEmpty
                       ? const Center(
-                          child: CircularProgressIndicator(), // Show a loading indicator while fetching delivered orders
+                          child:
+                              CircularProgressIndicator(), // Show a loading indicator while fetching delivered orders
                         )
-                      : OrderList(
-                          orders: viewModel.deliveredOrders.values.toList(),
+                      : RefreshIndicator(
+                          key: viewModel.refreshIndicatorKey,
+                          displacement: 50,
+                          color: Colors.white,
+                          backgroundColor: kcPrimaryColor,
+                          onRefresh: viewModel.refresh,
+                          child: OrderList(
+                            orders: viewModel.deliveredOrders.values.toList(),
+                          ),
                         ),
                 ],
               ),

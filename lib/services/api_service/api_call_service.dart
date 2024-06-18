@@ -25,9 +25,7 @@ class ApiCallService {
 
   // post call
   static Future<Response> postCall(
-      String url, 
-      String token, 
-      Map<String, dynamic> body,
+      String url, String token, Map<String, dynamic> body,
       {required bool needToken}) async {
     needToken ? header[_auth] = 'Bearer $token' : null; //'Bearer $token'
     try {
@@ -44,10 +42,8 @@ class ApiCallService {
   }
 
   // get call
-  static Future<Response> getCall(
-    String url, 
-    String token,
-    {required bool needToken}) async {
+  static Future<Response> getCall(String url, String token,
+      {required bool needToken}) async {
     needToken ? header[_auth] = 'Bearer $token' : null; //'Bearer $token'
     try {
       Response response = await get(Uri.parse(url), headers: header).timeout(

@@ -2,6 +2,8 @@ import 'package:marchant/services/state_service/cart_state_service.dart';
 import 'package:marchant/services/state_service/enrollment_state_service.dart';
 import 'package:marchant/services/state_service/landing_state_servic.dart';
 import 'package:marchant/services/state_service/onboarding_state_service.dart';
+import 'package:marchant/services/state_service/orders_state_service.dart';
+import 'package:marchant/services/state_service/post_state_service.dart';
 import 'package:marchant/services/state_service/product_state_service.dart';
 import 'package:marchant/ui/bottom_sheets/notice/notice_sheet.dart';
 import 'package:marchant/ui/dialogs/info_alert/info_alert_dialog.dart';
@@ -28,6 +30,7 @@ import 'package:marchant/ui/views/sub_category/sub_category_view.dart';
 import 'package:marchant/ui/views/company_profile/company_profile_view.dart';
 import 'package:marchant/services/state_service/user_service.dart';
 
+import 'package:marchant/ui/dialogs/file_view/file_view_dialog.dart';
 // @stacked-import
 
 @StackedApp(
@@ -61,6 +64,8 @@ import 'package:marchant/services/state_service/user_service.dart';
     LazySingleton(classType: LandingStateService),
     LazySingleton(classType: UserService),
     LazySingleton(classType: EnrollmentStateService),
+    LazySingleton(classType: PostStateService),
+    LazySingleton(classType: OrderStateService),
 // @stacked-service
   ],
   bottomsheets: [
@@ -71,7 +76,8 @@ import 'package:marchant/services/state_service/user_service.dart';
   ],
   dialogs: [
     StackedDialog(classType: InfoAlertDialog),
-    // @stacked-dialog
+    StackedDialog(classType: FileViewDialog),
+// @stacked-dialog
   ],
 )
 class App {}

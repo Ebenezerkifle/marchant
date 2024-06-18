@@ -5,8 +5,6 @@ import 'package:marchant/services/api_service/authentication.dart';
 import 'package:marchant/services/api_service/category_api_service.dart';
 import 'package:stacked/stacked.dart';
 
-
-
 class EnrollmentStateService with ListenableServiceMixin {
   EnrollmentStateService() {
     listenToReactiveValues([_userModel, _topCategories]);

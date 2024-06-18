@@ -18,12 +18,8 @@ class CategoryListViewModel extends ReactiveViewModel {
         .subCategoryView); // Navigate to SubcategoryPage using the generated Routes class
   }
 
-
-void navigateToSubCategory(String categoryId) {
+  void navigateToSubCategory(String categoryId) {
     _navigation.navigateToSubCategoryView(categoryValue: categoryId);
     // );
   }
-
-
-
 }

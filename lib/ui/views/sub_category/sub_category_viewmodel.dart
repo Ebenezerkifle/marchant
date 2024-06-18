@@ -126,5 +126,4 @@ class SubCategoryViewModel extends ReactiveViewModel {
   void changeUserRole() {
     // Your logic for changing user role
   }
-  
 }

@@ -44,7 +44,7 @@ class CartViewModel extends ReactiveViewModel {
     SnackBarService.showSnackBar(content: 'Successfully cleared.');
   }
 
- onPlaceOrder() async {
+  onPlaceOrder() async {
     setBusy(true);
     try {
       await _cartService.placeOrder();
@@ -68,10 +68,9 @@ class CartViewModel extends ReactiveViewModel {
   // }
 
   getImage(CartModel cart) {
-    return (cart.product!.productImage != null && cart.product!.productImage!.isNotEmpty)
+    return (cart.product!.productImage != null &&
+            cart.product!.productImage!.isNotEmpty)
         ? cart.product!.productImage!.first
         : '';
   }
 }
-
-

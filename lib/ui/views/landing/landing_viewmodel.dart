@@ -38,7 +38,6 @@ class LandingViewModel extends IndexTrackingViewModel {
   Map<String, CartModel> get cartItems => _cartState.cartItems;
   bool get retailor => _userService.user?.role == "Retailer";
 
-
   List<Widget> get manufacturorViews => const [
         ManuHomeView(),
         PostView(),

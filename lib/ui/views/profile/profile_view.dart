@@ -79,7 +79,8 @@ class ProfileView extends StackedView<ProfileViewModel> {
     );
   }
 
-  Widget? _getTrailingWidget(SettingOptions setting, ProfileViewModel viewModel) {
+  Widget? _getTrailingWidget(
+      SettingOptions setting, ProfileViewModel viewModel) {
     switch (setting) {
       case SettingOptions.shortCode:
         return Text(

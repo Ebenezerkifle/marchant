@@ -9,9 +9,6 @@
 //   CartModel({this.id, this.product, this.count, this.totalPrice});
 // }
 
-
-
-
 import 'package:marchant/models/product_model.dart';
 
 // class CartModel {
@@ -31,9 +28,6 @@ import 'package:marchant/models/product_model.dart';
 //     };
 //   }
 // }
-
-
-
 
 class CartModel {
   String? id;

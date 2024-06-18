@@ -49,7 +49,7 @@ class ManuProfileViewModel extends BaseViewModel {
         _navigation.clearStackAndShow(Routes.loginView);
         break;
       case SettingOptions.credit:
-        // TODO: Handle this case.
+      // TODO: Handle this case.
     }
   }
 }

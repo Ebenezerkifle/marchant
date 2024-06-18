@@ -1,7 +1,6 @@
 import 'package:marchant/enums/user_role.dart';
 import 'package:stacked/stacked.dart';
 
-
 class LandingStateService with ListenableServiceMixin {
   LandingStateService() {
     listenToReactiveValues([_userRole, _currentIndex]);

@@ -95,6 +95,7 @@ class ProductStateService with ListenableServiceMixin {
     _subProducts.value.clear();
     _subProducts.value
         .addAll(await ProductApiCallService().getSubProducts(categoryId));
+    print(_subProducts.value.length);
     notifyListeners();
   }
 

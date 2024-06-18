@@ -23,6 +23,14 @@ class HomeViewModel extends ReactiveViewModel {
   Map<String, Category> get categories => _productState.categories;
   Map<String, ProductModel> get products => _productState.products;
 
+  final GlobalKey<RefreshIndicatorState> refreshIndicatorKey =
+      GlobalKey<RefreshIndicatorState>();
+
+  Future<void> refresh() async {
+    _productState.getProducts();
+    _productState.getCategories();
+  }
+
   // Method to navigate to SubCategoryView
   void navigateToSubCategory(String categoryId) {
     _navigation.navigateToSubCategoryView(categoryValue: categoryId);
@@ -53,5 +61,3 @@ class HomeViewModel extends ReactiveViewModel {
   //   // changing user role
   // }
 }
-
-
