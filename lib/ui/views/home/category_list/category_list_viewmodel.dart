@@ -5,7 +5,7 @@ import 'package:marchant/services/state_service/product_state_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class CategoryListViewModel extends BaseViewModel {
+class CategoryListViewModel extends ReactiveViewModel {
   final _productState = locator<ProductStateService>();
   final _navigation = locator<NavigationService>();
   Map<String, Category> get allCategories => _productState.categories;
@@ -17,4 +17,13 @@ class CategoryListViewModel extends BaseViewModel {
     _navigation.navigateTo(Routes
         .subCategoryView); // Navigate to SubcategoryPage using the generated Routes class
   }
+
+
+void navigateToSubCategory(String categoryId) {
+    _navigation.navigateToSubCategoryView(categoryValue: categoryId);
+    // );
+  }
+
+
+
 }

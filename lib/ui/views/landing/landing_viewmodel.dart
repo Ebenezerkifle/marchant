@@ -4,6 +4,7 @@ import 'package:marchant/services/state_service/landing_state_servic.dart';
 import 'package:marchant/services/state_service/user_service.dart';
 import 'package:marchant/ui/views/manufacturer/manu_home/manu_home_view.dart';
 import 'package:marchant/ui/views/manufacturer/post/post_view.dart';
+import 'package:marchant/ui/views/manufacturer/profile/profile_view.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../app/app.locator.dart';
@@ -41,7 +42,7 @@ class LandingViewModel extends IndexTrackingViewModel {
   List<Widget> get manufacturorViews => const [
         ManuHomeView(),
         PostView(),
-        ProfileView(),
+        ManuProfileView(),
       ];
   List<BottomBarItem> get manufacturorerItems => [
         const BottomBarItem(title: 'Home', icon: FontAwesomeIcons.house),

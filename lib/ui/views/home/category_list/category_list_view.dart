@@ -38,7 +38,7 @@ class CategoryListView extends StackedView<CategoryListViewModel> {
                           title: e.value.name ?? "",
                           noImage: true,
                           center: true,
-                          onTap: () => viewModel.onSelected(e.key),
+                          onTap: () => viewModel.navigateToSubCategory(e.key),
                           dark: viewModel.selected.containsKey(e.key),
                           stackWidget: Positioned(
                               right: smallSize,

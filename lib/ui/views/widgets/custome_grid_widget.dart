@@ -1,5 +1,3 @@
-import 'dart:math';
-
 
 import 'package:flutter/material.dart';
 import 'package:marchant/ui/common/ui_helpers.dart';
@@ -42,50 +40,6 @@ class CustomeGrideWidget extends StatelessWidget {
 }
 
 
-// class CustomGrideWidget extends StatelessWidget {
-//   const CustomGrideWidget({
-//     Key? key,
-//     required this.widgets,
-//     this.column = 2,
-//     this.width,
-//   }) : super(key: key);
-
-//   final List<Widget> widgets;
-//   final int column;
-//   final double? width;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     if (widgets.isEmpty || column <= 0) {
-//       return Container(); // Return an empty container if there are no widgets or invalid column value
-//     }
-
-//     int row = max((widgets.length / column).ceil(), 1); // Ensure at least one row
-
-//     return SingleChildScrollView(
-//       scrollDirection: Axis.horizontal,
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: List.generate(row, (index) {
-//           int startIndex = index * column;
-//           int endIndex = min(startIndex + column, widgets.length);
-//           return Padding(
-//             padding: const EdgeInsets.symmetric(vertical: tinySize),
-//             child: Row(
-//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//               children: List.generate(endIndex - startIndex, (index2) {
-//                 return Padding(
-//                   padding: const EdgeInsets.only(right: smallSize),
-//                   child: widgets[startIndex + index2],
-//                 );
-//               }),
-//             ),
-//           );
-//         }),
-//       ),
-//     );
-//   }
-// }
 
 class CustomGrideWidget extends StatelessWidget {
   const CustomGrideWidget({
