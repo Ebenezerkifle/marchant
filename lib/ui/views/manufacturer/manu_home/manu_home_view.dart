@@ -7,7 +7,7 @@ import 'package:stacked/stacked.dart';
 import 'manu_home_viewmodel.dart';
 
 class ManuHomeView extends StackedView<ManuHomeViewModel> {
-  const ManuHomeView({Key? key}) : super(key: key);
+  const ManuHomeView({super.key});
 
   @override
   Widget builder(
