@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marchant/ui/common/app_colors.dart';
 import 'package:marchant/ui/common/app_text_style.dart';
 import 'package:marchant/ui/common/ui_helpers.dart';
+import 'package:marchant/ui/views/widgets/category_widget.dart';
 import 'package:marchant/ui/views/widgets/custome_app_bar.dart';
 import 'package:marchant/ui/views/widgets/custome_card_widget.dart';
 import 'package:marchant/ui/views/widgets/custome_grid_widget.dart';
@@ -113,7 +115,6 @@ import 'home_viewmodel.dart';
 //   if (title.length <= charLimit) return title;
 //   return '${title.substring(0, charLimit)}...';
 // }
-
 class HomeView extends StackedView<HomeViewModel> {
   const HomeView({super.key});
 
@@ -150,24 +151,45 @@ class HomeView extends StackedView<HomeViewModel> {
                   padding: const EdgeInsets.symmetric(horizontal: middleSize),
                   child: Column(
                     children: [
-                      CustomGrideWidget(
-                        column: 4,
-                        widgets: viewModel.categories.entries
-                            .take(12) // Take only the first 12 items
-                            .map(
-                              (e) => Padding(
-                                padding:
-                                    const EdgeInsets.only(right: smallSize),
-                                child: CircularCardWidget(
-                                  title: truncateTitle(e.value.name ?? ''),
-                                  image:
-                                      'assets/images/category.jpg', 
-                                  onTap: () =>
-                                      viewModel.navigateToSubCategory(e.key),
+                      // Horizontal ListView to include CustomGridWidget and CategoryWidget
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            CustomGrideWidget(
+                              column: 4,
+                              row: 3,
+                              widgets: viewModel.categories.entries
+                                  .take(24) // Take only the first 24 items
+                                  .map(
+                                    (e) => Padding(
+                                      padding: const EdgeInsets.only(right: smallSize),
+                                      child: CircularCardWidget(
+                                        title: truncateTitle(e.value.name ?? ''),
+                                        image: 'assets/images/category.jpg',
+                                        onTap: () => viewModel.navigateToSubCategory(e.key),
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
+                            if (viewModel.categories.length > 24)
+                              Padding(
+                                padding: const EdgeInsets.only(left: smallSize),
+                                child: CategoryWidget(
+                                  name: 'more',
+                                  selected: true,
+                                  onTap: viewModel.onMoreCategory,
+                                  roundness: 5,
+                                  hPadding: smallSize,
+                                  icon: const Icon(
+                                    FontAwesomeIcons.ellipsisVertical,
+                                    color: kcWhite,
+                                  ),
                                 ),
                               ),
-                            )
-                            .toList(),
+                          ],
+                        ),
                       ),
                       verticalSpaceMedium,
                       const Padding(
