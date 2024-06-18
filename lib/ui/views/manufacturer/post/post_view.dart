@@ -37,10 +37,10 @@ class PostView extends StatelessWidget {
                             borderRadius: BorderRadius.circular(5),
                             color: kcVeryLightGrey,
                           ),
-                          child: Column(
+                          child: const Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
+                            children: [
                               Icon(
                                 FontAwesomeIcons.plus,
                                 color: kcPrimaryColor,
