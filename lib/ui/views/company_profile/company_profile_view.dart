@@ -68,7 +68,7 @@ class CompanyProfileView extends StackedView<CompanyProfileViewModel> {
                   widgets: viewModel.products.entries
                       .map(
                         (e) => CustomeCardWidget(
-                          size: screenWidth(context) * .42,
+                          size: screenWidth(context) * .38,
                           title: e.value.productName ?? '',
                           details: e.value.details ?? [],
                           detailLimit: 3,

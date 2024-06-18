@@ -99,7 +99,7 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                           ),
                           Flexible(
                             child: Text(
-                              product.manufacturerId ?? 'Unknown Provider',
+                              product.companyName ?? 'Unknown Provider',
                               style: AppTextStyle.h4Normal,
                             ),
                           ),
