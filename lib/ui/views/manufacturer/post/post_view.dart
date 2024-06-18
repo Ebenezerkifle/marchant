@@ -69,15 +69,15 @@ class PostView extends StackedView<PostViewModel> {
                       title: 'Top Category',
                       widget: DropdownButtonFormField<String>(
                         value: viewModel.selectedCategory,
-                        hint: Text('Choose category'),
+                        hint: const Text('Choose category'),
                         onChanged: viewModel.onCategoryChanged,
-                        items: viewModel.categories.map((String category) {
+                        items: viewModel.topCategories.keys.map((String category) {
                           return DropdownMenuItem<String>(
                             value: category,
                             child: Text(category),
                           );
                         }).toList(),
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.symmetric(horizontal: 10),
                         ),
@@ -88,7 +88,7 @@ class PostView extends StackedView<PostViewModel> {
                       title: 'Sub Category',
                       widget: DropdownButtonFormField<String>(
                         value: viewModel.selectedSubCategory,
-                        hint: Text('Choose sub category'),
+                        hint: const Text('Choose sub category'),
                         onChanged: viewModel.onSubCategoryChanged,
                         items: viewModel.subCategories.map((String subCategory) {
                           return DropdownMenuItem<String>(
@@ -96,7 +96,7 @@ class PostView extends StackedView<PostViewModel> {
                             child: Text(subCategory),
                           );
                         }).toList(),
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.symmetric(horizontal: 10),
                         ),
@@ -107,7 +107,7 @@ class PostView extends StackedView<PostViewModel> {
                       title: 'Sub Sub Category',
                       widget: DropdownButtonFormField<String>(
                         value: viewModel.selectedSubSubCategory,
-                        hint: Text('Choose sub sub category'),
+                        hint: const Text('Choose sub sub category'),
                         onChanged: viewModel.onSubSubCategoryChanged,
                         items: viewModel.subSubCategories.map((String subSubCategory) {
                           return DropdownMenuItem<String>(
@@ -115,7 +115,7 @@ class PostView extends StackedView<PostViewModel> {
                             child: Text(subSubCategory),
                           );
                         }).toList(),
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.symmetric(horizontal: 10),
                         ),
@@ -159,7 +159,6 @@ class PostView extends StackedView<PostViewModel> {
                       ),
                     ),
                     verticalSpaceMiddle,
-                    
                     CustomeFormField(
                       title: 'Company Name',
                       widget: InputField(
@@ -186,9 +185,7 @@ class PostView extends StackedView<PostViewModel> {
                     verticalSpaceLarge,
                     CustomeButton(
                       text: 'Submit',
-                      onTap: () {
-                        // Handle form submission here
-                      },
+                      onTap: viewModel.onPostProduct,
                       width: double.infinity,
                     ),
                     verticalSpaceLarge,
@@ -205,6 +202,5 @@ class PostView extends StackedView<PostViewModel> {
   @override
   PostViewModel viewModelBuilder(
     BuildContext context,
-  ) =>
-      PostViewModel();
+  ) => PostViewModel();
 }
