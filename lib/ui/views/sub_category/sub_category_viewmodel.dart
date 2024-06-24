@@ -98,7 +98,7 @@ class SubCategoryViewModel extends ReactiveViewModel {
     final subCategories = categories[categoryId]?.subcategory ?? [];
     // print(categories[categoryId]);
     // print(categories[categoryId]?.toMap());
-    print(subCategories);
+    // print(subCategories);
     debugPrint('Fetching subcategories for categoryId: $categoryId');
     return subCategories;
   }
@@ -121,9 +121,5 @@ class SubCategoryViewModel extends ReactiveViewModel {
     //   variant: BottomSheetType.filter,
     //   title: 'Filter',
     // );
-  }
-
-  void changeUserRole() {
-    // Your logic for changing user role
   }
 }

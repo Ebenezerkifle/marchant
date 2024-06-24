@@ -116,7 +116,7 @@ class SignupViewModel extends FormViewModel {
   onNext() {
     if (_formKey.currentState!.validate() && _formError.isEmpty) {
       _enrollmentService.setUserModel(
-        phoneNumber: phoneNumController.text,
+        phoneNumber: phoneNumController.text.substring(1),
         password: passController.text,
       );
       _navigation.navigateToChooseCatagoryView();

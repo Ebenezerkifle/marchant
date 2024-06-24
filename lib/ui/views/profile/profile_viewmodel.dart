@@ -1,4 +1,6 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:marchant/services/state_service/orders_state_service.dart';
+import 'package:marchant/services/state_service/product_state_service.dart';
 import 'package:marchant/services/state_service/user_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -11,6 +13,8 @@ import '../../../services/storage_service.dart/session.dart';
 class ProfileViewModel extends BaseViewModel {
   final _navigation = locator<NavigationService>();
   final _userService = locator<UserService>();
+   final _productService = locator<ProductStateService>();
+   final _orderService = locator<OrderStateService>();
 
   String get image => 'assets/images/user.png';
 
@@ -19,12 +23,8 @@ class ProfileViewModel extends BaseViewModel {
       title: 'My detail',
       icon: FontAwesomeIcons.user,
     ),
-    // SettingOptions.payement: SettingModel(
-    //   title: 'Payment',
-    //   icon: FontAwesomeIcons.wallet,
-    // ),
     SettingOptions.shortCode: SettingModel(
-      title: 'Short code',
+      title: '889',
       icon: FontAwesomeIcons.phone,
     ),
     SettingOptions.credit: SettingModel(
@@ -47,6 +47,10 @@ class ProfileViewModel extends BaseViewModel {
 
   num get credit => _userService.user?.creditAvailable ?? 0;
 
+  // String get fullName => _userService.user?.fullName?? '';
+
+  // String get profilePhoneNumber => _userService.user?.phoneNumber?? '';
+
   tapHandler(SettingOptions setting) {
     switch (setting) {
       case SettingOptions.shortCode:
@@ -61,6 +65,10 @@ class ProfileViewModel extends BaseViewModel {
         break;
       case SettingOptions.logout:
         SessionService.clearAll();
+      //  _landingService.clearState();
+       _userService.resetState();
+       _productService.clearState();
+       _orderService.clearState();
         _navigation.clearStackAndShow(Routes.loginView);
         break;
     }

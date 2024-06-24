@@ -26,8 +26,6 @@ import 'package:marchant/ui/views/my_orders/my_orders_view.dart' as _i12;
 import 'package:marchant/ui/views/onboarding/login/login_view.dart' as _i4;
 import 'package:marchant/ui/views/onboarding/signup/choose_catagory/choose_catagory_view.dart'
     as _i7;
-import 'package:marchant/ui/views/onboarding/signup/signup_final/signup_final_view.dart'
-    as _i6;
 import 'package:marchant/ui/views/onboarding/signup/signup_view.dart' as _i5;
 import 'package:marchant/ui/views/profile/profile_view.dart' as _i14;
 import 'package:marchant/ui/views/startup/startup_view.dart' as _i3;
@@ -109,10 +107,7 @@ class StackedRouter extends _i1.RouterBase {
       Routes.signupView,
       page: _i5.SignupView,
     ),
-    _i1.RouteDef(
-      Routes.signupFinalView,
-      page: _i6.SignupFinalView,
-    ),
+   
     _i1.RouteDef(
       Routes.chooseCatagoryView,
       page: _i7.ChooseCatagoryView,
@@ -188,12 +183,7 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
-    _i6.SignupFinalView: (data) {
-      return _i19.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i6.SignupFinalView(),
-        settings: data,
-      );
-    },
+   
     _i7.ChooseCatagoryView: (data) {
       return _i19.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.ChooseCatagoryView(),

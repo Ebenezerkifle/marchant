@@ -70,8 +70,8 @@ class PostViewModel extends ReactiveViewModel {
   TextEditingController addressController = TextEditingController();
   TextEditingController tinController = TextEditingController();
 
-  List<String> subCategories = [];
-  List<String> subSubCategories = [];
+  List<Category> subCategories = [];
+  List<Category> subSubCategories = [];
 
   String? selectedCategory;
   String? selectedSubCategory;
@@ -91,17 +91,15 @@ class PostViewModel extends ReactiveViewModel {
 
     // Populate sub-categories based on selected category
     if (newValue != null) {
-      subCategories = topCategories[newValue]
-              ?.subcategory
-              ?.map((subCat) => subCat.name ?? "")
-              .toList() ??
-          [];
+      subCategories = topCategories[newValue]?.subcategory ?? [];
     }
 
     notifyListeners();
   }
 
   void onSubCategoryChanged(String? newValue) {
+        print(newValue);
+
     selectedSubCategory = newValue;
     // Reset sub-sub-categories when sub-category changes
     selectedSubSubCategory = null;
@@ -109,20 +107,16 @@ class PostViewModel extends ReactiveViewModel {
 
     // Populate sub-sub-categories based on selected sub-category
     if (newValue != null && selectedCategory != null) {
-      subSubCategories = topCategories[selectedCategory]
-              ?.subcategory
-              ?.firstWhere((subCat) => subCat.name == newValue,
-                  orElse: () => Category(subcategory: []))
-              .subcategory
-              ?.map((subSubCat) => subSubCat.name ?? "")
-              .toList() ??
-          [];
+      subSubCategories = subCategories
+          .firstWhere((subCat) => subCat.id == newValue, orElse: () => Category(subcategory: []))
+          .subcategory ?? [];
     }
 
     notifyListeners();
   }
 
   void onSubSubCategoryChanged(String? newValue) {
+    print(newValue);
     selectedSubSubCategory = newValue;
     notifyListeners();
   }
@@ -135,11 +129,6 @@ class PostViewModel extends ReactiveViewModel {
         .split(',')
         .map((detail) => detail.trim())
         .toList();
-    // Assuming images are collected from another UI component or field
-    // For demonstration, images can be added similarly as details
-    // images = []; // Update with actual implementation
-
-    // Example of how to access collected data
     print('Details: $details');
     print('Images: $images');
 
@@ -151,7 +140,6 @@ class PostViewModel extends ReactiveViewModel {
         description: descriptionController.text,
         address: addressController.text,
         quantity: num.parse(quantityController.text),
-        TIN: tinController.text,
         categoryId: selectedCategory,
         subCategoryId: selectedSubCategory,
         subSubCategoryId: selectedSubSubCategory,

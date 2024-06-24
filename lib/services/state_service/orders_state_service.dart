@@ -92,4 +92,11 @@ class OrderStateService with ListenableServiceMixin {
       notifyListeners();
     }
   }
+
+   void clearState() {
+    _orders.value.clear();
+    _deliveredOrders.value.clear();
+    _isLoading.value = false;
+    notifyListeners();
+  }
 }

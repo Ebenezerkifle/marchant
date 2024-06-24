@@ -1,5 +1,4 @@
 import 'package:marchant/app/app.locator.dart';
-import 'package:marchant/enums/user_role.dart';
 import 'package:marchant/models/product_model.dart';
 import 'package:marchant/services/state_service/landing_state_servic.dart';
 import 'package:marchant/services/state_service/post_state_service.dart';
@@ -22,11 +21,6 @@ class ManuHomeViewModel extends ReactiveViewModel {
     setBusy(true);
     _postService.getProducts();
     setBusy(false);
-  }
-
-  changeUserRole() {
-    _landingService.changeUserRole(UserRole.retailor);
-    notifyListeners();
   }
 
   onPostProduct() {

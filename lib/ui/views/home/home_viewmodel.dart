@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/app/app.router.dart';
 import 'package:marchant/models/category_model.dart';
@@ -12,6 +13,12 @@ class HomeViewModel extends ReactiveViewModel {
   final _navigation = locator<NavigationService>();
   final _productState = locator<ProductStateService>();
   final _cartState = locator<CartStateService>();
+
+  final IconData _moreIcon = FontAwesomeIcons.ellipsisVertical; 
+    IconData get moreIcon => _moreIcon;
+
+
+
 
   @override
   List<ListenableServiceMixin> get listenableServices =>

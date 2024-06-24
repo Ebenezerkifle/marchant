@@ -82,11 +82,6 @@ class ProfileView extends StackedView<ProfileViewModel> {
   Widget? _getTrailingWidget(
       SettingOptions setting, ProfileViewModel viewModel) {
     switch (setting) {
-      case SettingOptions.shortCode:
-        return Text(
-          "12345",
-          style: AppTextStyle.h3Bold.copyWith(color: Colors.green),
-        );
       case SettingOptions.credit:
         return Container(
           padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),

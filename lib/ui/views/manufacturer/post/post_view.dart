@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:marchant/models/category_model.dart';
 import 'package:marchant/ui/common/app_colors.dart';
 import 'package:marchant/ui/common/app_text_style.dart';
 import 'package:marchant/ui/common/ui_helpers.dart';
@@ -9,6 +10,7 @@ import 'package:marchant/ui/views/widgets/input_field.dart';
 import 'package:stacked/stacked.dart';
 import '../../widgets/custome_app_bar.dart';
 import 'post_viewmodel.dart';
+
 
 class PostView extends StatelessWidget {
   const PostView({super.key});
@@ -29,6 +31,7 @@ class PostView extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(
                       children: [
+
                         verticalSpaceMiddle,
                         GestureDetector(
                           onTap: viewModel.onPictureAdd,
@@ -64,29 +67,27 @@ class PostView extends StatelessWidget {
                             hint: 'Enter product name',
                           ),
                         ),
-                        verticalSpaceMiddle,
+                      verticalSpaceMiddle,
                         CustomeFormField(
                           title: 'Top Category',
                           widget: DropdownButtonFormField<String>(
                             value: viewModel.selectedCategory,
                             hint: const Text('Choose category'),
                             onChanged: viewModel.onCategoryChanged,
-                            items:
-                                viewModel.topCategories.keys.map((String key) {
+                            items: viewModel.topCategories.values.map((Category category) {
                               return DropdownMenuItem<String>(
-                                value: key,
-                                child: Text(
-                                    viewModel.topCategories[key]?.name ?? ''),
+                                value: category.id,
+                                child: Text(category.name ?? ''),
                               );
                             }).toList(),
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
-                              contentPadding:
-                                  EdgeInsets.symmetric(horizontal: 10),
+                              contentPadding: EdgeInsets.symmetric(horizontal: 10),
                             ),
                           ),
                         ),
-                        verticalSpaceMiddle,
+
+verticalSpaceMiddle,
                         if (viewModel.selectedCategory != null)
                           CustomeFormField(
                             title: 'Sub Category',
@@ -94,17 +95,15 @@ class PostView extends StatelessWidget {
                               value: viewModel.selectedSubCategory,
                               hint: const Text('Choose sub category'),
                               onChanged: viewModel.onSubCategoryChanged,
-                              items: viewModel.subCategories
-                                  .map((String subCategory) {
+                              items: viewModel.subCategories.map((Category subCategory) {
                                 return DropdownMenuItem<String>(
-                                  value: subCategory,
-                                  child: Text(subCategory),
+                                  value: subCategory.id,
+                                  child: Text(subCategory.name ?? ''),
                                 );
                               }).toList(),
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
-                                contentPadding:
-                                    EdgeInsets.symmetric(horizontal: 10),
+                                contentPadding: EdgeInsets.symmetric(horizontal: 10),
                               ),
                             ),
                           ),
@@ -116,17 +115,15 @@ class PostView extends StatelessWidget {
                               value: viewModel.selectedSubSubCategory,
                               hint: const Text('Choose sub sub category'),
                               onChanged: viewModel.onSubSubCategoryChanged,
-                              items: viewModel.subSubCategories
-                                  .map((String subSubCategory) {
+                              items: viewModel.subSubCategories.map((Category subSubCategory) {
                                 return DropdownMenuItem<String>(
-                                  value: subSubCategory,
-                                  child: Text(subSubCategory),
+                                  value: subSubCategory.id,
+                                  child: Text(subSubCategory.name ?? ''),
                                 );
                               }).toList(),
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
-                                contentPadding:
-                                    EdgeInsets.symmetric(horizontal: 10),
+                                contentPadding: EdgeInsets.symmetric(horizontal: 10),
                               ),
                             ),
                           ),
@@ -168,27 +165,12 @@ class PostView extends StatelessWidget {
                           ),
                         ),
                         verticalSpaceMiddle,
-                        CustomeFormField(
-                          title: 'Company Name',
-                          widget: InputField(
-                            controller: viewModel.companyNameController,
-                            hint: 'Enter company name',
-                          ),
-                        ),
-                        verticalSpaceMiddle,
-                        CustomeFormField(
+
+CustomeFormField(
                           title: 'Address',
                           widget: InputField(
                             controller: viewModel.addressController,
                             hint: 'Enter address',
-                          ),
-                        ),
-                        verticalSpaceMiddle,
-                        CustomeFormField(
-                          title: 'TIN',
-                          widget: InputField(
-                            controller: viewModel.tinController,
-                            hint: 'Enter TIN',
                           ),
                         ),
                         verticalSpaceLarge,
