@@ -17,9 +17,6 @@ class HomeViewModel extends ReactiveViewModel {
   final IconData _moreIcon = FontAwesomeIcons.ellipsisVertical; 
     IconData get moreIcon => _moreIcon;
 
-
-
-
   @override
   List<ListenableServiceMixin> get listenableServices =>
       [_productState, _cartState];

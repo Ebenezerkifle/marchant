@@ -21,75 +21,75 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
   bool _loading = false;
   bool get loading => _loading;
 
+  Map<String, Category> topCategories = {};
+  Map<String, String> selected = {};
+  String? _errorMessage;
+  String? get errorMessage => _errorMessage;
+
+  final Map<dynamic, String> _formError = {};
+  Map<dynamic, String> get formError => _formError;
+
+  final GlobalKey<RefreshIndicatorState> refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
+
   ChooseCategoryViewModel() {
     _init();
   }
 
   _init() async {
-    _loading = true;
-    notifyListeners();
+    await _loadCategories();
+  }
+
+  Future<void> _loadCategories() async {
+    setLoading(true);
     try {
       await _enrollmentService.getTopCategories();
+      topCategories = _enrollmentService.topCategories;
+      _errorMessage = null;
     } catch (e) {
       _errorMessage = 'Failed to load categories: $e';
-      // print(_errorMessage);
-    } finally {
-      _loading = false;
-      notifyListeners();
     }
+    setLoading(false);
+  }
+
+  Future<void> refresh() async {
+    await _loadCategories();
+  }
+
+  void setLoading(bool value) {
+    _loading = value;
+    notifyListeners();
   }
 
   @override
   List<ListenableServiceMixin> get listenableServices => [_enrollmentService];
 
-  Map<String, Category> get topCatagories => _enrollmentService.topCategories;
-  Map<String, String> selected = {};
-
-  final Map<dynamic, String> _formError = {};
-  Map<dynamic, String> get formError => _formError;
-
-  String? _errorMessage;
-  String? get errorMessage => _errorMessage;
-
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  GlobalKey<FormState> get formKey => _formKey;
-
-  onSelected(String key) {
+  void onSelected(String key) {
     selected.clear();
     selected[key] = key;
     notifyListeners();
   }
 
-  onBack() {
+  void onBack() {
     _navigation.back();
   }
 
-  void onSubmit() async {
+  Future<void> onSubmit() async {
     if (selected.isNotEmpty) {
       _enrollmentService.setUserModel(categoryId: selected.entries.first.key);
       setBusy(true);
 
       try {
         var response = await _enrollmentService.registerAuser();
-        // print('Response: ${response.statusCode} ${response.body}');
 
         if (response.statusCode == 201 || response.statusCode == 200) {
           var body = jsonDecode(response.body);
-          // print('Body: $body');
-
           var retailer = body['data']['retailer'];
           var token = body['token'];
-
-          // print('Retailer: $retailer');
-          // print('Token: $token');
 
           if (retailer != null && token != null) {
             var newUserData = UserModel.fromMap(retailer);
 
             _userService.setUserData(newUserData);
-            // print('User data after setting: ${_userService.user}');
-            // print(_userService.user?.CategoryId);
-            // print(_userService.user?.phoneNumber);
             SessionService.setString(SessionKey.token, token);
             _landingStateService.setIndex(0);
             _navigation.clearStackAndShow(Routes.landingView);
@@ -98,22 +98,9 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
             _errorMessage = _formError['response'];
           }
         } else {
-          // Handle other status codes
-          if (response.body.contains('{')) {
-            try {
-              var body = jsonDecode(response.body);
-              var message = body['message'];
-              _formError['response'] = message;
-            } catch (e) {
-              _formError['response'] = response.body.toString();
-            }
-          } else {
-            _formError['response'] = response.body.toString();
-          }
-          _errorMessage = _formError['response'];
+          _handleErrorResponse(response);
         }
       } catch (e) {
-        // print('Error: $e');
         _formError['response'] = 'An error occurred: $e';
         _errorMessage = _formError['response'];
       } finally {
@@ -121,5 +108,20 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
         notifyListeners();
       }
     }
+  }
+
+  void _handleErrorResponse(response) {
+    if (response.body.contains('{')) {
+      try {
+        var body = jsonDecode(response.body);
+        var message = body['message'];
+        _formError['response'] = message;
+      } catch (e) {
+        _formError['response'] = response.body.toString();
+      }
+    } else {
+      _formError['response'] = response.body.toString();
+    }
+    _errorMessage = _formError['response'];
   }
 }

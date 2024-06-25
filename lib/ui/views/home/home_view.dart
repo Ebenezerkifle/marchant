@@ -54,6 +54,7 @@ class HomeView extends StackedView<HomeViewModel> {
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(horizontal: middleSize),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Categories Section
                       viewModel.categories.isEmpty
@@ -64,45 +65,50 @@ class HomeView extends StackedView<HomeViewModel> {
                                 child: CircularProgressIndicator(),
                               ),
                             )
-                          : Wrap(
-                              spacing: smallSize,
-                              runSpacing: smallSize,
-                              children: [
-                                // Display the first 11 category cards
-                                 for (var i = 0; i < 11 && i < viewModel.categories.length; i++)
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.only(right: smallSize),
+                          : GridView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 4,
+                                mainAxisSpacing: smallSize,
+                                crossAxisSpacing: smallSize,
+                                childAspectRatio: 1,
+                              ),
+                              itemCount: viewModel.categories.length > 11
+                                  ? 12
+                                  : viewModel.categories.length,
+                              itemBuilder: (context, index) {
+                                if (index == 11) {
+                                  // "More" button with circular shape
+                                  return InkWell(
                                     child: CircularCardWidget(
-                                      title: truncateTitle(viewModel
-                                              .categories.entries
-                                              .elementAt(i)
-                                              .value
-                                              .name ??
-                                          ''),
-                                      image: viewModel.categories.entries.elementAt(i).value.image??
-                                       'assets/images/category.jpg',
-                                      onTap: () =>
-                                          viewModel.navigateToSubCategory(
-                                              viewModel.categories.entries
-                                                  .elementAt(i)
-                                                  .key),
+                                      title: 'More',
+                                      icon: viewModel.moreIcon,
+                                      onTap: viewModel.onMoreCategory,
                                     ),
-                                  ),
-
-                                // "More" button with circular shape
-                                if (viewModel.categories.length > 11)
-                                  InkWell(
-                                    child: CircularCardWidget(
-                                        title: 'More',
-                                        icon: viewModel.moreIcon,
-                                        onTap: viewModel.onMoreCategory),
-                                  ),
-                              ],
+                                  );
+                                }
+                                return CircularCardWidget(
+                                  title: viewModel
+                                          .categories.entries
+                                          .elementAt(index)
+                                          .value
+                                          .name ??
+                                      '',
+                                  image: viewModel.categories.entries
+                                          .elementAt(index)
+                                          .value
+                                          .image ??
+                                      'assets/images/category.jpg',
+                                  onTap: () => viewModel.navigateToSubCategory(
+                                      viewModel.categories.entries
+                                          .elementAt(index)
+                                          .key),
+                                );
+                              },
                             ),
-
                       verticalSpaceMedium,
-
                       // Our Products Section Title
                       const Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -110,7 +116,6 @@ class HomeView extends StackedView<HomeViewModel> {
                           Text('Our Products', style: AppTextStyle.h2Bold),
                         ],
                       ),
-
                       viewModel.products.isEmpty
                           ? SizedBox(
                               height: screenHeight(context) * .4,
@@ -155,7 +160,4 @@ class HomeView extends StackedView<HomeViewModel> {
   HomeViewModel viewModelBuilder(BuildContext context) => HomeViewModel();
 }
 
-String truncateTitle(String title, {int charLimit = 8}) {
-  if (title.length <= charLimit) return title;
-  return '${title.substring(0, charLimit)}...';
-}
+

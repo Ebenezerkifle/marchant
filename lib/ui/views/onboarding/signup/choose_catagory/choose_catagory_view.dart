@@ -87,49 +87,57 @@ class ChooseCatagoryView extends StackedView<ChooseCategoryViewModel> {
               ),
             Expanded(
               child: viewModel.loading
-                  ? Center(child: CircularProgressIndicator())
-                  : SingleChildScrollView(
-                      child: Padding(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: middleSize),
-                        child: Column(
-                          children: [
-                            verticalSpaceMiddle,
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: viewModel.topCatagories.entries
-                                  .map(
-                                    (e) => Padding(
-                                      padding: const EdgeInsets.only(
-                                          bottom: middleSize),
-                                      child: CustomeListTile(
-                                        title: e.value.name ?? '',
-                                        noPrice: true,
-                                        onTap: () =>
-                                            viewModel.onSelected(e.key),
-                                        height: 80,
-                                        center: true,
-                                        selected: viewModel.selected
-                                            .containsKey(e.key),
-                                        stackWidget: Positioned(
-                                          top: 40,
-                                          right: smallSize,
-                                          child: Icon(
-                                            viewModel.selected
-                                                    .containsKey(e.key)
-                                                ? FontAwesomeIcons
-                                                    .solidCircleDot
-                                                : FontAwesomeIcons.circleDot,
-                                            color: kcPrimaryColor,
+                  ? const Center(child: CircularProgressIndicator())
+                  : RefreshIndicator(
+                      key: viewModel.refreshIndicatorKey,
+                      displacement: 50,
+                      color: Colors.white,
+                      backgroundColor: kcPrimaryColor,
+                      onRefresh: viewModel.refresh,
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding:
+                              const EdgeInsets.symmetric(horizontal: middleSize),
+                          child: Column(
+                            children: [
+                              verticalSpaceMiddle,
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: viewModel.topCategories.entries
+                                    .map(
+                                      (e) => Padding(
+                                        padding: const EdgeInsets.only(
+                                            bottom: middleSize),
+                                        child: CustomeListTile(
+                                          title: e.value.name ?? '',
+                                          // imageUrl: [e.value.image??''],
+                                          noPrice: true,
+                                          onTap: () =>
+                                              viewModel.onSelected(e.key),
+                                          height: 80,
+                                          center: true,
+                                          selected: viewModel.selected
+                                              .containsKey(e.key),
+                                          stackWidget: Positioned(
+                                            top: 40,
+                                            right: smallSize,
+                                            child: Icon(
+                                              viewModel.selected
+                                                      .containsKey(e.key)
+                                                  ? FontAwesomeIcons
+                                                      .solidCircleDot
+                                                  : FontAwesomeIcons.circleDot,
+                                              color: kcPrimaryColor,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  )
-                                  .toList(),
-                            ),
-                            verticalSpaceLarge,
-                          ],
+                                    )
+                                    .toList(),
+                              ),
+                              verticalSpaceLarge,
+                            ],
+                          ),
                         ),
                       ),
                     ),

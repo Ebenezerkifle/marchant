@@ -4,12 +4,12 @@ import 'package:marchant/ui/views/widgets/image_builder.dart';
 
 class CircularCardWidget extends StatelessWidget {
   const CircularCardWidget({
-    Key? key,
+    super.key,
     required this.title,
     required this.onTap,
     this.image = 'assets/images/category.jpg',
     this.icon,
-  }) : super(key: key);
+  });
 
   final String title;
   final VoidCallback onTap;
@@ -58,13 +58,16 @@ class CircularCardWidget extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 4.0),
-            Text(
-              title,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 12.0,
+            Expanded(
+              child: Text(
+                title,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12.0,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
             ),
           ],
         ),

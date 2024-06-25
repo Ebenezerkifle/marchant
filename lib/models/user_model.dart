@@ -5,6 +5,7 @@ class UserModel {
   String? phoneNumber;
   String? password;
   String? CategoryId;
+  String? ManufacturerId;
   final num? transactionAmount;
   final num? creditAvailable;
   final num? tookCredit;
@@ -21,6 +22,7 @@ class UserModel {
     this.phoneNumber,
     this.password,
     this.CategoryId,
+    this.ManufacturerId,
     this.transactionAmount,
     this.creditAvailable,
     this.tookCredit,
@@ -59,6 +61,7 @@ class UserModel {
       phoneNumber: map['phoneNumber'] as String?,
       password: map['password'] as String?,
       CategoryId: map['CategoryId'] as String?,
+      ManufacturerId: map['ManufacturerId'] as String?,
       transactionAmount: map['transactionAmount'] as num?,
       creditAvailable: map['creditAvailable'] as num?,
       tookCredit: map['tookCredit'] as num?,

@@ -7,3 +7,4 @@ const orderUrl = '/api/order';
 const readPendingOrderUrl = '/api/order/ReadPendingOrdersByRetailer';
 const readDeliveredOrderUrl = '/api/order/ReadDeliveredOrdersByRetailer';
 const createProdUrl = '/api/product';
+const getProductsByManufacturer = '/api/product/byManufacturer';

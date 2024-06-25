@@ -18,6 +18,7 @@ class CategoryWidget extends StatelessWidget {
     this.hPadding,
     this.vPadding,
   });
+
   final String name;
   final bool selected;
   final VoidCallback onTap;
@@ -55,8 +56,7 @@ class CategoryWidget extends StatelessWidget {
               name,
               style: textStyle ??
                   AppTextStyle.withColor(
-                    color:
-                        txtColor ?? (selected ? kcWhite : kcPrimaryColorDark),
+                    color: txtColor ?? (selected ? kcWhite : kcPrimaryColorDark),
                     style: AppTextStyle.h4Normal,
                   ),
             ),
@@ -69,10 +69,3 @@ class CategoryWidget extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
