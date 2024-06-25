@@ -30,6 +30,7 @@ import 'package:marchant/ui/views/company_profile/company_profile_view.dart';
 import 'package:marchant/services/state_service/user_service.dart';
 
 import 'package:marchant/ui/dialogs/file_view/file_view_dialog.dart';
+import 'package:marchant/ui/views/onboarding/change_paswords/change_paswords_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -50,6 +51,7 @@ import 'package:marchant/ui/dialogs/file_view/file_view_dialog.dart';
     MaterialRoute(page: PostView),
     MaterialRoute(page: SubCategoryView),
     MaterialRoute(page: CompanyProfileView),
+    MaterialRoute(page: ChangePaswordsView),
 // @stacked-route
   ],
   dependencies: [

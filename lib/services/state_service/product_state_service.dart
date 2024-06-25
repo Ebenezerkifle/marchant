@@ -85,7 +85,7 @@ class ProductStateService with ListenableServiceMixin {
     notifyListeners();
   }
 
- void clearState() {
+  void clearState() {
     _products.value = {};
     _subProducts.value = {};
     _categories.value = {};

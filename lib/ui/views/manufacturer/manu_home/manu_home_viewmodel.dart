@@ -11,7 +11,7 @@ class ManuHomeViewModel extends ReactiveViewModel {
   @override
   List<ListenableServiceMixin> get listenableServices => [_postService];
 
-  Map<String, ProductModel> get  products => _postService.products;
+  Map<String, ProductModel> get products => _postService.products;
 
   ManuHomeViewModel() {
     _getMyProducts();

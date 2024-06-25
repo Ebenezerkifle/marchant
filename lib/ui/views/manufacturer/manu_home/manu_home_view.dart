@@ -27,6 +27,8 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
           CustomeAppBar(
             title: 'Merchant',
             back: false,
+            phoneIcon: Icons.phone,
+            phoneNumber: '889',
           ),
           Expanded(
             child: viewModel.products.isNotEmpty
@@ -42,7 +44,7 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                                 EdgeInsets.symmetric(horizontal: middleSize),
                             child: Text(
                               'your Products',
-                              style: AppTextStyle.h4Bold,
+                              style: AppTextStyle.h1Bold,
                             ),
                           ),
                           CustomeGrideWidget(

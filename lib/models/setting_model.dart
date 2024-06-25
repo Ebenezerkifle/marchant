@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 enum SettingOptions {
   shortCode,
-  language,
   myDetail,
   credit,
   about,
   logout,
+  changePass,
 }
 
 class SettingModel {

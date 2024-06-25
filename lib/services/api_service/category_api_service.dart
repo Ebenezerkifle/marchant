@@ -198,8 +198,7 @@ class CategoryApiCallService {
   Future<Map<String, Category>> getCategories() async {
     // print('******************************************Birhanu********************');
     // print(_userService.user);
-    final String categoryId =
-        _userService.user?.CategoryId ?? '';
+    final String categoryId = _userService.user?.CategoryId ?? '';
 
     // print('Category ID: $categoryId');
 

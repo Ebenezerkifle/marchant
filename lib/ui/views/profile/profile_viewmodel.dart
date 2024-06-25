@@ -13,8 +13,8 @@ import '../../../services/storage_service.dart/session.dart';
 class ProfileViewModel extends BaseViewModel {
   final _navigation = locator<NavigationService>();
   final _userService = locator<UserService>();
-   final _productService = locator<ProductStateService>();
-   final _orderService = locator<OrderStateService>();
+  final _productService = locator<ProductStateService>();
+  final _orderService = locator<OrderStateService>();
 
   String get image => 'assets/images/user.png';
 
@@ -27,13 +27,13 @@ class ProfileViewModel extends BaseViewModel {
       title: '889',
       icon: FontAwesomeIcons.phone,
     ),
+    SettingOptions.changePass: SettingModel(
+      title: 'change_password',
+      icon: FontAwesomeIcons.lock,
+    ),
     SettingOptions.credit: SettingModel(
       title: 'Credit',
       icon: FontAwesomeIcons.creditCard,
-    ),
-    SettingOptions.language: SettingModel(
-      title: 'Language',
-      icon: FontAwesomeIcons.language,
     ),
     SettingOptions.about: SettingModel(
       title: 'About',
@@ -55,20 +55,21 @@ class ProfileViewModel extends BaseViewModel {
     switch (setting) {
       case SettingOptions.shortCode:
         break;
+      case SettingOptions.changePass:
+        _navigation.navigateToChangePaswordsView();
+        break;
       case SettingOptions.myDetail:
         break;
       case SettingOptions.credit:
-        break;
-      case SettingOptions.language:
         break;
       case SettingOptions.about:
         break;
       case SettingOptions.logout:
         SessionService.clearAll();
-      //  _landingService.clearState();
-       _userService.resetState();
-       _productService.clearState();
-       _orderService.clearState();
+        //  _landingService.clearState();
+        _userService.resetState();
+        _productService.clearState();
+        _orderService.clearState();
         _navigation.clearStackAndShow(Routes.loginView);
         break;
     }

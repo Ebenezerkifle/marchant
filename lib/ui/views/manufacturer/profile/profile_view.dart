@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:marchant/models/setting_model.dart';
 import 'package:marchant/ui/common/app_text_style.dart';
 import 'package:marchant/ui/common/ui_helpers.dart';
 import 'package:marchant/ui/views/widgets/image_builder.dart';
@@ -62,7 +61,6 @@ class ManuProfileView extends StackedView<ManuProfileViewModel> {
                               (e) => SettingItem(
                                 title: e.value.title,
                                 icon: e.value.icon,
-                                trailing: _getTrailingWidget(e.key, viewModel),
                                 onTap: () => viewModel.tapHandler(e.key),
                               ),
                             )
@@ -77,19 +75,6 @@ class ManuProfileView extends StackedView<ManuProfileViewModel> {
         ),
       ),
     );
-  }
-
-  Widget? _getTrailingWidget(
-      SettingOptions setting, ManuProfileViewModel viewModel) {
-    switch (setting) {
-      case SettingOptions.shortCode:
-        return Text(
-          "12345",
-          style: AppTextStyle.h3Bold.copyWith(color: Colors.green),
-        );
-      default:
-        return null;
-    }
   }
 
   @override

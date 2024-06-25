@@ -29,7 +29,8 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
   final Map<dynamic, String> _formError = {};
   Map<dynamic, String> get formError => _formError;
 
-  final GlobalKey<RefreshIndicatorState> refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
+  final GlobalKey<RefreshIndicatorState> refreshIndicatorKey =
+      GlobalKey<RefreshIndicatorState>();
 
   ChooseCategoryViewModel() {
     _init();

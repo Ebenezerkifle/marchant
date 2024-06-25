@@ -90,8 +90,7 @@ class HomeView extends StackedView<HomeViewModel> {
                                   );
                                 }
                                 return CircularCardWidget(
-                                  title: viewModel
-                                          .categories.entries
+                                  title: viewModel.categories.entries
                                           .elementAt(index)
                                           .value
                                           .name ??
@@ -159,5 +158,3 @@ class HomeView extends StackedView<HomeViewModel> {
   @override
   HomeViewModel viewModelBuilder(BuildContext context) => HomeViewModel();
 }
-
-

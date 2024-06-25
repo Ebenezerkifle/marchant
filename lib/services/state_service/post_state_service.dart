@@ -7,7 +7,6 @@ import 'package:marchant/services/storage_service.dart/session.dart';
 import 'package:stacked/stacked.dart';
 
 class PostStateService with ListenableServiceMixin {
-
   PostStateService() {
     listenToReactiveValues([]);
   }
@@ -31,7 +30,6 @@ class PostStateService with ListenableServiceMixin {
   }
 
   getProducts() async {
-
     String url = '$baseUrl$getProductsByManufacturer';
     var token = await SessionService.getString(SessionKey.token);
     // api call

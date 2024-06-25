@@ -9,27 +9,29 @@ import 'package:flutter/material.dart' as _i19;
 import 'package:flutter/material.dart';
 import 'package:marchant/models/order_model.dart' as _i21;
 import 'package:marchant/models/product_model.dart' as _i20;
-import 'package:marchant/ui/views/cart/cart_view.dart' as _i10;
+import 'package:marchant/ui/views/cart/cart_view.dart' as _i9;
 import 'package:marchant/ui/views/company_profile/company_profile_view.dart'
-    as _i18;
+    as _i17;
 import 'package:marchant/ui/views/home/category_list/category_list_view.dart'
-    as _i8;
+    as _i7;
 import 'package:marchant/ui/views/home/home_view.dart' as _i2;
 import 'package:marchant/ui/views/home/product_detail/product_detail_view.dart'
-    as _i9;
-import 'package:marchant/ui/views/home/side_bar/side_bar_view.dart' as _i11;
-import 'package:marchant/ui/views/landing/landing_view.dart' as _i13;
+    as _i8;
+import 'package:marchant/ui/views/home/side_bar/side_bar_view.dart' as _i10;
+import 'package:marchant/ui/views/landing/landing_view.dart' as _i12;
 import 'package:marchant/ui/views/manufacturer/manu_home/manu_home_view.dart'
-    as _i15;
-import 'package:marchant/ui/views/manufacturer/post/post_view.dart' as _i16;
-import 'package:marchant/ui/views/my_orders/my_orders_view.dart' as _i12;
+    as _i14;
+import 'package:marchant/ui/views/manufacturer/post/post_view.dart' as _i15;
+import 'package:marchant/ui/views/my_orders/my_orders_view.dart' as _i11;
+import 'package:marchant/ui/views/onboarding/change_paswords/change_paswords_view.dart'
+    as _i18;
 import 'package:marchant/ui/views/onboarding/login/login_view.dart' as _i4;
 import 'package:marchant/ui/views/onboarding/signup/choose_catagory/choose_catagory_view.dart'
-    as _i7;
+    as _i6;
 import 'package:marchant/ui/views/onboarding/signup/signup_view.dart' as _i5;
-import 'package:marchant/ui/views/profile/profile_view.dart' as _i14;
+import 'package:marchant/ui/views/profile/profile_view.dart' as _i13;
 import 'package:marchant/ui/views/startup/startup_view.dart' as _i3;
-import 'package:marchant/ui/views/sub_category/sub_category_view.dart' as _i17;
+import 'package:marchant/ui/views/sub_category/sub_category_view.dart' as _i16;
 import 'package:stacked/stacked.dart' as _i1;
 import 'package:stacked_services/stacked_services.dart' as _i22;
 
@@ -41,8 +43,6 @@ class Routes {
   static const loginView = '/login-view';
 
   static const signupView = '/signup-view';
-
-  static const signupFinalView = '/signup-final-view';
 
   static const chooseCatagoryView = '/choose-catagory-view';
 
@@ -68,12 +68,13 @@ class Routes {
 
   static const companyProfileView = '/company-profile-view';
 
+  static const changePaswordsView = '/change-paswords-view';
+
   static const all = <String>{
     homeView,
     startupView,
     loginView,
     signupView,
-    signupFinalView,
     chooseCatagoryView,
     categoryListView,
     productDetailView,
@@ -86,6 +87,7 @@ class Routes {
     postView,
     subCategoryView,
     companyProfileView,
+    changePaswordsView,
   };
 }
 
@@ -107,54 +109,57 @@ class StackedRouter extends _i1.RouterBase {
       Routes.signupView,
       page: _i5.SignupView,
     ),
-   
     _i1.RouteDef(
       Routes.chooseCatagoryView,
-      page: _i7.ChooseCatagoryView,
+      page: _i6.ChooseCatagoryView,
     ),
     _i1.RouteDef(
       Routes.categoryListView,
-      page: _i8.CategoryListView,
+      page: _i7.CategoryListView,
     ),
     _i1.RouteDef(
       Routes.productDetailView,
-      page: _i9.ProductDetailView,
+      page: _i8.ProductDetailView,
     ),
     _i1.RouteDef(
       Routes.cartView,
-      page: _i10.CartView,
+      page: _i9.CartView,
     ),
     _i1.RouteDef(
       Routes.sideBarView,
-      page: _i11.SideBarView,
+      page: _i10.SideBarView,
     ),
     _i1.RouteDef(
       Routes.myOrdersView,
-      page: _i12.MyOrdersView,
+      page: _i11.MyOrdersView,
     ),
     _i1.RouteDef(
       Routes.landingView,
-      page: _i13.LandingView,
+      page: _i12.LandingView,
     ),
     _i1.RouteDef(
       Routes.profileView,
-      page: _i14.ProfileView,
+      page: _i13.ProfileView,
     ),
     _i1.RouteDef(
       Routes.manuHomeView,
-      page: _i15.ManuHomeView,
+      page: _i14.ManuHomeView,
     ),
     _i1.RouteDef(
       Routes.postView,
-      page: _i16.PostView,
+      page: _i15.PostView,
     ),
     _i1.RouteDef(
       Routes.subCategoryView,
-      page: _i17.SubCategoryView,
+      page: _i16.SubCategoryView,
     ),
     _i1.RouteDef(
       Routes.companyProfileView,
-      page: _i18.CompanyProfileView,
+      page: _i17.CompanyProfileView,
+    ),
+    _i1.RouteDef(
+      Routes.changePaswordsView,
+      page: _i18.ChangePaswordsView,
     ),
   ];
 
@@ -183,85 +188,90 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
-   
-    _i7.ChooseCatagoryView: (data) {
+    _i6.ChooseCatagoryView: (data) {
       return _i19.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i7.ChooseCatagoryView(),
+        builder: (context) => const _i6.ChooseCatagoryView(),
         settings: data,
       );
     },
-    _i8.CategoryListView: (data) {
+    _i7.CategoryListView: (data) {
       return _i19.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i8.CategoryListView(),
+        builder: (context) => const _i7.CategoryListView(),
         settings: data,
       );
     },
-    _i9.ProductDetailView: (data) {
+    _i8.ProductDetailView: (data) {
       final args = data.getArgs<ProductDetailViewArguments>(nullOk: false);
       return _i19.MaterialPageRoute<dynamic>(
         builder: (context) =>
-            _i9.ProductDetailView(key: args.key, product: args.product),
+            _i8.ProductDetailView(key: args.key, product: args.product),
         settings: data,
       );
     },
-    _i10.CartView: (data) {
+    _i9.CartView: (data) {
       final args = data.getArgs<CartViewArguments>(
         orElse: () => const CartViewArguments(),
       );
       return _i19.MaterialPageRoute<dynamic>(
-        builder: (context) => _i10.CartView(key: args.key, order: args.order),
+        builder: (context) => _i9.CartView(key: args.key, order: args.order),
         settings: data,
       );
     },
-    _i11.SideBarView: (data) {
+    _i10.SideBarView: (data) {
       return _i19.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i11.SideBarView(),
+        builder: (context) => const _i10.SideBarView(),
         settings: data,
       );
     },
-    _i12.MyOrdersView: (data) {
+    _i11.MyOrdersView: (data) {
       return _i19.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i12.MyOrdersView(),
+        builder: (context) => const _i11.MyOrdersView(),
         settings: data,
       );
     },
-    _i13.LandingView: (data) {
+    _i12.LandingView: (data) {
       return _i19.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i13.LandingView(),
+        builder: (context) => const _i12.LandingView(),
         settings: data,
       );
     },
-    _i14.ProfileView: (data) {
+    _i13.ProfileView: (data) {
       return _i19.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i14.ProfileView(),
+        builder: (context) => const _i13.ProfileView(),
         settings: data,
       );
     },
-    _i15.ManuHomeView: (data) {
+    _i14.ManuHomeView: (data) {
       return _i19.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i15.ManuHomeView(),
+        builder: (context) => const _i14.ManuHomeView(),
         settings: data,
       );
     },
-    _i16.PostView: (data) {
+    _i15.PostView: (data) {
       return _i19.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i16.PostView(),
+        builder: (context) => const _i15.PostView(),
         settings: data,
       );
     },
-    _i17.SubCategoryView: (data) {
+    _i16.SubCategoryView: (data) {
       final args = data.getArgs<SubCategoryViewArguments>(nullOk: false);
       return _i19.MaterialPageRoute<dynamic>(
-        builder: (context) => _i17.SubCategoryView(
+        builder: (context) => _i16.SubCategoryView(
             key: args.key, categoryValue: args.categoryValue),
         settings: data,
       );
     },
-    _i18.CompanyProfileView: (data) {
+    _i17.CompanyProfileView: (data) {
       final args = data.getArgs<CompanyProfileViewArguments>(nullOk: false);
       return _i19.MaterialPageRoute<dynamic>(
         builder: (context) =>
-            _i18.CompanyProfileView(key: args.key, product: args.product),
+            _i17.CompanyProfileView(key: args.key, product: args.product),
+        settings: data,
+      );
+    },
+    _i18.ChangePaswordsView: (data) {
+      return _i19.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i18.ChangePaswordsView(),
         settings: data,
       );
     },
@@ -433,20 +443,6 @@ extension NavigatorStateExtension on _i22.NavigationService {
         transition,
   ]) async {
     return navigateTo<dynamic>(Routes.signupView,
-        id: routerId,
-        preventDuplicates: preventDuplicates,
-        parameters: parameters,
-        transition: transition);
-  }
-
-  Future<dynamic> navigateToSignupFinalView([
-    int? routerId,
-    bool preventDuplicates = true,
-    Map<String, String>? parameters,
-    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
-  ]) async {
-    return navigateTo<dynamic>(Routes.signupFinalView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -634,6 +630,20 @@ extension NavigatorStateExtension on _i22.NavigationService {
         transition: transition);
   }
 
+  Future<dynamic> navigateToChangePaswordsView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.changePaswordsView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
   Future<dynamic> replaceWithHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -684,20 +694,6 @@ extension NavigatorStateExtension on _i22.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.signupView,
-        id: routerId,
-        preventDuplicates: preventDuplicates,
-        parameters: parameters,
-        transition: transition);
-  }
-
-  Future<dynamic> replaceWithSignupFinalView([
-    int? routerId,
-    bool preventDuplicates = true,
-    Map<String, String>? parameters,
-    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
-  ]) async {
-    return replaceWith<dynamic>(Routes.signupFinalView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -879,6 +875,20 @@ extension NavigatorStateExtension on _i22.NavigationService {
   }) async {
     return replaceWith<dynamic>(Routes.companyProfileView,
         arguments: CompanyProfileViewArguments(key: key, product: product),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithChangePaswordsView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.changePaswordsView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

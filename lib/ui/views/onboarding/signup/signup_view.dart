@@ -12,7 +12,7 @@ import '../../widgets/image_builder.dart';
 import 'signup_viewmodel.dart';
 
 class SignupView extends StackedView<SignupViewModel> {
-  const SignupView({Key? key}) : super(key: key);
+  const SignupView({super.key});
 
   @override
   Widget builder(
@@ -73,7 +73,20 @@ class SignupView extends StackedView<SignupViewModel> {
                           color: kcPrimaryColorDark,
                           size: viewModel.iconSize,
                         ),
+                        suffixIcon: InkWell(
+                          onTap: viewModel.togglePasswordVissibility,
+                          child: viewModel.passwordVisible
+                              ? Icon(
+                                  Icons.visibility,
+                                  size: viewModel.iconSize,
+                                )
+                              : Icon(
+                                  Icons.visibility_off,
+                                  size: viewModel.iconSize,
+                                ),
+                        ),
                         hint: viewModel.passHint,
+                        hideText: !viewModel.passwordVisible,
                       ),
                       verticalSpaceMiddle,
                       // Confirm password field
@@ -91,7 +104,20 @@ class SignupView extends StackedView<SignupViewModel> {
                           color: kcPrimaryColorDark,
                           size: viewModel.iconSize,
                         ),
+                        suffixIcon: InkWell(
+                          onTap: viewModel.toggleConfirmPasswordVissibility,
+                          child: viewModel.confirmPassVisible
+                              ? Icon(
+                                  Icons.visibility,
+                                  size: viewModel.iconSize,
+                                )
+                              : Icon(
+                                  Icons.visibility_off,
+                                  size: viewModel.iconSize,
+                                ),
+                        ),
                         hint: viewModel.confirmHint,
+                        hideText: !viewModel.confirmPassVisible,
                       ),
                       verticalSpaceMiddle,
                       // error message widget

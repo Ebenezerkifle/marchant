@@ -110,8 +110,8 @@ class LoginViewModel extends BaseViewModel {
         // Backend call to login the user
         var response = await _authentication.loginUser(
           LoginModel(
-                  phoneNumber: phoneNumController.text.substring(1),            
-                  password: passwordController.text,
+            phoneNumber: phoneNumController.text.substring(1),
+            password: passwordController.text,
           ),
         );
         // print(response.body);

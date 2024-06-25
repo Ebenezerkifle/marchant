@@ -1,5 +1,3 @@
-
-
 import 'package:marchant/models/order_model.dart';
 import 'package:marchant/services/api_service/orders_api_service.dart';
 import 'package:stacked/stacked.dart';
@@ -46,7 +44,7 @@ class OrderStateService with ListenableServiceMixin {
     }
   }
 
-   void clearState() {
+  void clearState() {
     _orders.value.clear();
     _deliveredOrders.value.clear();
     _isLoading.value = false;

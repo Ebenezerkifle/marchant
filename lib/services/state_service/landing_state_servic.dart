@@ -26,7 +26,7 @@ class LandingStateService with ListenableServiceMixin {
   final _userRole = ReactiveValue<UserRole>(UserRole.retailor);
   UserRole get userRole => _userRole.value;
 
-    clearState() {
+  clearState() {
     _currentIndex.value = 0;
     notifyListeners();
   }

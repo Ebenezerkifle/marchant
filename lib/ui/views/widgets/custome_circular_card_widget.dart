@@ -18,7 +18,8 @@ class CircularCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).size.width * 0.12; // Adjust size as needed
+    double size =
+        MediaQuery.of(context).size.width * 0.12; // Adjust size as needed
 
     return InkWell(
       onTap: onTap,
@@ -37,7 +38,7 @@ class CircularCardWidget extends StatelessWidget {
                       height: size,
                       child: Icon(
                         icon!,
-                        size: size * 0.7, // Adjust icon size as needed
+                        size: size * 0.9, // Adjust icon size as needed
                         color: Colors.white, // Set icon color
                       ),
                     ),

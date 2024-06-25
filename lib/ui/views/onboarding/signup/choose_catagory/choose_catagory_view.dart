@@ -96,8 +96,8 @@ class ChooseCatagoryView extends StackedView<ChooseCategoryViewModel> {
                       onRefresh: viewModel.refresh,
                       child: SingleChildScrollView(
                         child: Padding(
-                          padding:
-                              const EdgeInsets.symmetric(horizontal: middleSize),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: middleSize),
                           child: Column(
                             children: [
                               verticalSpaceMiddle,

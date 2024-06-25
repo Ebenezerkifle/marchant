@@ -70,15 +70,6 @@
 //   }
 // }
 
-
-
-
-
-
-
-
-
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marchant/app/app.locator.dart';
@@ -102,7 +93,7 @@ class CustomeAppBar extends StatelessWidget {
     this.phoneIcon,
     this.phoneNumber,
   });
-  
+
   final String title;
   final Color bgColor;
   final Color textColor;
@@ -118,7 +109,8 @@ class CustomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        double size = MediaQuery.of(context).size.width * 0.12; // Adjust size as needed
+    double size =
+        MediaQuery.of(context).size.width * 0.12; // Adjust size as needed
 
     return Container(
       height: MediaQuery.of(context).size.height * .08,
@@ -157,7 +149,7 @@ class CustomeAppBar extends StatelessWidget {
                 Icon(
                   phoneIcon,
                   color: textColor,
-                  size: size* 0.4,
+                  size: size * 0.4,
                 ),
               if (phoneNumber != null) ...[
                 horizontalSpaceSmall,

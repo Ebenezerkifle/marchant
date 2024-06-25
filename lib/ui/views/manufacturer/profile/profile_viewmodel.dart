@@ -17,12 +17,12 @@ class ManuProfileViewModel extends BaseViewModel {
       icon: FontAwesomeIcons.user,
     ),
     SettingOptions.shortCode: SettingModel(
-      title: 'Short code',
+      title: '889',
       icon: FontAwesomeIcons.phone,
     ),
-    SettingOptions.language: SettingModel(
-      title: 'Language',
-      icon: FontAwesomeIcons.language,
+    SettingOptions.changePass: SettingModel(
+      title: 'change_password',
+      icon: FontAwesomeIcons.lock,
     ),
     SettingOptions.about: SettingModel(
       title: 'About',
@@ -40,7 +40,8 @@ class ManuProfileViewModel extends BaseViewModel {
         break;
       case SettingOptions.myDetail:
         break;
-      case SettingOptions.language:
+      case SettingOptions.changePass:
+        _navigation.navigateToChangePaswordsView();
         break;
       case SettingOptions.about:
         break;

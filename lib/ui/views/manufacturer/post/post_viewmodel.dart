@@ -7,6 +7,7 @@ import 'package:marchant/services/state_service/enrollment_state_service.dart';
 import 'package:marchant/services/state_service/landing_state_servic.dart';
 import 'package:marchant/services/state_service/post_state_service.dart';
 import 'package:marchant/services/state_service/user_service.dart';
+import 'package:marchant/services/validation_service/front_validation.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../../app/app.dialogs.dart';
@@ -98,7 +99,7 @@ class PostViewModel extends ReactiveViewModel {
   }
 
   void onSubCategoryChanged(String? newValue) {
-        print(newValue);
+    print(newValue);
 
     selectedSubCategory = newValue;
     // Reset sub-sub-categories when sub-category changes
@@ -108,8 +109,10 @@ class PostViewModel extends ReactiveViewModel {
     // Populate sub-sub-categories based on selected sub-category
     if (newValue != null && selectedCategory != null) {
       subSubCategories = subCategories
-          .firstWhere((subCat) => subCat.id == newValue, orElse: () => Category(subcategory: []))
-          .subcategory ?? [];
+              .firstWhere((subCat) => subCat.id == newValue,
+                  orElse: () => Category(subcategory: []))
+              .subcategory ??
+          [];
     }
 
     notifyListeners();
@@ -121,20 +124,87 @@ class PostViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  void onPostProduct() async {
-    setBusy(true);
-    // Handle post product logic here
-    // Collect details and images from controllers
-    details = detailsController.text
-        .split(',')
-        .map((detail) => detail.trim())
-        .toList();
-    print('Details: $details');
-    print('Images: $images');
+  //---------------- FRONT END VALIDATION -------------
 
-    var product = ProductModel(
+  // _setStateOfFormField(String msg, var controller) {
+  //   // takes the validation result and set the state
+  //   if (msg.isNotEmpty) {
+  //     _formError[controller] = msg;
+  //     notifyListeners();
+  //     return;
+  //   }
+  //   _formError.remove(controller);
+  //   notifyListeners();
+  //   return;
+  // }
+
+  // Validate text.
+  validateText(String value, var controller, String label,
+      {int? minLength, int? maxLength, bool? email}) {
+    return _setStateOfFormField(
+      FrontValidation.validateFormField(
+        value,
+        label,
+        minLength: minLength,
+        maxLength: maxLength,
+        email: email ?? false,
+      ),
+      controller,
+    );
+  }
+
+  // Update form error state
+  void _setStateOfFormField(String msg, var controller) {
+    if (msg.isNotEmpty) {
+      _formError[controller] = msg;
+    } else {
+      _formError.remove(controller);
+    }
+    notifyListeners();
+  }
+
+  // Validate dropdowns
+  bool validateDropdowns() {
+    bool isValid = true;
+
+    if (selectedCategory == null) {
+      _formError['category'] = 'Choose a category';
+      isValid = false;
+    } else {
+      _formError.remove('category');
+    }
+
+    if (selectedSubCategory == null) {
+      _formError['subCategory'] = 'Choose a sub category';
+      isValid = false;
+    } else {
+      _formError.remove('subCategory');
+    }
+
+    if (selectedSubSubCategory == null) {
+      _formError['subSubCategory'] = 'Choose a sub sub category';
+      isValid = false;
+    } else {
+      _formError.remove('subSubCategory');
+    }
+
+    notifyListeners();
+    return isValid;
+  }
+
+  // Handle form submission
+  void onPostProduct() async {
+    _formError.remove('response');
+    if (_formKey.currentState!.validate() &&
+        _formError.isEmpty &&
+        validateDropdowns()) {
+      setBusy(true);
+
+      // Create product model
+      var product = ProductModel(
         productName: productNameController.text,
-        details: details,
+        details:
+            detailsController.text.split(',').map((e) => e.trim()).toList(),
         productImage: images,
         manufacturerId: _userService.user?.id,
         description: descriptionController.text,
@@ -143,10 +213,21 @@ class PostViewModel extends ReactiveViewModel {
         categoryId: selectedCategory,
         subCategoryId: selectedSubCategory,
         subSubCategoryId: selectedSubSubCategory,
-        salesPrice: num.parse(salesPriceController.text));
-    await _postService.sendProduct(product);
-    _landing.setIndex(0);
-    // todo clear every controllers.
-    setBusy(false);
+        salesPrice: num.parse(salesPriceController.text),
+      );
+
+      // Send product data to server
+      var response = await _postService.sendProduct(product);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        _landing.setIndex(0);
+      } else {
+        // Handle errors
+        _formError['response'] = response.body.toString();
+      }
+
+      setBusy(false);
+      notifyListeners();
+    }
   }
 }

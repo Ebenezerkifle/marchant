@@ -122,4 +122,18 @@ class SignupViewModel extends FormViewModel {
       _navigation.navigateToChooseCatagoryView();
     }
   }
+
+  bool get passwordVisible => _passVisible;
+  bool _passVisible = false;
+  void togglePasswordVissibility() {
+    _passVisible = !_passVisible;
+    notifyListeners();
+  }
+
+  bool get confirmPassVisible => _confirmPassVisible;
+  bool _confirmPassVisible = false;
+  void toggleConfirmPasswordVissibility() {
+    _confirmPassVisible = !_confirmPassVisible;
+    notifyListeners();
+  }
 }

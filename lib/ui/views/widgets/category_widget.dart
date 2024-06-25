@@ -56,7 +56,8 @@ class CategoryWidget extends StatelessWidget {
               name,
               style: textStyle ??
                   AppTextStyle.withColor(
-                    color: txtColor ?? (selected ? kcWhite : kcPrimaryColorDark),
+                    color:
+                        txtColor ?? (selected ? kcWhite : kcPrimaryColorDark),
                     style: AppTextStyle.h4Normal,
                   ),
             ),

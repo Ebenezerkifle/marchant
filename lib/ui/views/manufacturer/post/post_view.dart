@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marchant/models/category_model.dart';
 import 'package:marchant/ui/common/app_colors.dart';
@@ -11,70 +12,80 @@ import 'package:stacked/stacked.dart';
 import '../../widgets/custome_app_bar.dart';
 import 'post_viewmodel.dart';
 
-
-class PostView extends StatelessWidget {
+class PostView extends StackedView<PostViewModel> {
   const PostView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return ViewModelBuilder<PostViewModel>.reactive(
-      viewModelBuilder: () => PostViewModel(),
-      builder: (context, viewModel, child) => Scaffold(
+  Widget builder(
+    BuildContext context,
+    PostViewModel viewModel,
+    Widget? child,
+  ) {
+    return Scaffold(
         body: SafeArea(
-          top: true,
-          child: Column(
-            children: [
-              CustomeAppBar(title: 'Post a Product', back: false),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Column(
-                      children: [
-
-                        verticalSpaceMiddle,
-                        GestureDetector(
-                          onTap: viewModel.onPictureAdd,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 16.0),
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: kcVeryLightGrey,
-                            ),
-                            child: const Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  FontAwesomeIcons.plus,
-                                  color: kcPrimaryColor,
-                                ),
-                                verticalSpaceSmall,
-                                Text(
-                                  'Add Pictures',
-                                  style: AppTextStyle.h4Normal,
-                                )
-                              ],
-                            ),
-                          ),
+      top: true,
+      child: Column(
+        children: [
+          CustomeAppBar(title: 'Post a Product', back: false),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
+                  children: [
+                    verticalSpaceMiddle,
+                    GestureDetector(
+                      onTap: viewModel.onPictureAdd,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: kcVeryLightGrey,
                         ),
-                        verticalSpaceMiddle,
-                        CustomeFormField(
-                          title: 'Product Name',
-                          widget: InputField(
-                            controller: viewModel.productNameController,
-                            hint: 'Enter product name',
-                          ),
+                        child: const Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              FontAwesomeIcons.plus,
+                              color: kcPrimaryColor,
+                            ),
+                            verticalSpaceSmall,
+                            Text(
+                              'Add Pictures',
+                              style: AppTextStyle.h4Normal,
+                            )
+                          ],
                         ),
-                      verticalSpaceMiddle,
-                        CustomeFormField(
-                          title: 'Top Category',
-                          widget: DropdownButtonFormField<String>(
+                      ),
+                    ),
+                    verticalSpaceMiddle,
+                    CustomeFormField(
+                      title: 'product name',
+                      widget: InputField(
+                        validator: (value) => viewModel.validateText(
+                            value,
+                            viewModel.productNameController,
+                            'Enter product name'),
+                        error: viewModel.formError
+                            .containsKey(viewModel.productNameController),
+                        controller: viewModel.productNameController,
+                        hint: 'Enter product name',
+                      ),
+                    ),
+                    verticalSpaceMiddle,
+                    CustomeFormField(
+                      title: 'Top Category',
+                      widget: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          DropdownButtonFormField<String>(
                             value: viewModel.selectedCategory,
                             hint: const Text('Choose category'),
                             onChanged: viewModel.onCategoryChanged,
-                            items: viewModel.topCategories.values.map((Category category) {
+                            items: viewModel.topCategories.values
+                                .map((Category category) {
                               return DropdownMenuItem<String>(
                                 value: category.id,
                                 child: Text(category.name ?? ''),
@@ -82,20 +93,37 @@ class PostView extends StatelessWidget {
                             }).toList(),
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
-                              contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                              contentPadding:
+                                  EdgeInsets.symmetric(horizontal: 10),
                             ),
                           ),
-                        ),
-
-verticalSpaceMiddle,
-                        if (viewModel.selectedCategory != null)
-                          CustomeFormField(
-                            title: 'Sub Category',
-                            widget: DropdownButtonFormField<String>(
+                          if (viewModel.formError.containsKey('category'))
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: Text(
+                                viewModel.formError['category']!,
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                    verticalSpaceMiddle,
+                    if (viewModel.selectedCategory != null)
+                      CustomeFormField(
+                        title: 'Sub Category',
+                        widget: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            DropdownButtonFormField<String>(
                               value: viewModel.selectedSubCategory,
                               hint: const Text('Choose sub category'),
                               onChanged: viewModel.onSubCategoryChanged,
-                              items: viewModel.subCategories.map((Category subCategory) {
+                              items: viewModel.subCategories
+                                  .map((Category subCategory) {
                                 return DropdownMenuItem<String>(
                                   value: subCategory.id,
                                   child: Text(subCategory.name ?? ''),
@@ -103,19 +131,37 @@ verticalSpaceMiddle,
                               }).toList(),
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
-                                contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                                contentPadding:
+                                    EdgeInsets.symmetric(horizontal: 10),
                               ),
                             ),
-                          ),
-                        verticalSpaceMiddle,
-                        if (viewModel.selectedSubCategory != null)
-                          CustomeFormField(
-                            title: 'Sub Sub Category',
-                            widget: DropdownButtonFormField<String>(
+                            if (viewModel.formError.containsKey('subCategory'))
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Text(
+                                  viewModel.formError['subCategory']!,
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    verticalSpaceMiddle,
+                    if (viewModel.selectedSubCategory != null)
+                      CustomeFormField(
+                        title: 'Sub Sub Category',
+                        widget: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            DropdownButtonFormField<String>(
                               value: viewModel.selectedSubSubCategory,
                               hint: const Text('Choose sub sub category'),
                               onChanged: viewModel.onSubSubCategoryChanged,
-                              items: viewModel.subSubCategories.map((Category subSubCategory) {
+                              items: viewModel.subSubCategories
+                                  .map((Category subSubCategory) {
                                 return DropdownMenuItem<String>(
                                   value: subSubCategory.id,
                                   child: Text(subSubCategory.name ?? ''),
@@ -123,73 +169,108 @@ verticalSpaceMiddle,
                               }).toList(),
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
-                                contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                                contentPadding:
+                                    EdgeInsets.symmetric(horizontal: 10),
                               ),
                             ),
-                          ),
-                        verticalSpaceMiddle,
-                        CustomeFormField(
-                          title: 'Sales Price',
-                          widget: InputField(
-                            controller: viewModel.salesPriceController,
-                            hint: 'Enter sales price',
-                            // keyboardType: TextInputType.number,
-                          ),
+                            if (viewModel.formError
+                                .containsKey('subSubCategory'))
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Text(
+                                  viewModel.formError['subSubCategory']!,
+                                  style: const TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ),
+                          ],
                         ),
-                        verticalSpaceMiddle,
-                        CustomeFormField(
-                          title: 'Description',
-                          widget: InputField(
-                            controller: viewModel.descriptionController,
-                            hint: 'Enter description',
-                            extendable: true,
-                            charLength: 1000,
-                            height: 50,
-                          ),
-                        ),
-                        verticalSpaceMiddle,
-                        CustomeFormField(
-                          title: 'Details',
-                          widget: InputField(
-                            controller: viewModel.detailsController,
-                            hint: 'Enter details (comma separated)',
-                          ),
-                        ),
-                        verticalSpaceMiddle,
-                        CustomeFormField(
-                          title: 'Quantity',
-                          widget: InputField(
-                            controller: viewModel.quantityController,
-                            hint: 'Enter quantity',
-                            // keyboardType: TextInputType.number,
-                          ),
-                        ),
-                        verticalSpaceMiddle,
-
-CustomeFormField(
-                          title: 'Address',
-                          widget: InputField(
-                            controller: viewModel.addressController,
-                            hint: 'Enter address',
-                          ),
-                        ),
-                        verticalSpaceLarge,
-                        CustomeButton(
-                          text: 'Submit',
-                          onTap: viewModel.onPostProduct,
-                          width: double.infinity,
-                          loading: viewModel.isBusy,
-                        ),
-                        verticalSpaceLarge,
-                      ],
+                      ),
+                    verticalSpaceMiddle,
+                    CustomeFormField(
+                      title: 'Sales Price',
+                      widget: InputField(
+                        validator: (value) => viewModel.validateText(
+                            value,
+                            viewModel.salesPriceController,
+                            'Enter sales price'),
+                        error: viewModel.formError
+                            .containsKey(viewModel.salesPriceController),
+                        controller: viewModel.salesPriceController,
+                        hint: 'Enter sales price',
+                      ),
                     ),
-                  ),
+                    verticalSpaceMiddle,
+                    CustomeFormField(
+                      title: 'Description',
+                      widget: InputField(
+                        validator: (value) => viewModel.validateText(
+                            value,
+                            viewModel.descriptionController,
+                            'Enter description'),
+                        error: viewModel.formError
+                            .containsKey(viewModel.descriptionController),
+                        controller: viewModel.descriptionController,
+                        hint: 'Enter description',
+                        extendable: true,
+                        charLength: 1000,
+                        height: 50,
+                      ),
+                    ),
+                    verticalSpaceMiddle,
+                    CustomeFormField(
+                      title: 'Details',
+                      widget: InputField(
+                        validator: (value) => viewModel.validateText(
+                            value,
+                            viewModel.detailsController,
+                            'Enter details (comma separated)'),
+                        error: viewModel.formError
+                            .containsKey(viewModel.detailsController),
+                        controller: viewModel.detailsController,
+                        hint: 'Enter details (comma separated)',
+                      ),
+                    ),
+                    verticalSpaceMiddle,
+                    CustomeFormField(
+                      title: 'Quantity',
+                      widget: InputField(
+                        validator: (value) => viewModel.validateText(value,
+                            viewModel.quantityController, 'Enter quantity'),
+                        error: viewModel.formError
+                            .containsKey(viewModel.quantityController),
+                        controller: viewModel.quantityController,
+                        hint: 'Enter quantity',
+                        inputType: TextInputType.number,
+                        inputFormatter: [
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                        ],
+                        // keyboardType: TextInputType.number,
+                      ),
+                    ),
+                    verticalSpaceLarge,
+                    CustomeButton(
+                      text: 'Submit',
+                      onTap: viewModel.onPostProduct,
+                      width: double.infinity,
+                      loading: viewModel.isBusy,
+                    ),
+                    verticalSpaceLarge,
+                  ],
                 ),
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
-    );
+    ));
   }
+
+  @override
+  PostViewModel viewModelBuilder(
+    BuildContext context,
+  ) =>
+      PostViewModel();
 }

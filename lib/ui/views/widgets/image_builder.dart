@@ -35,7 +35,8 @@ class ImageBuilder extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         shape: circle ? BoxShape.circle : BoxShape.rectangle,
-        borderRadius: circle ? null : const BorderRadius.all(Radius.circular(8)),
+        borderRadius:
+            circle ? null : const BorderRadius.all(Radius.circular(8)),
         image: !_isUrl(image) && image.isNotEmpty
             ? DecorationImage(
                 image: AssetImage(image),
@@ -53,7 +54,7 @@ class ImageBuilder extends StatelessWidget {
               width: width ?? height,
               errorBuilder: (context, error, stackTrace) {
                 return Image.asset(
-                  'assets/images/order_delivery.png',
+                  'assets/images/category.jpg',
                   fit: fit,
                   height: height,
                   width: width ?? height,
@@ -68,7 +69,7 @@ class ImageBuilder extends StatelessWidget {
                   width: width ?? height,
                 )
               : Image.asset(
-                  'assets/images/order_delivery.png',
+                  'assets/images/category.jpg',
                   fit: fit,
                   height: height,
                   width: width ?? height,
@@ -82,12 +83,12 @@ class ImageBuilder extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(color: Colors.white.withOpacity(0.0)),
         child: ImageBuilder(
-          image: 'assets/images/student.jpg',
+          image: 'assets/images/category.jpg',
           height: height,
           fit: BoxFit.cover,
           errorBuilder: (context, error, stackTrace) {
             return Image.asset(
-              'assets/images/order_delivery.png',
+              'assets/images/category.jpg',
               fit: fit,
               height: height,
               width: width ?? height,
