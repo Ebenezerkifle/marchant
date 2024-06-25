@@ -7,13 +7,13 @@ class CircularCardWidget extends StatelessWidget {
     super.key,
     required this.title,
     required this.onTap,
-    this.image = 'assets/images/category.jpg',
+    this.image,
     this.icon,
   });
 
   final String title;
   final VoidCallback onTap;
-  final String image;
+  final String? image;
   final IconData? icon;
 
   @override
@@ -26,19 +26,15 @@ class CircularCardWidget extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Column(
           children: [
-            Stack( // Use Stack for layering elements
+            Stack(
+              alignment: Alignment.center,
               children: [
-                ClipOval( // Background circle
-                  child: Container(
-                    color: kcPrimaryColorDark, // Set background color
-                    width: size,
-                    height: size,
-                  ),
-                ),
-                if (icon != null) // Check if icon provided
-                  Positioned.fill( // Position icon within circle
-                    child: Align(
-                      alignment: Alignment.center,
+                if (icon != null)
+                  ClipOval(
+                    child: Container(
+                      color: kcPrimaryColorDark, // Set background color
+                      width: size,
+                      height: size,
                       child: Icon(
                         icon!,
                         size: size * 0.7, // Adjust icon size as needed
@@ -46,13 +42,21 @@ class CircularCardWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                if (icon == null) // Fallback for image (optional)
+                if (icon == null)
                   ClipOval(
                     child: ImageBuilder(
-                      image: image,
+                      image: image ?? 'assets/images/category.jpg',
                       width: size,
                       height: size,
                       fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Image.asset(
+                          'assets/images/category.jpg',
+                          width: size,
+                          height: size,
+                          fit: BoxFit.cover,
+                        );
+                      },
                     ),
                   ),
               ],

@@ -11,13 +11,16 @@ class ImageBuilder extends StatelessWidget {
     this.width,
     this.circle = false,
     this.blured = false,
+    this.errorBuilder,
   });
+
   final String image;
   final BoxFit fit;
   final double height;
   final double? width;
   final bool circle;
   final bool blured;
+  final Widget Function(BuildContext, Object, StackTrace?)? errorBuilder;
 
   bool _isUrl(String? string) {
     if (string == null) return false;
@@ -31,22 +34,49 @@ class ImageBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(8)),
-        image: image != "" && _isUrl(image)
-            ? DecorationImage(image: NetworkImage(image), fit: fit)
-            : DecorationImage(
-                image: AssetImage(
-                  image != '' ? image : 'assets/images/order_delivery.png',
-                ),
+        shape: circle ? BoxShape.circle : BoxShape.rectangle,
+        borderRadius: circle ? null : const BorderRadius.all(Radius.circular(8)),
+        image: !_isUrl(image) && image.isNotEmpty
+            ? DecorationImage(
+                image: AssetImage(image),
                 fit: fit,
-              ),
+              )
+            : null,
       ),
       height: height,
       width: width ?? height,
+      child: _isUrl(image)
+          ? Image.network(
+              image,
+              fit: fit,
+              height: height,
+              width: width ?? height,
+              errorBuilder: (context, error, stackTrace) {
+                return Image.asset(
+                  'assets/images/order_delivery.png',
+                  fit: fit,
+                  height: height,
+                  width: width ?? height,
+                );
+              },
+            )
+          : image.isNotEmpty
+              ? Image.asset(
+                  image,
+                  fit: fit,
+                  height: height,
+                  width: width ?? height,
+                )
+              : Image.asset(
+                  'assets/images/order_delivery.png',
+                  fit: fit,
+                  height: height,
+                  width: width ?? height,
+                ),
     );
   }
 
-  bluredImage() {
+  Widget bluredImage() {
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
       child: Container(
@@ -55,6 +85,14 @@ class ImageBuilder extends StatelessWidget {
           image: 'assets/images/student.jpg',
           height: height,
           fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) {
+            return Image.asset(
+              'assets/images/order_delivery.png',
+              fit: fit,
+              height: height,
+              width: width ?? height,
+            );
+          },
         ),
       ),
     );
