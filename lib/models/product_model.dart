@@ -70,7 +70,6 @@ class ProductModel {
 
   // Optional: Add a factory constructor to create a ProductModel from a map
   factory ProductModel.fromMap(Map<String, dynamic> map) {
-    print("birhanu!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     print(map);
     var product = ProductModel(
       id: map['_id'],
@@ -79,10 +78,10 @@ class ProductModel {
       productImage: List<String>.from(map['productImage'] as List<dynamic>),
       details: List<String>.from(map['details'] ?? []),
       // manufacturerId: map['manufacturerId'],
-      // companyName: map['ManufacturerId'] ?? '',
-      // address: map['ManufacturerId'],
-      // TIN: map['ManufacturerId'],
-      // logoImage: map['ManufacturerId'],
+      companyName: map['ManufacturerId']['companyName'] ?? '',
+      address: map['ManufacturerId']['address'],
+      TIN: map['ManufacturerId']['TIN'],
+      logoImage: map['ManufacturerId']['logoImage'],
       categoryId: map['categoryId'],
       subCategoryId: map['subCategoryId'],
       subSubCategoryId: map['subSubCategoryId'],

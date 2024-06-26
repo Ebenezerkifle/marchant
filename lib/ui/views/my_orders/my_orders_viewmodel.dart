@@ -42,12 +42,12 @@ class MyOrdersViewModel extends ReactiveViewModel {
     String title = '';
     List<String> images = [];
     if (cartList != null) {
-      print('-------------here we are------------------');
+      // print('-------------here we are------------------');
       for (int i = 0; i < cartList.length; i++) {
-        print('**************');
-        print(cartList[i].product?.productImage.isNotEmpty);
+        // print('**************');
+        // print(cartList[i].product?.productImage.isNotEmpty);
         String img = cartList[i].product?.productImage.first ?? '';
-        print(img);
+        // print(img);
         if (i == 1) {
           images.add(cartList[i].product?.productImage.first ?? "");
         }

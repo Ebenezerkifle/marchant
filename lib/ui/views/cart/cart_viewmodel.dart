@@ -54,7 +54,7 @@ class CartViewModel extends ReactiveViewModel {
       // _navigation.clearStackAndShow(Routes.myOrdersView);
       _landingService.setIndex(2);
     } catch (e) {
-      SnackBarService.showSnackBar(content: 'Order failed: $e');
+      SnackBarService.showSnackBar(content: 'Order failed: try again!');
     } finally {
       setBusy(false);
       _navigation.back();
