@@ -59,31 +59,33 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
                           color: Colors.white,
                           backgroundColor: kcPrimaryColor,
                           onRefresh: viewModel.refresh,
-                          child: Column(
-                            children: viewModel.pendingOrders.entries.map((e) {
-                              Map<String, dynamic> mergedData =
-                                  viewModel.getTitle(e.value.cartList);
-                              String title = mergedData['title'];
-                              List<String> images = mergedData['images'];
-                              return Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: middleSize,
-                                  vertical: smallSize,
-                                ),
-                                child: CustomeListTile(
-                                  title: title,
-                                  onTap:
-                                      () {}, //=> viewModel.onOrderTap(e.value),
-                                  imageUrl: images,
-                                  noPrice: false,
-                                  price: e.value.totalPrice ?? 0,
-                                  widget: Text(
-                                    '${e.value.count} Products',
-                                    style: AppTextStyle.h4Bold,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children:
+                                  viewModel.pendingOrders.entries.map((e) {
+                                Map<String, dynamic> mergedData =
+                                    viewModel.getTitle(e.value.cartList);
+                                String title = mergedData['title'];
+                                List<String> images = mergedData['images'];
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: middleSize,
+                                    vertical: smallSize,
                                   ),
-                                ),
-                              );
-                            }).toList(),
+                                  child: CustomeListTile(
+                                    title: title,
+                                    onTap: () => viewModel.onOrderTap(e.value),
+                                    imageUrl: images,
+                                    noPrice: false,
+                                    price: e.value.totalPrice ?? 0,
+                                    widget: Text(
+                                      '${e.value.count} Products',
+                                      style: AppTextStyle.h4Bold,
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
+                            ),
                           ),
                         ),
                   viewModel.deliveredOrders.isEmpty
@@ -114,8 +116,33 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
                           color: Colors.white,
                           backgroundColor: kcPrimaryColor,
                           onRefresh: viewModel.refresh,
-                          child: OrderList(
-                            orders: viewModel.deliveredOrders.values.toList(),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children:
+                                  viewModel.deliveredOrders.entries.map((e) {
+                                Map<String, dynamic> mergedData =
+                                    viewModel.getTitle(e.value.cartList);
+                                String title = mergedData['title'];
+                                List<String> images = mergedData['images'];
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: middleSize,
+                                    vertical: smallSize,
+                                  ),
+                                  child: CustomeListTile(
+                                    title: title,
+                                    onTap: () => viewModel.onOrderTap(e.value),
+                                    imageUrl: images,
+                                    noPrice: false,
+                                    price: e.value.totalPrice ?? 0,
+                                    widget: Text(
+                                      '${e.value.count} Products',
+                                      style: AppTextStyle.h4Bold,
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
+                            ),
                           ),
                         ),
                 ],

@@ -19,12 +19,10 @@ class OrdersApiService {
       needToken: true,
     );
     Map<String, OrderModel> orders = {};
-    // print(response.statusCode);
-    // print('orders ${response.body}');
     if (response.statusCode == 200 || response.statusCode == 201) {
       var body = jsonDecode(response.body);
       for (var ele in body['data']['orders']) {
-        OrderModel c = OrderModel.fromMap(ele);
+        OrderModel c = OrderModel.fromMapOrders(ele);
         orders[c.id ?? ''] = c;
       }
     }
@@ -45,7 +43,7 @@ class OrdersApiService {
     if (response.statusCode == 200 || response.statusCode == 201) {
       var body = jsonDecode(response.body);
       for (var ele in body['data']['orders']) {
-        OrderModel c = OrderModel.fromMap(ele);
+        OrderModel c = OrderModel.fromMapOrders(ele);
         deliveredOrders[c.id ?? ''] = c;
       }
     }

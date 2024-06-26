@@ -49,7 +49,7 @@ class LandingViewModel extends IndexTrackingViewModel {
         const BottomBarItem(title: 'Profile', icon: FontAwesomeIcons.solidUser),
       ];
 
-  List<Widget> get marchantViews => [
+  List<Widget> get marchantViews => const [
         HomeView(),
         CartView(),
         MyOrdersView(),

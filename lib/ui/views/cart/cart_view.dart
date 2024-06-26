@@ -16,7 +16,7 @@ import 'package:stacked/stacked.dart';
 import 'cart_viewmodel.dart';
 
 class CartView extends StackedView<CartViewModel> {
-  const CartView({Key? key, this.order}) : super(key: key);
+  const CartView({super.key, this.order});
   final OrderModel? order;
 
   @override

@@ -2,7 +2,7 @@ class ProductModel {
   String? id;
   String? productName;
   String? productTag;
-  List<String>? productImage;
+  List<String> productImage;
   String? manufacturerId;
   String? categoryId;
   String? subCategoryId;
@@ -22,7 +22,7 @@ class ProductModel {
     this.id,
     this.productName,
     this.productTag,
-    this.productImage,
+    this.productImage = const [],
     this.manufacturerId,
     this.categoryId,
     this.subCategoryId,
@@ -59,19 +59,28 @@ class ProductModel {
     };
   }
 
+  List<ProductModel> productsFromMap(map) {
+    List<ProductModel> products = [];
+    for (var ele in map) {
+      var p = ProductModel.fromMap(ele['productId']);
+      products.add(p);
+    }
+    return products;
+  }
+
   // Optional: Add a factory constructor to create a ProductModel from a map
   factory ProductModel.fromMap(Map<String, dynamic> map) {
-    return ProductModel(
+    var product = ProductModel(
       id: map['_id'],
-      productName: map['productName'],
+      productName: map['productName'] ?? '',
       productTag: map['productTag'],
-      productImage: List<String>.from(map['productImage'] ?? []),
+      productImage: List<String>.from(map['productImage'] as List<dynamic>),
       details: List<String>.from(map['details'] ?? []),
       // manufacturerId: map['manufacturerId'],
-      companyName: map['ManufacturerId']?['companyName'],
-      address: map['ManufacturerId']?['address'],
-      TIN: map['ManufacturerId']?['TIN'],
-      logoImage: map['ManufacturerId']?['logoImage'],
+      companyName: map['ManufacturerId'] ?? '',
+      address: map['ManufacturerId'],
+      TIN: map['ManufacturerId'],
+      logoImage: map['ManufacturerId'],
       categoryId: map['categoryId'],
       subCategoryId: map['subCategoryId'],
       subSubCategoryId: map['subSubCategoryId'],
@@ -81,5 +90,6 @@ class ProductModel {
       soldAmount: map['soldAmount'],
       status: map['status'],
     );
+    return product;
   }
 }
