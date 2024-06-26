@@ -20,10 +20,10 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
 
   @override
   Widget builder(
-    BuildContext context,
-    SubCategoryViewModel viewModel,
-    Widget? child,
-  ) {
+      BuildContext context,
+      SubCategoryViewModel viewModel,
+      Widget? child,
+      ) {
     return Scaffold(
       key: viewModel.scaffoldKey,
       backgroundColor: kcWhite,
@@ -48,80 +48,86 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                     padding: const EdgeInsets.symmetric(horizontal: middleSize),
                     child: Column(
                       children: [
-                        viewModel.categories.isEmpty
-                            ? SizedBox(
-                                height: screenHeight(context) * .3,
-                                width: double.infinity,
-                                child: const Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                              )
-                            // Horizontal scroll for subcategories
-                            : SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: middleSize),
-                                  child: Row(
-                                    children: [
-                                      Row(
+                        // Show progress indicator during refresh
+                        viewModel.isLoading
+                            ? const Center(child: CircularProgressIndicator())
+                            : viewModel.categories.isEmpty
+                                ? SizedBox(
+                                    height: screenHeight(context) * .3,
+                                    width: double.infinity,
+                                    child: const Center(
+                                      child: Text(
+                                        'No subcategories found',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                : SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: middleSize),
+                                      child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
-                                        children: viewModel
-                                            .getLimitedSubCategories()
-                                            .map((e) => Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
+                                        children: [
+                                          Row(
+                                            children: viewModel
+                                                .getLimitedSubCategories()
+                                                .map((e) => Padding(
+                                                      padding: const EdgeInsets.only(
                                                           right: smallSize),
-                                                  child: CategoryWidget(
-                                                    name: e.name ?? '',
-                                                    selected: viewModel.selected
-                                                            .containsKey(
-                                                                e.id) &&
-                                                        viewModel
-                                                            .selected[e.id]!,
-                                                    onTap: () {
-                                                      viewModel.toggleSelection(
-                                                          e.id ?? '');
-                                                      viewModel.getSubProducts(
-                                                          category: e.id ?? '');
-                                                    },
-                                                  ),
-                                                ))
-                                            .toList(),
-                                      ),
-                                      if (viewModel.hasMoreSubCategories)
-                                        CategoryWidget(
-                                          name: 'more',
-                                          selected: false,
-                                          onTap: viewModel.onMoreCategory,
-                                          roundness: 5,
-                                          hPadding: smallSize,
-                                          icon: const Icon(
-                                            FontAwesomeIcons.ellipsisVertical,
-                                            color: kcWhite,
+                                                      child: CategoryWidget(
+                                                        name: e.name ?? '',
+                                                        selected: viewModel.selected
+                                                            .containsKey(e.id) &&
+                                                            viewModel.selected[e.id]!,
+                                                        onTap: () {
+                                                          viewModel.toggleSelection(e.id ?? '');
+                                                          viewModel.getSubProducts(
+                                                              category: e.id ?? '');
+                                                        },
+                                                      ),
+                                                    ))
+                                                .toList(),
                                           ),
-                                        ),
-                                      horizontalSpaceMiddle,
-                                    ],
+                                          if (viewModel.hasMoreSubCategories)
+                                            CategoryWidget(
+                                              name: 'more',
+                                              selected: false,
+                                              onTap: viewModel.onMoreCategory,
+                                              roundness: 5,
+                                              hPadding: smallSize,
+                                              icon: const Icon(
+                                                FontAwesomeIcons.ellipsisVertical,
+                                                color: kcWhite,
+                                              ),
+                                            ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
                         verticalSpaceMedium,
-                        // Our Products Section Title
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text('Our Products', style: AppTextStyle.h2Bold),
                           ],
                         ),
-
                         viewModel.subProducts.isEmpty
                             ? SizedBox(
                                 height: screenHeight(context) * .4,
                                 width: double.infinity,
                                 child: const Center(
-                                  child: CircularProgressIndicator(),
+                                  child: Text(
+                                    'No products found',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
                                 ),
                               )
                             : CustomeGrideWidget(
@@ -134,8 +140,7 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                         title: e.value.productName ?? '',
                                         details: e.value.details ?? [],
                                         detailLimit: 3,
-                                        image:
-                                            e.value.productImage?.first ?? '',
+                                        image: e.value.productImage?.first ?? '',
                                         widget: Text(
                                           '${e.value.salesPrice} ETB',
                                           style: AppTextStyle.h4Bold,
@@ -151,7 +156,6 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                 ),
               ),
             ),
-            verticalSpaceSmall,
           ],
         ),
       ),
@@ -161,9 +165,4 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
   @override
   SubCategoryViewModel viewModelBuilder(BuildContext context) =>
       SubCategoryViewModel(categoryId: categoryValue);
-}
-
-String truncateTitle(String title, {int charLimit = 6}) {
-  if (title.length <= charLimit) return title;
-  return '${title.substring(0, charLimit)}...';
 }

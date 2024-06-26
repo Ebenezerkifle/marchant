@@ -7,6 +7,8 @@ import 'package:stacked/stacked.dart';
 import 'package:marchant/models/order_model.dart';
 
 import '../../common/app_colors.dart';
+import '../../common/app_text_style.dart';
+import '../widgets/custome_list_tile.dart';
 
 class MyOrdersView extends StackedView<MyOrdersViewModel> {
   const MyOrdersView({super.key});
@@ -29,7 +31,8 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
             ],
             onTap: (index) {
               if (index == 1 && viewModel.deliveredOrders.isEmpty) {
-                viewModel.getDeliveredOrders(); // Fetch delivered orders when the delivered tab is tapped
+                viewModel
+                    .getDeliveredOrders(); // Fetch delivered orders when the delivered tab is tapped
               }
             },
           ),
@@ -56,8 +59,31 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
                           color: Colors.white,
                           backgroundColor: kcPrimaryColor,
                           onRefresh: viewModel.refresh,
-                          child: OrderList(
-                            orders: viewModel.pendingOrders.values.toList(),
+                          child: Column(
+                            children: viewModel.pendingOrders.entries.map((e) {
+                              Map<String, dynamic> mergedData =
+                                  viewModel.getTitle(e.value.cartList);
+                              String title = mergedData['title'];
+                              List<String> images = mergedData['images'];
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: middleSize,
+                                  vertical: smallSize,
+                                ),
+                                child: CustomeListTile(
+                                  title: title,
+                                  onTap:
+                                      () {}, //=> viewModel.onOrderTap(e.value),
+                                  imageUrl: images,
+                                  noPrice: false,
+                                  price: e.value.totalPrice ?? 0,
+                                  widget: Text(
+                                    '${e.value.count} Products',
+                                    style: AppTextStyle.h4Bold,
+                                  ),
+                                ),
+                              );
+                            }).toList(),
                           ),
                         ),
                   viewModel.deliveredOrders.isEmpty
@@ -74,7 +100,8 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
                                   padding: EdgeInsets.all(16.0),
                                   child: Text(
                                     'No delivered orders yet',
-                                    style: TextStyle(fontSize: 18, color: Colors.grey),
+                                    style: TextStyle(
+                                        fontSize: 18, color: Colors.grey),
                                   ),
                                 ),
                               ),
@@ -98,7 +125,8 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
   }
 
   @override
-  MyOrdersViewModel viewModelBuilder(BuildContext context) => MyOrdersViewModel();
+  MyOrdersViewModel viewModelBuilder(BuildContext context) =>
+      MyOrdersViewModel();
 
   @override
   void onViewModelReady(MyOrdersViewModel viewModel) {
