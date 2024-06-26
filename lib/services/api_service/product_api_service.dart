@@ -18,7 +18,7 @@ class ProductApiCallService {
   Future<Map<String, ProductModel>> getProducts() async {
     // print('******************************************Birhanu********************');
     final String categoryId =
-        _userService.user?.CategoryId ?? '6669f80b707babd982746603';
+        _userService.user?.CategoryId ?? '';
 
     String token = await _getToken(); // Get the token
 
