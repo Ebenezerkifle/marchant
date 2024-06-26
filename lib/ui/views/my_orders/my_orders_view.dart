@@ -23,11 +23,11 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
       length: 2, // Number of tabs
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('My Orders'),
+          title: const Text('My Orders',  style: AppTextStyle.h1Bold,),
           bottom: TabBar(
             tabs: const [
-              Tab(text: 'Pending'),
-              Tab(text: 'Delivered'),
+              Tab(child: Text('Pending', style: AppTextStyle.h2Bold)),
+              Tab(child: Text('Delivered', style: AppTextStyle.h2Bold)),
             ],
             onTap: (index) {
               if (index == 1 && viewModel.deliveredOrders.isEmpty) {
