@@ -13,11 +13,15 @@ class MyOrdersViewModel extends ReactiveViewModel {
   Map<String, OrderModel> get deliveredOrders => _orderState.deliveredOrders;
   bool get isLoading => _orderState.isLoading;
 
-  final GlobalKey<RefreshIndicatorState> refreshIndicatorKey =
+  final GlobalKey<RefreshIndicatorState> refreshIndicatorKeyPending =
+      GlobalKey<RefreshIndicatorState>();
+  final GlobalKey<RefreshIndicatorState> refreshIndicatorKeyDelivered =
       GlobalKey<RefreshIndicatorState>();
 
   Future<void> refresh() async {
-    _orderState.getOrders();
+    await _orderState.getOrders();
+    await _orderState.getDeliveredOrders();
+    notifyListeners();
   }
 
   void getOrders() {

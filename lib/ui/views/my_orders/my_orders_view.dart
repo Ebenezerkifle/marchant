@@ -29,8 +29,7 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
             ],
             onTap: (index) {
               if (index == 1 && viewModel.deliveredOrders.isEmpty) {
-                viewModel
-                    .getDeliveredOrders(); // Fetch delivered orders when the delivered tab is tapped
+                viewModel.getDeliveredOrders(); // Fetch delivered orders when the delivered tab is tapped
               }
             },
           ),
@@ -52,7 +51,7 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
                           ),
                         )
                       : RefreshIndicator(
-                          key: viewModel.refreshIndicatorKey,
+                          key: viewModel.refreshIndicatorKeyPending,
                           displacement: 50,
                           color: Colors.white,
                           backgroundColor: kcPrimaryColor,
@@ -62,12 +61,28 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
                           ),
                         ),
                   viewModel.deliveredOrders.isEmpty
-                      ? const Center(
-                          child:
-                              CircularProgressIndicator(), // Show a loading indicator while fetching delivered orders
+                      ? RefreshIndicator(
+                          key: viewModel.refreshIndicatorKeyDelivered,
+                          displacement: 50,
+                          color: Colors.white,
+                          backgroundColor: kcPrimaryColor,
+                          onRefresh: viewModel.refresh,
+                          child: ListView(
+                            children: const [
+                              Center(
+                                child: Padding(
+                                  padding: EdgeInsets.all(16.0),
+                                  child: Text(
+                                    'No delivered orders yet',
+                                    style: TextStyle(fontSize: 18, color: Colors.grey),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         )
                       : RefreshIndicator(
-                          key: viewModel.refreshIndicatorKey,
+                          key: viewModel.refreshIndicatorKeyDelivered,
                           displacement: 50,
                           color: Colors.white,
                           backgroundColor: kcPrimaryColor,
@@ -83,8 +98,7 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
   }
 
   @override
-  MyOrdersViewModel viewModelBuilder(BuildContext context) =>
-      MyOrdersViewModel();
+  MyOrdersViewModel viewModelBuilder(BuildContext context) => MyOrdersViewModel();
 
   @override
   void onViewModelReady(MyOrdersViewModel viewModel) {

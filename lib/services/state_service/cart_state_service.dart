@@ -56,8 +56,12 @@ class CartStateService with ListenableServiceMixin {
       // totalAmount: _totalPrice.value,
       // count: _totalCount.value,
     );
+    print(products);
     try {
       final response = await _cartApiService.createNewOrder(order);
+      print("birhanu***********************************");
+      print(response.statusCode);
+      print(response.body);
       if (response.statusCode == 201) {
         _productStateService
             .placeOrder(order); // Store the order in the product state service
