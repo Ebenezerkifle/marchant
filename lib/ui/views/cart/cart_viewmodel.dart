@@ -23,7 +23,9 @@ class CartViewModel extends ReactiveViewModel {
 
   Map<String, TextEditingController> controllers = {};
   Map<String, CartModel> get cartItems => _cartService.cartItems;
-  double get totalPrice => _cartService.totalPrice;
+  // double get totalPrice => _cartService.totalPrice;
+    double get totalPrice => double.parse(_cartService.totalPrice.toStringAsFixed(2));
+
   num get totalCount => _cartService.totalCount;
 
   onChange(String count, String cartKey) {
@@ -31,7 +33,8 @@ class CartViewModel extends ReactiveViewModel {
     CartModel cartItem = cartItems[cartKey] ?? CartModel();
     num itemCount = num.parse(count);
     cartItem.count = itemCount;
-    cartItem.totalPrice = itemCount * (cartItem.product?.salesPrice ?? 0);
+    // cartItem.totalPrice = itemCount * (cartItem.product?.salesPrice ?? 0);
+        cartItem.totalPrice = double.parse((itemCount * (cartItem.product?.salesPrice ?? 0)).toStringAsFixed(2));
     _cartService.addToCart(cartItem);
   }
 

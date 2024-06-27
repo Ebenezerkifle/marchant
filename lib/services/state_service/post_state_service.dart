@@ -16,7 +16,6 @@ class PostStateService with ListenableServiceMixin {
 
   sendProduct(ProductModel product) async {
     String url = '$baseUrl$createProdUrl';
-    var token = await SessionService.getString(SessionKey.token);
     // api call
     var response = await ApiCallService.postCall(
       url,

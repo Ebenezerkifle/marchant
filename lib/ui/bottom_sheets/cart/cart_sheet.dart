@@ -49,7 +49,7 @@ class CartSheet extends StackedView<CartSheetModel> {
             ),
             verticalSpaceMiddle,
             ImageBuilder(
-              image: product.productImage?.first ?? '',
+              image: product.productImage.first,
               height: screenWidth(context) * .5,
               width: screenWidth(context),
             ),

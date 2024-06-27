@@ -21,7 +21,9 @@ class CartSheetModel extends ReactiveViewModel {
     }
   }
   num _totalPrice = 0.0;
-  num get totalPrice => _totalPrice;
+  // num get totalPrice => _totalPrice;
+  num get totalPrice => double.parse(_totalPrice.toStringAsFixed(2));
+
   num _count = 1;
   num get count => _count;
 

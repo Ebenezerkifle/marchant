@@ -63,7 +63,8 @@ class CartView extends StackedView<CartViewModel> {
                                               padding: const EdgeInsets.symmetric(
                                                   vertical: smallSize),
                                               child: CustomeListTile(
-                                                  title: value.product!.productName ??
+                                                  title: value.product!
+                                                          .productName ??
                                                       '',
                                                   description: value
                                                       .product?.description,
@@ -71,15 +72,20 @@ class CartView extends StackedView<CartViewModel> {
                                                     viewModel.getImage(value)
                                                   ],
                                                   price: order != null
-                                                      ? (value.product!.salesPrice ??
-                                                          0)
-                                                      : (value.totalPrice ?? 0),
+                                                      ? double.parse((value
+                                                                  .product!
+                                                                  .salesPrice ??
+                                                              0)
+                                                          .toStringAsFixed(2))
+                                                      : double.parse(viewModel
+                                                          .totalPrice
+                                                          .toStringAsFixed(2)),
+
                                                   // price: value.totalPrice ?? 0,
 
                                                   widget: order != null
                                                       ? Text('${value.product!.quantity} Items',
-                                                          style: AppTextStyle
-                                                              .h4Bold)
+                                                          style: AppTextStyle.h4Bold)
                                                       : Container(),
                                                   noPrice: false,
                                                   onTap: () {},
@@ -88,41 +94,34 @@ class CartView extends StackedView<CartViewModel> {
                                                       : Positioned(
                                                           top: tinySize,
                                                           right: tinySize,
-                                                          child:
-                                                              GestureDetector(
-                                                                  onTap: () => viewModel.onRemove(
-                                                                      value.id ??
-                                                                          ""),
-                                                                  child:
-                                                                      const Icon(
-                                                                    FontAwesomeIcons
-                                                                        .circleXmark,
-                                                                    color:
-                                                                        kcPrimaryColorDark,
-                                                                  ))),
+                                                          child: GestureDetector(
+                                                              onTap: () => viewModel.onRemove(value.id ?? ""),
+                                                              child: const Icon(
+                                                                FontAwesomeIcons
+                                                                    .circleXmark,
+                                                                color:
+                                                                    kcPrimaryColorDark,
+                                                              ))),
                                                   engagingWidget: order != null
                                                       ? null
                                                       : Padding(
-                                                          padding: const EdgeInsets.only(
-                                                              top: smallSize),
-                                                          child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment.spaceBetween,
-                                                              children: [
-                                                                Text(
-                                                                    '${value.count} Items',
-                                                                    style: AppTextStyle
-                                                                        .thinSmall),
-                                                                CartCalculator(
-                                                                    initialCount: value
-                                                                        .count
-                                                                        .toString(),
-                                                                    onChange: (count) => viewModel.onChange(
+                                                          padding: const EdgeInsets.only(top: smallSize),
+                                                          child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                                                            Text(
+                                                                '${value.count} Items',
+                                                                style: AppTextStyle
+                                                                    .thinSmall),
+                                                            CartCalculator(
+                                                                initialCount: value
+                                                                    .count
+                                                                    .toString(),
+                                                                onChange: (count) =>
+                                                                    viewModel.onChange(
                                                                         count ??
                                                                             '1',
                                                                         value.id ??
                                                                             ''))
-                                                              ])))))
+                                                          ])))))
                                           .toList()),
                                   verticalSpaceLarge,
                                 ],
@@ -156,10 +155,9 @@ class CartView extends StackedView<CartViewModel> {
                                         )),
                                     const Divider(),
                                     _details('Total Price',
-                                        '${order != null ? order!.totalAmount : viewModel.totalPrice} ETB'),
+                                        '${order != null ? order!.totalAmount?.toStringAsFixed(2) : viewModel.totalPrice.toStringAsFixed(2)} ETB'),
                                     _details('Item Count',
                                         '${order != null ? order!.products?.fold(0, (sum, product) => sum + (product.quantity?.toInt() ?? 0)) : viewModel.totalCount}'),
-
                                   ],
                                 ),
                               ),
