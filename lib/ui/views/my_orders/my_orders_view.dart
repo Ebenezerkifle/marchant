@@ -23,7 +23,10 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
       length: 2, // Number of tabs
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('My Orders',  style: AppTextStyle.h1Bold,),
+          title: const Text(
+            'My Orders',
+            style: AppTextStyle.h1Bold,
+          ),
           bottom: TabBar(
             tabs: const [
               Tab(child: Text('Pending', style: AppTextStyle.h2Bold)),
@@ -79,7 +82,8 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
                                     noPrice: false,
                                     price: e.value.totalAmount ?? 0,
                                     widget: Text(
-                                      '${e.value.products?.first.quantity} Products',
+                                      // '${e.value.products?.first.quantity} Products',
+                                      '${e.value.products?.fold(0, (sum, product) => sum + (product.quantity?.toInt() ?? 0)) as int} Products',
                                       style: AppTextStyle.h4Bold,
                                     ),
                                   ),
@@ -136,7 +140,7 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
                                     noPrice: false,
                                     price: e.value.totalAmount ?? 0,
                                     widget: Text(
-                                      '${e.value.products?.first.quantity} Products',
+                                      '${e.value.products?.fold(0, (sum, product) => sum + (product.quantity?.toInt() ?? 0)) as int} Products',
                                       style: AppTextStyle.h4Bold,
                                     ),
                                   ),

@@ -68,11 +68,16 @@ class CartView extends StackedView<CartViewModel> {
                                                   description: value
                                                       .product?.description,
                                                   imageUrl: [
-                                                    viewModel.getImage(value),
+                                                    viewModel.getImage(value)
                                                   ],
-                                                  price: value.totalPrice ?? 0,
+                                                  price: order != null
+                                                      ? (value.product!.salesPrice ??
+                                                          0)
+                                                      : (value.totalPrice ?? 0),
+                                                  // price: value.totalPrice ?? 0,
+
                                                   widget: order != null
-                                                      ? Text('${value.count} Items',
+                                                      ? Text('${value.product!.quantity} Items',
                                                           style: AppTextStyle
                                                               .h4Bold)
                                                       : Container(),
@@ -85,10 +90,9 @@ class CartView extends StackedView<CartViewModel> {
                                                           right: tinySize,
                                                           child:
                                                               GestureDetector(
-                                                                  onTap: () => viewModel
-                                                                      .onRemove(
-                                                                          value.id ??
-                                                                              ""),
+                                                                  onTap: () => viewModel.onRemove(
+                                                                      value.id ??
+                                                                          ""),
                                                                   child:
                                                                       const Icon(
                                                                     FontAwesomeIcons
@@ -103,8 +107,7 @@ class CartView extends StackedView<CartViewModel> {
                                                               top: smallSize),
                                                           child: Row(
                                                               mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
+                                                                  MainAxisAlignment.spaceBetween,
                                                               children: [
                                                                 Text(
                                                                     '${value.count} Items',

@@ -36,7 +36,7 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                     children: [
                       verticalSpaceMiddle,
                       ImageBuilder(
-                        image: product.productImage?.first ?? '',
+                        image: product.productImage.first,
                         height: screenWidth(context) * .7,
                         width: double.infinity,
                         fit: BoxFit.cover,

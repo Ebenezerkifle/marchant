@@ -72,9 +72,8 @@ class CartViewModel extends ReactiveViewModel {
   // }
 
   getImage(CartModel cart) {
-    return (cart.product!.productImage != null &&
-            cart.product!.productImage!.isNotEmpty)
-        ? cart.product!.productImage!.first
+    return (cart.product!.productImage.isNotEmpty)
+        ? cart.product!.productImage.first
         : '';
   }
 }

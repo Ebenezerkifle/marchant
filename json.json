@@ -1,0 +1,113 @@
+{
+    
+        "orders": [
+            {
+                "_id": "667c0866021797f96933ea5d",
+                "byRetailer": "667bc1507ee1bb201859ee58",
+                "products": [
+                    {
+                        "productId": {
+                            "_id": "667bc1001d609d28c0a4799b",
+                            "productName": "HomeAppliances",
+                            "productImage": [
+                                "https: //encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBejNvKyyf33UXKgn-TNY-7EJ6T9Dg6oy4rg&s"
+                            ],
+                            "ManufacturerId": {
+                                "_id": "667aa76b6d315dfb248ba12a",
+                                "companyName": "BBC",
+                                "fname": "Birhanu",
+                                "lname": "Gashaw",
+                                "email": "birhanu@gmail.com",
+                                "phoneNumber": "920202020",
+                                "address": "Addis",
+                                "CategoryId": "6679eeb22bd4caead8dfb054",
+                                "TIN": "12345678911",
+                                "logoImage": "",
+                                "companyProfile": "",
+                                "status": "Active",
+                                "role": "Manufacturer",
+                                "createdAt": "2024-06-25T11:18:03.042Z",
+                                "updatedAt": "2024-06-25T11:18:03.042Z",
+                                "__v": 0
+                            },
+                            "CategoryId": "667bc0621d609d28c0a47961",
+                            "SubCategoryId": "667bc0621d609d28c0a47962",
+                            "SubSubCategoryId": "667bc0621d609d28c0a47965",
+                            "salesPrice": 99.99,
+                            "description": "This is a sample       product description.",
+                            "details": [
+                                "16 RAM",
+                                "SSD",
+                                "HDD",
+                                "500GB"
+                            ],
+                            "quantity": 10,
+                            "SoldAmount": 0,
+                            "status": "Approved",
+                            "createdAt": "2024-06-26T07: 19: 28.945Z",
+                            "updatedAt": "2024-06-26T08: 14: 13.437Z",
+                            "productTag": "56709HZ",
+                            "__v": 0
+                        },
+                        "price": 99.99,
+                        "quantity": 1,
+                        "_id": "667c0866021797f96933ea5e"
+                    },
+                    {
+                        "productId": {
+                            "_id": "667bc17a1d609d28c0a479b0",
+                            "productName": "Laptops",
+                            "productImage": [
+                                "https: //encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBejNvKyyf33UXKgn-TNY-7EJ6T9Dg6oy4rg&s"
+                            ],
+                            "ManufacturerId": {
+                                "_id": "667aa76b6d315dfb248ba12a",
+                                "companyName": "BBC",
+                                "fname": "Birhanu",
+                                "lname": "Gashaw",
+                                "email": "birhanu@gmail.com",
+                                "phoneNumber": "920202020",
+                                "address": "Addis",
+                                "CategoryId": "6679eeb22bd4caead8dfb054",
+                                "TIN": "12345678911",
+                                "logoImage": "",
+                                "companyProfile": "",
+                                "status": "Active",
+                                "role": "Manufacturer",
+                                "createdAt": "2024-06-25T11:18:03.042Z",
+                                "updatedAt": "2024-06-25T11:18:03.042Z",
+                                "__v": 0
+                            },
+                            "CategoryId": "667bc0621d609d28c0a47961",
+                            "SubCategoryId": "667bc0621d609d28c0a47962",
+                            "SubSubCategoryId": "667bc0621d609d28c0a47965",
+                            "salesPrice": 99.99,
+                            "description": "This is a sample       product description.",
+                            "details": [
+                                "16 RAM",
+                                "SSD",
+                                "HDD",
+                                "500GB"
+                            ],
+                            "quantity": 10,
+                            "SoldAmount": 0,
+                            "status": "Approved",
+                            "createdAt": "2024-06-26T07: 21: 30387Z",
+                            "updatedAt": "2024-06-26T08: 13: 56.266Z",
+                            "productTag": "37060QD",
+                            "__v": 0
+                        },
+                        "price": 99.99,
+                        "quantity": 4,
+                        "_id": "667c0866021797f96933ea5f"
+                    }
+                ],
+                "totalAmount": 499.95,
+                "status": "Pending",
+                "activityStatus": "Active",
+                "createdAt": "2024-06-26T12: 24: 06.759Z",
+                "updatedAt": "2024-06-26T12: 24: 06.759Z",
+                "__v": 0
+            }
+        ]
+}
