@@ -8,8 +8,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 class CompanyProfileViewModel extends ReactiveViewModel {
   final _productState = locator<ProductStateService>();
-    final _navigation = locator<NavigationService>();
-
+  final _navigation = locator<NavigationService>();
 
   @override
   List<ListenableServiceMixin> get listenableServices => [_productState];
@@ -19,7 +18,7 @@ class CompanyProfileViewModel extends ReactiveViewModel {
 
   Map<String, ProductModel> get products => _productState.products;
 
-    void onItemSelected(ProductModel product) {
+  void onItemSelected(ProductModel product) {
     _navigation.navigateToProductDetailView(product: product);
   }
 }

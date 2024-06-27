@@ -70,5 +70,4 @@ class MyOrdersViewModel extends ReactiveViewModel {
   onOrderTap(OrderModel e) {
     _navigation.navigateToCartView(order: e);
   }
-
 }

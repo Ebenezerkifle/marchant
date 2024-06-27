@@ -58,6 +58,7 @@ class ApiCallService {
       return connectionProblem;
     }
   }
+
   // get call
   static Future<Response> getCall(String url, String token,
       {required bool needToken}) async {
@@ -73,8 +74,7 @@ class ApiCallService {
     }
   }
 
-
-   // patch call
+  // patch call
   static Future<Response> patchCall(String url, Map<String, dynamic> body,
       {required bool needToken}) async {
     needToken ? header[_auth] = 'Bearer ${await _getToken()}' : null;
@@ -90,7 +90,6 @@ class ApiCallService {
       return connectionProblem;
     }
   }
-
 
   static _getToken() async {
     return await SessionService.getString(SessionKey.token);

@@ -73,10 +73,13 @@ class SubCategoryViewModel extends ReactiveViewModel {
     _navigation.navigateToProductDetailView(product: product);
   }
 
-  void onMoreCategory() {
-    _navigation.navigateToCategoryListView();
-  }
+  // void onMoreCategory() {
+  //   _navigation.navigateToCategoryListView();
+  // }
 
+     void onMoreCategory() {
+    _navigation.navigateToSubCategoryListView(subCategories: subCategories);
+  }
   void onCartTap() {
     _navigation.navigateToCartView();
   }

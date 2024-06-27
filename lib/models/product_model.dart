@@ -70,7 +70,6 @@ class ProductModel {
 
   // Optional: Add a factory constructor to create a ProductModel from a map
   factory ProductModel.fromMap(Map<String, dynamic> map) {
-   
     var product = ProductModel(
       id: map['_id'],
       productName: map['productName'] ?? '',

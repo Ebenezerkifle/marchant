@@ -23,7 +23,6 @@ class Authentication {
     );
   }
 
-
   // change password
   Future<Response> changePassword(
     String userId,
@@ -61,5 +60,4 @@ class Authentication {
       needToken: false,
     );
   }
-
 }

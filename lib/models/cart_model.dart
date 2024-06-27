@@ -1,5 +1,3 @@
-
-
 import 'package:marchant/models/product_model.dart';
 
 class CartModel {

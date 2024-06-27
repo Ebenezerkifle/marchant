@@ -56,7 +56,7 @@ class CartStateService with ListenableServiceMixin {
       // totalAmount: _totalPrice.value,
       // count: _totalCount.value,
     );
-   
+
     try {
       final response = await _cartApiService.createNewOrder(order);
 

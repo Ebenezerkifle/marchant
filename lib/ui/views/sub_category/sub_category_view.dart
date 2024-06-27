@@ -20,10 +20,10 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
 
   @override
   Widget builder(
-      BuildContext context,
-      SubCategoryViewModel viewModel,
-      Widget? child,
-      ) {
+    BuildContext context,
+    SubCategoryViewModel viewModel,
+    Widget? child,
+  ) {
     return Scaffold(
       key: viewModel.scaffoldKey,
       backgroundColor: kcWhite,
@@ -68,7 +68,8 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                 : SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
                                     child: Padding(
-                                      padding: const EdgeInsets.only(left: middleSize),
+                                      padding: const EdgeInsets.only(
+                                          left: middleSize),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
@@ -77,17 +78,26 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                             children: viewModel
                                                 .getLimitedSubCategories()
                                                 .map((e) => Padding(
-                                                      padding: const EdgeInsets.only(
-                                                          right: smallSize),
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: smallSize),
                                                       child: CategoryWidget(
                                                         name: e.name ?? '',
-                                                        selected: viewModel.selected
-                                                            .containsKey(e.id) &&
-                                                            viewModel.selected[e.id]!,
+                                                        selected: viewModel
+                                                                .selected
+                                                                .containsKey(
+                                                                    e.id) &&
+                                                            viewModel.selected[
+                                                                e.id]!,
                                                         onTap: () {
-                                                          viewModel.toggleSelection(e.id ?? '');
-                                                          viewModel.getSubProducts(
-                                                              category: e.id ?? '');
+                                                          viewModel
+                                                              .toggleSelection(
+                                                                  e.id ?? '');
+                                                          viewModel
+                                                              .getSubProducts(
+                                                                  category:
+                                                                      e.id ??
+                                                                          '');
                                                         },
                                                       ),
                                                     ))
@@ -101,7 +111,8 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                               roundness: 5,
                                               hPadding: smallSize,
                                               icon: const Icon(
-                                                FontAwesomeIcons.ellipsisVertical,
+                                                FontAwesomeIcons
+                                                    .ellipsisVertical,
                                                 color: kcWhite,
                                               ),
                                             ),

@@ -93,7 +93,8 @@ class HomeView extends StackedView<HomeViewModel> {
                                   title: viewModel.categories.entries
                                           .elementAt(index)
                                           .value
-                                          .name ??'',
+                                          .name ??
+                                      '',
                                   image: viewModel.categories.entries
                                           .elementAt(index)
                                           .value

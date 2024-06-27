@@ -1,4 +1,3 @@
-
 import 'package:stacked/stacked.dart';
 
 enum RequestStatus {
@@ -8,8 +7,8 @@ enum RequestStatus {
   error,
 }
 
-class RequestStatusServiceService  with ListenableServiceMixin {
-  RequestStatusServiceService () {
+class RequestStatusServiceService with ListenableServiceMixin {
+  RequestStatusServiceService() {
     listenToReactiveValues([_status, _title, _description]);
   }
   final _status = ReactiveValue<RequestStatus>(RequestStatus.none);
