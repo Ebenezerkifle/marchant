@@ -9,7 +9,6 @@ class Authentication {
   Future<Response> registerNewUser(UserModel userModel) {
     return ApiCallService.postCall(
       '$baseUrl$singUpUrl',
-      'token',
       userModel.toMap(),
       needToken: false,
     );
@@ -19,9 +18,48 @@ class Authentication {
   Future<Response> loginUser(LoginModel login) {
     return ApiCallService.postCall(
       '$baseUrl$loginUrl',
-      'token',
       login.toMap(),
       needToken: false,
     );
   }
+
+
+  // change password
+  Future<Response> changePassword(
+    String userId,
+    String prevPassword,
+    String newPassword,
+  ) async {
+    return ApiCallService.patchCall(
+      '$baseUrl$changePassUrl',
+      {
+        'oldPassword': prevPassword,
+        'newPassword': newPassword,
+      },
+      needToken: true,
+    );
+  }
+
+  // reset password
+  Future<Response> resetPassword(
+    String userId,
+    String newPassword,
+  ) async {
+    return ApiCallService.patchCall(
+      '$baseUrl$singUpUrl$passResetUrl$userId',
+      {'password': newPassword},
+      needToken: false,
+    );
+  }
+
+  // check phone number
+  Future<Response> checkPhoneNumber(String phone) {
+    // String phoneNum = _changePhoneNumberFormat(phone);
+    return ApiCallService.postCall(
+      '$baseUrl$singUpUrl$phoneCheckerUrl',
+      {'phoneNumber': phone},
+      needToken: false,
+    );
+  }
+
 }

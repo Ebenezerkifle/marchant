@@ -4,8 +4,9 @@ import 'package:marchant/app/app.locator.dart';
 import '../helpers/test_helpers.dart';
 
 void main() {
-  group('ChangePaswordsViewModel Tests -', () {
+  group('RequestStatusServiceTest -', () {
     setUp(() => registerServices());
     tearDown(() => locator.reset());
   });
 }
+

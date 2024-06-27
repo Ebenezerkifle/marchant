@@ -41,7 +41,7 @@ class ManuProfileViewModel extends BaseViewModel {
       case SettingOptions.myDetail:
         break;
       case SettingOptions.changePass:
-        _navigation.navigateToChangePaswordsView();
+        _navigation.navigateToChangePasswordView();
         break;
       case SettingOptions.about:
         break;

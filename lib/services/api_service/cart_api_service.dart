@@ -14,7 +14,6 @@ class CartApiService {
     String token = await _getToken();
     return ApiCallService.postCall(
       '$baseUrl$orderUrl',
-      token,
       orderModel.toMap(),
       needToken: true,
     );

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
+import 'package:marchant/services/storage_service.dart/session.dart';
 
 class ApiCallService {
   // Authorization
@@ -23,11 +24,28 @@ class ApiCallService {
   static Response connectionProblem =
       Response('Please check your internet connection!', 500);
 
-  // post call
-  static Future<Response> postCall(
-      String url, String token, Map<String, dynamic> body,
+  // // post call
+  // static Future<Response> postCall(
+  //     String url, String token, Map<String, dynamic> body,
+  //     {required bool needToken}) async {
+  //   needToken ? header[_auth] = 'Bearer $token' : null; //'Bearer $token'
+  //   try {
+  //     Response response =
+  //         await post(Uri.parse(url), headers: header, body: jsonEncode(body))
+  //             .timeout(
+  //       timeout,
+  //       onTimeout: () => timeoutResponse,
+  //     );
+  //     return response;
+  //   } catch (e) {
+  //     return connectionProblem;
+  //   }
+  // }
+
+// post call
+  static Future<Response> postCall(String url, Map<String, dynamic> body,
       {required bool needToken}) async {
-    needToken ? header[_auth] = 'Bearer $token' : null; //'Bearer $token'
+    needToken ? header[_auth] = 'Bearer ${await _getToken()}' : null;
     try {
       Response response =
           await post(Uri.parse(url), headers: header, body: jsonEncode(body))
@@ -40,7 +58,6 @@ class ApiCallService {
       return connectionProblem;
     }
   }
-
   // get call
   static Future<Response> getCall(String url, String token,
       {required bool needToken}) async {
@@ -56,11 +73,11 @@ class ApiCallService {
     }
   }
 
-  // patch call
-  static Future<Response> patchCall(
-      String url, String token, Map<String, dynamic> body,
+
+   // patch call
+  static Future<Response> patchCall(String url, Map<String, dynamic> body,
       {required bool needToken}) async {
-    needToken ? header[_auth] = 'Bearer $token' : null; //'Bearer $token'
+    needToken ? header[_auth] = 'Bearer ${await _getToken()}' : null;
     try {
       Response response =
           await patch(Uri.parse(url), headers: header, body: jsonEncode(body))
@@ -72,5 +89,10 @@ class ApiCallService {
     } catch (e) {
       return connectionProblem;
     }
+  }
+
+
+  static _getToken() async {
+    return await SessionService.getString(SessionKey.token);
   }
 }

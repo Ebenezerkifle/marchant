@@ -8,3 +8,6 @@ const readPendingOrderUrl = '/api/order/ReadPendingOrdersByRetailer';
 const readDeliveredOrderUrl = '/api/order/ReadDeliveredOrdersByRetailer';
 const createProdUrl = '/api/product';
 const getProductsByManufacturer = '/api/product/byManufacturer';
+const changePassUrl = '/api/retailer/updatePassword';
+const passResetUrl = '/passwordReset/';
+const phoneCheckerUrl = '/phoneChecker/';

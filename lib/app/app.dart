@@ -5,6 +5,7 @@ import 'package:marchant/services/state_service/onboarding_state_service.dart';
 import 'package:marchant/services/state_service/orders_state_service.dart';
 import 'package:marchant/services/state_service/post_state_service.dart';
 import 'package:marchant/services/state_service/product_state_service.dart';
+import 'package:marchant/services/state_service/request_status_service_service.dart';
 import 'package:marchant/ui/bottom_sheets/notice/notice_sheet.dart';
 import 'package:marchant/ui/dialogs/info_alert/info_alert_dialog.dart';
 import 'package:marchant/ui/views/home/home_view.dart';
@@ -51,7 +52,7 @@ import 'package:marchant/ui/views/onboarding/change_paswords/change_paswords_vie
     MaterialRoute(page: PostView),
     MaterialRoute(page: SubCategoryView),
     MaterialRoute(page: CompanyProfileView),
-    MaterialRoute(page: ChangePaswordsView),
+    MaterialRoute(page: ChangePasswordView),
 // @stacked-route
   ],
   dependencies: [
@@ -66,6 +67,7 @@ import 'package:marchant/ui/views/onboarding/change_paswords/change_paswords_vie
     LazySingleton(classType: EnrollmentStateService),
     LazySingleton(classType: PostStateService),
     LazySingleton(classType: OrderStateService),
+    LazySingleton(classType: RequestStatusServiceService),
 // @stacked-service
   ],
   bottomsheets: [

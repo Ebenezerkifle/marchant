@@ -56,7 +56,7 @@ class ProfileViewModel extends BaseViewModel {
       case SettingOptions.shortCode:
         break;
       case SettingOptions.changePass:
-        _navigation.navigateToChangePaswordsView();
+        _navigation.navigateToChangePasswordView();
         break;
       case SettingOptions.myDetail:
         break;

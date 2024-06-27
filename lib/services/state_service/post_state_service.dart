@@ -20,7 +20,6 @@ class PostStateService with ListenableServiceMixin {
     // api call
     var response = await ApiCallService.postCall(
       url,
-      token,
       product.toMap(),
       needToken: true,
     );

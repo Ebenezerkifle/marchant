@@ -68,7 +68,7 @@ class Routes {
 
   static const companyProfileView = '/company-profile-view';
 
-  static const changePaswordsView = '/change-paswords-view';
+  static const changePasswordView = '/change-password-view';
 
   static const all = <String>{
     homeView,
@@ -87,7 +87,7 @@ class Routes {
     postView,
     subCategoryView,
     companyProfileView,
-    changePaswordsView,
+    changePasswordView,
   };
 }
 
@@ -158,8 +158,8 @@ class StackedRouter extends _i1.RouterBase {
       page: _i17.CompanyProfileView,
     ),
     _i1.RouteDef(
-      Routes.changePaswordsView,
-      page: _i18.ChangePaswordsView,
+      Routes.changePasswordView,
+      page: _i18.ChangePasswordView,
     ),
   ];
 
@@ -269,9 +269,13 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
-    _i18.ChangePaswordsView: (data) {
+    _i18.ChangePasswordView: (data) {
+      final args = data.getArgs<ChangePasswordViewArguments>(
+        orElse: () => const ChangePasswordViewArguments(),
+      );
       return _i19.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i18.ChangePaswordsView(),
+        builder: (context) =>
+            _i18.ChangePasswordView(key: args.key, forget: args.forget),
         settings: data,
       );
     },
@@ -389,6 +393,33 @@ class CompanyProfileViewArguments {
   @override
   int get hashCode {
     return key.hashCode ^ product.hashCode;
+  }
+}
+
+class ChangePasswordViewArguments {
+  const ChangePasswordViewArguments({
+    this.key,
+    this.forget = false,
+  });
+
+  final _i19.Key? key;
+
+  final bool forget;
+
+  @override
+  String toString() {
+    return '{"key": "$key", "forget": "$forget"}';
+  }
+
+  @override
+  bool operator ==(covariant ChangePasswordViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key && other.forget == forget;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode ^ forget.hashCode;
   }
 }
 
@@ -630,14 +661,17 @@ extension NavigatorStateExtension on _i22.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToChangePaswordsView([
+  Future<dynamic> navigateToChangePasswordView({
+    _i19.Key? key,
+    bool forget = false,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
-    return navigateTo<dynamic>(Routes.changePaswordsView,
+  }) async {
+    return navigateTo<dynamic>(Routes.changePasswordView,
+        arguments: ChangePasswordViewArguments(key: key, forget: forget),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -881,14 +915,17 @@ extension NavigatorStateExtension on _i22.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithChangePaswordsView([
+  Future<dynamic> replaceWithChangePasswordView({
+    _i19.Key? key,
+    bool forget = false,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
-    return replaceWith<dynamic>(Routes.changePaswordsView,
+  }) async {
+    return replaceWith<dynamic>(Routes.changePasswordView,
+        arguments: ChangePasswordViewArguments(key: key, forget: forget),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
