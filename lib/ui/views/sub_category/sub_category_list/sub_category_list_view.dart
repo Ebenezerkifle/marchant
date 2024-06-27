@@ -74,41 +74,88 @@ import 'package:stacked/stacked.dart';
 
 
 
+// class SubCategoryListView extends StatelessWidget {
+//   final List<Category> subCategories;
+
+//   const SubCategoryListView({Key? key, required this.subCategories}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: SafeArea(
+//         top: true,
+//         child: Column(
+//           children: [
+//             CustomeAppBar(title: 'All categories'),
+//             verticalSpaceMedium,
+//             Expanded(
+//               child: SingleChildScrollView(
+//                 child: Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: subCategories
+//                       .map((e) => Padding(
+//                             padding: const EdgeInsets.symmetric(horizontal: middleSize),
+//                             child: CustomeListTile(
+//                               title: e.name ?? '',
+//                               noImage: true,
+//                               center: true,
+//                               onTap: () {
+//                                 // viewModel.navigateToSubCategory(e.id); 
+//                               },
+//                             ),
+//                           ))
+//                       .toList(),
+//                 ),
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+
+
+
+
+
 class SubCategoryListView extends StatelessWidget {
   final List<Category> subCategories;
 
-  const SubCategoryListView({Key? key, required this.subCategories}) : super(key: key);
+  SubCategoryListView({Key? key, required this.subCategories}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        top: true,
-        child: Column(
-          children: [
-            CustomeAppBar(title: 'All categories'),
-            verticalSpaceMedium,
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: subCategories
-                      .map((e) => Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: middleSize),
-                            child: CustomeListTile(
-                              title: e.name ?? '',
-                              noImage: true,
-                              center: true,
-                              onTap: () {
-                                // viewModel.navigateToSubCategory(e.id); 
-                              },
-                            ),
-                          ))
-                      .toList(),
+    return ViewModelBuilder<SubCategoryListViewModel>.reactive(
+      viewModelBuilder: () => SubCategoryListViewModel(),
+      builder: (context, viewModel, child) => Scaffold(
+        body: SafeArea(
+          top: true,
+          child: Column(
+            children: [
+              CustomeAppBar(title: 'All categories'), // Corrected widget name
+              verticalSpaceMedium,
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: subCategories
+                        .map((e) => Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 16.0), // Assuming `middleSize` is defined elsewhere
+                              child: CustomeListTile(
+                                title: e.name ?? '',
+                                noImage: true,
+                                center: true,
+                                onTap: () => viewModel.navigateToSubCategory(e.id!), // Fixed onTap function call
+                              ),
+                            ))
+                        .toList(),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
