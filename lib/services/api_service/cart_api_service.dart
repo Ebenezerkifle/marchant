@@ -12,7 +12,6 @@ class CartApiService {
   // Create new order
   Future<Response> createNewOrder(OrderModel orderModel) async {
     String token = await _getToken();
-
     return ApiCallService.postCall(
       '$baseUrl$orderUrl',
       token,

@@ -56,12 +56,10 @@ class CartStateService with ListenableServiceMixin {
       // totalAmount: _totalPrice.value,
       // count: _totalCount.value,
     );
-    print(products);
+   
     try {
       final response = await _cartApiService.createNewOrder(order);
-      print("birhanu***********************************");
-      print(response.statusCode);
-      print(response.body);
+
       if (response.statusCode == 201) {
         _productStateService
             .placeOrder(order); // Store the order in the product state service
@@ -76,6 +74,15 @@ class CartStateService with ListenableServiceMixin {
     }
   }
 
+  // _totalPriceCalculator() {
+  //   _totalPrice.value = 0;
+  //   _totalCount.value = 0;
+  //   for (var element in _cartItems.value.values) {
+  //     _totalPrice.value += element.totalPrice ?? 0;
+  //     _totalCount.value += element.count ?? 0;
+  //   }
+  //   notifyListeners();
+  // }
   _totalPriceCalculator() {
     _totalPrice.value = 0;
     _totalCount.value = 0;
@@ -83,6 +90,8 @@ class CartStateService with ListenableServiceMixin {
       _totalPrice.value += element.totalPrice ?? 0;
       _totalCount.value += element.count ?? 0;
     }
+    // Round the total price to 2 decimal places
+    _totalPrice.value = double.parse(_totalPrice.value.toStringAsFixed(2));
     notifyListeners();
   }
 

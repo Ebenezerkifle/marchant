@@ -51,7 +51,7 @@ class SubCategoryViewModel extends ReactiveViewModel {
 
   getSubProducts({String? category}) {
     print("********Birhanu gashaw******************");
-    print(category);
+    // print(category);
     _productState.getSubProducts(category ?? categoryId);
   }
 

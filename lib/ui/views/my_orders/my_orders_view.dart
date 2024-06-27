@@ -83,7 +83,8 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
                                     price: e.value.totalAmount ?? 0,
                                     widget: Text(
                                       // '${e.value.products?.first.quantity} Products',
-                                      '${e.value.products?.fold(0, (sum, product) => sum + (product.quantity?.toInt() ?? 0)) as int} Products',
+                                      '${e.value.products?.length} Products',
+                                      // '${e.value.products?.fold(0, (sum, product) => sum + (product.quantity?.toInt() ?? 0)) as int} Products',
                                       style: AppTextStyle.h4Bold,
                                     ),
                                   ),
@@ -140,7 +141,9 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
                                     noPrice: false,
                                     price: e.value.totalAmount ?? 0,
                                     widget: Text(
-                                      '${e.value.products?.fold(0, (sum, product) => sum + (product.quantity?.toInt() ?? 0)) as int} Products',
+                                      // '${e.value.products?.fold(0, (sum, product) => sum + (product.quantity?.toInt() ?? 0)) as int} Products',
+                                      '${e.value.products?.length} Products',
+
                                       style: AppTextStyle.h4Bold,
                                     ),
                                   ),
