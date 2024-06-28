@@ -267,7 +267,9 @@ class StackedRouter extends _i1.RouterBase {
       final args = data.getArgs<SubCategoryViewArguments>(nullOk: false);
       return _i20.MaterialPageRoute<dynamic>(
         builder: (context) => _i16.SubCategoryView(
-            key: args.key, categoryValue: args.categoryValue),
+            key: args.key,
+            categoryValue: args.categoryValue,
+            subSubCategoryValue: args.subSubCategoryValue),
         settings: data,
       );
     },
@@ -293,7 +295,9 @@ class StackedRouter extends _i1.RouterBase {
       final args = data.getArgs<SubCategoryListViewArguments>(nullOk: false);
       return _i20.MaterialPageRoute<dynamic>(
         builder: (context) => _i19.SubCategoryListView(
-            key: args.key, subCategories: args.subCategories),
+            key: args.key,
+            subCategories: args.subCategories,
+            categoryValue: args.categoryValue),
         settings: data,
       );
     },
@@ -364,26 +368,31 @@ class SubCategoryViewArguments {
   const SubCategoryViewArguments({
     this.key,
     required this.categoryValue,
+    required this.subSubCategoryValue,
   });
 
   final _i20.Key? key;
 
   final String categoryValue;
 
+  final String subSubCategoryValue;
+
   @override
   String toString() {
-    return '{"key": "$key", "categoryValue": "$categoryValue"}';
+    return '{"key": "$key", "categoryValue": "$categoryValue", "subSubCategoryValue": "$subSubCategoryValue"}';
   }
 
   @override
   bool operator ==(covariant SubCategoryViewArguments other) {
     if (identical(this, other)) return true;
-    return other.key == key && other.categoryValue == categoryValue;
+    return other.key == key &&
+        other.categoryValue == categoryValue &&
+        other.subSubCategoryValue == subSubCategoryValue;
   }
 
   @override
   int get hashCode {
-    return key.hashCode ^ categoryValue.hashCode;
+    return key.hashCode ^ categoryValue.hashCode ^ subSubCategoryValue.hashCode;
   }
 }
 
@@ -445,26 +454,31 @@ class SubCategoryListViewArguments {
   const SubCategoryListViewArguments({
     this.key,
     required this.subCategories,
+    this.categoryValue,
   });
 
   final _i20.Key? key;
 
   final List<_i23.Category> subCategories;
 
+  final String? categoryValue;
+
   @override
   String toString() {
-    return '{"key": "$key", "subCategories": "$subCategories"}';
+    return '{"key": "$key", "subCategories": "$subCategories", "categoryValue": "$categoryValue"}';
   }
 
   @override
   bool operator ==(covariant SubCategoryListViewArguments other) {
     if (identical(this, other)) return true;
-    return other.key == key && other.subCategories == subCategories;
+    return other.key == key &&
+        other.subCategories == subCategories &&
+        other.categoryValue == categoryValue;
   }
 
   @override
   int get hashCode {
-    return key.hashCode ^ subCategories.hashCode;
+    return key.hashCode ^ subCategories.hashCode ^ categoryValue.hashCode;
   }
 }
 
@@ -674,6 +688,7 @@ extension NavigatorStateExtension on _i24.NavigationService {
   Future<dynamic> navigateToSubCategoryView({
     _i20.Key? key,
     required String categoryValue,
+    required String subSubCategoryValue,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -681,8 +696,10 @@ extension NavigatorStateExtension on _i24.NavigationService {
         transition,
   }) async {
     return navigateTo<dynamic>(Routes.subCategoryView,
-        arguments:
-            SubCategoryViewArguments(key: key, categoryValue: categoryValue),
+        arguments: SubCategoryViewArguments(
+            key: key,
+            categoryValue: categoryValue,
+            subSubCategoryValue: subSubCategoryValue),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -726,6 +743,7 @@ extension NavigatorStateExtension on _i24.NavigationService {
   Future<dynamic> navigateToSubCategoryListView({
     _i20.Key? key,
     required List<_i23.Category> subCategories,
+    String? categoryValue,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -734,7 +752,9 @@ extension NavigatorStateExtension on _i24.NavigationService {
   }) async {
     return navigateTo<dynamic>(Routes.subCategoryListView,
         arguments: SubCategoryListViewArguments(
-            key: key, subCategories: subCategories),
+            key: key,
+            subCategories: subCategories,
+            categoryValue: categoryValue),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -946,6 +966,7 @@ extension NavigatorStateExtension on _i24.NavigationService {
   Future<dynamic> replaceWithSubCategoryView({
     _i20.Key? key,
     required String categoryValue,
+    required String subSubCategoryValue,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -953,8 +974,10 @@ extension NavigatorStateExtension on _i24.NavigationService {
         transition,
   }) async {
     return replaceWith<dynamic>(Routes.subCategoryView,
-        arguments:
-            SubCategoryViewArguments(key: key, categoryValue: categoryValue),
+        arguments: SubCategoryViewArguments(
+            key: key,
+            categoryValue: categoryValue,
+            subSubCategoryValue: subSubCategoryValue),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -998,6 +1021,7 @@ extension NavigatorStateExtension on _i24.NavigationService {
   Future<dynamic> replaceWithSubCategoryListView({
     _i20.Key? key,
     required List<_i23.Category> subCategories,
+    String? categoryValue,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1006,7 +1030,9 @@ extension NavigatorStateExtension on _i24.NavigationService {
   }) async {
     return replaceWith<dynamic>(Routes.subCategoryListView,
         arguments: SubCategoryListViewArguments(
-            key: key, subCategories: subCategories),
+            key: key,
+            subCategories: subCategories,
+            categoryValue: categoryValue),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

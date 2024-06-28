@@ -80,7 +80,9 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
                                     onTap: () => viewModel.onOrderTap(e.value),
                                     imageUrl: images,
                                     noPrice: false,
-                                    price: e.value.totalAmount ?? 0,
+                                    price: double.parse(
+                                        (e.value.totalAmount ?? 0)
+                                            .toStringAsFixed(2)),
                                     widget: Text(
                                       // '${e.value.products?.first.quantity} Products',
                                       '${e.value.products?.length} Products',
@@ -139,7 +141,9 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
                                     onTap: () => viewModel.onOrderTap(e.value),
                                     imageUrl: images,
                                     noPrice: false,
-                                    price: e.value.totalAmount ?? 0,
+                                    price: double.parse(
+                                        (e.value.totalAmount ?? 0)
+                                            .toStringAsFixed(2)),
                                     widget: Text(
                                       // '${e.value.products?.fold(0, (sum, product) => sum + (product.quantity?.toInt() ?? 0)) as int} Products',
                                       '${e.value.products?.length} Products',

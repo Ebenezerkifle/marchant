@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marchant/models/category_model.dart';
-import 'package:marchant/ui/common/app_colors.dart';
 import 'package:marchant/ui/common/ui_helpers.dart';
 import 'package:marchant/ui/views/sub_category/sub_category_list/sub_category_list_viewmodel.dart';
 import 'package:marchant/ui/views/widgets/custome_app_bar.dart';
@@ -122,13 +120,15 @@ import 'package:stacked/stacked.dart';
 
 class SubCategoryListView extends StatelessWidget {
   final List<Category> subCategories;
+  final String? categoryValue;
 
-  SubCategoryListView({Key? key, required this.subCategories}) : super(key: key);
+
+  SubCategoryListView({Key? key, required this.subCategories, this.categoryValue}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SubCategoryListViewModel>.reactive(
-      viewModelBuilder: () => SubCategoryListViewModel(),
+      viewModelBuilder: () => SubCategoryListViewModel(categoryId: categoryValue!),
       builder: (context, viewModel, child) => Scaffold(
         body: SafeArea(
           top: true,

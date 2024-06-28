@@ -37,7 +37,7 @@ class HomeViewModel extends ReactiveViewModel {
 
   // Method to navigate to SubCategoryView
   void navigateToSubCategory(String categoryId) {
-    _navigation.navigateToSubCategoryView(categoryValue: categoryId);
+    _navigation.navigateToSubCategoryView(categoryValue: categoryId, subSubCategoryValue: '');
     // );
   }
 

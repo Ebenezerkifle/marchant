@@ -19,7 +19,7 @@ class CategoryListViewModel extends ReactiveViewModel {
   // }
 
   void navigateToSubCategory(String categoryId) {
-    _navigation.navigateToSubCategoryView(categoryValue: categoryId);
+    _navigation.navigateToSubCategoryView(categoryValue: categoryId, subSubCategoryValue: '');
     // );
   }
 }

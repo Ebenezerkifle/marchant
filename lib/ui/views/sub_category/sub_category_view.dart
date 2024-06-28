@@ -13,10 +13,11 @@ import 'package:stacked/stacked.dart';
 import 'sub_category_viewmodel.dart';
 
 class SubCategoryView extends StackedView<SubCategoryViewModel> {
-  const SubCategoryView({Key? key, required this.categoryValue})
+  const SubCategoryView({Key? key, required this.categoryValue, required this.subSubCategoryValue})
       : super(key: key);
 
   final String categoryValue;
+  final String subSubCategoryValue;
 
   @override
   Widget builder(
@@ -175,5 +176,5 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
 
   @override
   SubCategoryViewModel viewModelBuilder(BuildContext context) =>
-      SubCategoryViewModel(categoryId: categoryValue);
+      SubCategoryViewModel(categoryId: categoryValue, subSubCategoryId: subSubCategoryValue);
 }

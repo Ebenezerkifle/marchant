@@ -13,7 +13,9 @@ class SubCategoryViewModel extends ReactiveViewModel {
   final _productState = locator<ProductStateService>();
   final _cartState = locator<CartStateService>();
 
-  String categoryId = '';
+   String categoryId;
+  String? subSubCategoryId;
+
   List<Category> subCategories = [];
   Map<String, bool> _selected = {};
 
@@ -21,7 +23,7 @@ class SubCategoryViewModel extends ReactiveViewModel {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  SubCategoryViewModel({required this.categoryId}) {
+  SubCategoryViewModel({required this.categoryId, this.subSubCategoryId}) {
     subCategories = getSubCategories();
     getSubProducts();
     notifyListeners();
@@ -38,7 +40,7 @@ class SubCategoryViewModel extends ReactiveViewModel {
     _isLoading = true; // Set loading to true
     notifyListeners();
     await getSubProducts();
-    await getSubCategories();
+    getSubCategories();
     _isLoading = false; // Set loading to false after fetching
     notifyListeners();
   }
@@ -49,10 +51,12 @@ class SubCategoryViewModel extends ReactiveViewModel {
   Map<String, Category> get categories => _productState.categories;
   Map<String, ProductModel> get subProducts => _productState.subProducts;
 
-  getSubProducts({String? category}) {
-    print("********Birhanu gashaw******************");
-    // print(category);
-    _productState.getSubProducts(category ?? categoryId);
+ getSubProducts({String? category}) {
+    if (subSubCategoryId != null && subSubCategoryId!.isNotEmpty) {
+      _productState.getSubProducts(category ?? subSubCategoryId!);
+    } else {
+      _productState.getSubProducts(category ?? categoryId);
+    }
   }
 
   List<Category> getSubCategories() {
@@ -77,9 +81,10 @@ class SubCategoryViewModel extends ReactiveViewModel {
   //   _navigation.navigateToCategoryListView();
   // }
 
-     void onMoreCategory() {
-    _navigation.navigateToSubCategoryListView(subCategories: subCategories);
+  void onMoreCategory() {
+    _navigation.navigateToSubCategoryListView(subCategories: subCategories, categoryValue: categoryId);
   }
+
   void onCartTap() {
     _navigation.navigateToCartView();
   }
