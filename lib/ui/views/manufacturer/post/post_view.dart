@@ -62,12 +62,13 @@ class PostView extends StackedView<PostViewModel> {
                     ),
                     verticalSpaceMiddle,
                     CustomeFormField(
-                      title: 'product name',
+                      title: viewModel.name,
                       widget: InputField(
                         validator: (value) => viewModel.validateText(
-                            value,
-                            viewModel.productNameController,
-                            'Enter product name'),
+                          value,
+                          viewModel.productNameController,
+                          viewModel.name.trim(),
+                        ),
                         error: viewModel.formError
                             .containsKey(viewModel.productNameController),
                         controller: viewModel.productNameController,
@@ -251,6 +252,20 @@ class PostView extends StackedView<PostViewModel> {
                       ),
                     ),
                     verticalSpaceLarge,
+                    if (viewModel.hasError && viewModel.errorMsg.isNotEmpty ||
+                        viewModel.formError.isNotEmpty) ...[
+                      Text(
+                        viewModel.formError.isNotEmpty
+                            ? viewModel.formError.entries.first.value
+                            : viewModel.errorMsg,
+                        style: AppTextStyle.withColor(
+                          color: kcDanger,
+                          style: AppTextStyle.h4Normal,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      verticalSpaceSmall,
+                    ],
                     CustomeButton(
                       text: 'Submit',
                       onTap: viewModel.onPostProduct,

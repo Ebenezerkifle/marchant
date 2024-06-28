@@ -75,7 +75,7 @@ class ChangePasswordsViewModel extends BaseViewModel {
         passwordController.text,
         newPasswordController.text,
       );
-      print(response.body);
+      // print(response.body);
       if (response.statusCode == 200 || response.statusCode == 201) {
         // success
         // show snakbar here

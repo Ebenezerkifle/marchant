@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/models/category_model.dart';
 import 'package:marchant/models/product_model.dart';
@@ -11,6 +12,7 @@ import 'package:marchant/services/validation_service/front_validation.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../../app/app.dialogs.dart';
+import '../../../../services/state_service/snackbar_service.dart';
 
 class PostViewModel extends ReactiveViewModel {
   final _enrollmentService = locator<EnrollmentStateService>();
@@ -61,6 +63,10 @@ class PostViewModel extends ReactiveViewModel {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   GlobalKey<FormState> get formKey => _formKey;
 
+
+  String get name => 'Product name';
+
+
   // Controllers for text fields
   TextEditingController productNameController = TextEditingController();
   TextEditingController salesPriceController = TextEditingController();
@@ -99,7 +105,7 @@ class PostViewModel extends ReactiveViewModel {
   }
 
   void onSubCategoryChanged(String? newValue) {
-    print(newValue);
+    // print(newValue);
 
     selectedSubCategory = newValue;
     // Reset sub-sub-categories when sub-category changes
@@ -123,45 +129,90 @@ class PostViewModel extends ReactiveViewModel {
     selectedSubSubCategory = newValue;
     notifyListeners();
   }
+  
 
+  String errorMsg = '';
+
+  // Handle form submission
+  void onPostProduct() async {
+    // _formError.remove('response');
+        errorMsg = '';
+
+    if (_formKey.currentState!.validate() &&
+        _formError.isEmpty &&
+        validateDropdowns()) {
+      setBusy(true);
+      Response response;
+
+      // Create product model
+      var product = ProductModel(
+        productName: productNameController.text,
+        details:
+            detailsController.text.split(',').map((e) => e.trim()).toList(),
+        productImage: images,
+        manufacturerId: _userService.user!.id,
+        description: descriptionController.text,
+        address: addressController.text,
+        quantity: num.parse(quantityController.text),
+        categoryId: selectedCategory,
+        subCategoryId: selectedSubCategory,
+        subSubCategoryId: selectedSubSubCategory,
+        salesPrice: num.parse(salesPriceController.text),
+      );
+
+      // Send product data to server
+       response = await _postService.sendProduct(product);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        SnackBarService.showSnackBar(
+          content: 'Your Product is successfuly uploaded, please wait till approved'.trim(),
+        );
+        // _clearFields();
+        _landing.setIndex(0);
+      } else {
+        setError(true);
+        errorMsg = 'Something went wrong!';
+        notifyListeners();
+      }
+
+      setBusy(false);
+    }
+  }
+//  _clearFields() {
+//     passwordController.clear();
+//     confirmPasswordController.clear();
+//     newPasswordController.clear();
+//   }
   //---------------- FRONT END VALIDATION -------------
 
-  // _setStateOfFormField(String msg, var controller) {
-  //   // takes the validation result and set the state
-  //   if (msg.isNotEmpty) {
-  //     _formError[controller] = msg;
-  //     notifyListeners();
-  //     return;
-  //   }
-  //   _formError.remove(controller);
-  //   notifyListeners();
-  //   return;
-  // }
 
-  // Validate text.
+  _setStateOfFormField(String msg, var controller) {
+    // takes the validation result and set the state
+    if (msg.isNotEmpty) {
+      _formError[controller] = msg;
+      notifyListeners();
+      return;
+    } else {
+      _formError.remove(controller);
+      notifyListeners();
+      return;
+    }
+  }
+
+  // validate 
   validateText(String value, var controller, String label,
-      {int? minLength, int? maxLength, bool? email}) {
+      {int? minLength, int? maxLength}) {
     return _setStateOfFormField(
       FrontValidation.validateFormField(
         value,
         label,
         minLength: minLength,
         maxLength: maxLength,
-        email: email ?? false,
       ),
       controller,
     );
   }
 
-  // Update form error state
-  void _setStateOfFormField(String msg, var controller) {
-    if (msg.isNotEmpty) {
-      _formError[controller] = msg;
-    } else {
-      _formError.remove(controller);
-    }
-    notifyListeners();
-  }
 
   // Validate dropdowns
   bool validateDropdowns() {
@@ -190,44 +241,5 @@ class PostViewModel extends ReactiveViewModel {
 
     notifyListeners();
     return isValid;
-  }
-
-  // Handle form submission
-  void onPostProduct() async {
-    _formError.remove('response');
-    if (_formKey.currentState!.validate() &&
-        _formError.isEmpty &&
-        validateDropdowns()) {
-      setBusy(true);
-
-      // Create product model
-      var product = ProductModel(
-        productName: productNameController.text,
-        details:
-            detailsController.text.split(',').map((e) => e.trim()).toList(),
-        productImage: images,
-        manufacturerId: _userService.user?.id,
-        description: descriptionController.text,
-        address: addressController.text,
-        quantity: num.parse(quantityController.text),
-        categoryId: selectedCategory,
-        subCategoryId: selectedSubCategory,
-        subSubCategoryId: selectedSubSubCategory,
-        salesPrice: num.parse(salesPriceController.text),
-      );
-
-      // Send product data to server
-      var response = await _postService.sendProduct(product);
-
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        _landing.setIndex(0);
-      } else {
-        // Handle errors
-        _formError['response'] = response.body.toString();
-      }
-
-      setBusy(false);
-      notifyListeners();
-    }
   }
 }

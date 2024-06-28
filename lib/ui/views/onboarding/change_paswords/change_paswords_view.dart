@@ -12,8 +12,7 @@ import '../../widgets/custome_form_field.dart';
 import '../../widgets/input_field.dart';
 
 class ChangePasswordView extends StackedView<ChangePasswordsViewModel> {
-  const ChangePasswordView({super.key, this.forget = false});
-  final bool forget;
+  const ChangePasswordView({super.key});
 
   @override
   Widget builder(
@@ -36,7 +35,6 @@ class ChangePasswordView extends StackedView<ChangePasswordsViewModel> {
                     child: Column(
                       children: [
                         verticalSpaceLarge,
-                        if (!forget) ...[
                           CustomeFormField(
                             title: viewModel.password,
                             widget: InputField(
@@ -69,7 +67,6 @@ class ChangePasswordView extends StackedView<ChangePasswordsViewModel> {
                             ),
                           ),
                           verticalSpaceMedium,
-                        ],
                         CustomeFormField(
                           title: viewModel.newPassword,
                           widget: InputField(

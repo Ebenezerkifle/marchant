@@ -282,12 +282,8 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i18.ChangePasswordView: (data) {
-      final args = data.getArgs<ChangePasswordViewArguments>(
-        orElse: () => const ChangePasswordViewArguments(),
-      );
       return _i20.MaterialPageRoute<dynamic>(
-        builder: (context) =>
-            _i18.ChangePasswordView(key: args.key, forget: args.forget),
+        builder: (context) => const _i18.ChangePasswordView(),
         settings: data,
       );
     },
@@ -420,33 +416,6 @@ class CompanyProfileViewArguments {
   @override
   int get hashCode {
     return key.hashCode ^ product.hashCode;
-  }
-}
-
-class ChangePasswordViewArguments {
-  const ChangePasswordViewArguments({
-    this.key,
-    this.forget = false,
-  });
-
-  final _i20.Key? key;
-
-  final bool forget;
-
-  @override
-  String toString() {
-    return '{"key": "$key", "forget": "$forget"}';
-  }
-
-  @override
-  bool operator ==(covariant ChangePasswordViewArguments other) {
-    if (identical(this, other)) return true;
-    return other.key == key && other.forget == forget;
-  }
-
-  @override
-  int get hashCode {
-    return key.hashCode ^ forget.hashCode;
   }
 }
 
@@ -723,17 +692,14 @@ extension NavigatorStateExtension on _i24.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToChangePasswordView({
-    _i20.Key? key,
-    bool forget = false,
+  Future<dynamic> navigateToChangePasswordView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
+  ]) async {
     return navigateTo<dynamic>(Routes.changePasswordView,
-        arguments: ChangePasswordViewArguments(key: key, forget: forget),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -1001,17 +967,14 @@ extension NavigatorStateExtension on _i24.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithChangePasswordView({
-    _i20.Key? key,
-    bool forget = false,
+  Future<dynamic> replaceWithChangePasswordView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
+  ]) async {
     return replaceWith<dynamic>(Routes.changePasswordView,
-        arguments: ChangePasswordViewArguments(key: key, forget: forget),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
