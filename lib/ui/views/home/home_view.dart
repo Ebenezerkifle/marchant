@@ -124,14 +124,14 @@ class HomeView extends StackedView<HomeViewModel> {
                               ),
                             )
 
-                          //  viewModel.isBusy
+                          //  viewModel.isLoading
                           //   ? SizedBox(
                           //       height: screenHeight(context) * .4,
                           //       width: double.infinity,
                           //       child: const Center(
                           //           child: CircularProgressIndicator()),
                           //     )
-                          //   : viewModel.products.isEmpty && !viewModel.isBusy
+                          //   : viewModel.products.isEmpty && !viewModel.isLoading
                           //       ? SizedBox(
                           //           height: screenHeight(context) * .4,
                           //           width: double.infinity,

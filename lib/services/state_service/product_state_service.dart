@@ -59,9 +59,16 @@ class ProductStateService with ListenableServiceMixin {
   }
 
   Future<void> getProducts() async {
-    _products.value.clear();
-    _products.value.addAll(await ProductApiCallService().getProducts());
-    notifyListeners();
+    try {
+      _isLoading.value = true;
+      _products.value.clear();
+      _products.value.addAll(await ProductApiCallService().getProducts());
+    } catch (e) {
+      //
+    } finally {
+      _isLoading.value = false;
+      notifyListeners();
+    }
   }
 
   Future<void> getSubProducts(categoryId) async {
@@ -93,7 +100,7 @@ class ProductStateService with ListenableServiceMixin {
     _selected.value = {};
     _subCategories.value = {};
     _activeOrders.value = {};
-    // _isLoading.value = false;
+    _isLoading.value = false;
     notifyListeners();
   }
 }
