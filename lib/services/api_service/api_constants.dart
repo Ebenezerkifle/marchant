@@ -9,5 +9,6 @@ const readDeliveredOrderUrl = '/api/order/ReadDeliveredOrdersByRetailer';
 const createProdUrl = '/api/product';
 const getProductsByManufacturer = '/api/product/byManufacturer';
 const changePassUrl = '/api/retailer/updatePassword';
+const changeManuPassUrl = '/api/manufacturer/updatePassword/';
 const passResetUrl = '/passwordReset/';
 const phoneCheckerUrl = '/phoneChecker/';

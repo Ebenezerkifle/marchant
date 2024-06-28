@@ -5,14 +5,14 @@ import 'package:marchant/app/app.bottomsheets.dart';
 import 'package:marchant/app/app.dialogs.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/app/app.router.dart';
-import 'package:marchant/firebase_options.dart';
+// import 'package:marchant/firebase_options.dart';
 import 'package:marchant/services/state_service/snackbar_service.dart';
 import 'package:marchant/ui/common/app_colors.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await setupLocator();
   setupDialogUi();
   setupBottomSheetUi();

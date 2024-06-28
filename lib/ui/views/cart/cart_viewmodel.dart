@@ -7,12 +7,17 @@ import 'package:marchant/services/state_service/snackbar_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../../../services/state_service/orders_state_service.dart';
+
 class CartViewModel extends ReactiveViewModel {
   final _cartService = locator<CartStateService>();
   final _navigation = locator<NavigationService>();
   final _landingService = locator<LandingStateService>();
+  final OrderStateService _orderState = locator<OrderStateService>();
+
   @override
-  List<ListenableServiceMixin> get listenableServices => [_cartService];
+  List<ListenableServiceMixin> get listenableServices =>
+      [_cartService, _orderState];
 
   CartViewModel() {
     // text editing controllers.
@@ -45,6 +50,12 @@ class CartViewModel extends ReactiveViewModel {
     _cartService.removeFromCart(cartKey);
   }
 
+  Future<void> refresh() async {
+    await _orderState.getOrders();
+    await _orderState.getDeliveredOrders();
+    notifyListeners();
+  }
+
   onClearCart() {
     // clear the cart items.
     _cartService.clearCart();
@@ -57,6 +68,7 @@ class CartViewModel extends ReactiveViewModel {
       await _cartService.placeOrder();
       SnackBarService.showSnackBar(content: 'Successfully Ordered.');
       // _navigation.clearStackAndShow(Routes.myOrdersView);
+     await refresh();
       _landingService.setIndex(2);
     } catch (e) {
       SnackBarService.showSnackBar(content: 'Order failed: try again!');
