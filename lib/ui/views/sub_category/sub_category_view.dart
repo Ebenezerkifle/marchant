@@ -13,7 +13,10 @@ import 'package:stacked/stacked.dart';
 import 'sub_category_viewmodel.dart';
 
 class SubCategoryView extends StackedView<SubCategoryViewModel> {
-  const SubCategoryView({Key? key, required this.categoryValue, required this.subSubCategoryValue})
+  const SubCategoryView(
+      {Key? key,
+      required this.categoryValue,
+      required this.subSubCategoryValue})
       : super(key: key);
 
   final String categoryValue;
@@ -128,39 +131,41 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                             Text('Our Products', style: AppTextStyle.h2Bold),
                           ],
                         ),
-                        viewModel.subProducts.isEmpty
-                            ? SizedBox(
-                                height: screenHeight(context) * .4,
-                                width: double.infinity,
-                                child: const Center(
-                                  child: Text(
-                                    'No products found',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ),
-                              )
-                            : CustomeGrideWidget(
-                                widgets: viewModel.subProducts.entries
-                                    .map(
-                                      (e) => CustomeCardWidget(
-                                        size: screenWidth(context) * .38,
-                                        onTap: () =>
-                                            viewModel.onItemSelected(e.value),
-                                        title: e.value.productName ?? '',
-                                        details: e.value.details ?? [],
-                                        detailLimit: 3,
-                                        image: e.value.productImage.first,
-                                        widget: Text(
-                                          '${e.value.salesPrice} ETB',
-                                          style: AppTextStyle.h4Bold,
+                        viewModel.isBusy
+                            ? const Center(child: CircularProgressIndicator())
+                            : viewModel.subProducts.isEmpty && !viewModel.isBusy
+                                ? SizedBox(
+                                    height: screenHeight(context) * .4,
+                                    width: double.infinity,
+                                    child: const Center(
+                                      child: Text(
+                                        'No products found',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.grey,
                                         ),
                                       ),
-                                    )
-                                    .toList(),
-                              ),
+                                    ),
+                                  )
+                                : CustomeGrideWidget(
+                                    widgets: viewModel.subProducts.entries
+                                        .map(
+                                          (e) => CustomeCardWidget(
+                                            size: screenWidth(context) * .38,
+                                            onTap: () => viewModel
+                                                .onItemSelected(e.value),
+                                            title: e.value.productName ?? '',
+                                            details: e.value.details ?? [],
+                                            detailLimit: 3,
+                                            image: e.value.productImage.first,
+                                            widget: Text(
+                                              '${e.value.salesPrice} ETB',
+                                              style: AppTextStyle.h4Bold,
+                                            ),
+                                          ),
+                                        )
+                                        .toList(),
+                                  ),
                         verticalSpaceLarge,
                       ],
                     ),
@@ -176,5 +181,6 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
 
   @override
   SubCategoryViewModel viewModelBuilder(BuildContext context) =>
-      SubCategoryViewModel(categoryId: categoryValue, subSubCategoryId: subSubCategoryValue);
+      SubCategoryViewModel(
+          categoryId: categoryValue, subSubCategoryId: subSubCategoryValue);
 }

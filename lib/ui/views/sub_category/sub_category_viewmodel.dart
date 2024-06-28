@@ -13,7 +13,7 @@ class SubCategoryViewModel extends ReactiveViewModel {
   final _productState = locator<ProductStateService>();
   final _cartState = locator<CartStateService>();
 
-   String categoryId;
+  String categoryId;
   String? subSubCategoryId;
 
   List<Category> subCategories = [];
@@ -51,12 +51,14 @@ class SubCategoryViewModel extends ReactiveViewModel {
   Map<String, Category> get categories => _productState.categories;
   Map<String, ProductModel> get subProducts => _productState.subProducts;
 
- getSubProducts({String? category}) {
+  getSubProducts({String? category}) async{
+    setBusy(true);
     if (subSubCategoryId != null && subSubCategoryId!.isNotEmpty) {
-      _productState.getSubProducts(category ?? subSubCategoryId!);
+    await _productState.getSubProducts(category ?? subSubCategoryId!);
     } else {
-      _productState.getSubProducts(category ?? categoryId);
+     await _productState.getSubProducts(category ?? categoryId);
     }
+    setBusy(false);
   }
 
   List<Category> getSubCategories() {
@@ -82,7 +84,8 @@ class SubCategoryViewModel extends ReactiveViewModel {
   // }
 
   void onMoreCategory() {
-    _navigation.navigateToSubCategoryListView(subCategories: subCategories, categoryValue: categoryId);
+    _navigation.navigateToSubCategoryListView(
+        subCategories: subCategories, categoryValue: categoryId);
   }
 
   void onCartTap() {
