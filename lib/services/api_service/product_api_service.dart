@@ -34,6 +34,7 @@ class ProductApiCallService {
       var body = jsonDecode(response.body);
       // print('Parsed body: $body');
       var productData = body['data']['products'] as List<dynamic>;
+      
       // print('Category data: $categoryData');
       // print('Subcategories: $subCategories');
       for (var ele in productData) {

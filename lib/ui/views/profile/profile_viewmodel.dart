@@ -4,6 +4,8 @@ import 'package:marchant/services/state_service/product_state_service.dart';
 import 'package:marchant/services/state_service/user_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 import '../../../app/app.locator.dart';
 import '../../../app/app.router.dart';
@@ -49,11 +51,12 @@ class ProfileViewModel extends BaseViewModel {
 
   // String get fullName => _userService.user?.fullName?? '';
 
-  // String get profilePhoneNumber => _userService.user?.phoneNumber?? '';
+  String get profilePhoneNumber => _userService.user?.phoneNumber?? '';
 
   tapHandler(SettingOptions setting) {
     switch (setting) {
       case SettingOptions.shortCode:
+        _makePhoneCall();
         break;
       case SettingOptions.changePass:
         _navigation.navigateToChangePasswordView();
@@ -73,5 +76,15 @@ class ProfileViewModel extends BaseViewModel {
         _navigation.clearStackAndShow(Routes.loginView);
         break;
     }
+  }
+
+  final String _phoneNumber = '+251989363689';
+
+  Future<void> _makePhoneCall() async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: _phoneNumber,
+    );
+    await launchUrl(launchUri);
   }
 }

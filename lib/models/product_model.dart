@@ -70,6 +70,7 @@ class ProductModel {
   }
 
   factory ProductModel.fromMap(Map<String, dynamic> map) {
+    
     return ProductModel(
       id: map['_id'],
       productName: map['productName'] ?? '',

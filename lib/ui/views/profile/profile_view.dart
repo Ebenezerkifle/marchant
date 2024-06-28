@@ -46,13 +46,13 @@ class ProfileView extends StackedView<ProfileViewModel> {
                         fit: BoxFit.cover,
                       ),
                       verticalSpaceSmall,
-                      const Text(
-                        'Abeniezer Kifle',
-                        style: AppTextStyle.h2Bold,
-                      ),
-                      const Text(
-                        '0945837261',
-                        style: AppTextStyle.h4Normal,
+                      // const Text(
+                      //   'Abeniezer Kifle',
+                      //   style: AppTextStyle.h2Bold,
+                      // ),
+                      Text(
+                        viewModel.profilePhoneNumber.padLeft(10, '0').toString(),
+                        style: AppTextStyle.h4Bold,
                       ),
                       const Divider(),
                       verticalSpaceMiddle,
