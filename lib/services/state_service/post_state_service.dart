@@ -25,6 +25,7 @@ class PostStateService with ListenableServiceMixin {
     if (response.statusCode == 200 || response.statusCode == 201) {
       getProducts();
     }
+    return response;
   }
 
   getProducts() async {
