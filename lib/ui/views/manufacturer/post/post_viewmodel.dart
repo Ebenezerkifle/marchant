@@ -63,9 +63,7 @@ class PostViewModel extends ReactiveViewModel {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   GlobalKey<FormState> get formKey => _formKey;
 
-
   String get name => 'Product name';
-
 
   // Controllers for text fields
   TextEditingController productNameController = TextEditingController();
@@ -129,14 +127,13 @@ class PostViewModel extends ReactiveViewModel {
     selectedSubSubCategory = newValue;
     notifyListeners();
   }
-  
 
   String errorMsg = '';
 
   // Handle form submission
   void onPostProduct() async {
     // _formError.remove('response');
-        errorMsg = '';
+    errorMsg = '';
 
     if (_formKey.currentState!.validate() &&
         _formError.isEmpty &&
@@ -150,7 +147,7 @@ class PostViewModel extends ReactiveViewModel {
         details:
             detailsController.text.split(',').map((e) => e.trim()).toList(),
         productImage: images,
-        manufacturerId: _userService.user!.id,
+        manufacturerId: _userService.user?.id ?? '',
         description: descriptionController.text,
         address: addressController.text,
         quantity: num.parse(quantityController.text),
@@ -161,11 +158,13 @@ class PostViewModel extends ReactiveViewModel {
       );
 
       // Send product data to server
-       response = await _postService.sendProduct(product);
+      response = await _postService.sendProduct(product);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         SnackBarService.showSnackBar(
-          content: 'Your Product is successfuly uploaded, please wait till approved'.trim(),
+          content:
+              'Your Product is successfuly uploaded, please wait till approved'
+                  .trim(),
         );
         // _clearFields();
         _landing.setIndex(0);
@@ -185,7 +184,6 @@ class PostViewModel extends ReactiveViewModel {
 //   }
   //---------------- FRONT END VALIDATION -------------
 
-
   _setStateOfFormField(String msg, var controller) {
     // takes the validation result and set the state
     if (msg.isNotEmpty) {
@@ -199,7 +197,7 @@ class PostViewModel extends ReactiveViewModel {
     }
   }
 
-  // validate 
+  // validate
   validateText(String value, var controller, String label,
       {int? minLength, int? maxLength}) {
     return _setStateOfFormField(
@@ -212,7 +210,6 @@ class PostViewModel extends ReactiveViewModel {
       controller,
     );
   }
-
 
   // Validate dropdowns
   bool validateDropdowns() {
