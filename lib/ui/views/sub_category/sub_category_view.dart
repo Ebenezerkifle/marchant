@@ -132,7 +132,12 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                           ],
                         ),
                         viewModel.isBusy
-                            ? const Center(child: CircularProgressIndicator())
+                            ? SizedBox(
+                                height: screenHeight(context) * .4,
+                                width: double.infinity,
+                                child: const Center(
+                                    child: CircularProgressIndicator()),
+                              )
                             : viewModel.subProducts.isEmpty && !viewModel.isBusy
                                 ? SizedBox(
                                     height: screenHeight(context) * .4,

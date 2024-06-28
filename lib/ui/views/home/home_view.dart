@@ -123,6 +123,29 @@ class HomeView extends StackedView<HomeViewModel> {
                                 child: CircularProgressIndicator(),
                               ),
                             )
+
+                          //  viewModel.isBusy
+                          //   ? SizedBox(
+                          //       height: screenHeight(context) * .4,
+                          //       width: double.infinity,
+                          //       child: const Center(
+                          //           child: CircularProgressIndicator()),
+                          //     )
+                          //   : viewModel.products.isEmpty && !viewModel.isBusy
+                          //       ? SizedBox(
+                          //           height: screenHeight(context) * .4,
+                          //           width: double.infinity,
+                          //           child: const Center(
+                          //             child: Text(
+                          //               'No products found',
+                          //               style: TextStyle(
+                          //                 fontSize: 18,
+                          //                 color: Colors.grey,
+                          //               ),
+                          //             ),
+                          //           ),
+                          //         )
+                        
                           : CustomeGrideWidget(
                               widgets: viewModel.products.entries
                                   .map(

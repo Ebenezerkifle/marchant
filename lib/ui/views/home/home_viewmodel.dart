@@ -29,12 +29,21 @@ class HomeViewModel extends ReactiveViewModel {
 
   final GlobalKey<RefreshIndicatorState> refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
+      
 
   Future<void> refresh() async {
     _productState.getProducts();
     _productState.getCategories();
   }
-
+ // Update the refresh method
+  // Future<void> refresh() async {
+  //   setBusy(true);
+  //   await Future.wait([
+  //     _productState.getProducts(),
+  //     _productState.getCategories(),
+  //   ]);
+  //   setBusy(false);
+  // }
   // Method to navigate to SubCategoryView
   void navigateToSubCategory(String categoryId) {
     _navigation.navigateToSubCategoryView(categoryValue: categoryId, subSubCategoryValue: '');

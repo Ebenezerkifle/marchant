@@ -24,17 +24,23 @@ class MyOrdersViewModel extends ReactiveViewModel {
       GlobalKey<RefreshIndicatorState>();
 
   Future<void> refresh() async {
+    setBusy(true);
     await _orderState.getOrders();
     await _orderState.getDeliveredOrders();
+    setBusy(false);
     notifyListeners();
   }
 
-  void getOrders() {
-    _orderState.getOrders();
+  void getOrders()async {
+    setBusy(true);
+    await _orderState.getOrders();
+    setBusy(false);
   }
 
-  void getDeliveredOrders() {
-    _orderState.getDeliveredOrders();
+  void getDeliveredOrders() async {
+    setBusy(true);
+   await _orderState.getDeliveredOrders();
+    setBusy(false);
   }
 
   Map<String, dynamic> getTitle(List<CartModel>? cartList) {

@@ -177,7 +177,7 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
       topCategories = _enrollmentService.topCategories;
       _errorMessage = null;
     } catch (e) {
-      _errorMessage = 'Failed to load categories: $e';
+      _errorMessage = 'Failed to load categories';
     }
     setLoading(false);
   }
