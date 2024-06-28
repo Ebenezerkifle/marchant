@@ -155,7 +155,7 @@ class CartView extends StackedView<CartViewModel> {
                                         )),
                                     const Divider(),
                                     _details('Total Price',
-                                        '${order != null ? order!.totalAmount?.toStringAsFixed(2) : viewModel.totalPrice.toStringAsFixed(2)} ETB'),
+                                        '${order != null ? order!.products!.first.totalAmount?.toStringAsFixed(2) : viewModel.totalPrice.toStringAsFixed(2)} ETB'),
                                     _details('Item Count',
                                         '${order != null ? order!.products?.fold(0, (sum, product) => sum + (product.quantity?.toInt() ?? 0)) : viewModel.totalCount}'),
                                   ],
