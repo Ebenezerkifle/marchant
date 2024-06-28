@@ -21,7 +21,7 @@ class ManuProfileViewModel extends BaseViewModel {
       icon: FontAwesomeIcons.phone,
     ),
     SettingOptions.changePass: SettingModel(
-      title: 'change_password',
+      title: 'Change password',
       icon: FontAwesomeIcons.lock,
     ),
     SettingOptions.about: SettingModel(
