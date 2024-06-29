@@ -45,10 +45,12 @@ class ManuProfileView extends StackedView<ManuProfileViewModel> {
                         fit: BoxFit.cover,
                       ),
                       verticalSpaceSmall,
-                      // const Text(
-                      //   'Abeniezer Kifle',
-                      //   style: AppTextStyle.h2Bold,
-                      // ),
+                      if (viewModel.fullName.isNotEmpty) ...[
+                        Text(
+                          viewModel.fullName,
+                          style: AppTextStyle.h2Bold,
+                        ),
+                      ],
                       Text(
                         viewModel.profilePhoneNumber
                             .padLeft(10, '0')

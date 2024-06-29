@@ -37,6 +37,13 @@ class ManuProfileViewModel extends BaseViewModel {
       icon: FontAwesomeIcons.rightFromBracket,
     ),
   };
+
+  // Concatenate first name and last name with a space in between
+String get fullName {
+  final firstName = _userService.user?.firstName ?? '';
+  final lastName = _userService.user?.lastName ?? '';
+  return '$firstName $lastName'.trim();
+}
   String get profilePhoneNumber => _userService.user?.phoneNumber ?? '';
 
   void tapHandler(SettingOptions setting) {
