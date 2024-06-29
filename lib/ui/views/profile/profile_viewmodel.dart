@@ -49,12 +49,13 @@ class ProfileViewModel extends BaseViewModel {
   num get credit => _userService.user?.creditAvailable ?? 0;
 
 // Concatenate first name and last name with a space in between
-String get fullName {
-  final firstName = _userService.user?.firstName ?? '';
-  final lastName = _userService.user?.lastName ?? '';
-  return '$firstName $lastName'.trim();
-}
-  String get profilePhoneNumber => _userService.user?.phoneNumber ?? '' ;
+  String get fullName {
+    final firstName = _userService.user?.firstName ?? '';
+    final lastName = _userService.user?.lastName ?? '';
+    return '$firstName $lastName'.trim();
+  }
+
+  String get profilePhoneNumber => _userService.user?.phoneNumber ?? '';
 
   tapHandler(SettingOptions setting) {
     switch (setting) {

@@ -85,10 +85,9 @@ class OrderModel {
 
   // Factory constructor to create an OrderModel from a map
   factory OrderModel.fromMapOrders(Map<String, dynamic> map) {
-   
     List<ProductModel> products =
         ProductModel().productsFromMap(map['products']);
-   
+
     return OrderModel(
       id: map['_id'],
       // byRetailer: map['byRetailer'],

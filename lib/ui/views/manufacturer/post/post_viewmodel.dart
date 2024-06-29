@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
+
 import 'package:http/http.dart';
+import 'package:flutter/material.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/models/category_model.dart';
 import 'package:marchant/models/product_model.dart';
@@ -128,6 +130,10 @@ class PostViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
+  Future<void> refresh() async {
+    await _postService.getProducts();
+  }
+
   String errorMsg = '';
 
   // Handle form submission
@@ -163,24 +169,43 @@ class PostViewModel extends ReactiveViewModel {
       if (response.statusCode == 200 || response.statusCode == 201) {
         SnackBarService.showSnackBar(
           content:
-              'Your Product is successfuly uploaded, please wait till approved'
-                  .trim(),
+              'Your Product is successfuly uploaded, please wait till approved',
         );
         // _clearFields();
+        refresh();
         _landing.setIndex(0);
       } else {
-        setError(true);
-        errorMsg = 'Something went wrong!';
-        notifyListeners();
+        // not successful
+        if (response.body.contains('{')) {
+          try {
+            var body = jsonDecode(response.body);
+            var message = body['message'];
+            _formError['response'] = message;
+          } catch (e) {
+            _formError['response'] = response.body.toString();
+          }
+        } else {
+          _formError['response'] = response.body.toString();
+        }
       }
-
       setBusy(false);
+      notifyListeners();
     }
   }
 //  _clearFields() {
 //     passwordController.clear();
 //     confirmPasswordController.clear();
 //     newPasswordController.clear();
+  // productNameController.clear();
+  //           detailsController.clear();
+  //       manufacturerId: _userService.user?.id ?? '',
+  //       description: descriptionController.text,
+  //       address: addressController.text,
+  //       quantity: num.parse(quantityController.text),
+  //       categoryId: selectedCategory,
+  //       subCategoryId: selectedSubCategory,
+  //       subSubCategoryId: selectedSubSubCategory,
+  //       salesPrice: num.parse(salesPriceController.text),
 //   }
   //---------------- FRONT END VALIDATION -------------
 

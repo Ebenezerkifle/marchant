@@ -105,47 +105,46 @@ class LoginViewModel extends BaseViewModel {
       notifyListeners();
       SessionService.setBool(SessionKey.newUser, false);
 
-        // Backend call to login the user
-        var response = await _authentication.loginUser(
-          LoginModel(
-            phoneNumber: phoneNumController.text.substring(1),
-            password: passwordController.text,
-          ),
-        );
-        // Check the response status
-        if (response.statusCode == 201 || response.statusCode == 200) {
-          var body = jsonDecode(response.body);
-          var merchant = body['userLogged'];
-          var token = body['token'];
+      // Backend call to login the user
+      var response = await _authentication.loginUser(
+        LoginModel(
+          phoneNumber: phoneNumController.text.substring(1),
+          password: passwordController.text,
+        ),
+      );
+      // Check the response status
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        var body = jsonDecode(response.body);
+        var merchant = body['userLogged'];
+        var token = body['token'];
 
-          // Store user data
-          UserModel user = UserModel.fromMap(merchant);
-          _userService.setUserData(user); // Ensure user data is set here
+        // Store user data
+        UserModel user = UserModel.fromMap(merchant);
+        _userService.setUserData(user);
 
-          // Save the token
-          SessionService.setString(SessionKey.token, token);
-          _landingStateService.setIndex(0);
-          // Navigate to the landing view after successful login
+        // Save the token
+        SessionService.setString(SessionKey.token, token);
+        _landingStateService.setIndex(0);
+        // Navigate to the landing view after successful login
 
-          _navigationService.clearStackAndShow(Routes.landingView);
-        } else {
-          // Handle unsuccessful response
-          if (response.body.contains('{')) {
-            try {
-              var body = jsonDecode(response.body);
-              var message = body['message'];
-              _formError['response'] = message;
-            } catch (e) {
-              _formError['response'] = response.body.toString();
-            }
-          } else {
+        _navigationService.clearStackAndShow(Routes.landingView);
+      } else {
+        // Handle unsuccessful response
+        if (response.body.contains('{')) {
+          try {
+            var body = jsonDecode(response.body);
+            var message = body['message'];
+            _formError['response'] = message;
+          } catch (e) {
             _formError['response'] = response.body.toString();
           }
+        } else {
+          _formError['response'] = response.body.toString();
         }
-         // Reset the busy state and notify listeners
-        setBusy(false);
-        notifyListeners();
-      } 
-           
+      }
+      // Reset the busy state and notify listeners
+      setBusy(false);
+      notifyListeners();
+    }
   }
 }

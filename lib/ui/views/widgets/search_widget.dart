@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marchant/ui/common/app_colors.dart';
 import 'package:marchant/ui/common/app_text_style.dart';
-import 'package:marchant/ui/common/ui_helpers.dart';
-import 'package:marchant/ui/views/widgets/icon_decore_widget.dart';
+// import 'package:marchant/ui/common/ui_helpers.dart';
+// import 'package:marchant/ui/views/widgets/icon_decore_widget.dart';
 
 class SearchWidget extends StatelessWidget {
   const SearchWidget({super.key, this.width, this.onFilter});
@@ -43,14 +43,14 @@ class SearchWidget extends StatelessWidget {
               ),
             ),
           ),
-          horizontalSpaceSmall,
-          IconDecoreWidget(
-            icon: FontAwesomeIcons.sliders,
-            onTap: onFilter ?? () {},
-            forgroundColor: kcWhite,
-            backgroundColor: kcPrimaryColorDark,
-            roundness: 5,
-          )
+          // horizontalSpaceSmall,
+          // IconDecoreWidget(
+          //   icon: FontAwesomeIcons.sliders,
+          //   onTap: onFilter ?? () {},
+          //   forgroundColor: kcWhite,
+          //   backgroundColor: kcPrimaryColorDark,
+          //   roundness: 5,
+          // )
         ],
       ),
     );

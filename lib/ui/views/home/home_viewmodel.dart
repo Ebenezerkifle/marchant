@@ -32,8 +32,8 @@ class HomeViewModel extends ReactiveViewModel {
       GlobalKey<RefreshIndicatorState>();
 
   Future<void> refresh() async {
-    _productState.getProducts();
-    _productState.getCategories();
+    await _productState.getProducts();
+    await _productState.getCategories();
   }
 
   // Update the refresh method

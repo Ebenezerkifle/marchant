@@ -113,8 +113,6 @@ class MydetailViewModel extends BaseViewModel {
     }
   }
 
-
-
   final Map<dynamic, String> _formError = {};
   Map<dynamic, String> get formError => _formError;
 

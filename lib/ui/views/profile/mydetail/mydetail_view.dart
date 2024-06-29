@@ -71,7 +71,7 @@ class MydetailView extends StackedView<MydetailViewModel> {
                           ),
                         ),
                         verticalSpaceMedium,
-                         // Phone number field
+                        // Phone number field
                         CustomeFormField(
                           title: 'Phone Number',
                           widget: InputField(
@@ -96,44 +96,45 @@ class MydetailView extends StackedView<MydetailViewModel> {
                         ),
                         verticalSpaceMedium,
                         // Category dropdown field
-                     if(viewModel.role == "Retailer" )
-                      ...[ CustomeFormField(
-                          title: 'Top Category',
-                          widget: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              DropdownButtonFormField<String>(
-                                value: viewModel.selectedCategory,
-                                hint: const Text('Choose category'),
-                                onChanged: viewModel.setSelectedCategory,
-                                items: viewModel.topCategories.values
-                                    .map((Category category) {
-                                  return DropdownMenuItem<String>(
-                                    value: category.id,
-                                    child: Text(category.name ?? ''),
-                                  );
-                                }).toList(),
-                                decoration: const InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  contentPadding:
-                                      EdgeInsets.symmetric(horizontal: 10),
-                                ),
-                              ),
-                              if (viewModel.formError.containsKey('category'))
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 8.0),
-                                  child: Text(
-                                    viewModel.formError['category']!,
-                                    style: const TextStyle(
-                                      color: Colors.red,
-                                      fontSize: 12,
-                                    ),
+                        if (viewModel.role == "Retailer") ...[
+                          CustomeFormField(
+                            title: 'Top Category',
+                            widget: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                DropdownButtonFormField<String>(
+                                  value: viewModel.selectedCategory,
+                                  hint: const Text('Choose category'),
+                                  onChanged: viewModel.setSelectedCategory,
+                                  items: viewModel.topCategories.values
+                                      .map((Category category) {
+                                    return DropdownMenuItem<String>(
+                                      value: category.id,
+                                      child: Text(category.name ?? ''),
+                                    );
+                                  }).toList(),
+                                  decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    contentPadding:
+                                        EdgeInsets.symmetric(horizontal: 10),
                                   ),
                                 ),
-                            ],
+                                if (viewModel.formError.containsKey('category'))
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: Text(
+                                      viewModel.formError['category']!,
+                                      style: const TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
                           ),
-                        ),
-                        verticalSpaceLarge,],
+                          verticalSpaceLarge,
+                        ],
                         // if ((viewModel.hasError &&
                         //         viewModel.errorMsg.isNotEmpty) ||
                         //     viewModel.formError.isNotEmpty) ...[
@@ -149,7 +150,7 @@ class MydetailView extends StackedView<MydetailViewModel> {
                         //   ),
                         //   verticalSpaceSmall,
                         // ],
-                          // error message widget
+                        // error message widget
                         viewModel.formError.isNotEmpty
                             ? Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marchant/ui/common/app_colors.dart';
 import 'package:marchant/ui/common/ui_helpers.dart';
 import 'package:marchant/ui/views/widgets/custome_app_bar.dart';
 import 'package:marchant/ui/views/widgets/custome_button.dart';
@@ -31,59 +32,93 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
             phoneNumber: '889',
           ),
           Expanded(
-            child: viewModel.products.isNotEmpty
-                ? SingleChildScrollView(
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: middleSize),
-                      child: Column(
-                        children: [
-                          verticalSpaceMedium,
-                          const Padding(
-                            padding:
-                                EdgeInsets.symmetric(horizontal: middleSize),
-                            child: Text(
-                              'your Products',
-                              style: AppTextStyle.h1Bold,
+            child: RefreshIndicator(
+              key: viewModel.refreshIndicatorKey,
+              displacement: 50,
+              color: Colors.white,
+              backgroundColor: kcPrimaryColor,
+              onRefresh: viewModel.refresh,
+              child: viewModel.products.isNotEmpty
+                  ? SingleChildScrollView(
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.symmetric(horizontal: middleSize),
+                        child: Column(
+                          children: [
+                            verticalSpaceMedium,
+                            // Our Products Section Title
+                            const Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text('Your Products',
+                                    style: AppTextStyle.h2Bold),
+                              ],
                             ),
-                          ),
-                          CustomeGrideWidget(
-                            widgets: viewModel.products.entries
-                                .map(
-                                  (e) => CustomeCardWidget(
-                                    size: screenWidth(context) * .38,
-                                    onTap:
-                                        () {}, // => viewModel.onItemSelected(e.value),
-                                    title: e.value.productName ?? '',
-                                    details: e.value.details ?? [],
-                                    detailLimit: 3,
-                                    image: e.value.productImage.first,
-                                    widget: Text(
-                                      '${e.value.salesPrice} ETB',
-                                      style: AppTextStyle.h4Bold,
-                                    ),
-                                  ),
-                                )
-                                .toList(),
-                          ),
-                          verticalSpaceLarge,
-                        ],
-                      ),
-                    ),
-                  )
-                : Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      NothingFound(
-                        message: 'You have no product which is live.',
-                        child: CustomeButton(
-                          text: 'Post Product',
-                          onTap: viewModel.onPostProduct,
+
+                            viewModel.isBusy
+                                ? SizedBox(
+                                    height: screenHeight(context) * .4,
+                                    width: double.infinity,
+                                    child: const Center(
+                                        child: CircularProgressIndicator()),
+                                  )
+                                : viewModel.products.isEmpty &&
+                                        !viewModel.isBusy
+                                    ? SizedBox(
+                                        height: screenHeight(context) * .4,
+                                        width: double.infinity,
+                                        child: const Center(
+                                          child: Text(
+                                            'No products found',
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : CustomeGrideWidget(
+                                        widgets: viewModel.products.entries
+                                            .map(
+                                              (e) => CustomeCardWidget(
+                                                size:
+                                                    screenWidth(context) * .38,
+                                                onTap: () =>
+                                                    viewModel.onItemSelected(e
+                                                        .value), // => viewModel.onItemSelected(e.value),
+                                                title:
+                                                    e.value.productName ?? '',
+                                                details: e.value.details ?? [],
+                                                detailLimit: 3,
+                                                image:
+                                                    e.value.productImage.first,
+                                                widget: Text(
+                                                  '${e.value.salesPrice} ETB',
+                                                  style: AppTextStyle.h4Bold,
+                                                ),
+                                              ),
+                                            )
+                                            .toList(),
+                                      ),
+                            verticalSpaceLarge,
+                          ],
                         ),
                       ),
-                    ],
-                  ),
+                    )
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        NothingFound(
+                          message: 'You have no product which is live.',
+                          child: CustomeButton(
+                            text: 'Post Product',
+                            onTap: viewModel.onPostProduct,
+                          ),
+                        ),
+                      ],
+                    ),
+            ),
           ),
         ],
       ),

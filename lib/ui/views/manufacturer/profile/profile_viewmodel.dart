@@ -10,8 +10,7 @@ import '../../../../services/state_service/user_service.dart';
 
 class ManuProfileViewModel extends BaseViewModel {
   final _navigation = locator<NavigationService>();
-    final _userService = locator<UserService>();
-
+  final _userService = locator<UserService>();
 
   String get image => 'assets/images/user.png';
 
@@ -39,11 +38,12 @@ class ManuProfileViewModel extends BaseViewModel {
   };
 
   // Concatenate first name and last name with a space in between
-String get fullName {
-  final firstName = _userService.user?.firstName ?? '';
-  final lastName = _userService.user?.lastName ?? '';
-  return '$firstName $lastName'.trim();
-}
+  String get fullName {
+    final firstName = _userService.user?.firstName ?? '';
+    final lastName = _userService.user?.lastName ?? '';
+    return '$firstName $lastName'.trim();
+  }
+
   String get profilePhoneNumber => _userService.user?.phoneNumber ?? '';
 
   void tapHandler(SettingOptions setting) {

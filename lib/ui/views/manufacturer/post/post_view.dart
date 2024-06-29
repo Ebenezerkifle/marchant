@@ -144,7 +144,7 @@ class PostView extends StackedView<PostViewModel> {
                                   padding: const EdgeInsets.only(top: 8.0),
                                   child: Text(
                                     viewModel.formError['subCategory']!,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.red,
                                       fontSize: 12,
                                     ),
