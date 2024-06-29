@@ -85,10 +85,10 @@ class ProductModel {
       soldAmount: map['soldAmount'],
       status: map['status'],
       totalAmount: map['totalAmount'],
-      companyName: map['ManufacturerId']['companyName'] ?? '',
-      address: map['ManufacturerId']['address'],
-      TIN: map['ManufacturerId']['TIN'],
-      logoImage: map['ManufacturerId']['logoImage'],
+      // companyName: map['ManufacturerId']['companyName'] ?? '',
+      //address: map['ManufacturerId']['address'],
+      // TIN: map['ManufacturerId']['TIN'],
+      //logoImage: map['ManufacturerId']['logoImage'],
     );
   }
 }
