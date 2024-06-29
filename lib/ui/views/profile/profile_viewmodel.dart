@@ -6,7 +6,6 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
 import '../../../app/app.locator.dart';
 import '../../../app/app.router.dart';
 import '../../../models/setting_model.dart';
@@ -49,9 +48,13 @@ class ProfileViewModel extends BaseViewModel {
 
   num get credit => _userService.user?.creditAvailable ?? 0;
 
-  // String get fullName => _userService.user?.fullName?? '';
-
-  String get profilePhoneNumber => _userService.user?.phoneNumber?? '';
+// Concatenate first name and last name with a space in between
+String get fullName {
+  final firstName = _userService.user?.firstName ?? '';
+  final lastName = _userService.user?.lastName ?? '';
+  return '$firstName $lastName'.trim();
+}
+  String get profilePhoneNumber => _userService.user?.phoneNumber ?? '' ;
 
   tapHandler(SettingOptions setting) {
     switch (setting) {
@@ -62,6 +65,7 @@ class ProfileViewModel extends BaseViewModel {
         _navigation.navigateToChangePasswordView();
         break;
       case SettingOptions.myDetail:
+        _navigation.navigateToMydetailView();
         break;
       case SettingOptions.credit:
         break;

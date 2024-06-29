@@ -14,7 +14,7 @@ class ApiCallService {
   };
 
   // can handle all api
-  static const Duration timeout = Duration(seconds: 15);
+  static const Duration timeout = Duration(seconds: 25);
 
   // timeout response.
   static Response timeoutResponse =
@@ -77,7 +77,8 @@ class ApiCallService {
   // patch call
   static Future<Response> patchCall(String url, Map<String, dynamic> body,
       {required bool needToken}) async {
-    needToken ? header[_auth] = 'Bearer ${await _getToken()}' : null;
+    String token = await _getToken();
+    needToken ? header[_auth] = 'Bearer $token' : null;
     try {
       Response response =
           await patch(Uri.parse(url), headers: header, body: jsonEncode(body))

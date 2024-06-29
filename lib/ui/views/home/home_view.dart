@@ -145,7 +145,7 @@ class HomeView extends StackedView<HomeViewModel> {
                           //             ),
                           //           ),
                           //         )
-                        
+
                           : CustomeGrideWidget(
                               widgets: viewModel.products.entries
                                   .map(

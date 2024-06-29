@@ -127,8 +127,6 @@ import 'package:stacked_services/stacked_services.dart';
 //   }
 // }
 
-
-
 // import 'dart:convert';
 // import 'package:flutter/material.dart';
 // import 'package:marchant/app/app.locator.dart';
@@ -203,6 +201,7 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
   void onBack() {
     _navigation.back();
   }
+
   String errorMsg = '';
 
   Future<void> onSubmit() async {

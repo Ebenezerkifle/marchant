@@ -8,7 +8,7 @@ import 'package:marchant/services/api_service/api_constants.dart';
 import '../state_service/user_service.dart';
 
 class Authentication {
-    final _userService = locator<UserService>();
+  final _userService = locator<UserService>();
 
   // register new user
   Future<Response> registerNewUser(UserModel userModel) {
@@ -27,18 +27,35 @@ class Authentication {
       needToken: false,
     );
   }
-Future<Response> changePassword(
+
+//update user profile
+  Future<Response> changeUserProfile(UserModel userModel) {
+    final userId = _userService.user?.id;
+    final userbaseurl = _userService.user?.role == "Retailor"
+        ? retailorBaseUrl
+        : manufacturerBaseUrl;
+    return ApiCallService.patchCall(
+      '$baseUrl$userbaseurl$userId$updateUrl',
+      userModel.toMap(),
+      needToken: true,
+    );
+  }
+
+//change password
+  Future<Response> changePassword(
     String userId,
     String prevPassword,
     String newPassword,
-) async {
-    final changeUrl = _userService.user?.role == "Retailor" ? changePassUrl: changeManuPassUrl;
+  ) async {
+    final changeUrl = _userService.user?.role == "Retailor"
+        ? changePassUrl
+        : changeManuPassUrl;
     return ApiCallService.patchCall(
-        '$baseUrl$changeUrl',
-        {'oldPassword': prevPassword, 'newPassword': newPassword},
-        needToken: true,
+      '$baseUrl$changeUrl',
+      {'oldPassword': prevPassword, 'newPassword': newPassword},
+      needToken: true,
     );
-}
+  }
 
   // // change password
   // Future<Response> changePassword(

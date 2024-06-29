@@ -31,7 +31,7 @@ class MyOrdersViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  void getOrders()async {
+  void getOrders() async {
     setBusy(true);
     await _orderState.getOrders();
     setBusy(false);
@@ -39,7 +39,7 @@ class MyOrdersViewModel extends ReactiveViewModel {
 
   void getDeliveredOrders() async {
     setBusy(true);
-   await _orderState.getDeliveredOrders();
+    await _orderState.getDeliveredOrders();
     setBusy(false);
   }
 

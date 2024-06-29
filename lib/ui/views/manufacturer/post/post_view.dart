@@ -204,6 +204,10 @@ class PostView extends StackedView<PostViewModel> {
                               .containsKey(viewModel.salesPriceController),
                           controller: viewModel.salesPriceController,
                           hint: 'Enter sales price',
+                          inputType: TextInputType.number,
+                          inputFormatter: [
+                            FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                          ],
                         ),
                       ),
                       verticalSpaceMiddle,

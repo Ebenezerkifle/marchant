@@ -1,5 +1,3 @@
-
-
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/app/app.router.dart';
 import 'package:stacked/stacked.dart';
@@ -13,6 +11,5 @@ class SubCategoryListViewModel extends ReactiveViewModel {
   void navigateToSubCategory(String subSubCategoryId) {
     _navigation.navigateToSubCategoryView(
         subSubCategoryValue: subSubCategoryId, categoryValue: categoryId);
-    
   }
 }

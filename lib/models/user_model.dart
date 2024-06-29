@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 class UserModel {
-  // String? name;
+  String? firstName;
+  String? lastName;
   String? phoneNumber;
   String? password;
   String? CategoryId;
@@ -18,7 +19,8 @@ class UserModel {
   final DateTime? updatedAt;
 
   UserModel({
-    // this.name,
+    this.firstName,
+    this.lastName,
     this.phoneNumber,
     this.password,
     this.CategoryId,
@@ -48,7 +50,8 @@ class UserModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      // 'name': name,
+      'fname': firstName,
+      'lname': lastName,
       'password': password,
       'phoneNumber': phoneNumber,
       'CategoryId': CategoryId,

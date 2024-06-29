@@ -6,8 +6,12 @@ import 'package:marchant/services/storage_service.dart/session.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../../../../services/state_service/user_service.dart';
+
 class ManuProfileViewModel extends BaseViewModel {
   final _navigation = locator<NavigationService>();
+    final _userService = locator<UserService>();
+
 
   String get image => 'assets/images/user.png';
 
@@ -33,12 +37,14 @@ class ManuProfileViewModel extends BaseViewModel {
       icon: FontAwesomeIcons.rightFromBracket,
     ),
   };
+  String get profilePhoneNumber => _userService.user?.phoneNumber ?? '';
 
   void tapHandler(SettingOptions setting) {
     switch (setting) {
       case SettingOptions.shortCode:
         break;
       case SettingOptions.myDetail:
+        _navigation.navigateToMydetailView();
         break;
       case SettingOptions.changePass:
         _navigation.navigateToChangePasswordView();

@@ -75,53 +75,45 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
                       //               ],
                       //             ),
                       //           )
-                      //         : 
-                              RefreshIndicator(
-                                  key: viewModel.refreshIndicatorKeyPending,
-                                  displacement: 50,
-                                  color: Colors.white,
-                                  backgroundColor: kcPrimaryColor,
-                                  onRefresh: viewModel.refresh,
-                                  child: SingleChildScrollView(
-                                    child: Column(
-                                      children: viewModel.pendingOrders.entries
-                                          .map((e) {
-                                        Map<String, dynamic> mergedData =
-                                            viewModel
-                                                .getTitle(e.value.cartList);
-                                        String title = mergedData['title'];
-                                        List<String> images =
-                                            mergedData['images'];
-                                        return Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: middleSize,
-                                            vertical: smallSize,
-                                          ),
-                                          child: CustomeListTile(
-                                            title: title,
-                                            onTap: () =>
-                                                viewModel.onOrderTap(e.value),
-                                            imageUrl: images,
-                                            noPrice: false,
-                                            price: double.parse((e
-                                                        .value
-                                                        .products
-                                                        ?.first
-                                                        .totalAmount ??
-                                                    0)
-                                                .toStringAsFixed(2)),
-                                            widget: Text(
-                                              // '${e.value.products?.first.quantity} Products',
-                                              '${e.value.products?.length} Products',
-                                              // '${e.value.products?.fold(0, (sum, product) => sum + (product.quantity?.toInt() ?? 0)) as int} Products',
-                                              style: AppTextStyle.h4Bold,
-                                            ),
-                                          ),
-                                        );
-                                      }).toList(),
-                                    ),
+                      //         :
+                      RefreshIndicator(
+                        key: viewModel.refreshIndicatorKeyPending,
+                        displacement: 50,
+                        color: Colors.white,
+                        backgroundColor: kcPrimaryColor,
+                        onRefresh: viewModel.refresh,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: viewModel.pendingOrders.entries.map((e) {
+                              Map<String, dynamic> mergedData =
+                                  viewModel.getTitle(e.value.cartList);
+                              String title = mergedData['title'];
+                              List<String> images = mergedData['images'];
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: middleSize,
+                                  vertical: smallSize,
+                                ),
+                                child: CustomeListTile(
+                                  title: title,
+                                  onTap: () => viewModel.onOrderTap(e.value),
+                                  imageUrl: images,
+                                  noPrice: false,
+                                  price: double.parse(
+                                      (e.value.products?.first.totalAmount ?? 0)
+                                          .toStringAsFixed(2)),
+                                  widget: Text(
+                                    // '${e.value.products?.first.quantity} Products',
+                                    '${e.value.products?.length} Products',
+                                    // '${e.value.products?.fold(0, (sum, product) => sum + (product.quantity?.toInt() ?? 0)) as int} Products',
+                                    style: AppTextStyle.h4Bold,
                                   ),
                                 ),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ),
                       viewModel.deliveredOrders.isEmpty
                           ? RefreshIndicator(
                               key: viewModel.refreshIndicatorKeyDelivered,

@@ -51,12 +51,12 @@ class SubCategoryViewModel extends ReactiveViewModel {
   Map<String, Category> get categories => _productState.categories;
   Map<String, ProductModel> get subProducts => _productState.subProducts;
 
-  getSubProducts({String? category}) async{
+  getSubProducts({String? category}) async {
     setBusy(true);
     if (subSubCategoryId != null && subSubCategoryId!.isNotEmpty) {
-    await _productState.getSubProducts(category ?? subSubCategoryId!);
+      await _productState.getSubProducts(category ?? subSubCategoryId!);
     } else {
-     await _productState.getSubProducts(category ?? categoryId);
+      await _productState.getSubProducts(category ?? categoryId);
     }
     setBusy(false);
   }

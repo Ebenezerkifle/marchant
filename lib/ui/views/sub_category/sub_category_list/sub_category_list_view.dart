@@ -6,18 +6,19 @@ import 'package:marchant/ui/views/widgets/custome_app_bar.dart';
 import 'package:marchant/ui/views/widgets/custome_list_tile.dart';
 import 'package:stacked/stacked.dart';
 
-
 class SubCategoryListView extends StatelessWidget {
   final List<Category> subCategories;
   final String? categoryValue;
 
-
-  SubCategoryListView({Key? key, required this.subCategories, this.categoryValue}) : super(key: key);
+  SubCategoryListView(
+      {Key? key, required this.subCategories, this.categoryValue})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SubCategoryListViewModel>.reactive(
-      viewModelBuilder: () => SubCategoryListViewModel(categoryId: categoryValue!),
+      viewModelBuilder: () =>
+          SubCategoryListViewModel(categoryId: categoryValue!),
       builder: (context, viewModel, child) => Scaffold(
         body: SafeArea(
           top: true,
@@ -31,12 +32,15 @@ class SubCategoryListView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: subCategories
                         .map((e) => Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16.0), // Assuming `middleSize` is defined elsewhere
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal:
+                                      16.0), // Assuming `middleSize` is defined elsewhere
                               child: CustomeListTile(
                                 title: e.name ?? '',
                                 noImage: true,
                                 center: true,
-                                onTap: () => viewModel.navigateToSubCategory(e.id!), // Fixed onTap function call
+                                onTap: () => viewModel.navigateToSubCategory(
+                                    e.id!), // Fixed onTap function call
                               ),
                             ))
                         .toList(),
@@ -50,12 +54,6 @@ class SubCategoryListView extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
 
 // // ignore: must_be_immutable
 // class SubCategoryListView extends StackedView<SubCategoryListViewModel> {
@@ -118,10 +116,6 @@ class SubCategoryListView extends StatelessWidget {
 //     SubCategoryListViewModel();
 // }
 
-
-
-
-
 // class SubCategoryListView extends StatelessWidget {
 //   final List<Category> subCategories;
 
@@ -148,7 +142,7 @@ class SubCategoryListView extends StatelessWidget {
 //                               noImage: true,
 //                               center: true,
 //                               onTap: () {
-//                                 // viewModel.navigateToSubCategory(e.id); 
+//                                 // viewModel.navigateToSubCategory(e.id);
 //                               },
 //                             ),
 //                           ))
@@ -162,7 +156,3 @@ class SubCategoryListView extends StatelessWidget {
 //     );
 //   }
 // }
-
-
-
-

@@ -26,17 +26,17 @@ class HomeViewModel extends ReactiveViewModel {
 
   Map<String, Category> get categories => _productState.categories;
   Map<String, ProductModel> get products => _productState.products;
-   bool get isLoading => _productState.isLoading;
+  bool get isLoading => _productState.isLoading;
 
   final GlobalKey<RefreshIndicatorState> refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
-      
 
   Future<void> refresh() async {
     _productState.getProducts();
     _productState.getCategories();
   }
- // Update the refresh method
+
+  // Update the refresh method
   // Future<void> refresh() async {
   //   setBusy(true);
   //   await Future.wait([
@@ -47,7 +47,8 @@ class HomeViewModel extends ReactiveViewModel {
   // }
   // Method to navigate to SubCategoryView
   void navigateToSubCategory(String categoryId) {
-    _navigation.navigateToSubCategoryView(categoryValue: categoryId, subSubCategoryValue: '');
+    _navigation.navigateToSubCategoryView(
+        categoryValue: categoryId, subSubCategoryValue: '');
     // );
   }
 

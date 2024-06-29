@@ -99,14 +99,12 @@ class LoginViewModel extends BaseViewModel {
   void onLoginButton() async {
     _formError.remove('response');
 
-    // Validate the form
     if (_formKey.currentState!.validate() && _formError.isEmpty) {
       // Show progress indicator
       setBusy(true);
       notifyListeners();
       SessionService.setBool(SessionKey.newUser, false);
 
-      try {
         // Backend call to login the user
         var response = await _authentication.loginUser(
           LoginModel(
@@ -114,7 +112,6 @@ class LoginViewModel extends BaseViewModel {
             password: passwordController.text,
           ),
         );
-        print(response.body);
         // Check the response status
         if (response.statusCode == 201 || response.statusCode == 200) {
           var body = jsonDecode(response.body);
@@ -124,10 +121,6 @@ class LoginViewModel extends BaseViewModel {
           // Store user data
           UserModel user = UserModel.fromMap(merchant);
           _userService.setUserData(user); // Ensure user data is set here
-
-          // Print user data for debugging
-          // print(
-          //     'User data set: ${_userService.user?.CategoryId}, ${_userService.user?.phoneNumber}');
 
           // Save the token
           SessionService.setString(SessionKey.token, token);
@@ -149,18 +142,10 @@ class LoginViewModel extends BaseViewModel {
             _formError['response'] = response.body.toString();
           }
         }
-      } catch (e) {
-        // Handle errors during the login process
-        // print('Error during login: $e');
-        _formError['response'] = 'An error occurred: $e';
-      } finally {
-        // Reset the busy state and notify listeners
+         // Reset the busy state and notify listeners
         setBusy(false);
         notifyListeners();
-      }
-    } else {
-      // Handle form validation failure
-      // print('Form validation failed or form errors are present');
-    }
+      } 
+           
   }
 }
