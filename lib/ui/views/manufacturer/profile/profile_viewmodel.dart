@@ -5,6 +5,7 @@ import 'package:marchant/models/setting_model.dart';
 import 'package:marchant/services/storage_service.dart/session.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../services/state_service/user_service.dart';
 
@@ -49,6 +50,7 @@ class ManuProfileViewModel extends BaseViewModel {
   void tapHandler(SettingOptions setting) {
     switch (setting) {
       case SettingOptions.shortCode:
+        _makePhoneCall();
         break;
       case SettingOptions.myDetail:
         _navigation.navigateToMydetailView();
@@ -65,5 +67,15 @@ class ManuProfileViewModel extends BaseViewModel {
       case SettingOptions.credit:
       // TODO: Handle this case.
     }
+  }
+
+  final String _phoneNumber = '+251989363689';
+
+  Future<void> _makePhoneCall() async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: _phoneNumber,
+    );
+    await launchUrl(launchUri);
   }
 }

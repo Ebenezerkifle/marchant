@@ -169,7 +169,7 @@ class MydetailView extends StackedView<MydetailViewModel> {
                                   verticalSpaceSmall,
                                 ],
                               )
-                            : verticalSpaceMedium,
+                      : verticalSpaceMedium,
                         CustomeButton(
                           text: 'Change',
                           onTap: viewModel.onSubmit,

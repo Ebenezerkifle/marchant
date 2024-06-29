@@ -12,27 +12,41 @@ class ManuHomeViewModel extends ReactiveViewModel {
   final _postService = locator<PostStateService>();
   final _navigation = locator<NavigationService>();
 
+  String? errorMessage;
+
   @override
   List<ListenableServiceMixin> get listenableServices => [_postService];
 
   Map<String, ProductModel> get products => _postService.products;
 
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
+  get scaffoldKey => _key;
+
   ManuHomeViewModel() {
     _getMyProducts();
   }
+
   final GlobalKey<RefreshIndicatorState> refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
 
   Future<void> refresh() async {
-    setBusy(true);
-    await _getMyProducts();
-    setBusy(false);
+    try {
+      setBusy(true); // Set busy state to indicate loading
+      await _getMyProducts();
+    } finally {
+      setBusy(false); // Always unset busy state after operation
+    }
   }
 
-  _getMyProducts() async {
-    setBusy(true);
-    await _postService.getProducts();
-    setBusy(false);
+  Future<void> _getMyProducts() async {
+    try {
+      errorMessage = null; // Clear any existing error message
+      await _postService.getProducts();
+    } catch (e) {
+      errorMessage = 'Failed to fetch products. Please try again later.';
+    } finally {
+      notifyListeners(); // Notify listeners after state changes
+    }
   }
 
   onPostProduct() {

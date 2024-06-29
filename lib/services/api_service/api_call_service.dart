@@ -14,7 +14,7 @@ class ApiCallService {
   };
 
   // can handle all api
-  static const Duration timeout = Duration(seconds: 25);
+  static const Duration timeout = Duration(seconds: 15);
 
   // timeout response.
   static Response timeoutResponse =

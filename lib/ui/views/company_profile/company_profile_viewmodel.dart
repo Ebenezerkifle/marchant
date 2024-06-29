@@ -19,6 +19,6 @@ class CompanyProfileViewModel extends ReactiveViewModel {
   Map<String, ProductModel> get products => _productState.products;
 
   void onItemSelected(ProductModel product) {
-    _navigation.navigateToProductDetailView(product: product);
+    _navigation.navigateToManuProductDetailView(product: product);
   }
 }

@@ -24,11 +24,15 @@ class MyOrdersViewModel extends ReactiveViewModel {
       GlobalKey<RefreshIndicatorState>();
 
   Future<void> refresh() async {
-    setBusy(true);
+    try{
+ setBusy(true);
     await _orderState.getOrders();
     await _orderState.getDeliveredOrders();
-    setBusy(false);
+    }finally{
+ setBusy(false);
     notifyListeners();
+    }
+  
   }
 
   void getOrders() async {

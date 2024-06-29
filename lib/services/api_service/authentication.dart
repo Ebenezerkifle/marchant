@@ -30,32 +30,35 @@ class Authentication {
 
 //update user profile
   Future<Response> changeUserProfile(UserModel userModel) {
-    final userId = _userService.user?.id;
     final userbaseurl = _userService.user?.role == "Retailor"
-        ? retailorBaseUrl
-        : manufacturerBaseUrl;
+        ? retailorUpd
+        : manufacturerUpd;
     return ApiCallService.patchCall(
-      '$baseUrl$userbaseurl$userId$updateUrl',
+      '$baseUrl$userbaseurl',
       userModel.toMap(),
       needToken: true,
     );
   }
 
-//change password
-  Future<Response> changePassword(
-    String userId,
-    String prevPassword,
-    String newPassword,
-  ) async {
-    final changeUrl = _userService.user?.role == "Retailor"
-        ? changePassUrl
-        : changeManuPassUrl;
-    return ApiCallService.patchCall(
-      '$baseUrl$changeUrl',
-      {'oldPassword': prevPassword, 'newPassword': newPassword},
-      needToken: true,
-    );
-  }
+
+Future<Response> changePassword(
+  String userId,
+  String prevPassword,
+  String newPassword,
+) async {
+  final changePassUrl = _userService.user?.role == "Retailer"
+      ? changePassRetailerUrl
+      : changePassManufacturerUrl; // Define changePassUrl based on role
+
+  return ApiCallService.patchCall(
+    '$baseUrl$changePassUrl',
+    {'oldPassword': prevPassword, 'newPassword': newPassword},
+    needToken: true,
+  );
+}
+
+
+
 
   // // change password
   // Future<Response> changePassword(

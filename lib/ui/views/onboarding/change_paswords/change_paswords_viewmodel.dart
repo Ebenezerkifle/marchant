@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:marchant/services/api_service/authentication.dart';
@@ -87,11 +89,21 @@ class ChangePasswordsViewModel extends BaseViewModel {
 
         _navigation.back();
       } else {
-        setError(true);
-        errorMsg = 'Something went wrong!';
-        notifyListeners();
+        // not successful
+        if (response.body.contains('{')) {
+          try {
+            var body = jsonDecode(response.body);
+            var message = body['message'];
+            _formError['response'] = message;
+          } catch (e) {
+            _formError['response'] = response.body.toString();
+          }
+        } else {
+          _formError['response'] = response.body.toString();
+        }
       }
       setBusy(false);
+      notifyListeners();
     }
   }
 

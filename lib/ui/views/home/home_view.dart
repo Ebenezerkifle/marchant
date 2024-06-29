@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marchant/ui/views/widgets/custome_button.dart';
 import 'package:stacked/stacked.dart';
 import 'package:marchant/ui/common/app_colors.dart';
 import 'package:marchant/ui/common/app_text_style.dart';
@@ -57,7 +58,7 @@ class HomeView extends StackedView<HomeViewModel> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Categories Section
-                      viewModel.categories.isEmpty
+                      viewModel.isBusy
                           ? SizedBox(
                               height: screenHeight(context) * .3,
                               width: double.infinity,
@@ -65,6 +66,26 @@ class HomeView extends StackedView<HomeViewModel> {
                                 child: CircularProgressIndicator(),
                               ),
                             )
+                            : viewModel.errorMessage != null
+                              ? Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        viewModel.errorMessage!,
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                      SizedBox(height: 20),
+                                      CustomeButton(
+                                        text: 'Retry',
+                                        onTap: viewModel.refresh,
+                                      ),
+                                    ],
+                                  ),
+                                )
                           : GridView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
@@ -115,37 +136,67 @@ class HomeView extends StackedView<HomeViewModel> {
                           Text('Our Products', style: AppTextStyle.h2Bold),
                         ],
                       ),
-                      viewModel.products.isEmpty
+                          // viewModel.isBusy
+
+                          // ? SizedBox(
+                          //     height: screenHeight(context) * .4,
+                          //     width: double.infinity,
+                          //     child: const Center(
+                          //       child: CircularProgressIndicator(),
+                          //     ),
+                          //   )
+
+                          // //  viewModel.isLoading
+                          // //   ? SizedBox(
+                          // //       height: screenHeight(context) * .4,
+                          // //       width: double.infinity,
+                          // //       child: const Center(
+                          // //           child: CircularProgressIndicator()),
+                          // //     )
+                          // //   : viewModel.products.isEmpty && !viewModel.isLoading
+                          // //       ? SizedBox(
+                          // //           height: screenHeight(context) * .4,
+                          // //           width: double.infinity,
+                          // //           child: const Center(
+                          // //             child: Text(
+                          // //               'No products found',
+                          // //               style: TextStyle(
+                          // //                 fontSize: 18,
+                          // //                 color: Colors.grey,
+                          // //               ),
+                          // //             ),
+                          // //           ),
+                          // //         )
+
+                           viewModel.isBusy
                           ? SizedBox(
-                              height: screenHeight(context) * .4,
+                              height: screenHeight(context) * .3,
                               width: double.infinity,
                               child: const Center(
                                 child: CircularProgressIndicator(),
                               ),
                             )
-
-                          //  viewModel.isLoading
-                          //   ? SizedBox(
-                          //       height: screenHeight(context) * .4,
-                          //       width: double.infinity,
-                          //       child: const Center(
-                          //           child: CircularProgressIndicator()),
-                          //     )
-                          //   : viewModel.products.isEmpty && !viewModel.isLoading
-                          //       ? SizedBox(
-                          //           height: screenHeight(context) * .4,
-                          //           width: double.infinity,
-                          //           child: const Center(
-                          //             child: Text(
-                          //               'No products found',
-                          //               style: TextStyle(
-                          //                 fontSize: 18,
-                          //                 color: Colors.grey,
-                          //               ),
-                          //             ),
-                          //           ),
-                          //         )
-
+                            : viewModel.errorMessage != null
+                              ? Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        viewModel.errorMessage!,
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 20),
+                                      CustomeButton(
+                                        text: 'Retry',
+                                        onTap: viewModel.refresh,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                          
                           : CustomeGrideWidget(
                               widgets: viewModel.products.entries
                                   .map(
@@ -181,3 +232,13 @@ class HomeView extends StackedView<HomeViewModel> {
   @override
   HomeViewModel viewModelBuilder(BuildContext context) => HomeViewModel();
 }
+
+
+
+
+
+
+
+
+
+

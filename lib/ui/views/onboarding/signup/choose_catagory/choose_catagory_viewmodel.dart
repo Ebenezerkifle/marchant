@@ -209,50 +209,40 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
       _enrollmentService.setUserModel(categoryId: selected.entries.first.key);
       setBusy(true);
 
-      try {
-        var response = await _enrollmentService.registerAuser();
+      var response = await _enrollmentService.registerAuser();
 
-        if (response.statusCode == 201 || response.statusCode == 200) {
-          var body = jsonDecode(response.body);
-          var retailer = body['data']['retailer'];
-          var token = body['token'];
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        var body = jsonDecode(response.body);
+        var retailer = body['data']['retailer'];
+        var token = body['token'];
 
-          if (retailer != null && token != null) {
-            var newUserData = UserModel.fromMap(retailer);
+        if (retailer != null && token != null) {
+          var newUserData = UserModel.fromMap(retailer);
 
-            _userService.setUserData(newUserData);
-            SessionService.setString(SessionKey.token, token);
-            _landingStateService.setIndex(0);
-            _navigation.clearStackAndShow(Routes.landingView);
-          } else {
-            _formError['response'] = 'No retailer data found';
-            _errorMessage = _formError['response'];
+          _userService.setUserData(newUserData);
+          SessionService.setString(SessionKey.token, token);
+          _landingStateService.setIndex(0);
+          _navigation.clearStackAndShow(Routes.landingView);
+        } else {
+          _formError['response'] = 'No retailer data found';
+          _errorMessage = _formError['response'];
+        }
+      } else {
+        // not successful
+        if (response.body.contains('{')) {
+          try {
+            var body = jsonDecode(response.body);
+            var message = body['message'];
+            _formError['response'] = message;
+          } catch (e) {
+            _formError['response'] = response.body.toString();
           }
         } else {
-          _handleErrorResponse(response);
+          _formError['response'] = response.body.toString();
         }
-      } catch (e) {
-        _formError['response'] = 'An error occurred: $e';
-        _errorMessage = _formError['response'];
-      } finally {
-        setBusy(false);
-        notifyListeners();
       }
+      setBusy(false);
+      notifyListeners();
     }
-  }
-
-  void _handleErrorResponse(response) {
-    if (response.body.contains('{')) {
-      try {
-        var body = jsonDecode(response.body);
-        var message = body['message'];
-        _formError['response'] = message;
-      } catch (e) {
-        _formError['response'] = response.body.toString();
-      }
-    } else {
-      _formError['response'] = response.body.toString();
-    }
-    _errorMessage = _formError['response'];
   }
 }

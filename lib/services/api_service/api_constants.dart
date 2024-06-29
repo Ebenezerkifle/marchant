@@ -1,6 +1,6 @@
 const baseUrl = 'https://merchant-api-1dhq.onrender.com';
-const retailorBaseUrl = '/api/manufacturer/';
-const manufacturerBaseUrl = '/api/retailer/';
+const retailorUpd = '/api/retailer/updateByRetailer';
+const manufacturerUpd = '/api/manufacturer/updateManufacturerData';
 const categoryUrl = '/api/productCategory';
 const productUrl = '/api/product/getProductsByCategoryType';
 const singUpUrl = '/api/retailer';
@@ -10,8 +10,9 @@ const readPendingOrderUrl = '/api/order/ReadPendingOrdersByRetailer';
 const readDeliveredOrderUrl = '/api/order/ReadDeliveredOrdersByRetailer';
 const createProdUrl = '/api/product';
 const getProductsByManufacturer = '/api/product/byManufacturer';
-const changePassUrl = '/api/retailer/updatePassword';
-const changeManuPassUrl = '/api/manufacturer/updatePassword/';
+const changePassRetailerUrl = '/api/retailer/updatePassword';
+const changePassManufacturerUrl = '/api/manufacturer/updatePassword/';
 const passResetUrl = '/passwordReset/';
 const phoneCheckerUrl = '/phoneChecker/';
 const updateUrl = '/updateFields';
+

@@ -93,15 +93,6 @@ class ChooseCatagoryView extends StackedView<ChooseCategoryViewModel> {
               ),
               verticalSpaceSmall,
             ],
-            verticalSpaceMiddle,
-            if (viewModel.errorMessage != null)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: middleSize),
-                child: Text(
-                  viewModel.errorMessage!,
-                  style: const TextStyle(color: Colors.red, fontSize: 16),
-                ),
-              ),
             Expanded(
               child: viewModel.loading
                   ? const Center(child: CircularProgressIndicator())

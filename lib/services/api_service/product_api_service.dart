@@ -26,6 +26,7 @@ class ProductApiCallService {
       token,
       needToken: false,
     );
+    // print(response.body);
     Map<String, ProductModel> products = {};
     // print('Initial categories: $categories');
     // print('Response status code: ${response.statusCode}');

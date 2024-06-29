@@ -85,10 +85,15 @@ class ProductModel {
       soldAmount: map['soldAmount'],
       status: map['status'],
       totalAmount: map['totalAmount'],
-      // companyName: map['ManufacturerId']['companyName'] ?? '',
-      //address: map['ManufacturerId']['address'],
-      // TIN: map['ManufacturerId']['TIN'],
-      //logoImage: map['ManufacturerId']['logoImage'],
+      // companyName: map['ManufacturerId']['companyName'] != null ? map['ManufacturerId']['companyName'] as String : null,
+      // address: map['ManufacturerId']['address'] != null ? map['ManufacturerId']['address'] as String : null,
+      // TIN: map['ManufacturerId']['TIN'] != null ? map['ManufacturerId']['TIN'] as String : null,
+      // logoImage: map['ManufacturerId']['logoImage'] != null ? map['ManufacturerId']['logoImage'] as String : null,
+
+      // : map['ManufacturerId']['companyName'] ?? '',
+      //: map['ManufacturerId']['address'],
+      // TIN: ,
+      //logoImage: ,
     );
   }
 }
