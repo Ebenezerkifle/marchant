@@ -12,8 +12,7 @@ class ManuHomeViewModel extends ReactiveViewModel {
   final _landingService = locator<LandingStateService>();
   final _postService = locator<PostStateService>();
   final _navigation = locator<NavigationService>();
-    final _phoneService = locator<PhoneServiceService>(); 
-
+  final _phoneService = locator<PhoneServiceService>();
 
   String? errorMessage;
 
@@ -33,23 +32,19 @@ class ManuHomeViewModel extends ReactiveViewModel {
       GlobalKey<RefreshIndicatorState>();
 
   Future<void> refresh() async {
-    try {
-      setBusy(true); // Set busy state to indicate loading
-      await _getMyProducts();
-    } finally {
-      setBusy(false); // Always unset busy state after operation
-    }
+    await _getMyProducts();
   }
 
   Future<void> _getMyProducts() async {
     try {
+      setBusy(true);
       errorMessage = null; // Clear any existing error message
       await _postService.getProducts();
     } catch (e) {
       errorMessage = 'Failed to fetch products. Please try again later.';
-    } finally {
-      notifyListeners(); // Notify listeners after state changes
     }
+    setBusy(false);
+    notifyListeners();
   }
 
   onPostProduct() {
@@ -59,7 +54,8 @@ class ManuHomeViewModel extends ReactiveViewModel {
   void onItemSelected(ProductModel product) {
     _navigation.navigateToManuProductDetailView(product: product);
   }
-    Future<void> makePhoneCall() async {
-    await _phoneService.makePhoneCall(); 
+
+  Future<void> makePhoneCall() async {
+    await _phoneService.makePhoneCall();
   }
 }

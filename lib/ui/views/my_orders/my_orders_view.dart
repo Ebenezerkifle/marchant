@@ -122,17 +122,18 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
                               backgroundColor: kcPrimaryColor,
                               onRefresh: viewModel.refresh,
                               child: ListView(
-                                children: const [
-                                  Center(
-                                    child: Padding(
-                                      padding: EdgeInsets.all(16.0),
+                                children: [
+                                  SizedBox(
+                                    height: screenHeight(context) * .4,
+                                    width: double.infinity,
+                                    child: const Center(
                                       child: Text(
                                         'No delivered orders yet',
                                         style: TextStyle(
                                             fontSize: 18, color: Colors.grey),
                                       ),
                                     ),
-                                  ),
+                                  )
                                 ],
                               ),
                             )

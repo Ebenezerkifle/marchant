@@ -37,7 +37,7 @@ class PostStateService with ListenableServiceMixin {
       token,
       needToken: true,
     );
-    print(response.body);
+    // print(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
       var body = jsonDecode(response.body);
       var productData = body['data']['products'];
