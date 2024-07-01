@@ -7,6 +7,7 @@ import 'package:marchant/models/category_model.dart';
 import 'package:marchant/models/user_model.dart';
 import 'package:marchant/services/state_service/enrollment_state_service.dart';
 import 'package:marchant/services/state_service/landing_state_servic.dart';
+import 'package:marchant/services/state_service/snackbar_service.dart';
 import 'package:marchant/services/state_service/user_service.dart';
 import 'package:marchant/services/storage_service.dart/session.dart';
 import 'package:stacked/stacked.dart';
@@ -243,6 +244,9 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
       }
       setBusy(false);
       notifyListeners();
+    }else{
+  SnackBarService.showSnackBar(content: 'Please,Select Category.');
     }
+  
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:marchant/models/cart_model.dart';
 import 'package:marchant/models/product_model.dart';
 import 'package:marchant/models/order_model.dart';
@@ -57,20 +59,15 @@ class CartStateService with ListenableServiceMixin {
       // count: _totalCount.value,
     );
 
-    try {
-      final response = await _cartApiService.createNewOrder(order);
-
-      if (response.statusCode == 201) {
-        _productStateService
-            .placeOrder(order); // Store the order in the product state service
-        //_orderService.getOrders();
-        clearCart(); // Clear cart after successful order placement
-      } else {
-        throw Exception('Failed to place order');
-      }
-    } catch (e) {
-      // Handle error
-      throw Exception('Failed to place order: $e');
+    final response = await _cartApiService.createNewOrder(order);
+    if (response.statusCode == 201) {
+      _productStateService
+          .placeOrder(order); // Store the order in the product state service
+      clearCart(); // Clear cart after successful order placement
+    } else {
+// Extract error message from response
+      final responseBody = jsonDecode(response.body);
+      throw Exception(responseBody['message'] ?? 'Order failed: try again!');
     }
   }
 

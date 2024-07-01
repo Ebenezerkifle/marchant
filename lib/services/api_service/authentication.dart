@@ -30,7 +30,7 @@ class Authentication {
 
 //update user profile
   Future<Response> changeUserProfile(UserModel userModel) {
-    final userbaseurl = _userService.user?.role == "Retailor"
+    final userbaseurl = _userService.user?.role == "Retailer"
         ? retailorUpd
         : manufacturerUpd;
     return ApiCallService.patchCall(

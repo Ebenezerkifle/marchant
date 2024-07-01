@@ -240,7 +240,7 @@ class PostView extends StackedView<PostViewModel> {
                           controller: viewModel.detailsController,
                           hint: 'Enter details (comma separated)',
                           extendable: true,
-                          // charLength: 1000,
+                          charLength: 1000,
                           height: 50,
                         ),
                       ),

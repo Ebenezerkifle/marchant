@@ -3,6 +3,7 @@ import 'package:marchant/services/state_service/enrollment_state_service.dart';
 import 'package:marchant/services/state_service/landing_state_servic.dart';
 import 'package:marchant/services/state_service/onboarding_state_service.dart';
 import 'package:marchant/services/state_service/orders_state_service.dart';
+import 'package:marchant/services/common_services/phone_service_service.dart';
 import 'package:marchant/services/state_service/post_state_service.dart';
 import 'package:marchant/services/state_service/product_state_service.dart';
 import 'package:marchant/services/state_service/request_status_service_service.dart';
@@ -74,6 +75,7 @@ import 'package:marchant/ui/views/manufacturer/manu_home/manu_product_detail/man
     LazySingleton(classType: PostStateService),
     LazySingleton(classType: OrderStateService),
     LazySingleton(classType: RequestStatusServiceService),
+    LazySingleton(classType: PhoneServiceService),
 // @stacked-service
   ],
   bottomsheets: [

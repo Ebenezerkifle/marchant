@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/app/app.router.dart';
+import 'package:marchant/enums/user_role.dart';
 import 'package:marchant/models/login_model.dart';
 import 'package:marchant/models/user_model.dart';
 import 'package:marchant/services/api_service/authentication.dart';
@@ -112,22 +113,43 @@ class LoginViewModel extends BaseViewModel {
           password: passwordController.text,
         ),
       );
+
       // Check the response status
       if (response.statusCode == 201 || response.statusCode == 200) {
-        var body = jsonDecode(response.body);
-        var merchant = body['userLogged'];
-        var token = body['token'];
+        try {
+          var body = jsonDecode(response.body);
+          var merchant = body['userLogged'];
+          var token = body['token'];
 
-        // Store user data
-        UserModel user = UserModel.fromMap(merchant);
-        _userService.setUserData(user);
+          // Validate and parse user data
+          if (merchant != null && merchant is Map<String, dynamic>) {
+            UserModel user = UserModel.fromMap(merchant);
+            _userService.setUserData(user);
 
-        // Save the token
-        SessionService.setString(SessionKey.token, token);
-        _landingStateService.setIndex(0);
-        // Navigate to the landing view after successful login
+            // Save the token
+            SessionService.setString(SessionKey.token, token);
 
-        _navigationService.clearStackAndShow(Routes.landingView);
+            // Set landing page index based on user role
+            UserRole? userRoleEnum = userRoleFromString(user.role);
+
+            if (userRoleEnum == UserRole.retailor) {
+              _landingStateService.setIndex(0);
+            } else if (userRoleEnum == UserRole.manufacturer) {
+              _landingStateService.setIndex(1);
+            }
+            // Set user role in landing state service
+            _landingStateService.setUserRole(user.role);
+
+            // Navigate to the landing view after successful login
+            _navigationService.clearStackAndShow(Routes.landingView);
+          } else {
+            // Handle invalid user data or missing 'userLogged' field
+            _formError['response'] = 'Invalid user data received';
+          }
+        } catch (e) {
+          // Handle JSON decoding error
+          _formError['response'] = 'Error parsing server response';
+        }
       } else {
         // Handle unsuccessful response
         if (response.body.contains('{')) {
@@ -142,6 +164,7 @@ class LoginViewModel extends BaseViewModel {
           _formError['response'] = response.body.toString();
         }
       }
+
       // Reset the busy state and notify listeners
       setBusy(false);
       notifyListeners();

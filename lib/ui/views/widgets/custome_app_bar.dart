@@ -92,6 +92,8 @@ class CustomeAppBar extends StatelessWidget {
     this.leading,
     this.phoneIcon,
     this.phoneNumber,
+    this.onPhoneIconTap,
+
   });
 
   final String title;
@@ -104,6 +106,7 @@ class CustomeAppBar extends StatelessWidget {
   final Widget? leading;
   final IconData? phoneIcon;
   final String? phoneNumber;
+  final VoidCallback? onPhoneIconTap;
 
   final _navigationService = locator<NavigationService>();
 
@@ -146,10 +149,13 @@ class CustomeAppBar extends StatelessWidget {
           Row(
             children: [
               if (phoneIcon != null)
-                Icon(
-                  phoneIcon,
-                  color: textColor,
-                  size: size * 0.4,
+                GestureDetector(
+                  onTap: onPhoneIconTap,
+                  child: Icon(
+                    phoneIcon,
+                    color: textColor,
+                    size: size * 0.4,
+                  ),
                 ),
               if (phoneNumber != null) ...[
                 horizontalSpaceSmall,

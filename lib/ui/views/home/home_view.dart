@@ -34,6 +34,7 @@ class HomeView extends StackedView<HomeViewModel> {
               back: false,
               phoneIcon: Icons.phone,
               phoneNumber: '889',
+              onPhoneIconTap: viewModel.makePhoneCall,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(
@@ -66,7 +67,7 @@ class HomeView extends StackedView<HomeViewModel> {
                                 child: CircularProgressIndicator(),
                               ),
                             )
-                            : viewModel.errorMessage != null
+                          : viewModel.errorMessage != null
                               ? Center(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -86,48 +87,49 @@ class HomeView extends StackedView<HomeViewModel> {
                                     ],
                                   ),
                                 )
-                          : GridView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 4,
-                                mainAxisSpacing: smallSize,
-                                crossAxisSpacing: smallSize,
-                                childAspectRatio: 1,
-                              ),
-                              itemCount: viewModel.categories.length > 11
-                                  ? 12
-                                  : viewModel.categories.length,
-                              itemBuilder: (context, index) {
-                                if (index == 11) {
-                                  // "More" button with circular shape
-                                  return InkWell(
-                                    child: CircularCardWidget(
-                                      title: 'More',
-                                      icon: viewModel.moreIcon,
-                                      onTap: viewModel.onMoreCategory,
-                                    ),
-                                  );
-                                }
-                                return CircularCardWidget(
-                                  title: viewModel.categories.entries
-                                          .elementAt(index)
-                                          .value
-                                          .name ??
-                                      '',
-                                  image: viewModel.categories.entries
-                                          .elementAt(index)
-                                          .value
-                                          .image ??
-                                      'assets/images/category.jpg',
-                                  onTap: () => viewModel.navigateToSubCategory(
-                                      viewModel.categories.entries
-                                          .elementAt(index)
-                                          .key),
-                                );
-                              },
-                            ),
+                              : GridView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 4,
+                                    mainAxisSpacing: smallSize,
+                                    crossAxisSpacing: smallSize,
+                                    childAspectRatio: 1,
+                                  ),
+                                  itemCount: viewModel.categories.length > 11
+                                      ? 12
+                                      : viewModel.categories.length,
+                                  itemBuilder: (context, index) {
+                                    if (index == 11) {
+                                      // "More" button with circular shape
+                                      return InkWell(
+                                        child: CircularCardWidget(
+                                          title: 'More',
+                                          icon: viewModel.moreIcon,
+                                          onTap: viewModel.onMoreCategory,
+                                        ),
+                                      );
+                                    }
+                                    return CircularCardWidget(
+                                      title: viewModel.categories.entries
+                                              .elementAt(index)
+                                              .value
+                                              .name ??
+                                          '',
+                                      image: viewModel.categories.entries
+                                              .elementAt(index)
+                                              .value
+                                              .image ??
+                                          'assets/images/category.jpg',
+                                      onTap: () =>
+                                          viewModel.navigateToSubCategory(
+                                              viewModel.categories.entries
+                                                  .elementAt(index)
+                                                  .key),
+                                    );
+                                  },
+                                ),
                       verticalSpaceMedium,
                       // Our Products Section Title
                       const Row(
@@ -136,39 +138,39 @@ class HomeView extends StackedView<HomeViewModel> {
                           Text('Our Products', style: AppTextStyle.h2Bold),
                         ],
                       ),
-                          // viewModel.isBusy
+                      // viewModel.isBusy
 
-                          // ? SizedBox(
-                          //     height: screenHeight(context) * .4,
-                          //     width: double.infinity,
-                          //     child: const Center(
-                          //       child: CircularProgressIndicator(),
-                          //     ),
-                          //   )
+                      // ? SizedBox(
+                      //     height: screenHeight(context) * .4,
+                      //     width: double.infinity,
+                      //     child: const Center(
+                      //       child: CircularProgressIndicator(),
+                      //     ),
+                      //   )
 
-                          // //  viewModel.isLoading
-                          // //   ? SizedBox(
-                          // //       height: screenHeight(context) * .4,
-                          // //       width: double.infinity,
-                          // //       child: const Center(
-                          // //           child: CircularProgressIndicator()),
-                          // //     )
-                          // //   : viewModel.products.isEmpty && !viewModel.isLoading
-                          // //       ? SizedBox(
-                          // //           height: screenHeight(context) * .4,
-                          // //           width: double.infinity,
-                          // //           child: const Center(
-                          // //             child: Text(
-                          // //               'No products found',
-                          // //               style: TextStyle(
-                          // //                 fontSize: 18,
-                          // //                 color: Colors.grey,
-                          // //               ),
-                          // //             ),
-                          // //           ),
-                          // //         )
+                      // //  viewModel.isLoading
+                      // //   ? SizedBox(
+                      // //       height: screenHeight(context) * .4,
+                      // //       width: double.infinity,
+                      // //       child: const Center(
+                      // //           child: CircularProgressIndicator()),
+                      // //     )
+                      // //   : viewModel.products.isEmpty && !viewModel.isLoading
+                      // //       ? SizedBox(
+                      // //           height: screenHeight(context) * .4,
+                      // //           width: double.infinity,
+                      // //           child: const Center(
+                      // //             child: Text(
+                      // //               'No products found',
+                      // //               style: TextStyle(
+                      // //                 fontSize: 18,
+                      // //                 color: Colors.grey,
+                      // //               ),
+                      // //             ),
+                      // //           ),
+                      // //         )
 
-                           viewModel.isBusy
+                      viewModel.isBusy
                           ? SizedBox(
                               height: screenHeight(context) * .3,
                               width: double.infinity,
@@ -176,7 +178,7 @@ class HomeView extends StackedView<HomeViewModel> {
                                 child: CircularProgressIndicator(),
                               ),
                             )
-                            : viewModel.errorMessage != null
+                          : viewModel.errorMessage != null
                               ? Center(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -196,26 +198,25 @@ class HomeView extends StackedView<HomeViewModel> {
                                     ],
                                   ),
                                 )
-                          
-                          : CustomeGrideWidget(
-                              widgets: viewModel.products.entries
-                                  .map(
-                                    (e) => CustomeCardWidget(
-                                      size: screenWidth(context) * .38,
-                                      onTap: () =>
-                                          viewModel.onItemSelected(e.value),
-                                      title: e.value.productName ?? '',
-                                      details: e.value.details ?? [],
-                                      detailLimit: 3,
-                                      image: e.value.productImage.first,
-                                      widget: Text(
-                                        '${e.value.salesPrice} ETB',
-                                        style: AppTextStyle.h4Bold,
-                                      ),
-                                    ),
-                                  )
-                                  .toList(),
-                            ),
+                              : CustomeGrideWidget(
+                                  widgets: viewModel.products.entries
+                                      .map(
+                                        (e) => CustomeCardWidget(
+                                          size: screenWidth(context) * .38,
+                                          onTap: () =>
+                                              viewModel.onItemSelected(e.value),
+                                          title: e.value.productName ?? '',
+                                          details: e.value.details ?? [],
+                                          detailLimit: 3,
+                                          image: e.value.productImage.first,
+                                          widget: Text(
+                                            '${e.value.salesPrice} ETB',
+                                            style: AppTextStyle.h4Bold,
+                                          ),
+                                        ),
+                                      )
+                                      .toList(),
+                                ),
                       verticalSpaceLarge,
                     ],
                   ),
@@ -232,13 +233,3 @@ class HomeView extends StackedView<HomeViewModel> {
   @override
   HomeViewModel viewModelBuilder(BuildContext context) => HomeViewModel();
 }
-
-
-
-
-
-
-
-
-
-

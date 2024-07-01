@@ -51,11 +51,13 @@ class CartViewModel extends ReactiveViewModel {
   }
 
   Future<void> refresh() async {
-    setBusy(true);
-    await _orderState.getOrders();
-    await _orderState.getDeliveredOrders();
-    setBusy(false);
-    notifyListeners();
+    try {
+      setBusy(true);
+      await _orderState.getOrders();
+      await _orderState.getDeliveredOrders();
+    } finally {
+      setBusy(false);
+    }
   }
 
   onClearCart() {
@@ -75,7 +77,7 @@ class CartViewModel extends ReactiveViewModel {
       setBusy(false);
       _landingService.setIndex(2);
     } catch (e) {
-      SnackBarService.showSnackBar(content: 'Order failed: try again!');
+      SnackBarService.showSnackBar(content: e.toString());
     } finally {
       setBusy(false);
       _navigation.back();

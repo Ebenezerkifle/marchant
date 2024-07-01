@@ -146,7 +146,7 @@ class PostViewModel extends ReactiveViewModel {
     // _formError.remove('response');
     errorMsg = '';
 
-    if (_formKey.currentState!.validate() &&
+    if (
         _formError.isEmpty &&
         validateDropdowns()) {
       setBusy(true);

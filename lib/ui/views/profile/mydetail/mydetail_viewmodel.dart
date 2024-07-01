@@ -11,6 +11,7 @@ import '../../../../models/user_model.dart';
 import '../../../../services/state_service/enrollment_state_service.dart';
 import '../../../../services/state_service/snackbar_service.dart';
 import '../../../../services/state_service/user_service.dart';
+import '../../../../services/storage_service.dart/session.dart';
 import '../../../../services/validation_service/front_validation.dart';
 
 class MydetailViewModel extends BaseViewModel {
@@ -87,9 +88,22 @@ class MydetailViewModel extends BaseViewModel {
           CategoryId: selectedCategory,
         ),
       );
-      print('hhhhhhhhhhhhhhhhhhh');
-      print(response.body);
+      // print('hhhhhhhhhhhhhhhhhhh');
+      // print(response.body);
       if (response.statusCode == 200 || response.statusCode == 201) {
+        var body = jsonDecode(response.body);
+          var user;
+        _userService.user?.role == "Retailer"?
+        user = body['data']['retailer']:
+        user = body['data']['manufacturer'];
+
+        var token = body['token'];
+
+          var newUserData = UserModel.fromMap(user);
+
+          _userService.setUserData(newUserData);
+          SessionService.setString(SessionKey.token, token);
+       
         SnackBarService.showSnackBar(
           content: 'Your profile changed successfully',
         );

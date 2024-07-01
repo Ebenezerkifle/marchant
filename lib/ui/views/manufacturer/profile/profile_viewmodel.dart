@@ -2,16 +2,25 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/app/app.router.dart';
 import 'package:marchant/models/setting_model.dart';
+import 'package:marchant/services/common_services/phone_service_service.dart';
+import 'package:marchant/services/state_service/orders_state_service.dart';
+import 'package:marchant/services/state_service/product_state_service.dart';
 import 'package:marchant/services/storage_service.dart/session.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../services/state_service/landing_state_servic.dart';
 import '../../../../services/state_service/user_service.dart';
 
 class ManuProfileViewModel extends BaseViewModel {
   final _navigation = locator<NavigationService>();
   final _userService = locator<UserService>();
+  final  _phoneService = locator<PhoneServiceService>();
+ 
+  final _landingService = locator<LandingStateService>();
+  final _productService = locator<ProductStateService>();
+  final _orderService = locator<OrderStateService>();
+  
 
   String get image => 'assets/images/user.png';
 
@@ -50,7 +59,7 @@ class ManuProfileViewModel extends BaseViewModel {
   void tapHandler(SettingOptions setting) {
     switch (setting) {
       case SettingOptions.shortCode:
-        _makePhoneCall();
+        makePhoneCall();
         break;
       case SettingOptions.myDetail:
         _navigation.navigateToMydetailView();
@@ -62,20 +71,18 @@ class ManuProfileViewModel extends BaseViewModel {
         break;
       case SettingOptions.logout:
         SessionService.clearAll();
+        _landingService.clearState();
+        _userService.resetState();
+        _productService.clearState();
+        _orderService.clearState();
+        _navigation.clearStackAndShow(Routes.loginView);
         _navigation.clearStackAndShow(Routes.loginView);
         break;
       case SettingOptions.credit:
       // TODO: Handle this case.
     }
   }
-
-  final String _phoneNumber = '+251989363689';
-
-  Future<void> _makePhoneCall() async {
-    final Uri launchUri = Uri(
-      scheme: 'tel',
-      path: _phoneNumber,
-    );
-    await launchUrl(launchUri);
+ Future<void> makePhoneCall() async {
+    await _phoneService.makePhoneCall(); 
   }
 }
