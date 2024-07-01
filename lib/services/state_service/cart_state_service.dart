@@ -15,7 +15,6 @@ class CartStateService with ListenableServiceMixin {
   final _landingService = locator<LandingStateService>();
   final OrderStateService _orderState = locator<OrderStateService>();
 
-  @override
   List<ListenableServiceMixin> get listenableServices => [_orderState];
   CartStateService() {
     listenToReactiveValues([]);
@@ -95,15 +94,7 @@ class CartStateService with ListenableServiceMixin {
     }
   }
 
-  // _totalPriceCalculator() {
-  //   _totalPrice.value = 0;
-  //   _totalCount.value = 0;
-  //   for (var element in _cartItems.value.values) {
-  //     _totalPrice.value += element.totalPrice ?? 0;
-  //     _totalCount.value += element.count ?? 0;
-  //   }
-  //   notifyListeners();
-  // }
+  
   _totalPriceCalculator() {
     _totalPrice.value = 0;
     _totalCount.value = 0;

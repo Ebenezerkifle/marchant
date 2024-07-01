@@ -14,7 +14,7 @@ class Authentication {
   Future<Response> registerNewUser(UserModel userModel) {
     return ApiCallService.postCall(
       '$baseUrl$singUpUrl',
-      userModel.toMap(),
+      userModel.toMapReg(),
       needToken: false,
     );
   }

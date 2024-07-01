@@ -78,7 +78,7 @@ class ChooseCatagoryView extends StackedView<ChooseCategoryViewModel> {
                 ),
               ],
             ),
-            verticalSpaceLarge,
+            verticalSpaceSmall,
             if (viewModel.hasError && viewModel.errorMsg.isNotEmpty ||
                 viewModel.formError.isNotEmpty) ...[
               Text(

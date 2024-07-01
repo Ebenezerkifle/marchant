@@ -30,10 +30,22 @@ class PostViewModel extends ReactiveViewModel {
     _init();
   }
 
-  onPictureAdd() async {
-    // on adding pictures.
+  // onPictureAdd() async {
+  //   // on adding pictures.
+  //   await _filePicker.pickFile();
+  //   await _filePicker.showDialogAndUpload(DialogType.fileView);
+  // }
+
+onPictureAdd() async {
+    // Pick a file (image)
     await _filePicker.pickFile();
-    await _filePicker.showDialogAndUpload(DialogType.fileView);
+    // Ensure an image is picked before showing the upload dialog
+    if (_filePicker.images.isNotEmpty) {
+      await _filePicker.showDialogAndUpload(DialogType.fileView);
+    } else {
+      // Handle case where no image is selected
+      SnackBarService.showSnackBar(content: 'Please select an image.');
+    }
   }
 
   _init() async {
@@ -146,9 +158,11 @@ class PostViewModel extends ReactiveViewModel {
     // _formError.remove('response');
     errorMsg = '';
 
-    if (
+    if (_formKey.currentState!.validate() &&
         _formError.isEmpty &&
-        validateDropdowns()) {
+        validateDropdowns() &&
+        _filePicker.images.isNotEmpty
+        ) {
       setBusy(true);
       Response response;
 
@@ -274,259 +288,3 @@ void _clearFields() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-// import 'dart:convert';
-
-// import 'package:http/http.dart';
-// import 'package:flutter/material.dart';
-// import 'package:marchant/app/app.locator.dart';
-// import 'package:marchant/models/category_model.dart';
-// import 'package:marchant/models/product_model.dart';
-// import 'package:marchant/services/common_services/file_picker_service.dart';
-// import 'package:marchant/services/state_service/enrollment_state_service.dart';
-// import 'package:marchant/services/state_service/landing_state_servic.dart';
-// import 'package:marchant/services/state_service/post_state_service.dart';
-// import 'package:marchant/services/state_service/user_service.dart';
-// import 'package:marchant/services/validation_service/front_validation.dart';
-// import 'package:stacked/stacked.dart';
-
-// import '../../../../app/app.dialogs.dart';
-// import '../../../../services/state_service/snackbar_service.dart';
-
-// class PostViewModel extends ReactiveViewModel {
-//   final _enrollmentService = locator<EnrollmentStateService>();
-//   final _filePicker = FilePickerService();
-//   final _userService = locator<UserService>();
-//   final _postService = locator<PostStateService>();
-//   final _landing = locator<LandingStateService>();
-
-//   bool _loading = false;
-//   bool get loading => _loading;
-
-//   PostViewModel() {
-//     _init();
-//   }
-
-//   onPictureAdd() async {
-//     await _filePicker.pickFile();
-//     await _filePicker.showDialogAndUpload(DialogType.fileView);
-//   }
-
-//   _init() async {
-//     _loading = true;
-//     notifyListeners();
-//     try {
-//       await _enrollmentService.getTopCategories();
-//     } catch (e) {
-//       _errorMessage = 'Failed to load categories: $e';
-//     } finally {
-//       _loading = false;
-//       notifyListeners();
-//     }
-//   }
-
-//   @override
-//   List<ListenableServiceMixin> get listenableServices =>
-//       [_enrollmentService, _filePicker];
-
-//   Map<String, Category> get topCategories => _enrollmentService.topCategories;
-
-//   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-//   GlobalKey<FormState> get formKey => _formKey;
-
-//   TextEditingController productNameController = TextEditingController();
-//   TextEditingController salesPriceController = TextEditingController();
-//   TextEditingController descriptionController = TextEditingController();
-//   TextEditingController detailsController = TextEditingController();
-//   TextEditingController quantityController = TextEditingController();
-//   TextEditingController companyNameController = TextEditingController();
-//   TextEditingController addressController = TextEditingController();
-//   TextEditingController tinController = TextEditingController();
-
-//   List<Category> subCategories = [];
-//   List<Category> subSubCategories = [];
-
-//   String? selectedCategory;
-//   String? selectedSubCategory;
-//   String? selectedSubSubCategory;
-
-//   List<String> details = [];
-//   List<String> get images => _filePicker.images;
-
-//   String? _errorMessage;
-//   String? get errorMessage => _errorMessage;
-
-//   void onCategoryChanged(String? newValue) {
-//     selectedCategory = newValue;
-//     selectedSubCategory = null;
-//     selectedSubSubCategory = null;
-//     subCategories = [];
-//     subSubCategories = [];
-
-//     if (newValue != null) {
-//       subCategories = topCategories[newValue]?.subcategory ?? [];
-//     }
-
-//     notifyListeners();
-//   }
-
-//   void onSubCategoryChanged(String? newValue) {
-//     selectedSubCategory = newValue;
-//     selectedSubSubCategory = null;
-//     subSubCategories = [];
-
-//     if (newValue != null && selectedCategory != null) {
-//       subSubCategories = subCategories
-//               .firstWhere((subCat) => subCat.id == newValue,
-//                   orElse: () => Category(subcategory: []))
-//               .subcategory ??
-//           [];
-//     }
-
-//     notifyListeners();
-//   }
-
-//   void onSubSubCategoryChanged(String? newValue) {
-//     selectedSubSubCategory = newValue;
-//     notifyListeners();
-//   }
-
-//   Future<void> refresh() async {
-//     await _postService.getProducts();
-//   }
-
-//   // Handle form submission
-//   void onPostProduct() async {
-//     if (_formKey.currentState!.validate() &&
-//         _formError.isEmpty &&
-//         validateDropdowns()) {
-//       setBusy(true);
-//       Response response;
-
-//       var product = ProductModel(
-//         productName: productNameController.text,
-//         details:
-//             detailsController.text.split(',').map((e) => e.trim()).toList(),
-//         productImage: images,
-//         manufacturerId: _userService.user?.id ?? '',
-//         description: descriptionController.text,
-//         address: addressController.text,
-//         quantity: num.parse(quantityController.text),
-//         categoryId: selectedCategory,
-//         subCategoryId: selectedSubCategory,
-//         subSubCategoryId: selectedSubSubCategory,
-//         salesPrice: num.parse(salesPriceController.text),
-//       );
-
-//       response = await _postService.sendProduct(product);
-
-//       if (response.statusCode == 200 || response.statusCode == 201) {
-//         SnackBarService.showSnackBar(
-//           content: 'Your Product is successfully uploaded.',
-//         );
-//         _clearFields();
-//         refresh();
-//         _landing.setIndex(0);
-//       } else {
-//         if (response.body.contains('{')) {
-//           try {
-//             var body = jsonDecode(response.body);
-//             var message = body['message'];
-//             _formError['response'] = message;
-//           } catch (e) {
-//             _formError['response'] = response.body.toString();
-//           }
-//         } else {
-//           _formError['response'] = response.body.toString();
-//         }
-//       }
-//       setBusy(false);
-//       notifyListeners();
-//     }
-//   }
-
-//   void _clearFields() {
-//     productNameController.clear();
-//     salesPriceController.clear();
-//     descriptionController.clear();
-//     detailsController.clear();
-//     quantityController.clear();
-//     companyNameController.clear();
-//     addressController.clear();
-//     tinController.clear();
-//     selectedCategory = null;
-//     selectedSubCategory = null;
-//     selectedSubSubCategory = null;
-//     details.clear();
-//     _formError.clear();
-//   }
-
-//   Map<dynamic, String> _formError = {};
-//   Map<dynamic, String> get formError => _formError;
-
-//   //---------------- FRONT END VALIDATION -------------
-
-//   _setStateOfFormField(String msg, var controller) {
-//     if (msg.isNotEmpty) {
-//       _formError[controller] = msg;
-//       notifyListeners();
-//       return;
-//     } else {
-//       _formError.remove(controller);
-//       notifyListeners();
-//       return;
-//     }
-//   }
-
-//   validateText(String value, var controller, String label,
-//       {int? minLength, int? maxLength}) {
-//     return _setStateOfFormField(
-//       FrontValidation.validateFormField(
-//         value,
-//         label,
-//         minLength: minLength,
-//         maxLength: maxLength,
-//       ),
-//       controller,
-//     );
-//   }
-
-//   bool validateDropdowns() {
-//     bool isValid = true;
-
-//     if (selectedCategory == null) {
-//       _formError['category'] = 'Choose a category';
-//       isValid = false;
-//     } else {
-//       _formError.remove('category');
-//     }
-
-//     if (selectedSubCategory == null) {
-//       _formError['subCategory'] = 'Choose a sub category';
-//       isValid = false;
-//     } else {
-//       _formError.remove('subCategory');
-//     }
-
-//     if (selectedSubSubCategory == null) {
-//       _formError['subSubCategory'] = 'Choose a sub sub category';
-//       isValid = false;
-//     } else {
-//       _formError.remove('subSubCategory');
-//     }
-
-//     notifyListeners();
-//     return isValid;
-//   }
-// }

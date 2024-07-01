@@ -58,6 +58,16 @@ class UserModel {
     };
  
   }
+  Map<String, dynamic> toMapReg() {
+    return <String, dynamic>{
+      'fname': firstName,
+      'lname': lastName,
+      'password': password,
+      'phoneNumber': phoneNumber,
+      'CategoryId': CategoryId,
+    };
+ 
+  }
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     // print("Mapping UserModel from map: $map");

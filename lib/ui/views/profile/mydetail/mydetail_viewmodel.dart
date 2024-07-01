@@ -86,7 +86,7 @@ class MydetailViewModel extends BaseViewModel {
             CategoryId: selectedCategory,
           ),
         );
-      
+
         if (response.statusCode == 200 || response.statusCode == 201) {
           var body = jsonDecode(response.body);
           var userData = _userService.user?.role == "Retailer"
@@ -98,11 +98,12 @@ class MydetailViewModel extends BaseViewModel {
             var newUserData = UserModel.fromMap(userData);
             _userService.setUserData(newUserData);
             // SessionService.setString(SessionKey.token, token);
+            notifyListeners();
 
             SnackBarService.showSnackBar(
               content: 'Your profile changed successfully',
             );
-            _navigation.back();
+            _navigation.replaceWith( '/profile-view');
           } else {
             _formError['response'] = 'User data not found in response';
           }
