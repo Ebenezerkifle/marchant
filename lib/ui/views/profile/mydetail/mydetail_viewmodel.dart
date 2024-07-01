@@ -11,7 +11,7 @@ import '../../../../models/user_model.dart';
 import '../../../../services/state_service/enrollment_state_service.dart';
 import '../../../../services/state_service/snackbar_service.dart';
 import '../../../../services/state_service/user_service.dart';
-import '../../../../services/storage_service.dart/session.dart';
+// import '../../../../services/storage_service.dart/session.dart';
 import '../../../../services/validation_service/front_validation.dart';
 
 class MydetailViewModel extends BaseViewModel {
@@ -86,8 +86,7 @@ class MydetailViewModel extends BaseViewModel {
             CategoryId: selectedCategory,
           ),
         );
-        print(response.statusCode);
-        print(response.body);
+      
         if (response.statusCode == 200 || response.statusCode == 201) {
           var body = jsonDecode(response.body);
           var userData = _userService.user?.role == "Retailer"
@@ -122,7 +121,6 @@ class MydetailViewModel extends BaseViewModel {
           _formError['response'] = errorMessage;
         }
       } catch (e) {
-        print(e);
         _formError['response'] = 'Exception: ${e.toString()}';
       }
 

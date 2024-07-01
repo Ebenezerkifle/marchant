@@ -42,7 +42,7 @@ class HomeView extends StackedView<HomeViewModel> {
                 vertical: middleSize,
               ),
               child: SearchWidget(
-                onFilter: viewModel.onFilter,
+                searchController: viewModel.searchController,
               ),
             ),
             verticalSpaceSmall,
@@ -138,37 +138,6 @@ class HomeView extends StackedView<HomeViewModel> {
                           Text('Our Products', style: AppTextStyle.h2Bold),
                         ],
                       ),
-                      // viewModel.isBusy
-
-                      // ? SizedBox(
-                      //     height: screenHeight(context) * .4,
-                      //     width: double.infinity,
-                      //     child: const Center(
-                      //       child: CircularProgressIndicator(),
-                      //     ),
-                      //   )
-
-                      // //  viewModel.isLoading
-                      // //   ? SizedBox(
-                      // //       height: screenHeight(context) * .4,
-                      // //       width: double.infinity,
-                      // //       child: const Center(
-                      // //           child: CircularProgressIndicator()),
-                      // //     )
-                      // //   : viewModel.products.isEmpty && !viewModel.isLoading
-                      // //       ? SizedBox(
-                      // //           height: screenHeight(context) * .4,
-                      // //           width: double.infinity,
-                      // //           child: const Center(
-                      // //             child: Text(
-                      // //               'No products found',
-                      // //               style: TextStyle(
-                      // //                 fontSize: 18,
-                      // //                 color: Colors.grey,
-                      // //               ),
-                      // //             ),
-                      // //           ),
-                      // //         )
 
                       viewModel.isBusy
                           ? SizedBox(
@@ -199,23 +168,42 @@ class HomeView extends StackedView<HomeViewModel> {
                                   ),
                                 )
                               : CustomeGrideWidget(
-                                  widgets: viewModel.products.entries
-                                      .map(
-                                        (e) => CustomeCardWidget(
-                                          size: screenWidth(context) * .38,
-                                          onTap: () =>
-                                              viewModel.onItemSelected(e.value),
-                                          title: e.value.productName ?? '',
-                                          details: e.value.details ?? [],
-                                          detailLimit: 3,
-                                          image: e.value.productImage.first,
-                                          widget: Text(
-                                            '${e.value.salesPrice} ETB',
-                                            style: AppTextStyle.h4Bold,
-                                          ),
-                                        ),
-                                      )
-                                      .toList(),
+                                  widgets: viewModel.filterQuery != null &&
+                                          viewModel.filterQuery!.isNotEmpty
+                                      ? viewModel.filteredProducts.entries
+                                          .map(
+                                            (e) => CustomeCardWidget(
+                                              size: screenWidth(context) * .38,
+                                              onTap: () => viewModel
+                                                  .onItemSelected(e.value),
+                                              title: e.value.productName ?? '',
+                                              details: e.value.details ?? [],
+                                              detailLimit: 3,
+                                              image: e.value.productImage.first,
+                                              widget: Text(
+                                                '${e.value.salesPrice} ETB',
+                                                style: AppTextStyle.h4Bold,
+                                              ),
+                                            ),
+                                          )
+                                          .toList()
+                                      : viewModel.products.entries
+                                          .map(
+                                            (e) => CustomeCardWidget(
+                                              size: screenWidth(context) * .38,
+                                              onTap: () => viewModel
+                                                  .onItemSelected(e.value),
+                                              title: e.value.productName ?? '',
+                                              details: e.value.details ?? [],
+                                              detailLimit: 3,
+                                              image: e.value.productImage.first,
+                                              widget: Text(
+                                                '${e.value.salesPrice} ETB',
+                                                style: AppTextStyle.h4Bold,
+                                              ),
+                                            ),
+                                          )
+                                          .toList(),
                                 ),
                       verticalSpaceLarge,
                     ],
