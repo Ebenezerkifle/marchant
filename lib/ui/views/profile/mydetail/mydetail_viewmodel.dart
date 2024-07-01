@@ -38,7 +38,6 @@ class MydetailViewModel extends BaseViewModel {
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController phoneNumController = TextEditingController();
-  TextEditingController newPasswordController = TextEditingController();
   TextEditingController categoryController = TextEditingController();
 
   String errorMsg = '';
@@ -78,50 +77,55 @@ class MydetailViewModel extends BaseViewModel {
     errorMsg = '';
     if (_formKey.currentState!.validate() && _formError.isEmpty) {
       setBusy(true);
-      // Backend call to login the user
-      Response response;
-      response = await _apiCall.changeUserProfile(
-        UserModel(
-          firstName: firstNameController.text,
-          lastName: lastNameController.text,
-          phoneNumber: phoneNumController.text.substring(1),
-          CategoryId: selectedCategory,
-        ),
-      );
-      print('hhhhhhhhhhhhhhhhhhh');
-      print(response.body);
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        var body = jsonDecode(response.body);
-          var user;
-        _userService.user?.role == "Retailer"?
-        user = body['data']['retailer']:
-        user = body['data']['manufacturer'];
-
-        var token = body['token'];
-
-          var newUserData = UserModel.fromMap(user);
-
-          _userService.setUserData(newUserData);
-          SessionService.setString(SessionKey.token, token);
-       
-        SnackBarService.showSnackBar(
-          content: 'Your profile changed successfully',
+      try {
+        Response response = await _apiCall.changeUserProfile(
+          UserModel(
+            firstName: firstNameController.text,
+            lastName: lastNameController.text,
+            phoneNumber: phoneNumController.text.substring(1),
+            CategoryId: selectedCategory,
+          ),
         );
-        _navigation.back();
-      } else {
-        // not successful
-        if (response.body.contains('{')) {
-          try {
-            var body = jsonDecode(response.body);
-            var message = body['message'];
-            _formError['response'] = message;
-          } catch (e) {
-            _formError['response'] = response.body.toString();
+        print(response.statusCode);
+        print(response.body);
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          var body = jsonDecode(response.body);
+          var userData = _userService.user?.role == "Retailer"
+              ? body['data']['retailer']
+              : body['data']['manufacturer'];
+
+          if (userData != null) {
+            // var token = body['token'];
+            var newUserData = UserModel.fromMap(userData);
+            _userService.setUserData(newUserData);
+            // SessionService.setString(SessionKey.token, token);
+
+            SnackBarService.showSnackBar(
+              content: 'Your profile changed successfully',
+            );
+            _navigation.back();
+          } else {
+            _formError['response'] = 'User data not found in response';
           }
         } else {
-          _formError['response'] = response.body.toString();
+          var errorMessage = 'Error updating profile';
+          if (response.body.contains('{')) {
+            try {
+              var body = jsonDecode(response.body);
+              errorMessage = body['message'];
+            } catch (e) {
+              errorMessage = 'Failed to decode error message';
+            }
+          } else {
+            errorMessage = 'Unexpected error occurred';
+          }
+          _formError['response'] = errorMessage;
         }
+      } catch (e) {
+        print(e);
+        _formError['response'] = 'Exception: ${e.toString()}';
       }
+
       setBusy(false);
       notifyListeners();
     }

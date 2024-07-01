@@ -69,31 +69,60 @@ class ProductModel {
     return products;
   }
 
-  factory ProductModel.fromMap(Map<String, dynamic> map) {
-    return ProductModel(
-      id: map['_id'],
-      productName: map['productName'] ?? '',
-      productTag: map['productTag'],
-      productImage: List<String>.from(map['productImage'] as List<dynamic>),
-      details: List<String>.from(map['details'] ?? []),
-      categoryId: map['categoryId'],
-      subCategoryId: map['subCategoryId'],
-      subSubCategoryId: map['subSubCategoryId'],
-      salesPrice: map['salesPrice'],
-      description: map['description'],
-      quantity: map['quantity'],
-      soldAmount: map['soldAmount'],
-      status: map['status'],
-      totalAmount: map['totalAmount'],
-      // companyName: map['ManufacturerId']['companyName'] != null ? map['ManufacturerId']['companyName'] as String : null,
-      // address: map['ManufacturerId']['address'] != null ? map['ManufacturerId']['address'] as String : null,
-      // TIN: map['ManufacturerId']['TIN'] != null ? map['ManufacturerId']['TIN'] as String : null,
-      // logoImage: map['ManufacturerId']['logoImage'] != null ? map['ManufacturerId']['logoImage'] as String : null,
+  // factory ProductModel.fromMap(Map<String, dynamic> map) {
+  //   return ProductModel(
+  //     id: map['_id'],
+  //     productName: map['productName'] ?? '',
+  //     productTag: map['productTag'],
+  //     productImage: List<String>.from(map['productImage'] as List<dynamic>),
+  //     details: List<String>.from(map['details'] ?? []),
+  //     categoryId: map['categoryId'],
+  //     subCategoryId: map['subCategoryId'],
+  //     subSubCategoryId: map['subSubCategoryId'],
+  //     salesPrice: map['salesPrice'],
+  //     description: map['description'],
+  //     quantity: map['quantity'],
+  //     soldAmount: map['soldAmount'],
+  //     status: map['status'],
+  //     totalAmount: map['totalAmount'],
+  //     companyName: map['ManufacturerId']['companyName'] != null ? map['ManufacturerId']['companyName'] as String : null,
+  //     address: map['ManufacturerId']['address'] != null ? map['ManufacturerId']['address'] as String : null,
+  //     TIN: map['ManufacturerId']['TIN'] != null ? map['ManufacturerId']['TIN'] as String : null,
+  //     logoImage: map['ManufacturerId']['logoImage'] != null ? map['ManufacturerId']['logoImage'] as String : null,
 
-      // : map['ManufacturerId']['companyName'] ?? '',
-      //: map['ManufacturerId']['address'],
-      // TIN: ,
-      //logoImage: ,
-    );
-  }
+  //   );
+  // }
+
+
+  factory ProductModel.fromMap(Map<String, dynamic> map) {
+  return ProductModel(
+    id: map['_id'],
+    productName: map['productName'] ?? '',
+    productTag: map['productTag'],
+    productImage: List<String>.from(map['productImage'] as List<dynamic>),
+    details: List<String>.from(map['details'] ?? []),
+    categoryId: map['categoryId'],
+    subCategoryId: map['subCategoryId'],
+    subSubCategoryId: map['subSubCategoryId'],
+    salesPrice: map['salesPrice'],
+    description: map['description'],
+    quantity: map['quantity'],
+    soldAmount: map['soldAmount'],
+    status: map['status'],
+    totalAmount: map['totalAmount'],
+    companyName: map['ManufacturerId'] != null && map['ManufacturerId']['companyName'] != null
+        ? map['ManufacturerId']['companyName'] as String
+        : null,
+    address: map['ManufacturerId'] != null && map['ManufacturerId']['address'] != null
+        ? map['ManufacturerId']['address'] as String
+        : null,
+    TIN: map['ManufacturerId'] != null && map['ManufacturerId']['TIN'] != null
+        ? map['ManufacturerId']['TIN'] as String
+        : null,
+    logoImage: map['ManufacturerId'] != null && map['ManufacturerId']['logoImage'] != null
+        ? map['ManufacturerId']['logoImage'] as String
+        : null,
+  );
+}
+
 }
