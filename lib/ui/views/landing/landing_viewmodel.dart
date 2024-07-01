@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marchant/enums/user_role.dart';
 import 'package:marchant/services/state_service/landing_state_servic.dart';
-import 'package:marchant/services/state_service/user_service.dart';
 import 'package:marchant/ui/views/manufacturer/manu_home/manu_home_view.dart';
 import 'package:marchant/ui/views/manufacturer/post/post_view.dart';
 import 'package:marchant/ui/views/manufacturer/profile/profile_view.dart';
@@ -121,9 +120,13 @@ import 'widgets/bar_items.dart';
 
 
 
-class LandingViewModel extends BaseViewModel {
+class LandingViewModel extends IndexTrackingViewModel {
   final _cartState = locator<CartStateService>();
   final _landingService = locator<LandingStateService>();
+
+    @override
+  List<ListenableServiceMixin> get listenableServices =>
+      [_cartState, _landingService];
 
   Map<String, CartModel> get cartItems => _cartState.cartItems;
 
@@ -201,16 +204,15 @@ class LandingViewModel extends BaseViewModel {
   List<BottomBarItem> get itemsToShow =>
       userRole == UserRole.manufacturer ? manufacturerItems : retailerItems;
 
-  int _currentIndex = 0;
+  @override
 
-  int get currentIndex => _currentIndex;
-
-  void setIndex(int value) {
-    _currentIndex = value;
-    notifyListeners();
-  }
+    @override
+  int get currentIndex => _landingService.currentIndex;
 
   @override
+  void setIndex(int value) {
+    _landingService.setIndex(value);
+  }
   void dispose() {
     super.dispose();
   }

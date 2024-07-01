@@ -1,13 +1,22 @@
 import 'dart:convert';
 
+import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/models/cart_model.dart';
 import 'package:marchant/models/product_model.dart';
 import 'package:marchant/models/order_model.dart';
 import 'package:marchant/services/api_service/cart_api_service.dart';
+import 'package:marchant/services/state_service/landing_state_servic.dart';
+import 'package:marchant/services/state_service/orders_state_service.dart';
 import 'package:marchant/services/state_service/product_state_service.dart';
+import 'package:marchant/services/state_service/snackbar_service.dart';
 import 'package:stacked/stacked.dart';
 
 class CartStateService with ListenableServiceMixin {
+  final _landingService = locator<LandingStateService>();
+  final OrderStateService _orderState = locator<OrderStateService>();
+
+  @override
+  List<ListenableServiceMixin> get listenableServices => [_orderState];
   CartStateService() {
     listenToReactiveValues([]);
   }
@@ -58,12 +67,27 @@ class CartStateService with ListenableServiceMixin {
       // totalAmount: _totalPrice.value,
       // count: _totalCount.value,
     );
+    Future<void> refresh() async {
+      try {
+        await _orderState.getOrders();
+        await _orderState.getDeliveredOrders();
+      } finally {
+        
+      }
+    }
 
     final response = await _cartApiService.createNewOrder(order);
+        print(response.body);
+
     if (response.statusCode == 201) {
       _productStateService
           .placeOrder(order); // Store the order in the product state service
       clearCart(); // Clear cart after successful order placement
+      SnackBarService.showSnackBar(content: 'Successfully Ordered.');
+      // _navigation.clearStackAndShow(Routes.myOrdersView);
+
+      _landingService.setIndex(2);
+      await refresh();
     } else {
 // Extract error message from response
       final responseBody = jsonDecode(response.body);
