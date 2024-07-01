@@ -88,8 +88,8 @@ class MydetailViewModel extends BaseViewModel {
           CategoryId: selectedCategory,
         ),
       );
-      // print('hhhhhhhhhhhhhhhhhhh');
-      // print(response.body);
+      print('hhhhhhhhhhhhhhhhhhh');
+      print(response.body);
       if (response.statusCode == 200 || response.statusCode == 201) {
         var body = jsonDecode(response.body);
           var user;

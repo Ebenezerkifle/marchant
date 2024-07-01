@@ -1,6 +1,6 @@
 const baseUrl = 'https://merchant-api-1dhq.onrender.com';
 const retailorUpd = '/api/retailer/updateByRetailer';
-const manufacturerUpd = '/api/manufacturer/updateManufacturerData';
+const manufacturerUpd = '/api/manufacturer/updateByManufacturer/';
 const categoryUrl = '/api/productCategory';
 const productUrl = '/api/product/getProductsByCategoryType';
 const singUpUrl = '/api/retailer';
