@@ -62,6 +62,20 @@ class PostView extends StackedView<PostViewModel> {
                           ),
                         ),
                       ),
+                      if (viewModel.hasError && viewModel.errorMsg.isNotEmpty ||
+                          viewModel.formError.isNotEmpty) ...[
+                             verticalSpaceSmall,
+                        Text(
+                          viewModel.formError.isNotEmpty
+                              ? viewModel.formError.entries.first.value
+                              : viewModel.errorMsg,
+                          style: AppTextStyle.withColor(
+                            color: kcDanger,
+                            style: AppTextStyle.h4Normal,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
                       verticalSpaceMiddle,
                       CustomeFormField(
                         title: viewModel.name,
@@ -276,7 +290,6 @@ class PostView extends StackedView<PostViewModel> {
                         ),
                         verticalSpaceSmall,
                       ],
-
                       CustomeButton(
                         text: 'Submit',
                         onTap: viewModel.onPostProduct,
