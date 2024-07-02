@@ -16,14 +16,18 @@ import '../../../../services/state_service/user_service.dart';
 // import '../../../../services/storage_service.dart/session.dart';
 import '../../../../services/validation_service/front_validation.dart';
 
-class MydetailViewModel extends BaseViewModel {
+class MydetailViewModel extends ReactiveViewModel {
   final _apiCall = Authentication();
   final _userService = locator<UserService>();
   final _navigation = locator<NavigationService>();
   final _enrollmentService = locator<EnrollmentStateService>();
   // final _landingStateService = locator<LandingStateService>();
 
-  bool _loading = false;
+    @override
+      List<ListenableServiceMixin> get listenableServices => [_userService];
+
+
+  final bool _loading = false;
   bool get loading => _loading;
 
   Map<String, Category> topCategories = {};
@@ -108,8 +112,7 @@ class MydetailViewModel extends BaseViewModel {
             );
             
         _navigation.back();
-            // _landingStateService.setIndex(3);
-            // _navigation.clearStackAndShow(Routes.profileView);
+
           } else {
             _formError['response'] = 'User data not found in response';
           }

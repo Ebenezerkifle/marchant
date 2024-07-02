@@ -135,21 +135,6 @@ class MydetailView extends StackedView<MydetailViewModel> {
                           ),
                           verticalSpaceLarge,
                         ],
-                        // if ((viewModel.hasError &&
-                        //         viewModel.errorMsg.isNotEmpty) ||
-                        //     viewModel.formError.isNotEmpty) ...[
-                        //   Text(
-                        //     viewModel.formError.isNotEmpty
-                        //         ? viewModel.formError.entries.first.value
-                        //         : viewModel.errorMsg,
-                        //     style: AppTextStyle.withColor(
-                        //       color: kcDanger,
-                        //       style: AppTextStyle.h4Normal,
-                        //     ),
-                        //     textAlign: TextAlign.center,
-                        //   ),
-                        //   verticalSpaceSmall,
-                        // ],
                         // error message widget
                         viewModel.formError.isNotEmpty
                             ? Column(
