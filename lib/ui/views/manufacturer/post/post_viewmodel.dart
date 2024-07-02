@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:http/http.dart';
 import 'package:flutter/material.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/models/category_model.dart';
@@ -125,7 +124,7 @@ class PostViewModel extends ReactiveViewModel {
   }
 
   void onSubSubCategoryChanged(String? newValue) {
-    print(newValue);
+    // print(newValue);
     selectedSubSubCategory = newValue;
     notifyListeners();
   }
@@ -141,68 +140,140 @@ class PostViewModel extends ReactiveViewModel {
 
   String errorMsg = '';
 
-  // Handle form submission
+  // // Handle form submission
+  // void onPostProduct() async {
+  //   // _formError.remove('response');
+  //   errorMsg = '';
+
+  //   if (
+  //       _formError.isEmpty &&
+  //       validateDropdowns()&& images.isNotEmpty) {
+  //     setBusy(true);
+  //     Response response;
+
+  //     // Create product model
+  //     var product = ProductModel(
+  //       productName: productNameController.text,
+  //       details:
+  //           detailsController.text.split(',').map((e) => e.trim()).toList(),
+  //       productImage: images,
+  //       manufacturerId: _userService.user?.id ?? '',
+  //       description: descriptionController.text,
+  //       address: addressController.text,
+  //       quantity: num.parse(quantityController.text),
+  //       categoryId: selectedCategory,
+  //       subCategoryId: selectedSubCategory,
+  //       subSubCategoryId: selectedSubSubCategory,
+  //       salesPrice: num.parse(salesPriceController.text),
+  //     );
+
+  //     // Send product data to server
+  //     response = await _postService.sendProduct(product);
+
+  //     if (response.statusCode == 200 || response.statusCode == 201) {
+  //       SnackBarService.showSnackBar(
+  //         content:
+  //             'Your Product is successfuly uploaded, please wait till approved',
+  //       );
+  //       _clearFields();
+  //       refresh();
+  //       _landing.setIndex(0);
+  //     } else {
+  //       // not successful
+  //       if (response.body.contains('{')) {
+  //         try {
+  //           var body = jsonDecode(response.body);
+  //           var message = body['message'];
+  //           _formError['response'] = message;
+  //         } catch (e) {
+  //           _formError['response'] = response.body.toString();
+  //         }
+  //       } else {
+  //         _formError['response'] = response.body.toString();
+  //       }
+  //     }
+  //     setBusy(false);
+  //     notifyListeners();
+  //   }else {
+  //   // Handle missing images case
+  //   if (images.isEmpty) {
+  //     _formError['images'] = 'Please upload at least one image';
+  //     notifyListeners();
+  //   }
+  // }
+  // }
+
   void onPostProduct() async {
-    // _formError.remove('response');
-    errorMsg = '';
+  errorMsg = '';
 
-    if (
-        _formError.isEmpty &&
-        validateDropdowns()&& images.isNotEmpty) {
-      setBusy(true);
-      Response response;
+  // Check if the ViewModel is already busy
+  if (loading) return;
 
-      // Create product model
-      var product = ProductModel(
-        productName: productNameController.text,
-        details:
-            detailsController.text.split(',').map((e) => e.trim()).toList(),
-        productImage: images,
-        manufacturerId: _userService.user?.id ?? '',
-        description: descriptionController.text,
-        address: addressController.text,
-        quantity: num.parse(quantityController.text),
-        categoryId: selectedCategory,
-        subCategoryId: selectedSubCategory,
-        subSubCategoryId: selectedSubSubCategory,
-        salesPrice: num.parse(salesPriceController.text),
+  // Clear previous errors
+  _formError.clear();
+
+  // Validate form fields
+  if (!validateDropdowns()) {
+    notifyListeners();
+    return;
+  }
+
+  // Ensure images are uploaded
+  if (images.isEmpty) {
+    _formError['images'] = 'Please upload at least one image';
+    notifyListeners();
+    return;
+  }
+
+  // Set ViewModel to busy state
+  setBusy(true);
+
+  try {
+    // Create product model
+    var product = ProductModel(
+      productName: productNameController.text,
+      details: detailsController.text.split(',').map((e) => e.trim()).toList(),
+      productImage: images,
+      manufacturerId: _userService.user?.id ?? '',
+      description: descriptionController.text,
+      address: addressController.text,
+      quantity: num.parse(quantityController.text),
+      categoryId: selectedCategory,
+      subCategoryId: selectedSubCategory,
+      subSubCategoryId: selectedSubSubCategory,
+      salesPrice: num.parse(salesPriceController.text),
+    );
+
+    // Send product data to server
+    var response = await _postService.sendProduct(product);
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      SnackBarService.showSnackBar(
+        content: 'Your Product is successfully uploaded, please wait till approved',
       );
-
-      // Send product data to server
-      response = await _postService.sendProduct(product);
-
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        SnackBarService.showSnackBar(
-          content:
-              'Your Product is successfuly uploaded, please wait till approved',
-        );
-        _clearFields();
-        refresh();
-        _landing.setIndex(0);
+      _clearFields();
+      refresh();
+      _landing.setIndex(0);
+    } else {
+      // Handle server error response
+      if (response.body.contains('{')) {
+        var body = jsonDecode(response.body);
+        var message = body['message'];
+        _formError['response'] = message;
       } else {
-        // not successful
-        if (response.body.contains('{')) {
-          try {
-            var body = jsonDecode(response.body);
-            var message = body['message'];
-            _formError['response'] = message;
-          } catch (e) {
-            _formError['response'] = response.body.toString();
-          }
-        } else {
-          _formError['response'] = response.body.toString();
-        }
+        _formError['response'] = response.body.toString();
       }
-      setBusy(false);
-      notifyListeners();
-    }else {
-    // Handle missing images case
-    if (images.isEmpty) {
-      _formError['images'] = 'Please upload at least one image';
-      notifyListeners();
     }
+  } catch (e) {
+    // Handle any unexpected exceptions
+    _formError['response'] = 'An error occurred: $e';
+  } finally {
+    // Ensure ViewModel is set back to not busy
+    setBusy(false);
+    notifyListeners();
   }
-  }
+}
+
 void _clearFields() {
   productNameController.clear();
   salesPriceController.clear();
