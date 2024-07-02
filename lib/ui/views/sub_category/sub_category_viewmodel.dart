@@ -49,7 +49,7 @@ class SubCategoryViewModel extends ReactiveViewModel {
   getSubProducts({String? category}) async {
     try {
       setBusy(true);
-
+      errorMessage = null; // Clear any existing error message
       if (subSubCategoryId != null && subSubCategoryId!.isNotEmpty) {
         await _productState.getSubProducts(category ?? subSubCategoryId!);
       } else {
