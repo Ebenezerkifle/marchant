@@ -99,7 +99,10 @@ class ProductModel {
     id: map['_id'],
     productName: map['productName'] ?? '',
     productTag: map['productTag'],
-    productImage: List<String>.from(map['productImage'] as List<dynamic>),
+    // productImage: List<String>.from(map['productImage'] as List<dynamic>),
+     productImage: map['productImage'] != null
+        ? List<String>.from(map['productImage'] as List<dynamic>)
+        : [], // Empty list or null depending on your preference
     details: List<String>.from(map['details'] ?? []),
     categoryId: map['categoryId'],
     subCategoryId: map['subCategoryId'],
