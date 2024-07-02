@@ -24,8 +24,16 @@ class ManuHomeViewModel extends ReactiveViewModel {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   get scaffoldKey => _key;
 
+
+ final TextEditingController searchController = TextEditingController();
+
+  Map<String, ProductModel> filteredProducts = {};
+  String? filterQuery;
+
   ManuHomeViewModel() {
     _getMyProducts();
+        searchController.addListener(_onSearchChanged);
+
   }
 
   final GlobalKey<RefreshIndicatorState> refreshIndicatorKey =
@@ -51,11 +59,39 @@ class ManuHomeViewModel extends ReactiveViewModel {
     _landingService.setIndex(1);
   }
 
+  void _onSearchChanged() {
+    filterProducts(searchController.text);
+  }
+
   void onItemSelected(ProductModel product) {
     _navigation.navigateToManuProductDetailView(product: product);
   }
 
   Future<void> makePhoneCall() async {
     await _phoneService.makePhoneCall();
+  }
+
+  void filterProducts(String query) {
+    filterQuery = query
+        .toLowerCase(); // Convert the query to lowercase and assign to filterQuery
+
+    if (filterQuery?.isEmpty ?? true) {
+      // Check if filterQuery is null or empty
+      filteredProducts
+          .clear(); // If filterQuery is empty, clear filteredProducts map
+    } else {
+      // Perform custom fuzzy search on productName
+      filteredProducts = Map.fromEntries(products.entries.where((entry) {
+        final productName = entry.value.productName?.toLowerCase() ??
+            ''; // Get lowercase productName or empty string if null
+        final searchLower = filterQuery!
+            .toLowerCase(); // Get lowercase filterQuery (forced non-null assertion)
+
+        // Check if productName contains searchLower
+        return productName.contains(searchLower);
+      }));
+    }
+
+    notifyListeners(); // Notify listeners that filteredProducts have been updated
   }
 }

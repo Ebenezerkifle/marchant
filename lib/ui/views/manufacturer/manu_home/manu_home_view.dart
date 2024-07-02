@@ -4,6 +4,7 @@ import 'package:marchant/ui/common/ui_helpers.dart';
 import 'package:marchant/ui/views/widgets/custome_app_bar.dart';
 import 'package:marchant/ui/views/widgets/custome_button.dart';
 import 'package:marchant/ui/views/widgets/nothing_found.dart';
+import 'package:marchant/ui/views/widgets/search_widget.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../common/app_text_style.dart';
@@ -34,6 +35,16 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
               phoneNumber: '889',
               onPhoneIconTap: viewModel.makePhoneCall,
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: middleSize,
+                vertical: middleSize,
+              ),
+              child: SearchWidget(
+                searchController: viewModel.searchController,
+              ),
+            ),
+            verticalSpaceSmall,
             Expanded(
               child: RefreshIndicator(
                 key: viewModel.refreshIndicatorKey,
@@ -84,27 +95,84 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                                               style: AppTextStyle.h2Bold),
                                         ],
                                       ),
+                                      // CustomeGrideWidget(
+                                      //   widgets: viewModel.products.entries
+                                      //       .map(
+                                      //         (e) => CustomeCardWidget(
+                                      //           size:
+                                      //               screenWidth(context) * .38,
+                                      //           onTap: () => viewModel
+                                      //               .onItemSelected(e.value),
+                                      //           title:
+                                      //               e.value.productName ?? '',
+                                      //           details: e.value.details ?? [],
+                                      //           detailLimit: 3,
+                                      //           image:
+                                      //               e.value.productImage.first,
+                                      //           widget: Text(
+                                      //             '${e.value.salesPrice} ETB',
+                                      //             style: AppTextStyle.h4Bold,
+                                      //           ),
+                                      //         ),
+                                      //       )
+                                      //       .toList(),
+                                      // ),
                                       CustomeGrideWidget(
-                                        widgets: viewModel.products.entries
-                                            .map(
-                                              (e) => CustomeCardWidget(
-                                                size:
-                                                    screenWidth(context) * .38,
-                                                onTap: () => viewModel
-                                                    .onItemSelected(e.value),
-                                                title:
-                                                    e.value.productName ?? '',
-                                                details: e.value.details ?? [],
-                                                detailLimit: 3,
-                                                image:
-                                                    e.value.productImage.first,
-                                                widget: Text(
-                                                  '${e.value.salesPrice} ETB',
-                                                  style: AppTextStyle.h4Bold,
-                                                ),
-                                              ),
-                                            )
-                                            .toList(),
+                                        widgets: viewModel.filterQuery !=
+                                                    null &&
+                                                viewModel
+                                                    .filterQuery!.isNotEmpty
+                                            ? viewModel.filteredProducts.entries
+                                                .map(
+                                                  (e) => CustomeCardWidget(
+                                                    size: screenWidth(context) *
+                                                        .38,
+                                                    onTap: () => viewModel
+                                                        .onItemSelected(
+                                                            e.value),
+                                                    title:
+                                                        e.value.productName ??
+                                                            '',
+                                                    details:
+                                                        e.value.details ?? [],
+                                                    detailLimit: 3,
+                                                    image: e.value.productImage
+                                                        .first,
+                                                    widget: Text(
+                                                      '${e.value.salesPrice} ETB',
+                                                      style:
+                                                          AppTextStyle.h4Bold,
+                                                    ),
+                                                    status:
+                                                        e.value.status ??
+                                                            '',
+                                                  ),
+                                                )
+                                                .toList()
+                                            : viewModel.products.entries
+                                                .map(
+                                                  (e) => CustomeCardWidget(
+                                                    size: screenWidth(context) *
+                                                        .38,
+                                                    onTap: () => viewModel
+                                                        .onItemSelected(
+                                                            e.value),
+                                                    title:
+                                                        e.value.productName ??
+                                                            '',
+                                                    details:
+                                                        e.value.details ?? [],
+                                                    detailLimit: 3,
+                                                    image: e.value.productImage
+                                                        .first,
+                                                    widget: Text(
+                                                      '${e.value.salesPrice} ETB',
+                                                      style:
+                                                          AppTextStyle.h4Bold,
+                                                    ),
+                                                  ),
+                                                )
+                                                .toList(),
                                       ),
                                       verticalSpaceLarge,
                                     ],

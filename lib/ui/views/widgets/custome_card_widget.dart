@@ -132,6 +132,7 @@ class CustomeCardWidget extends StatelessWidget {
   const CustomeCardWidget({
     super.key,
     this.title = "",
+    this.status,
     this.size,
     this.small = false,
     this.details = const [],
@@ -147,6 +148,7 @@ class CustomeCardWidget extends StatelessWidget {
   });
 
   final String title;
+  final String? status;
   final double? size;
   final bool small;
   final List<String> details;
@@ -263,6 +265,13 @@ class CustomeCardWidget extends StatelessWidget {
                             ),
                             const SizedBox(height: 10),
                             widget,
+                            // const SizedBox(height: 10),
+                            // Text(
+                            //   status,
+                            //   style: AppTextStyle.h3Bold,
+                            //   maxLines: 1,
+                            //   overflow: TextOverflow.clip,
+                            // ),
                           ],
                         ),
                       ),
