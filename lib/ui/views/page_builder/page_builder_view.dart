@@ -41,7 +41,7 @@ class PageBuilderView extends StackedView<PageBuilderViewModel> {
                 onTap: viewModel.goToPreviousPage,
                 child: Icon(
                   Icons.arrow_back_ios,
-                  color: kcPrimaryColor.withOpacity(0.7), // Slightly transparent
+                  color: kcPrimaryColorDark.withOpacity(0.7), // Slightly transparent
                   size: 40,
                 ),
               ),
@@ -54,7 +54,7 @@ class PageBuilderView extends StackedView<PageBuilderViewModel> {
                 onTap: viewModel.goToNextPage,
                 child: Icon(
                   Icons.arrow_forward_ios,
-                  color: kcPrimaryColor.withOpacity(0.7), // Slightly transparent
+                  color: kcPrimaryColorDark.withOpacity(0.7), // Slightly transparent
                   size: 40,
                 ),
               ),

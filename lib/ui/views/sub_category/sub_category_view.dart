@@ -53,24 +53,7 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                     padding: const EdgeInsets.symmetric(horizontal: middleSize),
                     child: Column(
                       children: [
-                        // Show progress indicator during refresh
-                        // viewModel.isBusy
-                        //     ? const Center(child: CircularProgressIndicator())
-                        //     : viewModel.categories.isEmpty
-                        //         ? SizedBox(
-                        //             height: screenHeight(context) * .3,
-                        //             width: double.infinity,
-                        //             child: const Center(
-                        //               child: Text(
-                        //                 'No subcategories found',
-                        //                 style: TextStyle(
-                        //                   fontSize: 18,
-                        //                   color: Colors.grey,
-                        //                 ),
-                        //               ),
-                        //             ),
-                        //           )
-
+                       
                         // Categories Section
                         viewModel.isBusy
                             ? SizedBox(
@@ -156,7 +139,7 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                                   icon: const Icon(
                                                     FontAwesomeIcons
                                                         .ellipsisVertical,
-                                                    color: kcWhite,
+                                                    color: kcPrimaryColorDark,
                                                   ),
                                                 ),
                                             ],
