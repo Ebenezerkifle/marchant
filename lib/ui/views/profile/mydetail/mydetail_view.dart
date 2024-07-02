@@ -39,11 +39,12 @@ class MydetailView extends StackedView<MydetailViewModel> {
                             validator: (value) => viewModel.validateText(
                                 value ?? '',
                                 viewModel.firstNameController,
-                                viewModel.fristName),
+                                viewModel.fristName
+                                ),
                             controller: viewModel.firstNameController,
                             hint: '',
-                            error: viewModel.formError
-                                .containsKey(viewModel.firstNameController),
+                            // error: viewModel.formError
+                            //     .containsKey(viewModel.firstNameController),
                             prefixIcon: Icon(
                               FontAwesomeIcons.user,
                               color: kcPrimaryColorDark,
@@ -61,8 +62,8 @@ class MydetailView extends StackedView<MydetailViewModel> {
                                 viewModel.lastName),
                             controller: viewModel.lastNameController,
                             hint: '',
-                            error: viewModel.formError
-                                .containsKey(viewModel.lastNameController),
+                            // error: viewModel.formError
+                            //     .containsKey(viewModel.lastNameController),
                             prefixIcon: Icon(
                               FontAwesomeIcons.user,
                               color: kcPrimaryColorDark,

@@ -74,22 +74,23 @@ class ProductModel {
   factory ProductModel.fromMap(Map<String, dynamic> map) {
   return ProductModel(
     id: map['_id'],
-    productName: map['productName'] ?? '',
-    productTag: map['productTag'],
+    productName: map['productName'] != null ? map['productName'] as String : null,
+
+    productTag: map['productTag']!= null ? map['productTag'] as String : null,
     // productImage: List<String>.from(map['productImage'] as List<dynamic>),
      productImage: map['productImage'] != null
         ? List<String>.from(map['productImage'] as List<dynamic>)
         : [], // Empty list or null depending on your preference
-    details: List<String>.from(map['details'] ?? []),
-    categoryId: map['categoryId'],
-    subCategoryId: map['subCategoryId'],
-    subSubCategoryId: map['subSubCategoryId'],
-    salesPrice: map['salesPrice'],
-    description: map['description'],
-    quantity: map['quantity'],
-    soldAmount: map['soldAmount'],
+    details:map['details'] != null? List<String>.from(map['details'] as List<dynamic>) :[],
+    categoryId: map['categoryId']!= null ? map['categoryId'] as String : null,
+    subCategoryId: map['subCategoryId']!= null ? map['subCategoryId'] as String : null,
+    subSubCategoryId: map['subSubCategoryId']!= null ? map['subSubCategoryId'] as String : null,
+    salesPrice: map['salesPrice']!= null ? map['salesPrice'] as num : null,
+    description: map['description']!= null ? map['description'] as String : null,
+    quantity: map['quantity']!= null ? map['quantity'] as num : null,
+    soldAmount: map['soldAmount']!= null ? map['soldAmount'] as String : null,
     status: map['status'],
-    totalAmount: map['totalAmount'],
+    totalAmount: map['totalAmount']!= null ? map['totalAmount'] as num : null,
     companyName: map['ManufacturerId'] != null && map['ManufacturerId']['companyName'] != null
         ? map['ManufacturerId']['companyName'] as String
         : null,

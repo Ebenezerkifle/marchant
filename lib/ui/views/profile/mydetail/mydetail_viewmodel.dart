@@ -23,9 +23,8 @@ class MydetailViewModel extends ReactiveViewModel {
   final _enrollmentService = locator<EnrollmentStateService>();
   // final _landingStateService = locator<LandingStateService>();
 
-    @override
-      List<ListenableServiceMixin> get listenableServices => [_userService];
-
+  @override
+  List<ListenableServiceMixin> get listenableServices => [_userService];
 
   final bool _loading = false;
   bool get loading => _loading;
@@ -73,6 +72,7 @@ class MydetailViewModel extends ReactiveViewModel {
       phoneNumController.text = user.phoneNumber?.padLeft(10, '0') ?? '';
       selectedCategory = user.CategoryId;
     }
+ 
   }
 
   void setSelectedCategory(String? category) {
@@ -81,6 +81,7 @@ class MydetailViewModel extends ReactiveViewModel {
   }
 
   Future<void> onSubmit() async {
+        _formError.remove('response');
     errorMsg = '';
     if (_formKey.currentState!.validate() && _formError.isEmpty) {
       setBusy(true);
@@ -93,7 +94,7 @@ class MydetailViewModel extends ReactiveViewModel {
             CategoryId: selectedCategory,
           ),
         );
-
+      
         if (response.statusCode == 200 || response.statusCode == 201) {
           var body = jsonDecode(response.body);
           var userData = _userService.user?.role == "Retailer"
@@ -110,9 +111,8 @@ class MydetailViewModel extends ReactiveViewModel {
             SnackBarService.showSnackBar(
               content: 'Your profile changed successfully',
             );
-            
-        _navigation.back();
 
+            _navigation.back();
           } else {
             _formError['response'] = 'User data not found in response';
           }
@@ -155,10 +155,12 @@ class MydetailViewModel extends ReactiveViewModel {
     }
   }
 
-  void validateText(String value, var controller, String label,
+  void validateText(String? value, var controller, String label,
       {int? minLength, int? maxLength}) {
-    _setStateOfFormField(
-      FrontValidation.validateFormField(value, label,
+          value != null && value.isEmpty
+          ? null // Allow empty values for First Name and Last Name
+    :_setStateOfFormField(
+      FrontValidation.validateFormField(value??'', label,
           minLength: minLength, maxLength: maxLength),
       controller,
     );
