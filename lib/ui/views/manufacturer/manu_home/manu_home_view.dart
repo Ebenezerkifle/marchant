@@ -59,7 +59,7 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                                     color: Colors.red,
                                   ),
                                 ),
-                                SizedBox(height: 20),
+                                const SizedBox(height: 20),
                                 CustomeButton(
                                   text: 'Retry',
                                   onTap: viewModel.refresh,

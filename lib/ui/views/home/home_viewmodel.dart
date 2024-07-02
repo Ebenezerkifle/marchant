@@ -15,7 +15,7 @@ class HomeViewModel extends ReactiveViewModel {
   final _navigation = locator<NavigationService>();
   final _productState = locator<ProductStateService>();
   final _cartState = locator<CartStateService>();
-  final _phoneService = locator<PhoneServiceService>(); 
+  final _phoneService = locator<PhoneServiceService>();
 
   String? errorMessage;
   final IconData _moreIcon = FontAwesomeIcons.ellipsisVertical;
@@ -35,7 +35,7 @@ class HomeViewModel extends ReactiveViewModel {
   Map<String, ProductModel> filteredProducts = {};
   String? filterQuery;
 
-  bool get isLoading => _productState.isLoading;
+  // bool get isLoading => _productState.isLoading;
 
   final GlobalKey<RefreshIndicatorState> refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
@@ -46,12 +46,7 @@ class HomeViewModel extends ReactiveViewModel {
   }
 
   Future<void> refresh() async {
-    try {
-      setBusy(true); // Set busy state to indicate loading
-      await _getMyProducts();
-    } finally {
-      setBusy(false); // Always unset busy state after operation
-    }
+    await _getMyProducts();
   }
 
   Future<void> _getMyProducts() async {
@@ -62,9 +57,9 @@ class HomeViewModel extends ReactiveViewModel {
       await _productState.getCategories();
     } catch (e) {
       errorMessage = 'Failed to fetch products. Please try again later.';
-    } finally {
-      setBusy(false);
     }
+    setBusy(false);
+    notifyListeners();
   }
 
   void navigateToSubCategory(String categoryId) {
@@ -93,28 +88,32 @@ class HomeViewModel extends ReactiveViewModel {
   }
 
   Future<void> makePhoneCall() async {
-    await _phoneService.makePhoneCall(); 
+    await _phoneService.makePhoneCall();
   }
 
   void filterProducts(String query) {
-  filterQuery = query.toLowerCase(); // Convert the query to lowercase and assign to filterQuery
-  
-  if (filterQuery?.isEmpty ?? true) { // Check if filterQuery is null or empty
-    filteredProducts.clear(); // If filterQuery is empty, clear filteredProducts map
-  } else {
-    // Perform custom fuzzy search on productName
-    filteredProducts = Map.fromEntries(products.entries.where((entry) {
-      final productName = entry.value.productName?.toLowerCase() ?? ''; // Get lowercase productName or empty string if null
-      final searchLower = filterQuery!.toLowerCase(); // Get lowercase filterQuery (forced non-null assertion)
-      
-      // Check if productName contains searchLower
-      return productName.contains(searchLower);
-    }));
-  }
-  
-  notifyListeners(); // Notify listeners that filteredProducts have been updated
-}
+    filterQuery = query
+        .toLowerCase(); // Convert the query to lowercase and assign to filterQuery
 
+    if (filterQuery?.isEmpty ?? true) {
+      // Check if filterQuery is null or empty
+      filteredProducts
+          .clear(); // If filterQuery is empty, clear filteredProducts map
+    } else {
+      // Perform custom fuzzy search on productName
+      filteredProducts = Map.fromEntries(products.entries.where((entry) {
+        final productName = entry.value.productName?.toLowerCase() ??
+            ''; // Get lowercase productName or empty string if null
+        final searchLower = filterQuery!
+            .toLowerCase(); // Get lowercase filterQuery (forced non-null assertion)
+
+        // Check if productName contains searchLower
+        return productName.contains(searchLower);
+      }));
+    }
+
+    notifyListeners(); // Notify listeners that filteredProducts have been updated
+  }
 }
 
 

@@ -12,13 +12,16 @@ import '../../../models/setting_model.dart';
 import '../../../services/common_services/phone_service_service.dart';
 import '../../../services/storage_service.dart/session.dart';
 
-class ProfileViewModel extends BaseViewModel {
+class ProfileViewModel extends ReactiveViewModel {
   final _navigation = locator<NavigationService>();
   final _userService = locator<UserService>();
   final _landingService = locator<LandingStateService>();
   final _productService = locator<ProductStateService>();
   final _orderService = locator<OrderStateService>();
   final _phoneService = locator<PhoneServiceService>();
+
+   @override
+  List<ListenableServiceMixin> get listenableServices => [_userService];
 
   String get image => 'assets/images/user.png';
 

@@ -1,11 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+// import 'package:marchant/services/state_service/landing_state_servic.dart';
 import 'package:stacked/stacked.dart';
 import 'package:http/http.dart';
 import 'package:marchant/services/api_service/authentication.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../../../../app/app.locator.dart';
+// import '../../../../app/app.router.dart';
 import '../../../../models/category_model.dart'; // Use MyCategory here
 import '../../../../models/user_model.dart';
 import '../../../../services/state_service/enrollment_state_service.dart';
@@ -19,6 +21,7 @@ class MydetailViewModel extends BaseViewModel {
   final _userService = locator<UserService>();
   final _navigation = locator<NavigationService>();
   final _enrollmentService = locator<EnrollmentStateService>();
+  // final _landingStateService = locator<LandingStateService>();
 
   bool _loading = false;
   bool get loading => _loading;
@@ -103,7 +106,10 @@ class MydetailViewModel extends BaseViewModel {
             SnackBarService.showSnackBar(
               content: 'Your profile changed successfully',
             );
-            _navigation.replaceWith( '/profile-view');
+            
+        _navigation.back();
+            // _landingStateService.setIndex(3);
+            // _navigation.clearStackAndShow(Routes.profileView);
           } else {
             _formError['response'] = 'User data not found in response';
           }

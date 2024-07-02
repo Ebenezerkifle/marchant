@@ -12,7 +12,7 @@ import 'package:stacked_services/stacked_services.dart';
 import '../../../../services/state_service/landing_state_servic.dart';
 import '../../../../services/state_service/user_service.dart';
 
-class ManuProfileViewModel extends BaseViewModel {
+class ManuProfileViewModel extends ReactiveViewModel {
   final _navigation = locator<NavigationService>();
   final _userService = locator<UserService>();
   final  _phoneService = locator<PhoneServiceService>();
@@ -21,6 +21,9 @@ class ManuProfileViewModel extends BaseViewModel {
   final _productService = locator<ProductStateService>();
   final _orderService = locator<OrderStateService>();
   
+@override
+  List<ListenableServiceMixin> get listenableServices => [_userService];
+
 
   String get image => 'assets/images/user.png';
 

@@ -17,7 +17,7 @@ class SubCategoryViewModel extends ReactiveViewModel {
   String? subSubCategoryId;
 
   List<Category> subCategories = [];
-  Map<String, bool> _selected = {};
+  final Map<String, bool> _selected = {};
 
   // Added properties for loading state
   bool _isLoading = false;
@@ -37,11 +37,8 @@ class SubCategoryViewModel extends ReactiveViewModel {
       GlobalKey<RefreshIndicatorState>();
 
   Future<void> refresh() async {
-    _isLoading = true; // Set loading to true
-    notifyListeners();
     await getSubProducts();
-    getSubCategories();
-    _isLoading = false; // Set loading to false after fetching
+   getSubCategories();
     notifyListeners();
   }
 

@@ -91,16 +91,22 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                         ),
                       verticalSpaceSmall,
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
                             'Manufacturer: ',
                             style: AppTextStyle.h2Bold,
                           ),
-                          Flexible(
+                          const SizedBox(
+                              width:
+                                  smallSize), // Add some space between Text and Flexible
+                          Expanded(
                             child: Text(
                               product.companyName ?? 'Unknown Provider',
                               style: AppTextStyle.h4Normal,
+                              maxLines: 1, // Limit to one line
+                              overflow: TextOverflow
+                                  .ellipsis, // Use ellipsis to indicate overflow
                             ),
                           ),
                           TextButton(

@@ -53,7 +53,7 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                     child: Column(
                       children: [
                         // Show progress indicator during refresh
-                        viewModel.isLoading
+                        viewModel.isBusy
                             ? const Center(child: CircularProgressIndicator())
                             : viewModel.categories.isEmpty
                                 ? SizedBox(

@@ -1,10 +1,13 @@
 import 'package:marchant/models/user_model.dart';
+import 'package:stacked/stacked.dart';
 
-class UserService {
+class UserService with ListenableServiceMixin {
   UserModel? _userData;
 
   void setUserData(UserModel user) {
     _userData = user;
+    notifyListeners();
+
     // print('User data set: ${_userData?.CategoryId}, ${_userData?.phoneNumber}');
   }
 
@@ -12,5 +15,6 @@ class UserService {
 
   void resetState() {
     _userData = null;
+    notifyListeners();
   }
 }
