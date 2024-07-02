@@ -19,9 +19,7 @@ class SubCategoryViewModel extends ReactiveViewModel {
   List<Category> subCategories = [];
   final Map<String, bool> _selected = {};
 
-  // Added properties for loading state
-  bool _isLoading = false;
-  bool get isLoading => _isLoading;
+  String? errorMessage;
 
   SubCategoryViewModel({required this.categoryId, this.subSubCategoryId}) {
     subCategories = getSubCategories();
@@ -38,7 +36,7 @@ class SubCategoryViewModel extends ReactiveViewModel {
 
   Future<void> refresh() async {
     await getSubProducts();
-   getSubCategories();
+    getSubCategories();
     notifyListeners();
   }
 
@@ -49,13 +47,20 @@ class SubCategoryViewModel extends ReactiveViewModel {
   Map<String, ProductModel> get subProducts => _productState.subProducts;
 
   getSubProducts({String? category}) async {
-    setBusy(true);
-    if (subSubCategoryId != null && subSubCategoryId!.isNotEmpty) {
-      await _productState.getSubProducts(category ?? subSubCategoryId!);
-    } else {
-      await _productState.getSubProducts(category ?? categoryId);
+    try {
+      setBusy(true);
+
+      if (subSubCategoryId != null && subSubCategoryId!.isNotEmpty) {
+        await _productState.getSubProducts(category ?? subSubCategoryId!);
+      } else {
+        await _productState.getSubProducts(category ?? categoryId);
+      }
+    } catch (e) {
+      errorMessage = 'Failed to fetch categories. Please try again later.';
     }
+
     setBusy(false);
+    notifyListeners();
   }
 
   List<Category> getSubCategories() {

@@ -5,6 +5,7 @@ import 'package:marchant/ui/common/app_text_style.dart';
 import 'package:marchant/ui/common/ui_helpers.dart';
 import 'package:marchant/ui/views/widgets/category_widget.dart';
 import 'package:marchant/ui/views/widgets/custome_app_bar.dart';
+import 'package:marchant/ui/views/widgets/custome_button.dart';
 import 'package:marchant/ui/views/widgets/custome_card_widget.dart';
 import 'package:marchant/ui/views/widgets/custome_grid_widget.dart';
 
@@ -53,77 +54,117 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                     child: Column(
                       children: [
                         // Show progress indicator during refresh
+                        // viewModel.isBusy
+                        //     ? const Center(child: CircularProgressIndicator())
+                        //     : viewModel.categories.isEmpty
+                        //         ? SizedBox(
+                        //             height: screenHeight(context) * .3,
+                        //             width: double.infinity,
+                        //             child: const Center(
+                        //               child: Text(
+                        //                 'No subcategories found',
+                        //                 style: TextStyle(
+                        //                   fontSize: 18,
+                        //                   color: Colors.grey,
+                        //                 ),
+                        //               ),
+                        //             ),
+                        //           )
+
+                        // Categories Section
                         viewModel.isBusy
-                            ? const Center(child: CircularProgressIndicator())
-                            : viewModel.categories.isEmpty
-                                ? SizedBox(
-                                    height: screenHeight(context) * .3,
-                                    width: double.infinity,
-                                    child: const Center(
-                                      child: Text(
-                                        'No subcategories found',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          color: Colors.grey,
+                            ? SizedBox(
+                                height: screenHeight(context) * .3,
+                                width: double.infinity,
+                                child: const Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              )
+                            : viewModel.errorMessage != null
+                                ? Center(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          viewModel.errorMessage!,
+                                          style: const TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.red,
+                                          ),
                                         ),
-                                      ),
+                                        const SizedBox(height: 20),
+                                        CustomeButton(
+                                          text: 'Retry',
+                                          onTap: viewModel.refresh,
+                                        ),
+                                      ],
                                     ),
                                   )
-                                : SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: middleSize),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            children: viewModel
-                                                .getLimitedSubCategories()
-                                                .map((e) => Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              right: smallSize),
-                                                      child: CategoryWidget(
-                                                        name: e.name ?? '',
-                                                        selected: viewModel
-                                                                .selected
-                                                                .containsKey(
-                                                                    e.id) &&
-                                                            viewModel.selected[
-                                                                e.id]!,
-                                                        onTap: () {
-                                                          viewModel
-                                                              .toggleSelection(
-                                                                  e.id ?? '');
-                                                          viewModel
-                                                              .getSubProducts(
-                                                                  category:
+                                : viewModel.subCategories.isNotEmpty
+                                    ? SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: middleSize),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Row(
+                                                children: viewModel
+                                                    .getLimitedSubCategories()
+                                                    .map((e) => Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  right:
+                                                                      smallSize),
+                                                          child: CategoryWidget(
+                                                            name: e.name ?? '',
+                                                            selected: viewModel
+                                                                    .selected
+                                                                    .containsKey(
+                                                                        e.id) &&
+                                                                viewModel
+                                                                        .selected[
+                                                                    e.id]!,
+                                                            onTap: () {
+                                                              viewModel
+                                                                  .toggleSelection(
                                                                       e.id ??
                                                                           '');
-                                                        },
-                                                      ),
-                                                    ))
-                                                .toList(),
-                                          ),
-                                          if (viewModel.hasMoreSubCategories)
-                                            CategoryWidget(
-                                              name: 'more',
-                                              selected: false,
-                                              onTap: viewModel.onMoreCategory,
-                                              roundness: 5,
-                                              hPadding: smallSize,
-                                              icon: const Icon(
-                                                FontAwesomeIcons
-                                                    .ellipsisVertical,
-                                                color: kcWhite,
+                                                              viewModel
+                                                                  .getSubProducts(
+                                                                      category:
+                                                                          e.id ??
+                                                                              '');
+                                                            },
+                                                          ),
+                                                        ))
+                                                    .toList(),
                                               ),
-                                            ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
+                                              if (viewModel
+                                                  .hasMoreSubCategories)
+                                                CategoryWidget(
+                                                  name: 'more',
+                                                  selected: false,
+                                                  onTap:
+                                                      viewModel.onMoreCategory,
+                                                  roundness: 5,
+                                                  hPadding: smallSize,
+                                                  icon: const Icon(
+                                                    FontAwesomeIcons
+                                                        .ellipsisVertical,
+                                                    color: kcWhite,
+                                                  ),
+                                                ),
+                                            ],
+                                          ),
+                                        ),
+                                      )
+                                    : const Center(
+                                        child: Text("No Sub Categories avaliable")),
                         verticalSpaceMedium,
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.start,
