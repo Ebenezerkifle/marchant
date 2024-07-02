@@ -1,7 +1,6 @@
-
 import 'package:url_launcher/url_launcher.dart';
 
-class PhoneServiceService  {
+class PhoneServiceService {
   final String _phoneNumber = '+251889';
 
   Future<void> makePhoneCall() async {

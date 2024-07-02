@@ -20,7 +20,7 @@ class ProfileViewModel extends ReactiveViewModel {
   final _orderService = locator<OrderStateService>();
   final _phoneService = locator<PhoneServiceService>();
 
-   @override
+  @override
   List<ListenableServiceMixin> get listenableServices => [_userService];
 
   String get image => 'assets/images/user.png';

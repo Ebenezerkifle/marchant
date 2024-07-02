@@ -38,7 +38,6 @@ class Authentication {
       userModel.toMap(),
       needToken: true,
     );
-    
   }
 
   Future<Response> changePassword(

@@ -15,4 +15,3 @@ const changePassManufacturerUrl = '/api/manufacturer/updatePassword/';
 const passResetUrl = '/passwordReset/';
 const phoneCheckerUrl = '/phoneChecker/';
 const updateUrl = '/updateFields';
-

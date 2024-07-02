@@ -164,7 +164,8 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                         ),
                                       )
                                     : const Center(
-                                        child: Text("No Sub Categories avaliable")),
+                                        child: Text(
+                                            "No Sub Categories avaliable")),
                         verticalSpaceMedium,
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.start,

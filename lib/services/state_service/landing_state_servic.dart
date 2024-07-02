@@ -32,14 +32,11 @@
 //   }
 // }
 
-
-
-
 import 'package:marchant/enums/user_role.dart';
 import 'package:stacked/stacked.dart';
 
-class LandingStateService with ListenableServiceMixin{
- LandingStateService() {
+class LandingStateService with ListenableServiceMixin {
+  LandingStateService() {
     listenToReactiveValues([_userRole, _currentIndex]);
   }
 
@@ -68,27 +65,25 @@ class LandingStateService with ListenableServiceMixin{
   //   notifyListeners();
   // }
 
+  void setUserRole(String? roleString) {
+    if (roleString == null) {
+      return; // Handle null case as needed
+    }
 
-void setUserRole(String? roleString) {
-  if (roleString == null) {
-    return; // Handle null case as needed
+    // Convert roleString to UserRole enum
+    UserRole? role;
+    if (roleString.toLowerCase() == 'retailor') {
+      role = UserRole.retailor;
+    } else if (roleString.toLowerCase() == 'manufacturer') {
+      role = UserRole.manufacturer;
+    } else {
+      // Handle unknown role case
+      return; // or throw an exception, log an error, etc.
+    }
+
+    _userRole.value = role;
+    notifyListeners();
   }
-
-  // Convert roleString to UserRole enum
-  UserRole? role;
-  if (roleString.toLowerCase() == 'retailor') {
-    role = UserRole.retailor;
-  } else if (roleString.toLowerCase() == 'manufacturer') {
-    role = UserRole.manufacturer;
-  } else {
-    // Handle unknown role case
-    return; // or throw an exception, log an error, etc.
-  }
-
-  _userRole.value = role;
-  notifyListeners();
-}
-
 
   void clearState() {
     _currentIndex.value = 0;

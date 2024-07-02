@@ -62,7 +62,6 @@ class PostView extends StackedView<PostViewModel> {
                           ),
                         ),
                       ),
-                      
                       verticalSpaceMiddle,
                       CustomeFormField(
                         title: viewModel.name,
@@ -301,16 +300,6 @@ class PostView extends StackedView<PostViewModel> {
   ) =>
       PostViewModel();
 }
-
-
-
-
-
-
-
-
-
-
 
 // import 'dart:convert';
 

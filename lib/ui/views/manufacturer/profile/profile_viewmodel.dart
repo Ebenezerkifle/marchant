@@ -15,15 +15,14 @@ import '../../../../services/state_service/user_service.dart';
 class ManuProfileViewModel extends ReactiveViewModel {
   final _navigation = locator<NavigationService>();
   final _userService = locator<UserService>();
-  final  _phoneService = locator<PhoneServiceService>();
- 
+  final _phoneService = locator<PhoneServiceService>();
+
   final _landingService = locator<LandingStateService>();
   final _productService = locator<ProductStateService>();
   final _orderService = locator<OrderStateService>();
-  
-@override
-  List<ListenableServiceMixin> get listenableServices => [_userService];
 
+  @override
+  List<ListenableServiceMixin> get listenableServices => [_userService];
 
   String get image => 'assets/images/user.png';
 
@@ -79,13 +78,14 @@ class ManuProfileViewModel extends ReactiveViewModel {
         _productService.clearState();
         _orderService.clearState();
         _navigation.clearStackAndShow(Routes.loginView);
-        _navigation.clearStackAndShow(Routes.loginView);
+        // _navigation.clearStackAndShow(Routes.loginView);
         break;
       case SettingOptions.credit:
       // TODO: Handle this case.
     }
   }
- Future<void> makePhoneCall() async {
-    await _phoneService.makePhoneCall(); 
+
+  Future<void> makePhoneCall() async {
+    await _phoneService.makePhoneCall();
   }
 }

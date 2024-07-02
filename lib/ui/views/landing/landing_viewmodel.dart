@@ -93,14 +93,11 @@ import 'widgets/bar_items.dart';
 //       ];
 // }
 
-
-
-
 class LandingViewModel extends IndexTrackingViewModel {
   final _cartState = locator<CartStateService>();
   final _landingService = locator<LandingStateService>();
 
-    @override
+  @override
   List<ListenableServiceMixin> get listenableServices =>
       [_cartState, _landingService];
 
@@ -181,14 +178,14 @@ class LandingViewModel extends IndexTrackingViewModel {
       userRole == UserRole.manufacturer ? manufacturerItems : retailerItems;
 
   @override
-
-    @override
+  @override
   int get currentIndex => _landingService.currentIndex;
 
   @override
   void setIndex(int value) {
     _landingService.setIndex(value);
   }
+
   void dispose() {
     super.dispose();
   }

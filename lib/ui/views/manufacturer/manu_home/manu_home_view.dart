@@ -70,27 +70,34 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                         : viewModel.products.isNotEmpty
                             ? SingleChildScrollView(
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: middleSize),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: middleSize),
                                   child: Column(
                                     children: [
                                       verticalSpaceMedium,
                                       // Our Products Section Title
                                       const Row(
-                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         children: [
-                                          Text('Your Products', style: AppTextStyle.h2Bold),
+                                          Text('Your Products',
+                                              style: AppTextStyle.h2Bold),
                                         ],
                                       ),
                                       CustomeGrideWidget(
                                         widgets: viewModel.products.entries
                                             .map(
                                               (e) => CustomeCardWidget(
-                                                size: screenWidth(context) * .38,
-                                                onTap: () => viewModel.onItemSelected(e.value),
-                                                title: e.value.productName ?? '',
+                                                size:
+                                                    screenWidth(context) * .38,
+                                                onTap: () => viewModel
+                                                    .onItemSelected(e.value),
+                                                title:
+                                                    e.value.productName ?? '',
                                                 details: e.value.details ?? [],
                                                 detailLimit: 3,
-                                                image: e.value.productImage.first,
+                                                image:
+                                                    e.value.productImage.first,
                                                 widget: Text(
                                                   '${e.value.salesPrice} ETB',
                                                   style: AppTextStyle.h4Bold,
@@ -109,7 +116,8 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   NothingFound(
-                                    message: 'You have no product which is live.',
+                                    message:
+                                        'You have no product which is live.',
                                     child: CustomeButton(
                                       text: 'Post Product',
                                       onTap: viewModel.onPostProduct,
@@ -126,5 +134,6 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
   }
 
   @override
-  ManuHomeViewModel viewModelBuilder(BuildContext context) => ManuHomeViewModel();
+  ManuHomeViewModel viewModelBuilder(BuildContext context) =>
+      ManuHomeViewModel();
 }

@@ -70,13 +70,11 @@ class CartStateService with ListenableServiceMixin {
       try {
         await _orderState.getOrders();
         await _orderState.getDeliveredOrders();
-      } finally {
-        
-      }
+      } finally {}
     }
 
     final response = await _cartApiService.createNewOrder(order);
-        print(response.body);
+    print(response.body);
 
     if (response.statusCode == 201) {
       _productStateService
@@ -94,7 +92,6 @@ class CartStateService with ListenableServiceMixin {
     }
   }
 
-  
   _totalPriceCalculator() {
     _totalPrice.value = 0;
     _totalCount.value = 0;

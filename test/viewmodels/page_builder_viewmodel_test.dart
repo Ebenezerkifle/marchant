@@ -4,7 +4,7 @@ import 'package:marchant/app/app.locator.dart';
 import '../helpers/test_helpers.dart';
 
 void main() {
-  group('PhoneServiceServiceTest -', () {
+  group('PageBuilderViewModel Tests -', () {
     setUp(() => registerServices());
     tearDown(() => locator.reset());
   });

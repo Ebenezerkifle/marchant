@@ -93,7 +93,6 @@ class CustomeAppBar extends StatelessWidget {
     this.phoneIcon,
     this.phoneNumber,
     this.onPhoneIconTap,
-
   });
 
   final String title;

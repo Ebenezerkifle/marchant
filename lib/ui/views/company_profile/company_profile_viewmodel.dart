@@ -32,8 +32,7 @@ class CompanyProfileViewModel extends ReactiveViewModel {
       GlobalKey<RefreshIndicatorState>();
   Future<void> refresh() async {
     // Set busy state to indicate loading
-      await _getMyProducts();
-    
+    await _getMyProducts();
   }
 
   Future<void> _getMyProducts() async {
@@ -48,17 +47,6 @@ class CompanyProfileViewModel extends ReactiveViewModel {
     notifyListeners(); // Notify listeners after state changes
   }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 // import 'package:flutter/material.dart';
 // import 'package:marchant/app/app.locator.dart';

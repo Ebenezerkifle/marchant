@@ -36,6 +36,7 @@ import 'package:marchant/ui/views/onboarding/change_paswords/change_paswords_vie
 import 'package:marchant/ui/views/sub_category/sub_category_list/sub_category_list_view.dart';
 import 'package:marchant/ui/views/profile/mydetail/mydetail_view.dart';
 import 'package:marchant/ui/views/manufacturer/manu_home/manu_product_detail/manu_product_detail_view.dart';
+import 'package:marchant/ui/views/page_builder/page_builder_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -60,6 +61,7 @@ import 'package:marchant/ui/views/manufacturer/manu_home/manu_product_detail/man
     MaterialRoute(page: SubCategoryListView),
     MaterialRoute(page: MydetailView),
     MaterialRoute(page: ManuProductDetailView),
+    MaterialRoute(page: PageBuilderView),
 // @stacked-route
   ],
   dependencies: [

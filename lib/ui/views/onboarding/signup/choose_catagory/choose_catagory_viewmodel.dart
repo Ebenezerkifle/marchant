@@ -116,9 +116,8 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
       }
       setBusy(false);
       notifyListeners();
-    }else{
-  SnackBarService.showSnackBar(content: 'Please,Select Category.');
+    } else {
+      SnackBarService.showSnackBar(content: 'Please,Select Category.');
     }
-  
   }
 }

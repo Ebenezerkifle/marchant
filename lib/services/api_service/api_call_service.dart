@@ -86,7 +86,7 @@ class ApiCallService {
         timeout,
         onTimeout: () => timeoutResponse,
       );
-     
+
       return response;
     } catch (e) {
       return connectionProblem;

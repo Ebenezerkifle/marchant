@@ -39,8 +39,7 @@ class MydetailView extends StackedView<MydetailViewModel> {
                             validator: (value) => viewModel.validateText(
                                 value ?? '',
                                 viewModel.firstNameController,
-                                viewModel.fristName
-                                ),
+                                viewModel.fristName),
                             controller: viewModel.firstNameController,
                             hint: '',
                             // error: viewModel.formError
@@ -155,7 +154,7 @@ class MydetailView extends StackedView<MydetailViewModel> {
                                   verticalSpaceSmall,
                                 ],
                               )
-                      : verticalSpaceMedium,
+                            : verticalSpaceMedium,
                         CustomeButton(
                           text: 'Change',
                           onTap: viewModel.onSubmit,

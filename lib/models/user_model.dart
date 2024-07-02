@@ -56,8 +56,8 @@ class UserModel {
       'phoneNumber': phoneNumber,
       'CategoryId': CategoryId,
     };
- 
   }
+
   Map<String, dynamic> toMapReg() {
     return <String, dynamic>{
       'fname': firstName,
@@ -66,7 +66,6 @@ class UserModel {
       'phoneNumber': phoneNumber,
       'CategoryId': CategoryId,
     };
- 
   }
 
   factory UserModel.fromMap(Map<String, dynamic> map) {

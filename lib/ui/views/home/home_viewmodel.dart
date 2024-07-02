@@ -116,10 +116,6 @@ class HomeViewModel extends ReactiveViewModel {
   }
 }
 
-
-
-
-
 // import 'package:flutter/material.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:fuzzy/fuzzy.dart';
@@ -138,7 +134,7 @@ class HomeViewModel extends ReactiveViewModel {
 //   final _navigation = locator<NavigationService>();
 //   final _productState = locator<ProductStateService>();
 //   final _cartState = locator<CartStateService>();
-//   final _phoneService = locator<PhoneServiceService>(); 
+//   final _phoneService = locator<PhoneServiceService>();
 
 //   String? errorMessage;
 //   final IconData _moreIcon = FontAwesomeIcons.ellipsisVertical;
@@ -152,7 +148,6 @@ class HomeViewModel extends ReactiveViewModel {
 //   get scaffoldKey => _key;
 
 // final TextEditingController searchController = TextEditingController();
-
 
 //   Map<String, Category> get categories => _productState.categories;
 //   Map<String, ProductModel> get products => _productState.products;
@@ -235,12 +230,12 @@ class HomeViewModel extends ReactiveViewModel {
 //   // }
 
 //     Future<void> makePhoneCall() async {
-//     await _phoneService.makePhoneCall(); 
+//     await _phoneService.makePhoneCall();
 //   }
 
 //  void filterProducts(String query) {
 //   filterQuery = query.toLowerCase();
-  
+
 //   if (filterQuery.isEmpty) {
 //     filteredProducts.clear();
 //   } else {
@@ -263,9 +258,8 @@ class HomeViewModel extends ReactiveViewModel {
 //           .map((result) => MapEntry(result.item.key, result.item.value)),
 //     );
 //   }
-  
+
 //   notifyListeners();
 // }
 
 // }
-

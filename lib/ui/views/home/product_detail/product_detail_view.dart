@@ -4,9 +4,9 @@ import 'package:marchant/models/product_model.dart';
 import 'package:marchant/ui/common/app_colors.dart';
 import 'package:marchant/ui/common/app_text_style.dart';
 import 'package:marchant/ui/common/ui_helpers.dart';
+import 'package:marchant/ui/views/page_builder/page_builder_view.dart';
 import 'package:marchant/ui/views/widgets/custome_app_bar.dart';
 import 'package:marchant/ui/views/widgets/custome_button.dart';
-import 'package:marchant/ui/views/widgets/image_builder.dart';
 import 'package:stacked/stacked.dart';
 
 import 'product_detail_viewmodel.dart';
@@ -34,13 +34,17 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // verticalSpaceMiddle,
+                      // ImageBuilder(
+                      //   image: product.productImage.first,
+                      //   height: screenWidth(context) * .7,
+                      //   width: double.infinity,
+                      //   fit: BoxFit.cover,
+                      // ),
+                      // verticalSpaceMiddle,
                       verticalSpaceMiddle,
-                      ImageBuilder(
-                        image: product.productImage.first,
-                        height: screenWidth(context) * .7,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
+                      // Horizontally scrollable list of images with a clue icon
+                      PageBuilderView(product: product),
                       verticalSpaceMiddle,
                       Text(
                         product.productName ?? '',

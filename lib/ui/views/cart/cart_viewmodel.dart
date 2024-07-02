@@ -65,9 +65,8 @@ class CartViewModel extends ReactiveViewModel {
   onPlaceOrder() async {
     setBusy(true);
     try {
-      await _cartService.placeOrder();  
-    setBusy(false);
-
+      await _cartService.placeOrder();
+      setBusy(false);
     } catch (e) {
       SnackBarService.showSnackBar(content: e.toString());
     } finally {

@@ -133,7 +133,8 @@ class HomeView extends StackedView<HomeViewModel> {
                                         );
                                       },
                                     )
-                                  : const Center(child: Text("No Categories avaliable")),
+                                  : const Center(
+                                      child: Text("No Categories avaliable")),
                       verticalSpaceMedium,
                       // Our Products Section Title
                       const Row(
