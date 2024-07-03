@@ -75,6 +75,7 @@ class PostView extends StackedView<PostViewModel> {
                               .containsKey(viewModel.productNameController),
                           controller: viewModel.productNameController,
                           hint: 'Enter product name',
+                          height: 50,
                         ),
                       ),
                       verticalSpaceMiddle,
@@ -83,34 +84,50 @@ class PostView extends StackedView<PostViewModel> {
                         widget: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            DropdownButtonFormField<String>(
-                              value: viewModel.selectedCategory,
-                              hint: const Text('Choose category'),
-                              onChanged: viewModel.onCategoryChanged,
-                              items: viewModel.topCategories.values
-                                  .map((Category category) {
-                                return DropdownMenuItem<String>(
-                                  value: category.id,
-                                  child: Text(category.name ?? ''),
-                                );
-                              }).toList(),
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                contentPadding:
-                                    EdgeInsets.symmetric(horizontal: 10),
-                              ),
-                            ),
-                            if (viewModel.formError.containsKey('category'))
-                              Padding(
-                                padding: const EdgeInsets.only(top: 8.0),
-                                child: Text(
-                                  viewModel.formError['category']!,
-                                  style: const TextStyle(
-                                    color: Colors.red,
-                                    fontSize: 12,
+                            SizedBox(
+                              height: 50,
+                              child: DropdownButtonFormField<String>(
+                                value: viewModel.selectedCategory,
+                                hint: const Text('Choose category'),
+                                onChanged: viewModel.onCategoryChanged,
+                                items: viewModel.topCategories.values
+                                    .map((Category category) {
+                                  return DropdownMenuItem<String>(
+                                    value: category.id,
+                                    child: Text(category.name ?? ''),
+                                  );
+                                }).toList(),
+                                // decoration: const InputDecoration(
+                                //   border: OutlineInputBorder(),
+                                //   contentPadding:
+                                //       EdgeInsets.symmetric(horizontal: 10),
+                                // ),
+
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: viewModel.formError
+                                              .containsKey('category')
+                                          ? Colors.red
+                                            : kcPrimaryColorDark,
+                                    ),
                                   ),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
                                 ),
                               ),
+                            ),
+                            // if (viewModel.formError.containsKey('category'))
+                            //   Padding(
+                            //     padding: const EdgeInsets.only(top: 8.0),
+                            //     child: Text(
+                            //       viewModel.formError['category']!,
+                            //       style: const TextStyle(
+                            //         color: Colors.red,
+                            //         fontSize: 12,
+                            //       ),
+                            //     ),
+                            //   ),
                           ],
                         ),
                       ),
@@ -121,35 +138,45 @@ class PostView extends StackedView<PostViewModel> {
                           widget: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              DropdownButtonFormField<String>(
-                                value: viewModel.selectedSubCategory,
-                                hint: const Text('Choose sub category'),
-                                onChanged: viewModel.onSubCategoryChanged,
-                                items: viewModel.subCategories
-                                    .map((Category subCategory) {
-                                  return DropdownMenuItem<String>(
-                                    value: subCategory.id,
-                                    child: Text(subCategory.name ?? ''),
-                                  );
-                                }).toList(),
-                                decoration: const InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  contentPadding:
-                                      EdgeInsets.symmetric(horizontal: 10),
-                                ),
-                              ),
-                              if (viewModel.formError
-                                  .containsKey('subCategory'))
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 8.0),
-                                  child: Text(
-                                    viewModel.formError['subCategory']!,
-                                    style: const TextStyle(
-                                      color: Colors.red,
-                                      fontSize: 12,
+                              SizedBox(
+                                height: 50,
+                                child: DropdownButtonFormField<String>(
+                                  value: viewModel.selectedSubCategory,
+                                  hint: const Text('Choose sub category'),
+                                  onChanged: viewModel.onSubCategoryChanged,
+                                  items: viewModel.subCategories
+                                      .map((Category subCategory) {
+                                    return DropdownMenuItem<String>(
+                                      value: subCategory.id,
+                                      child: Text(subCategory.name ?? ''),
+                                    );
+                                  }).toList(),
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: viewModel.formError
+                                                .containsKey('subCategory')
+                                            ? Colors.red
+                                            : kcPrimaryColorDark,
+                                      ),
                                     ),
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
                                   ),
                                 ),
+                              ),
+                              // if (viewModel.formError
+                              //     .containsKey('subCategory'))
+                              //   Padding(
+                              //     padding: const EdgeInsets.only(top: 8.0),
+                              //     child: Text(
+                              //       viewModel.formError['subCategory']!,
+                              //       style: const TextStyle(
+                              //         color: Colors.red,
+                              //         fontSize: 12,
+                              //       ),
+                              //     ),
+                              //   ),
                             ],
                           ),
                         ),
@@ -160,50 +187,66 @@ class PostView extends StackedView<PostViewModel> {
                           widget: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              DropdownButtonFormField<String>(
-                                value: viewModel.selectedSubSubCategory,
-                                hint: const Text('Choose sub sub category'),
-                                onChanged: viewModel.onSubSubCategoryChanged,
-                                items: viewModel.subSubCategories
-                                    .map((Category subSubCategory) {
-                                  return DropdownMenuItem<String>(
-                                    value: subSubCategory.id,
-                                    child: Text(subSubCategory.name ?? ''),
-                                  );
-                                }).toList(),
-                                decoration: const InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  contentPadding:
-                                      EdgeInsets.symmetric(horizontal: 10),
-                                ),
-                              ),
-                              if (viewModel.formError
-                                  .containsKey('subSubCategory'))
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 8.0),
-                                  child: Text(
-                                    viewModel.formError['subSubCategory']!,
-                                    style: const TextStyle(
-                                      color: Colors.red,
-                                      fontSize: 12,
+                              SizedBox(
+                                height: 50,
+                                child: DropdownButtonFormField<String>(
+                                  value: viewModel.selectedSubSubCategory,
+                                  hint: const Text('Choose sub sub category'),
+                                  onChanged: viewModel.onSubSubCategoryChanged,
+                                  items: viewModel.subSubCategories
+                                      .map((Category subSubCategory) {
+                                    return DropdownMenuItem<String>(
+                                      value: subSubCategory.id,
+                                      child: Text(subSubCategory.name ?? ''),
+                                    );
+                                  }).toList(),
+                                  // decoration: const InputDecoration(
+                                  //   border: OutlineInputBorder(),
+                                  //   contentPadding:
+                                  //       EdgeInsets.symmetric(horizontal: 10),
+                                  // ),
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: viewModel.formError
+                                                .containsKey('subCategory')
+                                            ? Colors.red
+                                            : kcPrimaryColorDark,
+                                      ),
                                     ),
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
                                   ),
                                 ),
+                              ),
+                              // if (viewModel.formError
+                              //     .containsKey('subSubCategory'))
+                              //   Padding(
+                              //     padding: const EdgeInsets.only(top: 8.0),
+                              //     child: Text(
+                              //       viewModel.formError['subSubCategory']!,
+                              //       style: const TextStyle(
+                              //         color: Colors.red,
+                              //         fontSize: 12,
+                              //       ),
+                              //     ),
+                              //   ),
                             ],
                           ),
                         ),
-                      verticalSpaceMiddle,
+                      if (viewModel.selectedSubSubCategory != null) ...[
+                        verticalSpaceMiddle
+                      ],
                       CustomeFormField(
                         title: 'Sales Price',
                         widget: InputField(
-                          validator: (value) => viewModel.validateText(
-                              value,
-                              viewModel.salesPriceController,
-                              'Enter sales price'),
+                          validator: (value) => viewModel.validateText(value,
+                              viewModel.salesPriceController, 'Sales price'),
                           error: viewModel.formError
                               .containsKey(viewModel.salesPriceController),
                           controller: viewModel.salesPriceController,
                           hint: 'Enter sales price',
+                          height: 50,
                           inputType: TextInputType.number,
                           inputFormatter: [
                             FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
@@ -212,19 +255,19 @@ class PostView extends StackedView<PostViewModel> {
                       ),
                       verticalSpaceMiddle,
                       CustomeFormField(
-                        title: 'Description',
+                        title: 'Quantity',
                         widget: InputField(
-                          validator: (value) => viewModel.validateText(
-                              value,
-                              viewModel.descriptionController,
-                              'Enter description'),
+                          validator: (value) => viewModel.validateText(value,
+                              viewModel.quantityController, 'Quantity'),
                           error: viewModel.formError
-                              .containsKey(viewModel.descriptionController),
-                          controller: viewModel.descriptionController,
-                          hint: 'Enter description',
-                          extendable: true,
-                          charLength: 1000,
-                          height: 70,
+                              .containsKey(viewModel.quantityController),
+                          controller: viewModel.quantityController,
+                          hint: 'Enter uantity',
+                          inputType: TextInputType.number,
+                          inputFormatter: [
+                            FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                          ], // keyboardType: TextInputType.number,
+                          height: 50.0,
                         ),
                       ),
                       verticalSpaceMiddle,
@@ -234,31 +277,29 @@ class PostView extends StackedView<PostViewModel> {
                           validator: (value) => viewModel.validateText(
                               value,
                               viewModel.detailsController,
-                              'Enter details (comma separated)'),
+                              'Details (comma separated)'),
                           error: viewModel.formError
                               .containsKey(viewModel.detailsController),
                           controller: viewModel.detailsController,
                           hint: 'Enter details (comma separated)',
                           extendable: true,
-                          charLength: 1000,
-                          height: 50,
+                          charLength: 1500,
+                          height: 100.0,
                         ),
                       ),
                       verticalSpaceMiddle,
                       CustomeFormField(
-                        title: 'Quantity',
+                        title: 'Description',
                         widget: InputField(
                           validator: (value) => viewModel.validateText(value,
-                              viewModel.quantityController, 'Enter quantity'),
+                              viewModel.descriptionController, 'Description'),
                           error: viewModel.formError
-                              .containsKey(viewModel.quantityController),
-                          controller: viewModel.quantityController,
-                          hint: 'Enter quantity',
-                          inputType: TextInputType.number,
-                          inputFormatter: [
-                            FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                          ],
-                          // keyboardType: TextInputType.number,
+                              .containsKey(viewModel.descriptionController),
+                          controller: viewModel.descriptionController,
+                          hint: 'Enter description',
+                          extendable: true,
+                          charLength: 1500,
+                          height: 100.0,
                         ),
                       ),
                       verticalSpaceLarge,

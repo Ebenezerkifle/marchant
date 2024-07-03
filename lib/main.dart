@@ -30,6 +30,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       scaffoldMessengerKey: SnackBarService.scaffoldKey,
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(scaffoldBackgroundColor: kcWhite),
       initialRoute: Routes.startupView,
       onGenerateRoute: StackedRouter().onGenerateRoute,
       navigatorKey: StackedService.navigatorKey,

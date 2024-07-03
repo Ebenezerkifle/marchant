@@ -86,7 +86,7 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                                       horizontal: middleSize),
                                   child: Column(
                                     children: [
-                                      verticalSpaceMedium,
+                                      verticalSpaceMiddle,
                                       // Our Products Section Title
                                       const Row(
                                         mainAxisAlignment:
@@ -96,7 +96,7 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                                               style: AppTextStyle.h2Bold),
                                         ],
                                       ),
-
+                                      verticalSpaceTiny,
                                       CustomeGrideWidget(
                                         widgets: viewModel.filterQuery !=
                                                     null &&
@@ -160,7 +160,7 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                                                       style:
                                                           AppTextStyle.h4Bold,
                                                     ),
-                                                     status:
+                                                    status:
                                                         e.value.status ?? '',
                                                   ),
                                                 )
