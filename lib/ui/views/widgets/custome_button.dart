@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:marchant/ui/common/app_colors.dart';
 import 'package:marchant/ui/common/app_text_style.dart';
 
@@ -80,9 +81,14 @@ class CustomeButton extends StatelessWidget {
             loading
                 ? Padding(
                     padding: const EdgeInsets.all(2.0),
-                    child: CircularProgressIndicator(
-                      color: textColor,
-                    ))
+                    child: SpinKitThreeBounce(
+                                  color:textColor,
+                                     size: 25.0,
+                                   )          
+                    // child: CircularProgressIndicator(
+                    //   color: textColor,
+                    // )
+                    )
                 : !iconOnly
                     ? icon ?? const SizedBox(height: 0, width: 0)
                     : Container(),

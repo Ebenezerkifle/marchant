@@ -128,6 +128,7 @@ import 'package:marchant/ui/common/app_text_style.dart';
 import 'package:marchant/ui/common/ui_helpers.dart';
 import 'package:marchant/ui/views/widgets/image_builder.dart';
 
+
 class CustomeCardWidget extends StatelessWidget {
   const CustomeCardWidget({
     super.key,
@@ -138,7 +139,7 @@ class CustomeCardWidget extends StatelessWidget {
     this.details = const [],
     this.onTap,
     this.centerText = false,
-    this.image = 'assets/images/folder.png',
+    this.image = 'assets/images/category.jpg',
     this.elevation = true,
     this.widget = const SizedBox(),
     this.video = false,
@@ -265,13 +266,13 @@ class CustomeCardWidget extends StatelessWidget {
                             ),
                             const SizedBox(height: 10),
                             widget,
-                            // const SizedBox(height: 10),
-                            // Text(
-                            //   status,
-                            //   style: AppTextStyle.h3Bold,
-                            //   maxLines: 1,
-                            //   overflow: TextOverflow.clip,
-                            // ),
+                            const SizedBox(height: 10),
+                            Text(
+                              status??'',
+                              style: AppTextStyle.h3Bold,
+                              maxLines: 1,
+                              overflow: TextOverflow.clip,
+                            ),
                           ],
                         ),
                       ),

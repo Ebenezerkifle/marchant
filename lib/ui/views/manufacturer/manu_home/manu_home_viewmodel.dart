@@ -71,6 +71,8 @@ class ManuHomeViewModel extends ReactiveViewModel {
     await _phoneService.makePhoneCall();
   }
 
+
+  
   void filterProducts(String query) {
     filterQuery = query
         .toLowerCase(); // Convert the query to lowercase and assign to filterQuery
@@ -82,16 +84,40 @@ class ManuHomeViewModel extends ReactiveViewModel {
     } else {
       // Perform custom fuzzy search on productName
       filteredProducts = Map.fromEntries(products.entries.where((entry) {
-        final productName = entry.value.productName?.toLowerCase() ??
-            ''; // Get lowercase productName or empty string if null
+        final status = entry.value.status?.toLowerCase() ??
+            ''; // Get lowercase status or empty string if null
         final searchLower = filterQuery!
             .toLowerCase(); // Get lowercase filterQuery (forced non-null assertion)
 
         // Check if productName contains searchLower
-        return productName.contains(searchLower);
+        return status.contains(searchLower);
       }));
     }
 
     notifyListeners(); // Notify listeners that filteredProducts have been updated
   }
+
+  // void filterProducts(String query) {
+  //   filterQuery = query
+  //       .toLowerCase(); // Convert the query to lowercase and assign to filterQuery
+
+  //   if (filterQuery?.isEmpty ?? true) {
+  //     // Check if filterQuery is null or empty
+  //     filteredProducts
+  //         .clear(); // If filterQuery is empty, clear filteredProducts map
+  //   } else {
+  //     // Perform custom fuzzy search on productName
+  //     filteredProducts = Map.fromEntries(products.entries.where((entry) {
+  //       final productName = entry.value.productName?.toLowerCase() ??
+  //           ''; // Get lowercase productName or empty string if null
+  //       final searchLower = filterQuery!
+  //           .toLowerCase(); // Get lowercase filterQuery (forced non-null assertion)
+
+  //       // Check if productName contains searchLower
+  //       return productName.contains(searchLower);
+  //     }));
+  //   }
+
+  //   notifyListeners(); // Notify listeners that filteredProducts have been updated
+  // }
 }

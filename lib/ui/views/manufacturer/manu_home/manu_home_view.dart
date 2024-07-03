@@ -95,28 +95,7 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                                               style: AppTextStyle.h2Bold),
                                         ],
                                       ),
-                                      // CustomeGrideWidget(
-                                      //   widgets: viewModel.products.entries
-                                      //       .map(
-                                      //         (e) => CustomeCardWidget(
-                                      //           size:
-                                      //               screenWidth(context) * .38,
-                                      //           onTap: () => viewModel
-                                      //               .onItemSelected(e.value),
-                                      //           title:
-                                      //               e.value.productName ?? '',
-                                      //           details: e.value.details ?? [],
-                                      //           detailLimit: 3,
-                                      //           image:
-                                      //               e.value.productImage.first,
-                                      //           widget: Text(
-                                      //             '${e.value.salesPrice} ETB',
-                                      //             style: AppTextStyle.h4Bold,
-                                      //           ),
-                                      //         ),
-                                      //       )
-                                      //       .toList(),
-                                      // ),
+
                                       CustomeGrideWidget(
                                         widgets: viewModel.filterQuery !=
                                                     null &&
@@ -136,16 +115,20 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                                                     details:
                                                         e.value.details ?? [],
                                                     detailLimit: 3,
+                                                    // image: e.value.productImage
+                                                    //     .first,
                                                     image: e.value.productImage
-                                                        .first,
+                                                            .isNotEmpty
+                                                        ? e.value.productImage
+                                                            .first
+                                                        : 'assets/images/category.jpg',
                                                     widget: Text(
                                                       '${e.value.salesPrice} ETB',
                                                       style:
                                                           AppTextStyle.h4Bold,
                                                     ),
                                                     status:
-                                                        e.value.status ??
-                                                            '',
+                                                        e.value.status ?? '',
                                                   ),
                                                 )
                                                 .toList()
@@ -163,13 +146,21 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                                                     details:
                                                         e.value.details ?? [],
                                                     detailLimit: 3,
+                                                    // image: e.value.productImage
+                                                    //     .first,
                                                     image: e.value.productImage
-                                                        .first,
+                                                            .isNotEmpty
+                                                        ? e.value.productImage
+                                                            .first
+                                                        : 'assets/images/category.jpg', // default image
+
                                                     widget: Text(
                                                       '${e.value.salesPrice} ETB',
                                                       style:
                                                           AppTextStyle.h4Bold,
                                                     ),
+                                                     status:
+                                                        e.value.status ?? '',
                                                   ),
                                                 )
                                                 .toList(),

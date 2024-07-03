@@ -187,7 +187,12 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                             title: e.value.productName ?? '',
                                             details: e.value.details ?? [],
                                             detailLimit: 3,
-                                            image: e.value.productImage.first,
+                                            // image: e.value.productImage.first,
+                                             image: e.value.productImage
+                                                            .isNotEmpty
+                                                        ? e.value.productImage
+                                                            .first
+                                                        : 'assets/images/category.jpg',
                                             widget: Text(
                                               '${e.value.salesPrice} ETB',
                                               style: AppTextStyle.h4Bold,

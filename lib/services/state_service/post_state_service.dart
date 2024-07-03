@@ -37,6 +37,7 @@ class PostStateService with ListenableServiceMixin {
       token,
       needToken: true,
     );
+    print("prducts to check status is provieded");
     print(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
       var body = jsonDecode(response.body);
@@ -51,7 +52,7 @@ class PostStateService with ListenableServiceMixin {
 
   getApprovedProducts(String? manufacturer) async {
     String url = '$baseUrl$getApprovedProductsByManufacturer$manufacturer';
-    print(url);
+    // print(url);
     var token = await SessionService.getString(SessionKey.token);
     // api call
     var response = await ApiCallService.getCall(
@@ -59,7 +60,7 @@ class PostStateService with ListenableServiceMixin {
       token,
       needToken: true,
     );
-    print(response.body);
+    // print(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
       var body = jsonDecode(response.body);
       var productData = body['data']['products'];

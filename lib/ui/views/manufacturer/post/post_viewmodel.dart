@@ -184,7 +184,7 @@ class PostViewModel extends ReactiveViewModel {
       if (response.statusCode == 200 || response.statusCode == 201) {
         SnackBarService.showSnackBar(
           content:
-              'Your Product is successfuly uploaded, please wait till approved',
+              'Your Product is successfuly uploaded',
         );
         _clearFields();
         refresh();
