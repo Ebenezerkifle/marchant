@@ -8,6 +8,7 @@ import 'package:marchant/ui/views/widgets/custome_app_bar.dart';
 import 'package:marchant/ui/views/widgets/custome_button.dart';
 import 'package:marchant/ui/views/widgets/custome_card_widget.dart';
 import 'package:marchant/ui/views/widgets/custome_grid_widget.dart';
+import 'package:marchant/ui/views/widgets/fading_circle.dart';
 
 import 'package:stacked/stacked.dart';
 
@@ -60,7 +61,7 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                 height: screenHeight(context) * .3,
                                 width: double.infinity,
                                 child: const Center(
-                                  child: CircularProgressIndicator(),
+                                  child: spinkit,
                                 ),
                               )
                             : viewModel.errorMessage != null
@@ -161,7 +162,7 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                 height: screenHeight(context) * .4,
                                 width: double.infinity,
                                 child: const Center(
-                                    child: CircularProgressIndicator()),
+                                    child: spinkit),
                               )
                             : viewModel.subProducts.isEmpty && !viewModel.isBusy
                                 ? SizedBox(

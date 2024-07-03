@@ -3,6 +3,7 @@ import 'package:marchant/ui/common/app_colors.dart';
 import 'package:marchant/ui/common/ui_helpers.dart';
 import 'package:marchant/ui/views/widgets/custome_app_bar.dart';
 import 'package:marchant/ui/views/widgets/custome_button.dart';
+import 'package:marchant/ui/views/widgets/fading_circle.dart';
 import 'package:marchant/ui/views/widgets/nothing_found.dart';
 import 'package:marchant/ui/views/widgets/search_widget.dart';
 import 'package:stacked/stacked.dart';
@@ -56,7 +57,7 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                     ? SizedBox(
                         height: screenHeight(context) * .4,
                         width: double.infinity,
-                        child: const Center(child: CircularProgressIndicator()),
+                        child: const Center(child: spinkit),
                       )
                     : viewModel.errorMessage != null
                         ? Center(

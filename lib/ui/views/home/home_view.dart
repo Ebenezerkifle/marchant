@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:marchant/ui/views/widgets/custome_button.dart';
+import 'package:marchant/ui/views/widgets/fading_circle.dart';
 import 'package:stacked/stacked.dart';
 import 'package:marchant/ui/common/app_colors.dart';
 import 'package:marchant/ui/common/app_text_style.dart';
@@ -64,7 +66,7 @@ class HomeView extends StackedView<HomeViewModel> {
                               height: screenHeight(context) * .3,
                               width: double.infinity,
                               child: const Center(
-                                child: CircularProgressIndicator(),
+                                child: spinkit,
                               ),
                             )
                           : viewModel.errorMessage != null
@@ -149,7 +151,7 @@ class HomeView extends StackedView<HomeViewModel> {
                               height: screenHeight(context) * .3,
                               width: double.infinity,
                               child: const Center(
-                                child: CircularProgressIndicator(),
+                                child: spinkit,
                               ),
                             )
                           : viewModel.errorMessage != null

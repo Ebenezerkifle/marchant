@@ -6,6 +6,7 @@ import 'package:marchant/ui/views/widgets/custome_app_bar.dart';
 import 'package:marchant/ui/views/widgets/custome_button.dart';
 import 'package:marchant/ui/views/widgets/custome_card_widget.dart';
 import 'package:marchant/ui/views/widgets/custome_grid_widget.dart';
+import 'package:marchant/ui/views/widgets/fading_circle.dart';
 import 'package:stacked/stacked.dart';
 import './company_profile_viewmodel.dart';
 import 'package:marchant/models/product_model.dart';
@@ -69,7 +70,7 @@ class CompanyProfileView extends StackedView<CompanyProfileViewModel> {
                           height: screenHeight(context) * .4,
                           width: double.infinity,
                           child:
-                              const Center(child: CircularProgressIndicator()),
+                              const Center(child: spinkit),
                         )
                       : viewModel.errorMessage != null
                           ? Center(
