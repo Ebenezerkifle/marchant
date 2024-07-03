@@ -36,6 +36,58 @@ class PostView extends StackedView<PostViewModel> {
                   child: Column(
                     children: [
                       verticalSpaceMiddle,
+                      // Display uploaded images
+                        if (viewModel.images.isNotEmpty)
+                          SizedBox(
+                            height: 100,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: viewModel.images.length,
+                              itemBuilder: (context, index) {
+                                return Row(
+                                  children: [
+                                    Stack(
+                                      children: [
+                                        Container(
+                                          width: 100,
+                                          height: 100,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(5),
+                                            image: DecorationImage(
+                                              image: NetworkImage(
+                                                viewModel.images[index],
+                                              ),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          top: 0,
+                                          right: 0,
+                                          child: GestureDetector(
+                                            onTap: () => viewModel.removeImage(index),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: Colors.red,
+                                                borderRadius: BorderRadius.circular(20),
+                                              ),
+                                              child: const Icon(
+                                                Icons.close,
+                                                color: Colors.white,
+                                                size: 20,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(width: 10),
+                                  ],
+                                );
+                              },
+                            ),
+                          ),
+                          //add picture section
                       GestureDetector(
                         onTap: viewModel.onPictureAdd,
                         child: Container(
@@ -97,11 +149,7 @@ class PostView extends StackedView<PostViewModel> {
                                     child: Text(category.name ?? ''),
                                   );
                                 }).toList(),
-                                // decoration: const InputDecoration(
-                                //   border: OutlineInputBorder(),
-                                //   contentPadding:
-                                //       EdgeInsets.symmetric(horizontal: 10),
-                                // ),
+                               
 
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
@@ -117,17 +165,7 @@ class PostView extends StackedView<PostViewModel> {
                                 ),
                               ),
                             ),
-                            // if (viewModel.formError.containsKey('category'))
-                            //   Padding(
-                            //     padding: const EdgeInsets.only(top: 8.0),
-                            //     child: Text(
-                            //       viewModel.formError['category']!,
-                            //       style: const TextStyle(
-                            //         color: Colors.red,
-                            //         fontSize: 12,
-                            //       ),
-                            //     ),
-                            //   ),
+                            
                           ],
                         ),
                       ),
@@ -165,18 +203,7 @@ class PostView extends StackedView<PostViewModel> {
                                   ),
                                 ),
                               ),
-                              // if (viewModel.formError
-                              //     .containsKey('subCategory'))
-                              //   Padding(
-                              //     padding: const EdgeInsets.only(top: 8.0),
-                              //     child: Text(
-                              //       viewModel.formError['subCategory']!,
-                              //       style: const TextStyle(
-                              //         color: Colors.red,
-                              //         fontSize: 12,
-                              //       ),
-                              //     ),
-                              //   ),
+                             
                             ],
                           ),
                         ),
@@ -200,11 +227,7 @@ class PostView extends StackedView<PostViewModel> {
                                       child: Text(subSubCategory.name ?? ''),
                                     );
                                   }).toList(),
-                                  // decoration: const InputDecoration(
-                                  //   border: OutlineInputBorder(),
-                                  //   contentPadding:
-                                  //       EdgeInsets.symmetric(horizontal: 10),
-                                  // ),
+                                 
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide(
@@ -219,18 +242,7 @@ class PostView extends StackedView<PostViewModel> {
                                   ),
                                 ),
                               ),
-                              // if (viewModel.formError
-                              //     .containsKey('subSubCategory'))
-                              //   Padding(
-                              //     padding: const EdgeInsets.only(top: 8.0),
-                              //     child: Text(
-                              //       viewModel.formError['subSubCategory']!,
-                              //       style: const TextStyle(
-                              //         color: Colors.red,
-                              //         fontSize: 12,
-                              //       ),
-                              //     ),
-                              //   ),
+                             
                             ],
                           ),
                         ),
@@ -342,182 +354,3 @@ class PostView extends StackedView<PostViewModel> {
       PostViewModel();
 }
 
-// import 'dart:convert';
-
-// import 'package:http/http.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
-// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import 'package:marchant/models/category_model.dart';
-// import 'package:marchant/ui/common/app_colors.dart';
-// import 'package:marchant/ui/common/app_text_style.dart';
-// import 'package:marchant/ui/common/ui_helpers.dart';
-// import 'package:marchant/ui/views/widgets/custome_button.dart';
-// import 'package:marchant/ui/views/widgets/custome_form_field.dart';
-// import 'package:marchant/ui/views/widgets/input_field.dart';
-// import 'package:stacked/stacked.dart';
-// import '../../widgets/custome_app_bar.dart';
-// import 'post_viewmodel.dart';
-
-// class PostView extends StatelessWidget {
-//   const PostView({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return ViewModelBuilder<PostViewModel>.reactive(
-//       viewModelBuilder: () => PostViewModel(),
-//       builder: (context, viewModel, child) {
-//         return Scaffold(
-//           body: SafeArea(
-//             top: true,
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.stretch,
-//               children: [
-//                 CustomeAppBar(title: 'Post a Product', back: false),
-//                 Expanded(
-//                   child: SingleChildScrollView(
-//                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-//                     child: Form(
-//                       key: viewModel.formKey,
-//                       child: Column(
-//                         crossAxisAlignment: CrossAxisAlignment.start,
-//                         children: [
-//                           verticalSpaceMiddle,
-//                           // Uploaded images section
-//                           if (viewModel.images.isNotEmpty) ...[
-//                             SizedBox(
-//                               height: 100,
-//                               child: ListView.builder(
-//                                 scrollDirection: Axis.horizontal,
-//                                 itemCount: viewModel.images.length,
-//                                 itemBuilder: (context, index) {
-//                                   return Row(
-//                                     children: [
-//                                       Stack(
-//                                         children: [
-//                                           Container(
-//                                             width: 100,
-//                                             height: 100,
-//                                             decoration: BoxDecoration(
-//                                               borderRadius:
-//                                                   BorderRadius.circular(5),
-//                                               image: DecorationImage(
-//                                                 image: NetworkImage(
-//                                                   viewModel.images[index],
-//                                                 ),
-//                                                 fit: BoxFit.cover,
-//                                               ),
-//                                             ),
-//                                           ),
-//                                           Positioned(
-//                                             top: 0,
-//                                             right: 0,
-//                                             child: GestureDetector(
-//                                               onTap: () {
-//                                                 viewModel.removeImage(index);
-//                                               },
-//                                               child: Container(
-//                                                 decoration: BoxDecoration(
-//                                                   color: Colors.red,
-//                                                   borderRadius:
-//                                                       BorderRadius.circular(20),
-//                                                 ),
-//                                                 child: Icon(
-//                                                   Icons.close,
-//                                                   color: Colors.white,
-//                                                   size: 20,
-//                                                 ),
-//                                               ),
-//                                             ),
-//                                           ),
-//                                         ],
-//                                       ),
-//                                       SizedBox(width: 10),
-//                                     ],
-//                                   );
-//                                 },
-//                               ),
-//                             ),
-//                           ],
-//                           // Add pictures section
-//                           GestureDetector(
-//                             onTap: viewModel.onPictureAdd,
-//                             child: Container(
-//                               padding: const EdgeInsets.symmetric(
-//                                 vertical: 16.0,
-//                               ),
-//                               width: double.infinity,
-//                               decoration: BoxDecoration(
-//                                 borderRadius: BorderRadius.circular(5),
-//                                 color: kcVeryLightGrey,
-//                               ),
-//                               child: Column(
-//                                 crossAxisAlignment: CrossAxisAlignment.center,
-//                                 mainAxisAlignment: MainAxisAlignment.center,
-//                                 children: [
-//                                   Icon(
-//                                     FontAwesomeIcons.plus,
-//                                     color: kcPrimaryColor,
-//                                   ),
-//                                   verticalSpaceSmall,
-//                                   Text(
-//                                     'Add Pictures',
-//                                     style: AppTextStyle.h4Normal,
-//                                   )
-//                                 ],
-//                               ),
-//                             ),
-//                           ),
-//                           verticalSpaceMiddle,
-//                           // Other form fields
-//                           CustomeFormField(
-//                             title: viewModel.name,
-//                             widget: InputField(
-//                               validator: (value) => viewModel.validateText(
-//                                 value,
-//                                 viewModel.productNameController,
-//                                 viewModel.name.trim(),
-//                               ),
-//                               error: viewModel.formError
-//                                   .containsKey(viewModel.productNameController),
-//                               controller: viewModel.productNameController,
-//                               hint: 'Enter product name',
-//                             ),
-//                           ),
-//                           // Remaining form fields...
-//                           verticalSpaceLarge,
-//                           if (viewModel.hasError &&
-//                               viewModel.errorMsg.isNotEmpty ||
-//                               viewModel.formError.isNotEmpty) ...[
-//                             Text(
-//                               viewModel.formError.isNotEmpty
-//                                   ? viewModel.formError.entries.first.value
-//                                   : viewModel.errorMsg,
-//                               style: AppTextStyle.withColor(
-//                                 color: kcDanger,
-//                                 style: AppTextStyle.h4Normal,
-//                               ),
-//                               textAlign: TextAlign.center,
-//                             ),
-//                             verticalSpaceSmall,
-//                           ],
-//                           CustomeButton(
-//                             text: 'Submit',
-//                             onTap: viewModel.onPostProduct,
-//                             width: double.infinity,
-//                             loading: viewModel.isBusy,
-//                           ),
-//                           verticalSpaceLarge,
-//                         ],
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         );
-//       },
-//     );
-//   }
-// }
