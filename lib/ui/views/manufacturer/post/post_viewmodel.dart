@@ -35,10 +35,12 @@ class PostViewModel extends ReactiveViewModel {
     await _filePicker.pickFile();
     await _filePicker.showDialogAndUpload(DialogType.fileView);
   }
+
   void removeImage(int index) {
     images.removeAt(index);
     notifyListeners();
   }
+
   _init() async {
     _loading = true;
     notifyListeners();
@@ -186,8 +188,7 @@ class PostViewModel extends ReactiveViewModel {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         SnackBarService.showSnackBar(
-          content:
-              'Your Product is successfuly uploaded',
+          content: 'Your Product is successfuly uploaded',
         );
         _clearFields();
         refresh();
@@ -224,6 +225,7 @@ class PostViewModel extends ReactiveViewModel {
     selectedSubCategory = null;
     selectedSubSubCategory = null;
     details.clear();
+    images.clear();
     _formError.clear();
     errorMsg = '';
   }
@@ -286,4 +288,3 @@ class PostViewModel extends ReactiveViewModel {
     return isValid;
   }
 }
-
