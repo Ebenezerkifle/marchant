@@ -37,7 +37,29 @@ class PostStateService with ListenableServiceMixin {
       token,
       needToken: true,
     );
-    // print(response.body);
+    print(response.body);
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      var body = jsonDecode(response.body);
+      var productData = body['data']['products'];
+      for (var ele in productData) {
+        ProductModel c = ProductModel.fromMap(ele);
+        _products.value[c.id ?? ''] = c;
+        notifyListeners();
+      }
+    }
+  }
+
+  getApprovedProducts(String? manufacturer) async {
+    String url = '$baseUrl$getApprovedProductsByManufacturer$manufacturer';
+    print(url);
+    var token = await SessionService.getString(SessionKey.token);
+    // api call
+    var response = await ApiCallService.getCall(
+      url,
+      token,
+      needToken: true,
+    );
+    print(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
       var body = jsonDecode(response.body);
       var productData = body['data']['products'];

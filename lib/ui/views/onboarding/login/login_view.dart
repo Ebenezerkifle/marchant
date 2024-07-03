@@ -183,7 +183,7 @@ class LoginView extends StackedView<LoginViewModel> {
                   ),
                   const SizedBox(height: 30),
                   //Text(viewModel.copyright, style: AppTextStyle.verySmall),
-                  const SizedBox(height: 20),
+                  // const SizedBox(height: 20),
                 ],
               ),
             ),

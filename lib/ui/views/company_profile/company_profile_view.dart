@@ -6,7 +6,6 @@ import 'package:marchant/ui/views/widgets/custome_app_bar.dart';
 import 'package:marchant/ui/views/widgets/custome_button.dart';
 import 'package:marchant/ui/views/widgets/custome_card_widget.dart';
 import 'package:marchant/ui/views/widgets/custome_grid_widget.dart';
-import 'package:marchant/ui/views/widgets/nothing_found.dart';
 import 'package:stacked/stacked.dart';
 import './company_profile_viewmodel.dart';
 import 'package:marchant/models/product_model.dart';
@@ -128,10 +127,7 @@ class CompanyProfileView extends StackedView<CompanyProfileViewModel> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    NothingFound(
-                                      message:
-                                          'You have no product which is live.',
-                                    ),
+                                    Center(child: Text('No Product Found.')),
                                   ],
                                 ),
                 ],
@@ -147,5 +143,5 @@ class CompanyProfileView extends StackedView<CompanyProfileViewModel> {
   CompanyProfileViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      CompanyProfileViewModel();
+      CompanyProfileViewModel(product: product);
 }
