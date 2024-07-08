@@ -34,13 +34,13 @@ class LoginView extends StackedView<LoginViewModel> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // Welcome messages.
-                  Text(
-                    viewModel.welcomeMsg,
-                    style: AppTextStyle.withSize(
-                      style: AppTextStyle.h3Bold,
-                      weight: FontWeight.bold,
-                    ),
-                  ),
+                  // Text(
+                  //   viewModel.welcomeMsg,
+                  //   style: AppTextStyle.withSize(
+                  //     style: AppTextStyle.h3Bold,
+                  //     weight: FontWeight.bold,
+                  //   ),
+                  // ),
                   Stack(
                     children: [
                       ImageBuilder(
@@ -58,7 +58,7 @@ class LoginView extends StackedView<LoginViewModel> {
                     ),
                     child: Column(
                       children: [
-                        Text(viewModel.singinMsg, style: AppTextStyle.h2Bold),
+                        Text(viewModel.singinMsg, style: AppTextStyle.h1Bold),
                         verticalSpaceMiddle,
                         // phone number field
                         InputField(

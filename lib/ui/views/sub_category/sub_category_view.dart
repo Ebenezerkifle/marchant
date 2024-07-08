@@ -100,20 +100,9 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                                     .getLimitedSubCategories()
                                                     .map((e) => Padding(
                                                           padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  right:
-                                                                      smallSize),
-                                                          child: CategoryWidget(
-                                                            name: e.name ?? '',
-                                                            selected: viewModel
-                                                                    .selected
-                                                                    .containsKey(
-                                                                        e.id) &&
-                                                                viewModel
-                                                                        .selected[
-                                                                    e.id]!,
-                                                            onTap: () {
+                                                              const EdgeInsets.only(right: smallSize),
+                                                          child: CategoryWidget(name: e.name ?? '',selected: viewModel.selected.containsKey(e.id) && viewModel.selected[e.id]!,
+                                                           onTap: () {
                                                               viewModel
                                                                   .toggleSelection(
                                                                       e.id ??
@@ -130,7 +119,7 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                               ),
                                               if (viewModel
                                                   .hasMoreSubCategories)
-                                                CategoryWidget(
+                                                MoreButtonCategoryWidget(
                                                   name: 'more',
                                                   selected: false,
                                                   onTap:

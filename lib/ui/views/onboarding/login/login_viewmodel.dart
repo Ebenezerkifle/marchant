@@ -23,7 +23,7 @@ class LoginViewModel extends BaseViewModel {
   String get welcomeMsg => 'Welcome';
   String get image => 'assets/logo/logo_icon.png';
   // String get image => 'assets/images/order_delivery.png';
-  String get singinMsg => 'Signin';
+  String get singinMsg => 'Sign in';
 
   double get iconSize => 15;
 

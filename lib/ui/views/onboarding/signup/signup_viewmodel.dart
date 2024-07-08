@@ -18,7 +18,8 @@ class SignupViewModel extends FormViewModel {
 
   String get signUpMsg => 'Create an Account';
 
-  String get image => 'assets/images/order_delivery.png';
+  String get image => 'assets/logo/logo_icon.png';
+  // String get image => 'assets/images/order_delivery.png';
 
   TextEditingController phoneNumController = TextEditingController();
   TextEditingController passController = TextEditingController();

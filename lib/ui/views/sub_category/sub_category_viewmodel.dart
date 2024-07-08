@@ -56,7 +56,7 @@ class SubCategoryViewModel extends ReactiveViewModel {
         await _productState.getSubProducts(category ?? categoryId);
       }
     } catch (e) {
-      errorMessage = 'Failed to fetch categories. Please try again later.';
+      errorMessage = 'Failed to fetch categories.';
     }
 
     setBusy(false);

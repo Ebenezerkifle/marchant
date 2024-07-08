@@ -28,7 +28,7 @@ class SignupView extends StackedView<SignupViewModel> {
             children: [
               ImageBuilder(
                 image: viewModel.image,
-                height: screenHeight(context) * .4,
+                height: screenHeight(context) * .35,
                 fit: BoxFit.contain,
               ),
               Padding(
