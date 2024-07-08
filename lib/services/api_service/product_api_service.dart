@@ -33,9 +33,10 @@ class ProductApiCallService {
 
         products[c.id ?? ''] = c;
       }
-    } else {
-      throw Exception(response.body);
-    }
+    } 
+    // else {
+    //   throw Exception(response.body);
+    // }
     return products;
   }
 

@@ -46,24 +46,26 @@ class ProductStateService with ListenableServiceMixin {
   bool get isLoading => _isLoading.value;
 
   Future<void> getCategories() async {
-    try {
+    // try {
       _isLoading.value = true;
       _categories.value.clear();
       _categories.value.addAll(await CategoryApiCallService().getCategories());
-    } catch (e) {
-      throw Exception(e);
-    }
+    // }
+    //  catch (e) {
+    //   throw Exception(e);
+    // }
     notifyListeners();
   }
 
   Future<void> getProducts() async {
-    try {
+    // try {
       _isLoading.value = true;
       _products.value.clear();
       _products.value.addAll(await ProductApiCallService().getProducts());
-    } catch (e) {
-      throw Exception(e);
-    }
+    // } 
+    // catch (e) {
+    //   throw Exception(e);
+    // }
     notifyListeners();
   }
 
