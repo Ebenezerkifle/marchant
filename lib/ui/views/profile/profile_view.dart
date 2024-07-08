@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marchant/models/setting_model.dart';
+import 'package:marchant/ui/common/app_colors.dart';
 import 'package:stacked/stacked.dart';
 import '../../common/app_text_style.dart';
 import '../../common/ui_helpers.dart';
@@ -90,12 +91,12 @@ class ProfileView extends StackedView<ProfileViewModel> {
         return Container(
           padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
           decoration: BoxDecoration(
-            color: Colors.green.withOpacity(0.8),
+            color: kcPrimaryColor.withOpacity(0.8),
             borderRadius: BorderRadius.circular(16.0),
           ),
           child: Text(
             viewModel.credit.toString(),
-            style: AppTextStyle.h3Bold.copyWith(color: Colors.white),
+            style: AppTextStyle.h3Bold.copyWith(color: kcPrimaryColorDark),
           ),
         );
       default:

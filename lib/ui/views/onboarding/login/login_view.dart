@@ -38,14 +38,14 @@ class LoginView extends StackedView<LoginViewModel> {
                     viewModel.welcomeMsg,
                     style: AppTextStyle.withSize(
                       style: AppTextStyle.h3Bold,
-                      weight: FontWeight.normal,
+                      weight: FontWeight.bold,
                     ),
                   ),
                   Stack(
                     children: [
                       ImageBuilder(
                         image: viewModel.image,
-                        height: screenHeight(context) * .4,
+                        height: screenHeight(context) * .35,
                         fit: BoxFit.contain,
                       ),
                     ],

@@ -8,7 +8,7 @@ class CustomeButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.onTap,
-    this.btnColor = kcDarkGreyColor,
+    this.btnColor = kcPrimaryColorDark,
     this.textColor = kcWhite,
     this.height = 50,
     this.width,

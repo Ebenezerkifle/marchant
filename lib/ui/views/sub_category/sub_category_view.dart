@@ -140,7 +140,7 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                                   icon: const Icon(
                                                     FontAwesomeIcons
                                                         .ellipsisVertical,
-                                                    color: kcPrimaryColorDark,
+                                                    color: kcPrimaryColor,
                                                   ),
                                                 ),
                                             ],

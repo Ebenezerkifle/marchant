@@ -38,8 +38,8 @@ class CircularCardWidget extends StatelessWidget {
                       height: size,
                       child: Icon(
                         icon!,
-                        size: size * 0.9, // Adjust icon size as needed
-                        color: Colors.white, // Set icon color
+                        size: size * 0.7, // Adjust icon size as needed
+                        color: kcPrimaryColor, // Set icon color
                       ),
                     ),
                   ),

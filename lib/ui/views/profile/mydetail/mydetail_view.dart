@@ -159,7 +159,7 @@ class MydetailView extends StackedView<MydetailViewModel> {
                           text: 'Change',
                           onTap: viewModel.onSubmit,
                           width: double.infinity,
-                          btnColor: kcPrimaryColor,
+                          btnColor: kcPrimaryColorDark,
                           loading: viewModel.isBusy,
                         ),
                       ],

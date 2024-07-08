@@ -21,7 +21,8 @@ class LoginViewModel extends BaseViewModel {
   final _landingStateService = locator<LandingStateService>();
 
   String get welcomeMsg => 'Welcome';
-  String get image => 'assets/images/order_delivery.png';
+  String get image => 'assets/logo/logo_icon.png';
+  // String get image => 'assets/images/order_delivery.png';
   String get singinMsg => 'Signin';
 
   double get iconSize => 15;

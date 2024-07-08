@@ -49,7 +49,7 @@ class ChangePasswordView extends StackedView<ChangePasswordsViewModel> {
                             hint: viewModel.passwordHint,
                             prefixIcon: Icon(
                               FontAwesomeIcons.lock,
-                              color: kcPrimaryColor.withOpacity(.5),
+                              color: kcPrimaryColorDark.withOpacity(.5),
                               size: iconSize,
                             ),
                             suffixIcon: GestureDetector(
@@ -80,7 +80,7 @@ class ChangePasswordView extends StackedView<ChangePasswordsViewModel> {
                             hint: viewModel.newPasswordHint,
                             prefixIcon: Icon(
                               FontAwesomeIcons.lock,
-                              color: kcPrimaryColor.withOpacity(.5),
+                              color: kcPrimaryColorDark.withOpacity(.5),
                               size: iconSize,
                             ),
                             suffixIcon: GestureDetector(
@@ -109,7 +109,7 @@ class ChangePasswordView extends StackedView<ChangePasswordsViewModel> {
                             hint: viewModel.confirmPasswordHint,
                             prefixIcon: Icon(
                               FontAwesomeIcons.lock,
-                              color: kcPrimaryColor.withOpacity(.5),
+                              color: kcPrimaryColorDark.withOpacity(.5),
                               size: iconSize,
                             ),
                             suffixIcon: GestureDetector(
@@ -145,7 +145,7 @@ class ChangePasswordView extends StackedView<ChangePasswordsViewModel> {
                           text: 'submit',
                           onTap: viewModel.onSubmit,
                           width: double.infinity,
-                          btnColor: kcPrimaryColor,
+                          btnColor: kcPrimaryColorDark,
                           loading: viewModel.isBusy,
                         )
                       ],
