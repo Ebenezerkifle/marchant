@@ -178,9 +178,5 @@ class MydetailView extends StackedView<MydetailViewModel> {
   MydetailViewModel viewModelBuilder(BuildContext context) =>
       MydetailViewModel();
 
-  @override
-  void onViewModelReady(MydetailViewModel viewModel) {
-    viewModel.initialize();
-    super.onViewModelReady(viewModel);
-  }
+ 
 }

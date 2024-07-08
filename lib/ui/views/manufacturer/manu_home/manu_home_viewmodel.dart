@@ -49,7 +49,7 @@ class ManuHomeViewModel extends ReactiveViewModel {
       errorMessage = null; // Clear any existing error message
       await _postService.getProducts();
     } catch (e) {
-      errorMessage = 'Failed to fetch products. Please try again later.';
+      errorMessage = 'Failed to fetch products';
     }
     setBusy(false);
     notifyListeners();

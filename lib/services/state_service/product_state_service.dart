@@ -51,11 +51,9 @@ class ProductStateService with ListenableServiceMixin {
       _categories.value.clear();
       _categories.value.addAll(await CategoryApiCallService().getCategories());
     } catch (e) {
-      // Handle error
-    } finally {
-      _isLoading.value = false;
-      notifyListeners();
+      throw Exception(e);
     }
+    notifyListeners();
   }
 
   Future<void> getProducts() async {
@@ -64,18 +62,21 @@ class ProductStateService with ListenableServiceMixin {
       _products.value.clear();
       _products.value.addAll(await ProductApiCallService().getProducts());
     } catch (e) {
-      //
-    } finally {
-      _isLoading.value = false;
-      notifyListeners();
+      throw Exception(e);
     }
+    notifyListeners();
   }
 
   Future<void> getSubProducts(categoryId) async {
-    _subProducts.value.clear();
-    _subProducts.value
-        .addAll(await ProductApiCallService().getSubProducts(categoryId));
-    // print(_subProducts.value.length);
+    try {
+      _subProducts.value.clear();
+      _subProducts.value
+          .addAll(await ProductApiCallService().getSubProducts(categoryId));
+      // print(_subProducts.value.length);
+    } catch (e) {
+      throw Exception(e);
+    }
+
     notifyListeners();
   }
 

@@ -5,6 +5,7 @@ import 'package:marchant/ui/common/app_text_style.dart';
 import 'package:marchant/ui/common/ui_helpers.dart';
 import 'package:marchant/ui/views/widgets/custome_button.dart';
 import 'package:marchant/ui/views/widgets/custome_list_tile.dart';
+import 'package:marchant/ui/views/widgets/fading_circle.dart';
 import 'package:stacked/stacked.dart';
 
 import 'choose_catagory_viewmodel.dart';
@@ -95,50 +96,74 @@ class ChooseCatagoryView extends StackedView<ChooseCategoryViewModel> {
             ],
             Expanded(
               child: viewModel.loading
-                  ? const Center(child: CircularProgressIndicator())
-                  : RefreshIndicator(
-                      key: viewModel.refreshIndicatorKey,
-                      displacement: 50,
-                      color: Colors.white,
-                      backgroundColor: kcPrimaryColor,
-                      onRefresh: viewModel.refresh,
-                      child: ListView(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: middleSize),
-                        children: [
-                          verticalSpaceMiddle,
-                          ...viewModel.topCategories.entries
-                              .map(
-                                (e) => Padding(
-                                  padding:
-                                      const EdgeInsets.only(bottom: middleSize),
-                                  child: CustomeListTile(
-                                    title: e.value.name ?? '',
-                                    // imageUrl: [e.value.image??''],
-                                    noPrice: true,
-                                    onTap: () => viewModel.onSelected(e.key),
-                                    height: 80,
-                                    center: true,
-                                    selected:
-                                        viewModel.selected.containsKey(e.key),
-                                    stackWidget: Positioned(
-                                      top: 40,
-                                      right: smallSize,
-                                      child: Icon(
-                                        viewModel.selected.containsKey(e.key)
-                                            ? FontAwesomeIcons.solidCircleDot
-                                            : FontAwesomeIcons.circleDot,
-                                        color: kcPrimaryColor,
+                  ? const Center(child: spinkit)
+                  : viewModel.errorMessage != null
+                      ? Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                viewModel.errorMessage!,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.red,
+                                ),
+                              ),
+                              const SizedBox(height: 20),
+                              CustomeButton(
+                                text: 'Retry',
+                                onTap: viewModel.refresh,
+                              ),
+                            ],
+                          ),
+                        )
+                      : viewModel.topCategories.isNotEmpty
+                          ? RefreshIndicator(
+                              key: viewModel.refreshIndicatorKey,
+                              displacement: 50,
+                              color: Colors.white,
+                              backgroundColor: kcPrimaryColor,
+                              onRefresh: viewModel.refresh,
+                              child: ListView(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: middleSize),
+                                children: [
+                                  verticalSpaceMiddle,
+                                  ...viewModel.topCategories.entries.map(
+                                    (e) => Padding(
+                                      padding: const EdgeInsets.only(
+                                          bottom: middleSize),
+                                      child: CustomeListTile(
+                                        title: e.value.name ?? '',
+                                        // imageUrl: [e.value.image??''],
+                                        noPrice: true,
+                                        onTap: () =>
+                                            viewModel.onSelected(e.key),
+                                        height: 80,
+                                        center: true,
+                                        selected: viewModel.selected
+                                            .containsKey(e.key),
+                                        stackWidget: Positioned(
+                                          top: 40,
+                                          right: smallSize,
+                                          child: Icon(
+                                            viewModel.selected
+                                                    .containsKey(e.key)
+                                                ? FontAwesomeIcons
+                                                    .solidCircleDot
+                                                : FontAwesomeIcons.circleDot,
+                                            color: kcPrimaryColor,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              )
-                              .toList(),
-                          verticalSpaceLarge,
-                        ],
-                      ),
-                    ),
+                                  verticalSpaceLarge,
+                                ],
+                              ),
+                            )
+                          : const Center(
+                              child: Text("No Categories avaliable")),
             ),
           ],
         ),

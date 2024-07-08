@@ -46,6 +46,8 @@ class PostStateService with ListenableServiceMixin {
         _products.value[c.id ?? ''] = c;
         notifyListeners();
       }
+    } else {
+      throw Exception(response.body);
     }
   }
 

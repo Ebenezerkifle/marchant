@@ -10,6 +10,7 @@ import 'package:stacked_services/stacked_services.dart';
 class MyOrdersViewModel extends ReactiveViewModel {
   final OrderStateService _orderState = locator<OrderStateService>();
   final _navigation = locator<NavigationService>();
+  String? errorMessage;
 
   @override
   List<ListenableServiceMixin> get listenableServices => [_orderState];
@@ -23,28 +24,47 @@ class MyOrdersViewModel extends ReactiveViewModel {
   final GlobalKey<RefreshIndicatorState> refreshIndicatorKeyDelivered =
       GlobalKey<RefreshIndicatorState>();
 
-  Future<void> refresh() async {
+  Future<void> refreshPending() async {
+        print('refresh pending is tapped');
+
+    await getOrders();
+  }
+
+  Future<void> refreshDelivered() async {
+    print('refresh deliver is tapped');
+    await getDeliveredOrders();
+  }
+
+  Future<void> getOrders() async {
     try {
       setBusy(true);
       await _orderState.getOrders();
-      await _orderState.getDeliveredOrders();
-    } finally {
-      setBusy(false);
-      notifyListeners();
+      errorMessage = null; // Clear any existing error message
+    } catch (e) {
+      errorMessage = 'Failed to fetch orders';
+      print(e);
     }
+    setBusy(false);
+    notifyListeners();
   }
 
-  void getOrders() async {
-    setBusy(true);
-    await _orderState.getOrders();
+  Future<void> getDeliveredOrders() async {
+    try {
+      setBusy(true);
+      await _orderState.getDeliveredOrders();
+      errorMessage = null; // Clear any existing error message
+    } catch (e) {
+      errorMessage = 'Failed to fetch orders';
+    }
     setBusy(false);
+    notifyListeners();
   }
 
-  void getDeliveredOrders() async {
-    setBusy(true);
-    await _orderState.getDeliveredOrders();
-    setBusy(false);
-  }
+  // void getDeliveredOrders() async {
+  //   setBusy(true);
+  //   await _orderState.getDeliveredOrders();
+  //   setBusy(false);
+  // }
 
   Map<String, dynamic> getTitle(List<CartModel>? cartList) {
     Map<String, dynamic> response = {};

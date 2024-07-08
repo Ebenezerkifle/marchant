@@ -53,10 +53,11 @@ class HomeViewModel extends ReactiveViewModel {
     try {
       setBusy(true);
       errorMessage = null; // Clear any existing error message
+       await _productState.getCategories();
       await _productState.getProducts();
-      await _productState.getCategories();
+     
     } catch (e) {
-      errorMessage = 'Failed to fetch products. Please try again later.';
+      errorMessage = 'Failed to fetch products';
     }
     setBusy(false);
     notifyListeners();

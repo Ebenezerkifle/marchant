@@ -26,6 +26,8 @@ class OrdersApiService {
         OrderModel c = OrderModel.fromMapOrders(ele);
         orders[c.id ?? ''] = c;
       }
+    } else {
+      throw Exception(response.body);
     }
 
     return orders;
@@ -40,8 +42,7 @@ class OrdersApiService {
       needToken: true,
     );
     Map<String, OrderModel> deliveredOrders = {};
-    // print(response.statusCode);
-    // print('orders ${response.body}');
+
     if (response.statusCode == 200 || response.statusCode == 201) {
       var body = jsonDecode(response.body);
 
@@ -49,6 +50,8 @@ class OrdersApiService {
         OrderModel c = OrderModel.fromMapOrders(ele);
         deliveredOrders[c.id ?? ''] = c;
       }
+    } else {
+      throw Exception(response.body);
     }
     return deliveredOrders;
   }

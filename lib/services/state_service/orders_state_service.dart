@@ -22,26 +22,23 @@ class OrderStateService with ListenableServiceMixin {
 
   Future<void> getOrders() async {
     try {
-      _isLoading.value = true;
+      // _isLoading.value = true;
       _orders.value = await OrdersApiService().getOrders();
     } catch (e) {
-      // Handle error
-    } finally {
-      _isLoading.value = false;
-      notifyListeners();
+      throw Exception(e);
     }
+    notifyListeners();
   }
 
   Future<void> getDeliveredOrders() async {
     try {
-      _isLoading.value = true;
+      // _isLoading.value = true;
       _deliveredOrders.value = await OrdersApiService().getDeliveredOrders();
     } catch (e) {
-      // Handle error
-    } finally {
-      _isLoading.value = false;
+      throw Exception(e);
+    } 
       notifyListeners();
-    }
+    
   }
 
   void clearState() {

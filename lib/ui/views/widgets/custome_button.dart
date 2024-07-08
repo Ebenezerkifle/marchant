@@ -82,9 +82,9 @@ class CustomeButton extends StatelessWidget {
                 ? Padding(
                     padding: const EdgeInsets.all(2.0),
                     child: SpinKitThreeBounce(
-                                  color:textColor,
-                                     size: 25.0,
-                                   )          
+                      color: textColor,
+                      size: 15.0,
+                    )
                     // child: CircularProgressIndicator(
                     //   color: textColor,
                     // )

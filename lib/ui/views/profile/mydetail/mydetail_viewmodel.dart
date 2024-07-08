@@ -46,6 +46,10 @@ class MydetailViewModel extends ReactiveViewModel {
   TextEditingController phoneNumController = TextEditingController();
   TextEditingController categoryController = TextEditingController();
 
+  MydetailViewModel() {
+    initialize();
+  }
+
   String errorMsg = '';
 
   Future<void> initialize() async {
