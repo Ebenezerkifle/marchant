@@ -14,22 +14,216 @@ import 'package:stacked/stacked.dart';
 
 import 'sub_category_viewmodel.dart';
 
+// class SubCategoryView extends StackedView<SubCategoryViewModel> {
+//   const SubCategoryView(
+//       {Key? key,
+//       required this.categoryValue,
+//       required this.subSubCategoryValue})
+//       : super(key: key);
+
+//   final String categoryValue;
+//   final String subSubCategoryValue;
+
+//   @override
+//   Widget builder(
+//     BuildContext context,
+//     SubCategoryViewModel viewModel,
+//     Widget? child,
+//   ) {
+//     return Scaffold(
+//       key: viewModel.scaffoldKey,
+//       backgroundColor: kcWhite,
+//       body: SafeArea(
+//         top: true,
+//         child: Column(
+//           children: [
+//             CustomeAppBar(
+//               title: 'Subcategories',
+//               back: true,
+//             ),
+//             verticalSpaceSmall,
+//             Expanded(
+//               child: RefreshIndicator(
+//                 key: viewModel.refreshIndicatorKey,
+//                 displacement: 50,
+//                 color: Colors.white,
+//                 backgroundColor: kcPrimaryColor,
+//                 onRefresh: viewModel.refresh,
+//                 child: SingleChildScrollView(
+//                   child: Padding(
+//                     padding: const EdgeInsets.symmetric(horizontal: middleSize),
+//                     child: Column(
+//                       children: [
+                       
+//                         // Categories Section
+//                         viewModel.isBusy
+//                             ? SizedBox(
+//                                 height: screenHeight(context) * .3,
+//                                 width: double.infinity,
+//                                 child: const Center(
+//                                   child: spinkit,
+//                                 ),
+//                               )
+//                             : viewModel.errorMessage != null
+//                                 ? Center(
+//                                     child: Column(
+//                                       mainAxisAlignment:
+//                                           MainAxisAlignment.center,
+//                                       children: [
+//                                         Text(
+//                                           viewModel.errorMessage!,
+//                                           style: const TextStyle(
+//                                             fontSize: 18,
+//                                             color: Colors.red,
+//                                           ),
+//                                         ),
+//                                         const SizedBox(height: 20),
+//                                         CustomeButton(
+//                                           text: 'Retry',
+//                                           onTap: viewModel.refresh,
+//                                         ),
+//                                       ],
+//                                     ),
+//                                   )
+//                                 : viewModel.subCategories.isNotEmpty
+//                                     ? SingleChildScrollView(
+//                                         scrollDirection: Axis.horizontal,
+//                                         child: Padding(
+//                                           padding: const EdgeInsets.only(
+//                                               left: middleSize),
+//                                           child: Row(
+//                                             mainAxisAlignment:
+//                                                 MainAxisAlignment.spaceBetween,
+//                                             children: [
+//                                               Row(
+//                                                 children: viewModel
+//                                                     .getLimitedSubCategories()
+//                                                     .map((e) => Padding(
+//                                                           padding:
+//                                                               const EdgeInsets.only(right: smallSize),
+//                                                           child: CategoryWidget(name: e.name ?? '',
+//                                                           selected: viewModel.selected.containsKey(e.id) && viewModel.selected[e.id]!,
+//                                                            onTap: () {
+//                                                               viewModel
+//                                                                   .toggleSelection(
+//                                                                       e.id ??
+//                                                                           '');
+//                                                               viewModel
+//                                                                   .getSubProducts(
+//                                                                       category:
+//                                                                           e.id ??
+//                                                                               '');
+//                                                             },
+//                                                           ),
+//                                                         ))
+//                                                     .toList(),
+//                                               ),
+//                                               if (viewModel
+//                                                   .hasMoreSubCategories)
+//                                                 MoreButtonCategoryWidget(
+//                                                   name: 'more',
+//                                                   selected: false,
+//                                                   onTap:
+//                                                       viewModel.onMoreCategory,
+//                                                   roundness: 5,
+//                                                   hPadding: smallSize,
+//                                                   icon: const Icon(
+//                                                     FontAwesomeIcons
+//                                                         .ellipsisVertical,
+//                                                     color: kcPrimaryColor,
+//                                                   ),
+//                                                 ),
+//                                             ],
+//                                           ),
+//                                         ),
+//                                       )
+//                                     : const Center(
+//                                         child: Text(
+//                                             "No Sub Categories avaliable")),
+//                         verticalSpaceMedium,
+//                         const Row(
+//                           mainAxisAlignment: MainAxisAlignment.start,
+//                           children: [
+//                             Text('Our Products', style: AppTextStyle.h2Bold),
+//                           ],
+//                         ),
+//                         viewModel.isBusy
+//                             ? SizedBox(
+//                                 height: screenHeight(context) * .4,
+//                                 width: double.infinity,
+//                                 child: const Center(
+//                                     child: spinkit),
+//                               )
+//                             : viewModel.subProducts.isEmpty && !viewModel.isBusy
+//                                 ? SizedBox(
+//                                     height: screenHeight(context) * .4,
+//                                     width: double.infinity,
+//                                     child: const Center(
+//                                       child: Text(
+//                                         'No products found',
+//                                         style: TextStyle(
+//                                           fontSize: 18,
+//                                           color: Colors.grey,
+//                                         ),
+//                                       ),
+//                                     ),
+//                                   )
+//                                 : CustomeGrideWidget(
+//                                     widgets: viewModel.subProducts.entries
+//                                         .map(
+//                                           (e) => CustomeCardWidget(
+//                                             size: screenWidth(context) * .38,
+//                                             onTap: () => viewModel
+//                                                 .onItemSelected(e.value),
+//                                             title: e.value.productName ?? '',
+//                                             details: e.value.details ?? [],
+//                                             detailLimit: 3,
+//                                             // image: e.value.productImage.first,
+//                                              image: e.value.productImage
+//                                                             .isNotEmpty
+//                                                         ? e.value.productImage
+//                                                             .first
+//                                                         : 'assets/images/category.jpg',
+//                                             widget: Text(
+//                                               '${e.value.salesPrice} ETB',
+//                                               style: AppTextStyle.h4Bold,
+//                                             ),
+//                                           ),
+//                                         )
+//                                         .toList(),
+//                                   ),
+//                         verticalSpaceLarge,
+//                       ],
+//                     ),
+//                   ),
+//                 ),
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+
+//   @override
+//   SubCategoryViewModel viewModelBuilder(BuildContext context) =>
+//       SubCategoryViewModel(
+//           categoryId: categoryValue, subSubCategoryId: subSubCategoryValue);
+// }
+
+
+
+
+
+
 class SubCategoryView extends StackedView<SubCategoryViewModel> {
-  const SubCategoryView(
-      {Key? key,
-      required this.categoryValue,
-      required this.subSubCategoryValue})
-      : super(key: key);
+  const SubCategoryView({Key? key, required this.categoryValue, required this.subSubCategoryValue}) : super(key: key);
 
   final String categoryValue;
   final String subSubCategoryValue;
 
   @override
-  Widget builder(
-    BuildContext context,
-    SubCategoryViewModel viewModel,
-    Widget? child,
-  ) {
+  Widget builder(BuildContext context, SubCategoryViewModel viewModel, Widget? child) {
     return Scaffold(
       key: viewModel.scaffoldKey,
       backgroundColor: kcWhite,
@@ -54,21 +248,19 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                     padding: const EdgeInsets.symmetric(horizontal: middleSize),
                     child: Column(
                       children: [
-                       
                         // Categories Section
-                        viewModel.isBusy
+                        viewModel.isSubCategoriesBusy
                             ? SizedBox(
                                 height: screenHeight(context) * .3,
                                 width: double.infinity,
                                 child: const Center(
-                                  child: spinkit,
+                                  child: spinkit, // Different spinner for subcategories
                                 ),
                               )
                             : viewModel.errorMessage != null
                                 ? Center(
                                     child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Text(
                                           viewModel.errorMessage!,
@@ -89,46 +281,34 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                     ? SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
                                         child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: middleSize),
+                                          padding: const EdgeInsets.only(left: middleSize),
                                           child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
                                               Row(
-                                                children: viewModel
-                                                    .getLimitedSubCategories()
+                                                children: viewModel.getLimitedSubCategories()
                                                     .map((e) => Padding(
-                                                          padding:
-                                                              const EdgeInsets.only(right: smallSize),
-                                                          child: CategoryWidget(name: e.name ?? '',selected: viewModel.selected.containsKey(e.id) && viewModel.selected[e.id]!,
-                                                           onTap: () {
-                                                              viewModel
-                                                                  .toggleSelection(
-                                                                      e.id ??
-                                                                          '');
-                                                              viewModel
-                                                                  .getSubProducts(
-                                                                      category:
-                                                                          e.id ??
-                                                                              '');
+                                                          padding: const EdgeInsets.only(right: smallSize),
+                                                          child: CategoryWidget(
+                                                            name: e.name ?? '',
+                                                            selected: viewModel.selected.containsKey(e.id) && viewModel.selected[e.id]!,
+                                                            onTap: () {
+                                                              viewModel.toggleSelection(e.id ?? '');
+                                                              viewModel.getSubProducts(category: e.id ?? '');
                                                             },
                                                           ),
                                                         ))
                                                     .toList(),
                                               ),
-                                              if (viewModel
-                                                  .hasMoreSubCategories)
+                                              if (viewModel.hasMoreSubCategories)
                                                 MoreButtonCategoryWidget(
                                                   name: 'more',
                                                   selected: false,
-                                                  onTap:
-                                                      viewModel.onMoreCategory,
+                                                  onTap: viewModel.onMoreCategory,
                                                   roundness: 5,
                                                   hPadding: smallSize,
                                                   icon: const Icon(
-                                                    FontAwesomeIcons
-                                                        .ellipsisVertical,
+                                                    FontAwesomeIcons.ellipsisVertical,
                                                     color: kcPrimaryColor,
                                                   ),
                                                 ),
@@ -137,8 +317,7 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                         ),
                                       )
                                     : const Center(
-                                        child: Text(
-                                            "No Sub Categories avaliable")),
+                                        child: Text("No Sub Categories available")),
                         verticalSpaceMedium,
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -146,14 +325,15 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                             Text('Our Products', style: AppTextStyle.h2Bold),
                           ],
                         ),
-                        viewModel.isBusy
+                        viewModel.isProductsBusy
                             ? SizedBox(
                                 height: screenHeight(context) * .4,
                                 width: double.infinity,
                                 child: const Center(
-                                    child: spinkit),
+                                  child: spinkit, // Different spinner for products
+                                ),
                               )
-                            : viewModel.subProducts.isEmpty && !viewModel.isBusy
+                            : viewModel.subProducts.isEmpty && !viewModel.isProductsBusy
                                 ? SizedBox(
                                     height: screenHeight(context) * .4,
                                     width: double.infinity,
@@ -172,17 +352,11 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                         .map(
                                           (e) => CustomeCardWidget(
                                             size: screenWidth(context) * .38,
-                                            onTap: () => viewModel
-                                                .onItemSelected(e.value),
+                                            onTap: () => viewModel.onItemSelected(e.value),
                                             title: e.value.productName ?? '',
                                             details: e.value.details ?? [],
                                             detailLimit: 3,
-                                            // image: e.value.productImage.first,
-                                             image: e.value.productImage
-                                                            .isNotEmpty
-                                                        ? e.value.productImage
-                                                            .first
-                                                        : 'assets/images/category.jpg',
+                                            image: e.value.productImage.isNotEmpty ? e.value.productImage.first : 'assets/images/category.jpg',
                                             widget: Text(
                                               '${e.value.salesPrice} ETB',
                                               style: AppTextStyle.h4Bold,
@@ -205,7 +379,5 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
   }
 
   @override
-  SubCategoryViewModel viewModelBuilder(BuildContext context) =>
-      SubCategoryViewModel(
-          categoryId: categoryValue, subSubCategoryId: subSubCategoryValue);
+  SubCategoryViewModel viewModelBuilder(BuildContext context) => SubCategoryViewModel(categoryId: categoryValue, subSubCategoryId: subSubCategoryValue);
 }

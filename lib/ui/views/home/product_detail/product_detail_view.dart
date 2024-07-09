@@ -34,14 +34,6 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // verticalSpaceMiddle,
-                      // ImageBuilder(
-                      //   image: product.productImage.first,
-                      //   height: screenWidth(context) * .7,
-                      //   width: double.infinity,
-                      //   fit: BoxFit.cover,
-                      // ),
-                      // verticalSpaceMiddle,
                       verticalSpaceMiddle,
                       // Horizontally scrollable list of images with a clue icon
                       PageBuilderView(product: product),
@@ -101,7 +93,7 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                             'Manufacturer: ',
                             style: AppTextStyle.h2Bold,
                           ),
-                        horizontalSpaceSmall, // Add some space between Text and Flexible
+                          horizontalSpaceSmall, // Add some space between Text and Flexible
                           Expanded(
                             child: Text(
                               product.companyName ?? 'Unknown Provider',
@@ -116,19 +108,20 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                const Text(
+                                Text(
                                   'See More',
-                                  style: AppTextStyle.h4Bold,
+                                  style: AppTextStyle.h4Bold
+                                      .copyWith(color: kcPrimaryColor),
                                 ),
                                 horizontalSpaceTiny,
-                                Icon(
+                                const Icon(
                                   Icons.arrow_forward_ios_rounded,
                                   size: middleSize,
-                                  color: Theme.of(context).colorScheme.primary,
+                                  color: kcPrimaryColor,
                                 ),
                               ],
                             ),
-                          ),
+                          )
                         ],
                       ),
                       verticalSpaceMedium,
@@ -152,7 +145,7 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                             Text(
                               '${product.salesPrice} ETB',
                               style: AppTextStyle.withColor(
-                                color: kcPrimaryColor,
+                                color: kcPrimaryColorDark,
                                 style: AppTextStyle.big,
                               ),
                             ),

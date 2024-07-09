@@ -8,6 +8,109 @@ import 'package:marchant/services/state_service/product_state_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+// class SubCategoryViewModel extends ReactiveViewModel {
+//   final _navigation = locator<NavigationService>();
+//   final _productState = locator<ProductStateService>();
+//   final _cartState = locator<CartStateService>();
+
+//   String categoryId;
+//   String? subSubCategoryId;
+
+//   List<Category> subCategories = [];
+//   final Map<String, bool> _selected = {};
+
+//   String? errorMessage;
+
+//   SubCategoryViewModel({required this.categoryId, this.subSubCategoryId}) {
+//     subCategories = getSubCategories();
+//     getSubProducts();
+//     notifyListeners();
+//   }
+
+//   @override
+//   List<ListenableServiceMixin> get listenableServices =>
+//       [_productState, _cartState];
+
+//   final GlobalKey<RefreshIndicatorState> refreshIndicatorKey =
+//       GlobalKey<RefreshIndicatorState>();
+
+//   Future<void> refresh() async {
+//     await getSubProducts();
+//     getSubCategories();
+//     notifyListeners();
+//   }
+
+//   final GlobalKey<ScaffoldState> _key = GlobalKey();
+//   get scaffoldKey => _key;
+
+//   Map<String, Category> get categories => _productState.categories;
+//   Map<String, ProductModel> get subProducts => _productState.subProducts;
+
+//   getSubProducts({String? category}) async {
+//     try {
+//       setBusy(true);
+//       errorMessage = null; // Clear any existing error message
+//       if (subSubCategoryId != null && subSubCategoryId!.isNotEmpty) {
+//         await _productState.getSubProducts(category ?? subSubCategoryId!);
+//       } else {
+//         await _productState.getSubProducts(category ?? categoryId);
+//       }
+//     } catch (e) {
+//       errorMessage = 'Failed to fetch categories.';
+//     }
+
+//     setBusy(false);
+//     notifyListeners();
+//   }
+
+//   List<Category> getSubCategories() {
+//     final subCategories = categories[categoryId]?.subcategory ?? [];
+//     return subCategories;
+//   }
+
+//   List<Category> getLimitedSubCategories() {
+//     return subCategories.take(3).toList();
+//   }
+
+//   bool get hasMoreSubCategories {
+//     return subCategories.length > 3;
+//   }
+
+//   void onItemSelected(ProductModel product) {
+//     _navigation.navigateToProductDetailView(product: product);
+//   }
+
+//   // void onMoreCategory() {
+//   //   _navigation.navigateToCategoryListView();
+//   // }
+
+//   void onMoreCategory() {
+//     _navigation.navigateToSubCategoryListView(
+//         subCategories: subCategories, categoryValue: categoryId);
+//   }
+
+//   void onCartTap() {
+//     _navigation.navigateToCartView();
+//   }
+
+//   void onFilter() {
+//     // onFilter. show bottomsheet.
+//   }
+
+//   Map<String, bool> get selected => _selected;
+
+//   void toggleSelection(String id) {
+//     _selected.clear(); // Clear all selections
+//     _selected[id] = true; // Select the tapped item
+//     notifyListeners();
+//   }
+// }
+
+
+
+
+
+
 class SubCategoryViewModel extends ReactiveViewModel {
   final _navigation = locator<NavigationService>();
   final _productState = locator<ProductStateService>();
@@ -20,23 +123,29 @@ class SubCategoryViewModel extends ReactiveViewModel {
   final Map<String, bool> _selected = {};
 
   String? errorMessage;
+  String? categoryErrorMessage;
+  String? productErrorMessage;
+
+  bool _isSubCategoriesBusy = false;
+  bool _isProductsBusy = false;
+
+  bool get isSubCategoriesBusy => _isSubCategoriesBusy;
+  bool get isProductsBusy => _isProductsBusy;
 
   SubCategoryViewModel({required this.categoryId, this.subSubCategoryId}) {
-    subCategories = getSubCategories();
+    loadSubCategories();
     getSubProducts();
     notifyListeners();
   }
 
   @override
-  List<ListenableServiceMixin> get listenableServices =>
-      [_productState, _cartState];
+  List<ListenableServiceMixin> get listenableServices => [_productState, _cartState];
 
-  final GlobalKey<RefreshIndicatorState> refreshIndicatorKey =
-      GlobalKey<RefreshIndicatorState>();
+  final GlobalKey<RefreshIndicatorState> refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
 
   Future<void> refresh() async {
     await getSubProducts();
-    getSubCategories();
+    loadSubCategories();
     notifyListeners();
   }
 
@@ -46,26 +155,40 @@ class SubCategoryViewModel extends ReactiveViewModel {
   Map<String, Category> get categories => _productState.categories;
   Map<String, ProductModel> get subProducts => _productState.subProducts;
 
-  getSubProducts({String? category}) async {
+  Future<void> getSubProducts({String? category}) async {
     try {
-      setBusy(true);
+      _isProductsBusy = true;
       errorMessage = null; // Clear any existing error message
+      notifyListeners();
       if (subSubCategoryId != null && subSubCategoryId!.isNotEmpty) {
         await _productState.getSubProducts(category ?? subSubCategoryId!);
       } else {
         await _productState.getSubProducts(category ?? categoryId);
       }
     } catch (e) {
-      errorMessage = 'Failed to fetch categories.';
+      errorMessage = 'Failed to fetch products.';
+    } finally {
+      _isProductsBusy = false;
+      notifyListeners();
     }
+  }
 
-    setBusy(false);
-    notifyListeners();
+  Future<void> loadSubCategories() async {
+    try {
+      _isSubCategoriesBusy = true;
+      notifyListeners();
+      // Simulate fetching subcategories from a service or API
+      subCategories = getSubCategories();
+    } catch (e) {
+      errorMessage = 'Failed to fetch subcategories.';
+    } finally {
+      _isSubCategoriesBusy = false;
+      notifyListeners();
+    }
   }
 
   List<Category> getSubCategories() {
     final subCategories = categories[categoryId]?.subcategory ?? [];
-    debugPrint('Fetching subcategories for categoryId: $categoryId');
     return subCategories;
   }
 
@@ -81,13 +204,8 @@ class SubCategoryViewModel extends ReactiveViewModel {
     _navigation.navigateToProductDetailView(product: product);
   }
 
-  // void onMoreCategory() {
-  //   _navigation.navigateToCategoryListView();
-  // }
-
   void onMoreCategory() {
-    _navigation.navigateToSubCategoryListView(
-        subCategories: subCategories, categoryValue: categoryId);
+    _navigation.navigateToSubCategoryListView(subCategories: subCategories, categoryValue: categoryId);
   }
 
   void onCartTap() {

@@ -23,6 +23,7 @@ class ProductApiCallService {
       token,
       needToken: false,
     );
+   
     Map<String, ProductModel> products = {};
     if (response.statusCode == 200 || response.statusCode == 201) {
       var body = jsonDecode(response.body);
@@ -33,10 +34,13 @@ class ProductApiCallService {
 
         products[c.id ?? ''] = c;
       }
-    } 
-    // else {
-    //   throw Exception(response.body);
-    // }
+    } else if (response.statusCode == 404) {
+      throw Exception('No products found for this category');
+    } else {
+      // throw Exception(response.body);
+
+      throw Exception('Failed to fetch products');
+    }
     return products;
   }
 

@@ -21,7 +21,7 @@ class CartCalculator extends StackedView<CartCalculatorModel> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        CategoryWidget(
+        PlustAndMinusWidget(
           name: ' - ',
           selected: true,
           onTap: viewModel.subtract,
@@ -43,7 +43,7 @@ class CartCalculator extends StackedView<CartCalculatorModel> {
           ],
         ),
         horizontalSpaceSmall,
-        CategoryWidget(
+        PlustAndMinusWidget(
           name: ' + ',
           selected: true,
           onTap: viewModel.add,

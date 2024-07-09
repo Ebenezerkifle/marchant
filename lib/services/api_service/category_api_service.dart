@@ -40,11 +40,9 @@ class CategoryApiCallService {
 
   // Get Categories
   Future<Map<String, Category>> getCategories() async {
-    // print('******************************************Birhanu********************');
-    // print(_userService.user);
+   
     final String categoryId = _userService.user?.CategoryId ?? '';
 
-    // print('Category ID: $categoryId');
 
     String token = await _getToken(); // Get the token
 
@@ -54,29 +52,20 @@ class CategoryApiCallService {
       needToken: false,
     );
     Map<String, Category> categories = {};
-    // print('Initial categories: $categories');
-    // print('Response status code: ${response.statusCode}');
-    // print('Response body: ${response.body}');
+   
     if (response.statusCode == 200 || response.statusCode == 201) {
       var body = jsonDecode(response.body);
-      // print('Parsed body: $body');
       var categoryData = body['data']['category'];
-      // print('Category data: $categoryData');
       var subCategories = categoryData['subCategories'] as List<dynamic>;
-      // print('Subcategories: $subCategories');
       for (var ele in subCategories) {
         Category c = Category.fromMap(ele);
-        // List<Category> sub = c.subcategory ?? [];
-        //for (var s in sub) {
+      
         categories[c.id ?? ''] = c;
-        //}
       }
-      // print('Categories after processing: $categories');
     } else {
-      print(
-          'Error fetching categories: ${response.statusCode} ${response.reasonPhrase}');
+          throw Exception(response.body);
+
     }
-    // print('Final categories: ${response.body}');
     return categories;
   }
 }

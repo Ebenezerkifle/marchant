@@ -61,7 +61,8 @@ class HomeView extends StackedView<HomeViewModel> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Categories Section
-                      viewModel.isBusy
+                      viewModel.isCategoriesBusy
+                      // viewModel.isBusy
                           ? SizedBox(
                               height: screenHeight(context) * .3,
                               width: double.infinity,
@@ -69,13 +70,13 @@ class HomeView extends StackedView<HomeViewModel> {
                                 child: spinkit,
                               ),
                             )
-                          : viewModel.errorMessage != null
+                          : viewModel.categoryErrorMessage != null
                               ? Center(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        viewModel.errorMessage!,
+                                        viewModel.categoryErrorMessage!,
                                         style: const TextStyle(
                                           fontSize: 18,
                                           color: Colors.red,
@@ -84,7 +85,7 @@ class HomeView extends StackedView<HomeViewModel> {
                                       const SizedBox(height: 20),
                                       CustomeButton(
                                         text: 'Retry',
-                                        onTap: viewModel.refresh,
+                                        onTap: viewModel.categoryRefresh,
                                       ),
                                     ],
                                   ),
@@ -146,7 +147,8 @@ class HomeView extends StackedView<HomeViewModel> {
                         ],
                       ),
 
-                      viewModel.isBusy
+                      viewModel.isProductsBusy
+                      // viewModel.isBusy
                           ? SizedBox(
                               height: screenHeight(context) * .3,
                               width: double.infinity,
@@ -154,13 +156,13 @@ class HomeView extends StackedView<HomeViewModel> {
                                 child: spinkit,
                               ),
                             )
-                          : viewModel.errorMessage != null
+                          : viewModel.productErrorMessage != null
                               ? Center(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        viewModel.errorMessage!,
+                                        viewModel.productErrorMessage!,
                                         style: const TextStyle(
                                           fontSize: 18,
                                           color: Colors.red,
@@ -169,7 +171,7 @@ class HomeView extends StackedView<HomeViewModel> {
                                       const SizedBox(height: 20),
                                       CustomeButton(
                                         text: 'Retry',
-                                        onTap: viewModel.refresh,
+                                        onTap: viewModel.productRefresh,
                                       ),
                                     ],
                                   ),

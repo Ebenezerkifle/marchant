@@ -25,13 +25,11 @@ class MyOrdersViewModel extends ReactiveViewModel {
       GlobalKey<RefreshIndicatorState>();
 
   Future<void> refreshPending() async {
-        print('refresh pending is tapped');
 
     await getOrders();
   }
 
   Future<void> refreshDelivered() async {
-    print('refresh deliver is tapped');
     await getDeliveredOrders();
   }
 
@@ -42,7 +40,6 @@ class MyOrdersViewModel extends ReactiveViewModel {
       errorMessage = null; // Clear any existing error message
     } catch (e) {
       errorMessage = 'Failed to fetch orders';
-      print(e);
     }
     setBusy(false);
     notifyListeners();

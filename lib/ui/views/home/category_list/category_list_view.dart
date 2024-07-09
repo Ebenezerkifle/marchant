@@ -48,7 +48,7 @@ class CategoryListView extends StackedView<CategoryListViewModel> {
                                 FontAwesomeIcons.circleDot,
                                 color: viewModel.selected.containsKey(e.key)
                                     ? kcWhite
-                                    : kcPrimaryColorDark,
+                                     : kcPrimaryColor,
                               )),
                         ),
                       ))

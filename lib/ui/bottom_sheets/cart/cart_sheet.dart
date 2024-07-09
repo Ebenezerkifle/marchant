@@ -79,12 +79,14 @@ class CartSheet extends StackedView<CartSheetModel> {
                 onTap: () => completer!(
                   SheetResponse(confirmed: false),
                 ),
-                textColor: kcDarkGreyColor,
+                textColor: kcPrimaryColor,
+                // textColor: kcDarkGreyColor,
                 width: MediaQuery.of(context).size.width * .4,
                 stroke: true,
               ),
               CustomeButton(
                 text: 'Add',
+                textColor: kcPrimaryColor,
                 onTap: () => completer!(
                   SheetResponse(
                     confirmed: true,

@@ -152,7 +152,7 @@ class CustomeAppBar extends StatelessWidget {
                   onTap: onPhoneIconTap,
                   child: Icon(
                     phoneIcon,
-                    color: textColor,
+                    color: kcPrimaryColor,
                     size: size * 0.4,
                   ),
                 ),
@@ -162,7 +162,7 @@ class CustomeAppBar extends StatelessWidget {
                   phoneNumber!,
                   style: textStyle ??
                       AppTextStyle.withColor(
-                        color: textColor,
+                        color: kcPrimaryColor,
                         style: AppTextStyle.h2Bold,
                       ),
                 ),
