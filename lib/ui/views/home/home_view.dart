@@ -62,7 +62,7 @@ class HomeView extends StackedView<HomeViewModel> {
                     children: [
                       // Categories Section
                       viewModel.isCategoriesBusy
-                      // viewModel.isBusy
+                          // viewModel.isBusy
                           ? SizedBox(
                               height: screenHeight(context) * .3,
                               width: double.infinity,
@@ -148,7 +148,7 @@ class HomeView extends StackedView<HomeViewModel> {
                       ),
 
                       viewModel.isProductsBusy
-                      // viewModel.isBusy
+                          // viewModel.isBusy
                           ? SizedBox(
                               height: screenHeight(context) * .3,
                               width: double.infinity,
@@ -157,23 +157,27 @@ class HomeView extends StackedView<HomeViewModel> {
                               ),
                             )
                           : viewModel.productErrorMessage != null
-                              ? Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        viewModel.productErrorMessage!,
-                                        style: const TextStyle(
-                                          fontSize: 18,
-                                          color: Colors.red,
+                              ? SizedBox(
+                                  height: screenHeight(context) * .4,
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          viewModel.productErrorMessage!,
+                                          style: const TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.red,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(height: 20),
-                                      CustomeButton(
-                                        text: 'Retry',
-                                        onTap: viewModel.productRefresh,
-                                      ),
-                                    ],
+                                        const SizedBox(height: 20),
+                                        CustomeButton(
+                                          text: 'Retry',
+                                          onTap: viewModel.refresh,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 )
                               : viewModel.products.isNotEmpty
@@ -195,10 +199,10 @@ class HomeView extends StackedView<HomeViewModel> {
                                                   // image: e
                                                   //     .value.productImage.first,
                                                   image: e.value.productImage
-                                                            .isNotEmpty
-                                                        ? e.value.productImage
-                                                            .first
-                                                        : 'assets/images/category.jpg',
+                                                          .isNotEmpty
+                                                      ? e.value.productImage
+                                                          .first
+                                                      : 'assets/images/category.jpg',
                                                   widget: Text(
                                                     '${e.value.salesPrice} ETB',
                                                     style: AppTextStyle.h4Bold,
@@ -221,10 +225,10 @@ class HomeView extends StackedView<HomeViewModel> {
                                                   // image: e
                                                   //     .value.productImage.first,
                                                   image: e.value.productImage
-                                                            .isNotEmpty
-                                                        ? e.value.productImage
-                                                            .first
-                                                        : 'assets/images/category.jpg',
+                                                          .isNotEmpty
+                                                      ? e.value.productImage
+                                                          .first
+                                                      : 'assets/images/category.jpg',
                                                   widget: Text(
                                                     '${e.value.salesPrice} ETB',
                                                     style: AppTextStyle.h4Bold,

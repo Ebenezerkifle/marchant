@@ -111,6 +111,12 @@ import 'package:stacked_services/stacked_services.dart';
 
 
 
+
+
+
+
+
+
 class SubCategoryViewModel extends ReactiveViewModel {
   final _navigation = locator<NavigationService>();
   final _productState = locator<ProductStateService>();
@@ -118,6 +124,7 @@ class SubCategoryViewModel extends ReactiveViewModel {
 
   String categoryId;
   String? subSubCategoryId;
+  String? categoryRefresh;
 
   List<Category> subCategories = [];
   final Map<String, bool> _selected = {};
@@ -149,6 +156,10 @@ class SubCategoryViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
+  Future<void> subProductRefresh() async {
+    await getSubProducts(category: categoryRefresh);
+  }
+
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   get scaffoldKey => _key;
 
@@ -157,8 +168,9 @@ class SubCategoryViewModel extends ReactiveViewModel {
 
   Future<void> getSubProducts({String? category}) async {
     try {
+      categoryRefresh = category;
       _isProductsBusy = true;
-      errorMessage = null; // Clear any existing error message
+      productErrorMessage = null;
       notifyListeners();
       if (subSubCategoryId != null && subSubCategoryId!.isNotEmpty) {
         await _productState.getSubProducts(category ?? subSubCategoryId!);
@@ -166,8 +178,13 @@ class SubCategoryViewModel extends ReactiveViewModel {
         await _productState.getSubProducts(category ?? categoryId);
       }
     } catch (e) {
-      errorMessage = 'Failed to fetch products.';
+      if (e.toString().contains('No products found for this category')) {
+        _productState.subProducts.clear(); // Clear the products list
+      } else {
+        productErrorMessage = 'Check your connection';
+      }
     } finally {
+      categoryRefresh = null;
       _isProductsBusy = false;
       notifyListeners();
     }
@@ -177,10 +194,9 @@ class SubCategoryViewModel extends ReactiveViewModel {
     try {
       _isSubCategoriesBusy = true;
       notifyListeners();
-      // Simulate fetching subcategories from a service or API
       subCategories = getSubCategories();
     } catch (e) {
-      errorMessage = 'Failed to fetch subcategories.';
+      categoryErrorMessage = 'Failed to fetch subcategories.';
     } finally {
       _isSubCategoriesBusy = false;
       notifyListeners();

@@ -64,6 +64,12 @@ class ProductApiCallService {
 
         subProducts[c.id ?? ''] = c;
       }
+    }else if (response.statusCode == 404) {
+      throw Exception('No products found for this category');
+    } else {
+      // throw Exception(response.body);
+
+      throw Exception('Failed to fetch products');
     }
     return subProducts;
   }
