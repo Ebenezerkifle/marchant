@@ -30,7 +30,7 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
         child: Column(
           children: [
             CustomeAppBar(
-              title: 'Merchant',
+              title: 'Bale Suk',
               back: false,
               phoneIcon: Icons.phone,
               phoneNumber: '889',

@@ -32,7 +32,7 @@ class HomeView extends StackedView<HomeViewModel> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomeAppBar(
-              title: 'Merchant',
+              title: 'Bale Suk',
               back: false,
               phoneIcon: Icons.phone,
               phoneNumber: '889',
