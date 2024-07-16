@@ -6,19 +6,19 @@ class CircularCardWidget extends StatelessWidget {
   const CircularCardWidget({
     super.key,
     required this.title,
-    required this.onTap,
+    this.onTap,
     this.image,
     this.icon,
   });
 
   final String title;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final String? image;
   final IconData? icon;
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).size.width * 0.12; // Adjust size as needed
+    double size = MediaQuery.of(context).size.width * 0.13; // Adjust size as needed
 
     return InkWell(
       onTap: onTap,

@@ -14,7 +14,7 @@ class CustomeCardWidget extends StatelessWidget {
     this.details = const [],
     this.onTap,
     this.centerText = false,
-    this.image = 'https://via.placeholder.com/100',
+    this.image = 'assets/images/mark.png',
     // this.image = 'assets/images/category.jpg',
     this.elevation = true,
     this.widget = const SizedBox(),
