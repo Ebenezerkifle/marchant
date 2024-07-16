@@ -1,6 +1,7 @@
 import 'package:marchant/services/state_service/cart_state_service.dart';
 import 'package:marchant/services/state_service/enrollment_state_service.dart';
 import 'package:marchant/services/state_service/landing_state_servic.dart';
+import 'package:marchant/services/state_service/language_service.dart';
 import 'package:marchant/services/state_service/onboarding_state_service.dart';
 import 'package:marchant/services/state_service/orders_state_service.dart';
 import 'package:marchant/services/common_services/phone_service_service.dart';
@@ -37,6 +38,7 @@ import 'package:marchant/ui/views/sub_category/sub_category_list/sub_category_li
 import 'package:marchant/ui/views/profile/mydetail/mydetail_view.dart';
 import 'package:marchant/ui/views/manufacturer/manu_home/manu_product_detail/manu_product_detail_view.dart';
 import 'package:marchant/ui/views/page_builder/page_builder_view.dart';
+import 'package:marchant/ui/bottom_sheets/change_language/change_language_sheet.dart';
 // @stacked-import
 
 @StackedApp(
@@ -78,12 +80,14 @@ import 'package:marchant/ui/views/page_builder/page_builder_view.dart';
     LazySingleton(classType: OrderStateService),
     LazySingleton(classType: RequestStatusServiceService),
     LazySingleton(classType: PhoneServiceService),
+    LazySingleton(classType: LanguagesService),
 // @stacked-service
   ],
   bottomsheets: [
     StackedBottomsheet(classType: NoticeSheet),
     StackedBottomsheet(classType: CartSheet),
     StackedBottomsheet(classType: FilterSheet),
+    StackedBottomsheet(classType: ChangeLanguageSheet),
 // @stacked-bottom-sheet
   ],
   dialogs: [

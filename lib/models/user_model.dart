@@ -17,6 +17,12 @@ class UserModel {
   final String? id;
   final DateTime? createdAt;
   final DateTime? updatedAt;
+  String? location;
+  String? tin;
+  String? city;
+  String? subCity;
+  String? woreda;
+  String? idNumber;
 
   UserModel({
     this.firstName,
@@ -35,6 +41,12 @@ class UserModel {
     this.id,
     this.createdAt,
     this.updatedAt,
+    this.city,
+    this.idNumber,
+    this.location,
+    this.subCity,
+    this.tin,
+    this.woreda,
   });
 
   UserModel copywith({
@@ -55,6 +67,12 @@ class UserModel {
       // 'password': password,
       'phoneNumber': phoneNumber,
       'CategoryId': CategoryId,
+      'location': location,
+      'tin': tin,
+      'city': city,
+      'subCity': subCity,
+      'woreda': woreda,
+      'idNumber': idNumber,
     };
   }
 
@@ -73,6 +91,12 @@ class UserModel {
     return UserModel(
       firstName: map['fname'] as String?,
       lastName: map['lname'] as String?,
+      location: map['location'] as String?,
+      tin: map['tin'] as String?,
+      city: map['city'] as String?,
+      subCity: map['subCity'] as String?,
+      woreda: map['woreda'] as String?,
+      idNumber: map['idNumber'] as String?,
       phoneNumber: map['phoneNumber'] as String?,
       password: map['password'] != null ? map['password'] as String : null,
       CategoryId: map['CategoryId'] as String?,

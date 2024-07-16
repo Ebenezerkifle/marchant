@@ -25,7 +25,6 @@ class MyOrdersViewModel extends ReactiveViewModel {
       GlobalKey<RefreshIndicatorState>();
 
   Future<void> refreshPending() async {
-
     await getOrders();
   }
 

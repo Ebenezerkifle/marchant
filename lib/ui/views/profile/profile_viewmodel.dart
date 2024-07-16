@@ -1,4 +1,5 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:marchant/app/app.bottomsheets.dart';
 import 'package:marchant/services/state_service/landing_state_servic.dart';
 import 'package:marchant/services/state_service/orders_state_service.dart';
 import 'package:marchant/services/state_service/product_state_service.dart';
@@ -19,6 +20,8 @@ class ProfileViewModel extends ReactiveViewModel {
   final _productService = locator<ProductStateService>();
   final _orderService = locator<OrderStateService>();
   final _phoneService = locator<PhoneServiceService>();
+    final _bottomSheet = locator<BottomSheetService>();
+
 
   @override
   List<ListenableServiceMixin> get listenableServices => [_userService];
@@ -33,6 +36,10 @@ class ProfileViewModel extends ReactiveViewModel {
     SettingOptions.shortCode: SettingModel(
       title: '889',
       icon: FontAwesomeIcons.phone,
+    ),
+    SettingOptions.language: SettingModel(
+      title: 'change_language',
+      icon: FontAwesomeIcons.globe,
     ),
     SettingOptions.changePass: SettingModel(
       title: 'Change password',
@@ -68,6 +75,9 @@ class ProfileViewModel extends ReactiveViewModel {
       case SettingOptions.shortCode:
         makePhoneCall();
         break;
+      case SettingOptions.language:
+        _showLanguageOptions();
+        break;
       case SettingOptions.changePass:
         _navigation.navigateToChangePasswordView();
         break;
@@ -87,6 +97,13 @@ class ProfileViewModel extends ReactiveViewModel {
         _navigation.clearStackAndShow(Routes.loginView);
         break;
     }
+  }
+
+ _showLanguageOptions() {
+    _bottomSheet.showCustomSheet(
+      variant: BottomSheetType.changeLanguage,
+      title: 'change_language',
+    );
   }
 
   Future<void> makePhoneCall() async {

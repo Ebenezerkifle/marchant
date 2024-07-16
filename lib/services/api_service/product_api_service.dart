@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/models/product_model.dart';
 import 'package:marchant/services/state_service/user_service.dart';
+import 'package:marchant/services/storage_service.dart/session.dart';
 import 'api_call_service.dart';
 import 'api_constants.dart';
 
@@ -9,7 +10,7 @@ class ProductApiCallService {
   final _userService = locator<UserService>();
 
   Future<String> _getToken() async {
-    return 'your_token';
+    return await SessionService.getString(SessionKey.token);
   }
 
   // Get products
@@ -23,7 +24,7 @@ class ProductApiCallService {
       token,
       needToken: false,
     );
-   
+
     Map<String, ProductModel> products = {};
     if (response.statusCode == 200 || response.statusCode == 201) {
       var body = jsonDecode(response.body);
@@ -64,7 +65,7 @@ class ProductApiCallService {
 
         subProducts[c.id ?? ''] = c;
       }
-    }else if (response.statusCode == 404) {
+    } else if (response.statusCode == 404) {
       throw Exception('No products found for this category');
     } else {
       // throw Exception(response.body);

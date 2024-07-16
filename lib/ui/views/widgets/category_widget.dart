@@ -71,7 +71,6 @@ class CategoryWidget extends StatelessWidget {
   }
 }
 
-
 class MoreButtonCategoryWidget extends StatelessWidget {
   const MoreButtonCategoryWidget({
     super.key,
@@ -124,7 +123,7 @@ class MoreButtonCategoryWidget extends StatelessWidget {
               name,
               style: textStyle ??
                   AppTextStyle.withColor(
-                    color: kcWhite ,
+                    color: kcWhite,
                     style: AppTextStyle.h4Bold,
                   ),
             ),
@@ -190,7 +189,7 @@ class PlustAndMinusWidget extends StatelessWidget {
               name,
               style: textStyle ??
                   AppTextStyle.withColor(
-                    color: kcPrimaryColor ,
+                    color: kcPrimaryColor,
                     style: AppTextStyle.h4Bold,
                   ),
             ),

@@ -15,4 +15,5 @@ const changePassManufacturerUrl = '/api/manufacturer/updatePassword/';
 const passResetUrl = '/passwordReset/';
 const phoneCheckerUrl = '/phoneChecker/';
 const updateUrl = '/updateFields';
-const getApprovedProductsByManufacturer = '/api/product/ProductsByManufacturer/';
+const getApprovedProductsByManufacturer =
+    '/api/product/ProductsByManufacturer/';

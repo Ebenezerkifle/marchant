@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/app/app.router.dart';
@@ -20,20 +21,18 @@ class LoginViewModel extends BaseViewModel {
   final _userService = locator<UserService>();
   final _landingStateService = locator<LandingStateService>();
 
-  String get welcomeMsg => 'Welcome';
   String get image => 'assets/logo/logo_icon.png';
-  // String get image => 'assets/images/order_delivery.png';
-  String get singinMsg => 'Sign in';
+  String get singinMsg => 'sign_in'.tr();
 
   double get iconSize => 15;
 
-  String get phoneNumFieldHint => 'Phone number';
-  String get passwordHint => 'Password';
+  String get phoneNumFieldHint => 'phone_number'.tr();
+  String get passwordHint => 'password'.tr();
   bool get passwordVisible => _passVisible;
-  String get forgotPass => 'Forgot password?';
-  String get loginButtonText => 'Login';
-  String get dontHaveAccMsg => 'Do not have an account?';
-  String get register => 'Register';
+  String get forgotPass => "forgot_password".tr();
+  String get loginButtonText => 'login'.tr();
+  String get dontHaveAccMsg => "dont_have_account?".tr();
+  String get register => 'register'.tr();
 
   TextEditingController phoneNumController = TextEditingController();
   TextEditingController passwordController = TextEditingController();

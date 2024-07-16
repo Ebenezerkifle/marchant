@@ -95,7 +95,7 @@ class ChooseCatagoryView extends StackedView<ChooseCategoryViewModel> {
               verticalSpaceSmall,
             ],
             Expanded(
-              child: viewModel.loading
+              child: viewModel.isBusy
                   ? const Center(child: spinkit)
                   : viewModel.errorMessage != null
                       ? Center(

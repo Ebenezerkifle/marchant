@@ -37,57 +37,60 @@ class PostView extends StackedView<PostViewModel> {
                     children: [
                       verticalSpaceMiddle,
                       // Display uploaded images
-                        if (viewModel.images.isNotEmpty)
-                          SizedBox(
-                            height: 100,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: viewModel.images.length,
-                              itemBuilder: (context, index) {
-                                return Row(
-                                  children: [
-                                    Stack(
-                                      children: [
-                                        Container(
-                                          width: 100,
-                                          height: 100,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(5),
-                                            image: DecorationImage(
-                                              image: NetworkImage(
-                                                viewModel.images[index],
-                                              ),
-                                              fit: BoxFit.cover,
+                      if (viewModel.images.isNotEmpty)
+                        SizedBox(
+                          height: 100,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: viewModel.images.length,
+                            itemBuilder: (context, index) {
+                              return Row(
+                                children: [
+                                  Stack(
+                                    children: [
+                                      Container(
+                                        width: 100,
+                                        height: 100,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                              viewModel.images[index],
+                                            ),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                      Positioned(
+                                        top: 0,
+                                        right: 0,
+                                        child: GestureDetector(
+                                          onTap: () =>
+                                              viewModel.removeImage(index),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              color: Colors.red,
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                            ),
+                                            child: const Icon(
+                                              Icons.close,
+                                              color: Colors.white,
+                                              size: 20,
                                             ),
                                           ),
                                         ),
-                                        Positioned(
-                                          top: 0,
-                                          right: 0,
-                                          child: GestureDetector(
-                                            onTap: () => viewModel.removeImage(index),
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                color: Colors.red,
-                                                borderRadius: BorderRadius.circular(20),
-                                              ),
-                                              child: const Icon(
-                                                Icons.close,
-                                                color: Colors.white,
-                                                size: 20,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(width: 10),
-                                  ],
-                                );
-                              },
-                            ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(width: 10),
+                                ],
+                              );
+                            },
                           ),
-                          //add picture section
+                        ),
+                      //add picture section
                       GestureDetector(
                         onTap: viewModel.onPictureAdd,
                         child: Container(
@@ -149,15 +152,13 @@ class PostView extends StackedView<PostViewModel> {
                                     child: Text(category.name ?? ''),
                                   );
                                 }).toList(),
-                               
-
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: viewModel.formError
                                               .containsKey('category')
                                           ? Colors.red
-                                            : kcPrimaryColorDark,
+                                          : kcPrimaryColorDark,
                                     ),
                                   ),
                                   contentPadding: const EdgeInsets.symmetric(
@@ -165,7 +166,6 @@ class PostView extends StackedView<PostViewModel> {
                                 ),
                               ),
                             ),
-                            
                           ],
                         ),
                       ),
@@ -203,7 +203,6 @@ class PostView extends StackedView<PostViewModel> {
                                   ),
                                 ),
                               ),
-                             
                             ],
                           ),
                         ),
@@ -227,7 +226,6 @@ class PostView extends StackedView<PostViewModel> {
                                       child: Text(subSubCategory.name ?? ''),
                                     );
                                   }).toList(),
-                                 
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide(
@@ -242,7 +240,6 @@ class PostView extends StackedView<PostViewModel> {
                                   ),
                                 ),
                               ),
-                             
                             ],
                           ),
                         ),
@@ -265,23 +262,23 @@ class PostView extends StackedView<PostViewModel> {
                           ],
                         ),
                       ),
-                      verticalSpaceMiddle,
-                      CustomeFormField(
-                        title: 'Quantity',
-                        widget: InputField(
-                          validator: (value) => viewModel.validateText(value,
-                              viewModel.quantityController, 'Quantity'),
-                          error: viewModel.formError
-                              .containsKey(viewModel.quantityController),
-                          controller: viewModel.quantityController,
-                          hint: 'Enter uantity',
-                          inputType: TextInputType.number,
-                          inputFormatter: [
-                            FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                          ], // keyboardType: TextInputType.number,
-                          height: 50.0,
-                        ),
-                      ),
+                      // verticalSpaceMiddle,
+                      // CustomeFormField(
+                      //   title: 'Quantity',
+                      //   widget: InputField(
+                      //     validator: (value) => viewModel.validateText(value,
+                      //         viewModel.quantityController, 'Quantity'),
+                      //     error: viewModel.formError
+                      //         .containsKey(viewModel.quantityController),
+                      //     controller: viewModel.quantityController,
+                      //     hint: 'Enter uantity',
+                      //     inputType: TextInputType.number,
+                      //     inputFormatter: [
+                      //       FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                      //     ], // keyboardType: TextInputType.number,
+                      //     height: 50.0,
+                      //   ),
+                      // ),
                       verticalSpaceMiddle,
                       CustomeFormField(
                         title: 'Details',
@@ -353,4 +350,3 @@ class PostView extends StackedView<PostViewModel> {
   ) =>
       PostViewModel();
 }
-

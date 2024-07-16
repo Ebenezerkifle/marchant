@@ -77,7 +77,7 @@ class PostViewModel extends ReactiveViewModel {
   TextEditingController salesPriceController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
-  TextEditingController quantityController = TextEditingController();
+  // TextEditingController quantityController = TextEditingController();
   TextEditingController companyNameController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController tinController = TextEditingController();
@@ -130,7 +130,6 @@ class PostViewModel extends ReactiveViewModel {
   }
 
   void onSubSubCategoryChanged(String? newValue) {
-    print(newValue);
     selectedSubSubCategory = newValue;
     notifyListeners();
   }
@@ -176,7 +175,7 @@ class PostViewModel extends ReactiveViewModel {
         manufacturerId: _userService.user?.id ?? '',
         description: descriptionController.text,
         address: addressController.text,
-        quantity: num.parse(quantityController.text),
+        // quantity: num.parse(quantityController.text),
         categoryId: selectedCategory,
         subCategoryId: selectedSubCategory,
         subSubCategoryId: selectedSubSubCategory,
@@ -217,7 +216,7 @@ class PostViewModel extends ReactiveViewModel {
     salesPriceController.clear();
     descriptionController.clear();
     detailsController.clear();
-    quantityController.clear();
+    // quantityController.clear();
     companyNameController.clear();
     addressController.clear();
     tinController.clear();

@@ -69,8 +69,7 @@ class CompanyProfileView extends StackedView<CompanyProfileViewModel> {
                       ? SizedBox(
                           height: screenHeight(context) * .4,
                           width: double.infinity,
-                          child:
-                              const Center(child: spinkit),
+                          child: const Center(child: spinkit),
                         )
                       : viewModel.errorMessage != null
                           ? Center(

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:marchant/app/app.router.dart';
 import 'package:marchant/services/state_service/enrollment_state_service.dart';
@@ -16,21 +17,21 @@ class SignupViewModel extends FormViewModel {
   @override
   List<ListenableServiceMixin> get listenableServices => [_onboardingState];
 
-  String get signUpMsg => 'Create an Account';
-
   String get image => 'assets/logo/logo_icon.png';
-  // String get image => 'assets/images/order_delivery.png';
 
   TextEditingController phoneNumController = TextEditingController();
   TextEditingController passController = TextEditingController();
   TextEditingController confirmController = TextEditingController();
 
   double get iconSize => 15;
-  String get haveAccount => 'Aready have an Account?';
-
-  String get phoneNumFieldHint => 'Phone number';
-  String get passHint => 'password';
-  String get confirmHint => 'confirm password';
+  String get haveAccount => "already_have_account".tr();
+  
+  String get signUpMsg => "create_an_account".tr();
+ String get singinMsg => 'sign_in'.tr();
+ String get next => "continue".tr();
+  String get phoneNumFieldHint => 'phone_number'.tr();
+  String get passHint => 'password'.tr();
+  String get confirmHint => 'confirm_password'.tr();
 
   //------------------ Validation --------------
   final _formKey = GlobalKey<FormState>();

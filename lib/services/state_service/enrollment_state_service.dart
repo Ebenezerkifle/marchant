@@ -54,11 +54,6 @@ class EnrollmentStateService with ListenableServiceMixin {
   }
 }
 
-
-
-
-
-
 // import 'package:marchant/enums/user_role.dart';
 // import 'package:marchant/models/category_model.dart';
 // import 'package:marchant/models/user_model.dart';

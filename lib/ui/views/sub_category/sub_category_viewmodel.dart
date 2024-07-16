@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/app/app.router.dart';
 import 'package:marchant/models/category_model.dart';
@@ -106,17 +107,6 @@ import 'package:stacked_services/stacked_services.dart';
 //   }
 // }
 
-
-
-
-
-
-
-
-
-
-
-
 class SubCategoryViewModel extends ReactiveViewModel {
   final _navigation = locator<NavigationService>();
   final _productState = locator<ProductStateService>();
@@ -139,6 +129,9 @@ class SubCategoryViewModel extends ReactiveViewModel {
   bool get isSubCategoriesBusy => _isSubCategoriesBusy;
   bool get isProductsBusy => _isProductsBusy;
 
+  final IconData _moreIcon = FontAwesomeIcons.ellipsisVertical;
+  IconData get moreIcon => _moreIcon;
+
   SubCategoryViewModel({required this.categoryId, this.subSubCategoryId}) {
     loadSubCategories();
     getSubProducts();
@@ -146,9 +139,11 @@ class SubCategoryViewModel extends ReactiveViewModel {
   }
 
   @override
-  List<ListenableServiceMixin> get listenableServices => [_productState, _cartState];
+  List<ListenableServiceMixin> get listenableServices =>
+      [_productState, _cartState];
 
-  final GlobalKey<RefreshIndicatorState> refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
+  final GlobalKey<RefreshIndicatorState> refreshIndicatorKey =
+      GlobalKey<RefreshIndicatorState>();
 
   Future<void> refresh() async {
     await getSubProducts();
@@ -221,7 +216,8 @@ class SubCategoryViewModel extends ReactiveViewModel {
   }
 
   void onMoreCategory() {
-    _navigation.navigateToSubCategoryListView(subCategories: subCategories, categoryValue: categoryId);
+    _navigation.navigateToSubCategoryListView(
+        subCategories: subCategories, categoryValue: categoryId);
   }
 
   void onCartTap() {

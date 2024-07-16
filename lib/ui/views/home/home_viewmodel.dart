@@ -204,7 +204,6 @@ class HomeViewModel extends ReactiveViewModel {
       notifyListeners();
       await _productState.getProducts();
     } catch (e) {
-     
       if (e.toString().contains('No products found for this category')) {
         // productErrorMessage = 'No Products found';
         _productState.products.clear(); // Clear the products list

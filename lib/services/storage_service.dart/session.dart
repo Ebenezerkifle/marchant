@@ -1,10 +1,11 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-enum SessionKey { token, newUser }
+enum SessionKey { token, newUser, language }
 
 Map<SessionKey, String> sessionMap = {
   SessionKey.token: 'token',
   SessionKey.newUser: 'newUser',
+  SessionKey.language: 'language',
 };
 
 class SessionService {

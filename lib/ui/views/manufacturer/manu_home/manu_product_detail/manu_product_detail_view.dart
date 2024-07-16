@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:marchant/ui/views/page_builder/page_builder_view.dart';
 import 'package:stacked/stacked.dart';
@@ -78,12 +76,12 @@ class ManuProductDetailView extends StackedView<ManuProductDetailViewModel> {
                                         ),
                                       ),
                                       horizontalSpaceSmall,
-                                      Flexible(
+                                      Expanded(
                                         child: Text(
                                           e,
                                           style: AppTextStyle.h3Normal,
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
+                                          // maxLines: 1,
+                                          // overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
                                     ],
@@ -92,6 +90,26 @@ class ManuProductDetailView extends StackedView<ManuProductDetailViewModel> {
                               )
                               .toList(),
                         ),
+                      verticalSpaceSmall,
+
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'Status: ',
+                            style: AppTextStyle.h2Bold,
+                          ),
+                          horizontalSpaceSmall, // Add some space between Text and Flexible
+                          Expanded(
+                            child: Text(
+                              product.status ?? '',
+                              style: AppTextStyle.h3Bold,
+                              maxLines: 1,
+                              overflow: TextOverflow.clip,
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),

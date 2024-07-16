@@ -8,8 +8,8 @@ class OrderStateService with ListenableServiceMixin {
       _orders,
       _deliveredOrders,
     ]);
-    getOrders();
-    getDeliveredOrders();
+    // getOrders();
+    // getDeliveredOrders();
   }
 
   final _orders = ReactiveValue<Map<String, OrderModel>>({});
@@ -25,6 +25,7 @@ class OrderStateService with ListenableServiceMixin {
       // _isLoading.value = true;
       _orders.value = await OrdersApiService().getOrders();
     } catch (e) {
+      print(e);
       throw Exception(e);
     }
     notifyListeners();
@@ -36,9 +37,8 @@ class OrderStateService with ListenableServiceMixin {
       _deliveredOrders.value = await OrdersApiService().getDeliveredOrders();
     } catch (e) {
       throw Exception(e);
-    } 
-      notifyListeners();
-    
+    }
+    notifyListeners();
   }
 
   void clearState() {

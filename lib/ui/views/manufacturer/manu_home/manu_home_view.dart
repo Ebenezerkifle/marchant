@@ -29,23 +29,34 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
         top: true,
         child: Column(
           children: [
-            CustomeAppBar(
-              title: 'Bale Suk',
-              back: false,
-              phoneIcon: Icons.phone,
-              phoneNumber: '889',
-              onPhoneIconTap: viewModel.makePhoneCall,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: middleSize,
-                vertical: middleSize,
+            Container(
+              color: kcPrimaryColorDark,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomeAppBar(
+                    title: 'Bale Suk',
+                    back: false,
+                    phoneIcon: Icons.phone,
+                    phoneNumber: '889',
+                    onPhoneIconTap: viewModel.makePhoneCall,
+                    bgColor: kcPrimaryColorDark,
+                    textColor: kcPrimaryColor,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: middleSize,
+                      vertical: middleSize,
+                    ),
+                    child: SearchWidget(
+                      searchController: viewModel.searchController,
+                    ),
+                  ),
+                  verticalSpaceSmall,
+                ],
               ),
-              child: SearchWidget(
-                searchController: viewModel.searchController,
-              ),
             ),
-            verticalSpaceSmall,
+            verticalSpaceMiddle,
             Expanded(
               child: RefreshIndicator(
                 key: viewModel.refreshIndicatorKey,
@@ -96,7 +107,7 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                                               style: AppTextStyle.h2Bold),
                                         ],
                                       ),
-                                      verticalSpaceTiny,
+                                      verticalSpaceMiddle,
                                       CustomeGrideWidget(
                                         widgets: viewModel.filterQuery !=
                                                     null &&
@@ -113,9 +124,10 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                                                     title:
                                                         e.value.productName ??
                                                             '',
+                                                    // description: e.value.description??'',
                                                     details:
                                                         e.value.details ?? [],
-                                                    detailLimit: 3,
+                                                    detailLimit: 1,
                                                     // image: e.value.productImage
                                                     //     .first,
                                                     image: e.value.productImage
@@ -128,8 +140,8 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                                                       style:
                                                           AppTextStyle.h4Bold,
                                                     ),
-                                                    status:
-                                                        e.value.status ?? '',
+                                                    // status:
+                                                    //     e.value.status ?? '',
                                                   ),
                                                 )
                                                 .toList()
@@ -144,9 +156,13 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                                                     title:
                                                         e.value.productName ??
                                                             '',
-                                                    details:
-                                                        e.value.details ?? [],
-                                                    detailLimit: 3,
+                                                    description:
+                                                        e.value.description ??
+                                                            '',
+
+                                                    // details:
+                                                    //     e.value.details ?? [],
+                                                    // detailLimit: 3,
                                                     // image: e.value.productImage
                                                     //     .first,
                                                     image: e.value.productImage
@@ -160,8 +176,8 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                                                       style:
                                                           AppTextStyle.h4Bold,
                                                     ),
-                                                    status:
-                                                        e.value.status ?? '',
+                                                    // status:
+                                                    //     e.value.status ?? '',
                                                   ),
                                                 )
                                                 .toList(),

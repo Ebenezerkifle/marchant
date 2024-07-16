@@ -26,14 +26,15 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
             'My Orders',
             style: AppTextStyle.h1Bold,
           ),
-          bottom:  TabBar(
-            indicatorColor: kcPrimaryColor, // Setting the underline color to kcPrimaryColor
+          bottom: TabBar(
+            indicatorColor:
+                kcPrimaryColor, // Setting the underline color to kcPrimaryColor
             tabs: const [
               Tab(child: Text('Pending', style: AppTextStyle.h2Bold)),
               Tab(child: Text('Delivered', style: AppTextStyle.h2Bold)),
             ],
-              onTap: (index) {
-              if (index ==1) {
+            onTap: (index) {
+              if (index == 1) {
                 viewModel
                     .getDeliveredOrders(); // Fetch delivered orders when the delivered tab is tapped
               }

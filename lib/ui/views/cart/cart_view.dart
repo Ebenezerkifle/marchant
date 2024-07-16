@@ -153,7 +153,9 @@ class CartView extends StackedView<CartViewModel> {
                                           color: kcWhite,
                                           style: AppTextStyle.h3Bold,
                                         )),
-                                    const Divider(color: kcPrimaryColor,),
+                                    const Divider(
+                                      color: kcPrimaryColor,
+                                    ),
                                     _details('Total Price',
                                         '${order != null ? order!.products!.first.totalAmount?.toStringAsFixed(2) : viewModel.totalPrice.toStringAsFixed(2)} ETB'),
                                     _details('Item Count',

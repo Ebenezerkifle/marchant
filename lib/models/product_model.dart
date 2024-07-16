@@ -20,29 +20,28 @@ class ProductModel {
   num? totalAmount;
   String? manufacturer;
 
-
-  ProductModel(
-      {this.id,
-      this.productName,
-      this.productTag,
-      this.productImage = const [],
-      this.manufacturerId,
-      this.categoryId,
-      this.subCategoryId,
-      this.subSubCategoryId,
-      this.salesPrice,
-      this.description,
-      this.quantity,
-      this.soldAmount,
-      this.status,
-      this.details,
-      this.companyName,
-      this.address,
-      this.TIN,
-      this.logoImage,
-      this.totalAmount,
-      this.manufacturer,
-      });
+  ProductModel({
+    this.id,
+    this.productName,
+    this.productTag,
+    this.productImage = const [],
+    this.manufacturerId,
+    this.categoryId,
+    this.subCategoryId,
+    this.subSubCategoryId,
+    this.salesPrice,
+    this.description,
+    this.quantity,
+    this.soldAmount,
+    this.status,
+    this.details,
+    this.companyName,
+    this.address,
+    this.TIN,
+    this.logoImage,
+    this.totalAmount,
+    this.manufacturer,
+  });
 
   // Optional: Add a method to convert to a map for easier printing or debugging
   Map<String, dynamic> toMap() {
@@ -101,7 +100,7 @@ class ProductModel {
       quantity: map['quantity'] != null ? map['quantity'] as num : null,
       soldAmount:
           map['soldAmount'] != null ? map['soldAmount'] as String : null,
-      status: map['status'] != null ?map['status'] as String : null,
+      status: map['status'] != null ? map['status'] as String : null,
       totalAmount:
           map['totalAmount'] != null ? map['totalAmount'] as num : null,
       companyName: map['ManufacturerId'] != null &&
@@ -119,10 +118,10 @@ class ProductModel {
               map['ManufacturerId']['logoImage'] != null
           ? map['ManufacturerId']['logoImage'] as String
           : null,
-      manufacturer: map['ManufacturerId'] != null &&
-              map['ManufacturerId']['_id'] != null
-          ? map['ManufacturerId']['_id'] as String
-          : null,
+      manufacturer:
+          map['ManufacturerId'] != null && map['ManufacturerId']['_id'] != null
+              ? map['ManufacturerId']['_id'] as String
+              : null,
     );
   }
 }

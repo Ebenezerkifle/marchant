@@ -20,6 +20,8 @@ dependencies:
   stacked_services: ^1.1.0
   url_launcher: ^6.3.0
   flutter_launcher_icons: "^0.13.1"
+  easy_localization: ^3.0.5
+
 
 
 dev_dependencies:
@@ -41,4 +43,5 @@ flutter:
   assets:
     - assets/images/
     - assets/logo/
+    - assets/translations/
 

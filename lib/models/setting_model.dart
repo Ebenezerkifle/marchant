@@ -7,6 +7,7 @@ enum SettingOptions {
   about,
   logout,
   changePass,
+  language,
 }
 
 class SettingModel {

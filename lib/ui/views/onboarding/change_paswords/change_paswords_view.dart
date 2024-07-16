@@ -125,7 +125,7 @@ class ChangePasswordView extends StackedView<ChangePasswordsViewModel> {
                             ),
                           ),
                         ),
-                        verticalSpaceLarge,
+                        verticalSpaceMedium,
                         if (viewModel.hasError &&
                                 viewModel.errorMsg.isNotEmpty ||
                             viewModel.formError.isNotEmpty) ...[

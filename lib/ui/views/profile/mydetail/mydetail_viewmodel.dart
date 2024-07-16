@@ -40,11 +40,23 @@ class MydetailViewModel extends ReactiveViewModel {
   String get phoneNumFieldHint => 'Phone number';
   String get fristName => 'First Name';
   String get lastName => 'Last Name';
+  String get location => 'Location';
+  String get tin => 'Tin';
+  String get city => 'City';
+  String get subCity => 'Sub City';
+  String get woreda => 'Woreda';
+  String get idNumber => 'ID Number';
 
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController phoneNumController = TextEditingController();
   TextEditingController categoryController = TextEditingController();
+  TextEditingController locationController = TextEditingController();
+  TextEditingController tinController = TextEditingController();
+  TextEditingController cityController = TextEditingController();
+  TextEditingController subCityController = TextEditingController();
+  TextEditingController woredaController = TextEditingController();
+  TextEditingController idNumberController = TextEditingController();
 
   MydetailViewModel() {
     initialize();
@@ -71,8 +83,16 @@ class MydetailViewModel extends ReactiveViewModel {
   void _loadUserDetails() {
     var user = _userService.user;
     if (user != null) {
+      print(user);
+
       firstNameController.text = user.firstName ?? '';
       lastNameController.text = user.lastName ?? '';
+      locationController.text = user.location ?? '';
+      tinController.text = user.tin ?? '';
+      cityController.text = user.city ?? '';
+      subCityController.text = user.subCity ?? '';
+      woredaController.text = user.woreda ?? '';
+      idNumberController.text = user.idNumber ?? '';
       phoneNumController.text = user.phoneNumber?.padLeft(10, '0') ?? '';
       selectedCategory = user.CategoryId;
     }
@@ -95,8 +115,15 @@ class MydetailViewModel extends ReactiveViewModel {
             lastName: lastNameController.text,
             phoneNumber: phoneNumController.text.substring(1),
             CategoryId: selectedCategory,
+            location: locationController.text,
+            tin: tinController.text,
+            city: cityController.text,
+            subCity: subCityController.text,
+            woreda: woredaController.text,
+            idNumber: idNumberController.text,
           ),
         );
+        print(response.body);
 
         if (response.statusCode == 200 || response.statusCode == 201) {
           var body = jsonDecode(response.body);

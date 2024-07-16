@@ -19,9 +19,6 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
   final _userService = locator<UserService>();
   final _landingStateService = locator<LandingStateService>();
 
-  bool _loading = false;
-  bool get loading => _loading;
-
   Map<String, Category> topCategories = {};
   Map<String, String> selected = {};
   String? _errorMessage;
@@ -42,24 +39,21 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
   }
 
   Future<void> _loadCategories() async {
-    setLoading(true);
+    setBusy(true);
     try {
       await _enrollmentService.getTopCategories();
       topCategories = _enrollmentService.topCategories;
       _errorMessage = null;
     } catch (e) {
+      print(e);
       _errorMessage = 'Failed to load categories';
     }
-    setLoading(false);
+    setBusy(false);
+    notifyListeners();
   }
 
   Future<void> refresh() async {
     await _loadCategories();
-  }
-
-  void setLoading(bool value) {
-    _loading = value;
-    notifyListeners();
   }
 
   @override

@@ -5,7 +5,6 @@ import 'api_call_service.dart';
 import 'api_constants.dart';
 
 class OrdersApiService {
-  // Simulating a token retrieval function
   Future<String> _getToken() async {
     return await SessionService.getString(SessionKey.token);
   }

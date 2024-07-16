@@ -15,6 +15,7 @@ import '../services/common_services/phone_service_service.dart';
 import '../services/state_service/cart_state_service.dart';
 import '../services/state_service/enrollment_state_service.dart';
 import '../services/state_service/landing_state_servic.dart';
+import '../services/state_service/language_service.dart';
 import '../services/state_service/onboarding_state_service.dart';
 import '../services/state_service/orders_state_service.dart';
 import '../services/state_service/post_state_service.dart';
@@ -46,4 +47,5 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => OrderStateService());
   locator.registerLazySingleton(() => RequestStatusServiceService());
   locator.registerLazySingleton(() => PhoneServiceService());
+  locator.registerLazySingleton(() => LanguagesService());
 }

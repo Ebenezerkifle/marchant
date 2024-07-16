@@ -1,9 +1,10 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:marchant/app/app.bottomsheets.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/app/app.router.dart';
 import 'package:marchant/models/setting_model.dart';
 import 'package:marchant/services/common_services/phone_service_service.dart';
-import 'package:marchant/services/state_service/orders_state_service.dart';
+// import 'package:marchant/services/state_service/orders_state_service.dart';
 import 'package:marchant/services/state_service/product_state_service.dart';
 import 'package:marchant/services/storage_service.dart/session.dart';
 import 'package:stacked/stacked.dart';
@@ -16,10 +17,10 @@ class ManuProfileViewModel extends ReactiveViewModel {
   final _navigation = locator<NavigationService>();
   final _userService = locator<UserService>();
   final _phoneService = locator<PhoneServiceService>();
-
+  final _bottomSheet = locator<BottomSheetService>();
   final _landingService = locator<LandingStateService>();
   final _productService = locator<ProductStateService>();
-  final _orderService = locator<OrderStateService>();
+  // final _orderService = locator<OrderStateService>();
 
   @override
   List<ListenableServiceMixin> get listenableServices => [_userService];
@@ -34,6 +35,10 @@ class ManuProfileViewModel extends ReactiveViewModel {
     SettingOptions.shortCode: SettingModel(
       title: '889',
       icon: FontAwesomeIcons.phone,
+    ),
+    SettingOptions.language: SettingModel(
+      title: 'change_language',
+      icon: FontAwesomeIcons.globe,
     ),
     SettingOptions.changePass: SettingModel(
       title: 'Change password',
@@ -66,6 +71,9 @@ class ManuProfileViewModel extends ReactiveViewModel {
       case SettingOptions.myDetail:
         _navigation.navigateToMydetailView();
         break;
+      case SettingOptions.language:
+        _showLanguageOptions();
+        break;
       case SettingOptions.changePass:
         _navigation.navigateToChangePasswordView();
         break;
@@ -76,13 +84,20 @@ class ManuProfileViewModel extends ReactiveViewModel {
         _landingService.clearState();
         _userService.resetState();
         _productService.clearState();
-        _orderService.clearState();
+        // _orderService.clearState();
         _navigation.clearStackAndShow(Routes.loginView);
         // _navigation.clearStackAndShow(Routes.loginView);
         break;
       case SettingOptions.credit:
       // TODO: Handle this case.
     }
+  }
+
+  _showLanguageOptions() {
+    _bottomSheet.showCustomSheet(
+      variant: BottomSheetType.changeLanguage,
+      title: 'change_language',
+    );
   }
 
   Future<void> makePhoneCall() async {

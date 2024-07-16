@@ -62,10 +62,8 @@ class ProductStateService with ListenableServiceMixin {
       _products.value.clear();
       _products.value.addAll(await ProductApiCallService().getProducts());
     } catch (e) {
-
       throw Exception(e);
     } finally {
-
       _isLoading.value = false;
       notifyListeners();
     }

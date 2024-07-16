@@ -142,7 +142,7 @@ class SignupView extends StackedView<SignupViewModel> {
                           : verticalSpaceMedium,
                       // proceed button comes next!
                       CustomeButton(
-                        text: 'Next',
+                        text: viewModel.next,
                         onTap: viewModel.onNext,
                         width: double.infinity,
                         loading: viewModel.isBusy,
@@ -164,7 +164,7 @@ class SignupView extends StackedView<SignupViewModel> {
                           InkWell(
                             onTap: viewModel.onSignIn,
                             child: Text(
-                              'Sign in',
+                              viewModel.singinMsg,
                               style: AppTextStyle.withColor(
                                 color: kcPrimaryColor,
                                 style: AppTextStyle.h3Bold,
