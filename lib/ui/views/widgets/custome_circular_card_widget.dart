@@ -18,8 +18,7 @@ class CircularCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double size =
-        MediaQuery.of(context).size.width * 0.12; // Adjust size as needed
+    double size = MediaQuery.of(context).size.width * 0.12; // Adjust size as needed
 
     return InkWell(
       onTap: onTap,
@@ -46,13 +45,13 @@ class CircularCardWidget extends StatelessWidget {
                 if (icon == null)
                   ClipOval(
                     child: ImageBuilder(
-                      image: image ?? 'assets/images/category.jpg',
+                      image: image ?? 'assets/images/menu.png',
                       width: size,
                       height: size,
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
                         return Image.asset(
-                          'assets/images/category.jpg',
+                          'assets/images/menu.png',
                           width: size,
                           height: size,
                           fit: BoxFit.cover,

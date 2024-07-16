@@ -54,9 +54,9 @@ class ImageBuilder extends StatelessWidget {
               width: width ?? height,
               errorBuilder: (context, error, stackTrace) {
                 return Image.asset(
-                  'assets/images/category.jpg',
-                  fit: fit,
-                  height: height,
+                  'assets/images/mark.png',
+                    fit: BoxFit.contain,
+                    height: height * 0.25,
                   width: width ?? height,
                 );
               },
@@ -69,9 +69,9 @@ class ImageBuilder extends StatelessWidget {
                   width: width ?? height,
                 )
               : Image.asset(
-                  'assets/images/category.jpg',
-                  fit: fit,
-                  height: height,
+                  'assets/images/mark.png',
+                    fit: BoxFit.contain,
+                    height: height * 0.25,
                   width: width ?? height,
                 ),
     );
@@ -83,14 +83,14 @@ class ImageBuilder extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(color: Colors.white.withOpacity(0.0)),
         child: ImageBuilder(
-          image: 'assets/images/category.jpg',
-          height: height,
-          fit: BoxFit.cover,
+          image: 'assets/images/mark.png',
+          fit: BoxFit.contain,
+                    height: height * 0.25,
           errorBuilder: (context, error, stackTrace) {
             return Image.asset(
-              'assets/images/category.jpg',
-              fit: fit,
-              height: height,
+              'assets/images/mark.png',
+                fit: BoxFit.contain,
+                    height: height * 0.25,
               width: width ?? height,
             );
           },

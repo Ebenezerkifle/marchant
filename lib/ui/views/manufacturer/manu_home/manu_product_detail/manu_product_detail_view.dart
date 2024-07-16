@@ -85,6 +85,7 @@ class ManuProductDetailView extends StackedView<ManuProductDetailViewModel> {
                               .toList(),
                         ),
                       verticalSpaceSmall,
+                        if (viewModel.role != "Retailer") ...[
 
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -104,6 +105,7 @@ class ManuProductDetailView extends StackedView<ManuProductDetailViewModel> {
                           ),
                         ],
                       ),
+                        ]
                     ],
                   ),
                 ),

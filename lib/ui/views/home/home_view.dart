@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:marchant/ui/views/widgets/custome_button.dart';
 import 'package:marchant/ui/views/widgets/fading_circle.dart';
 import 'package:stacked/stacked.dart';
@@ -139,7 +138,7 @@ class HomeView extends StackedView<HomeViewModel> {
                                                   .elementAt(index)
                                                   .value
                                                   .image ??
-                                              'assets/images/category.jpg',
+                                              'assets/images/menu.png',
                                           onTap: () =>
                                               viewModel.navigateToSubCategory(
                                                   viewModel.categories.entries
