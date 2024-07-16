@@ -26,7 +26,7 @@ class PostView extends StackedView<PostViewModel> {
       top: true,
       child: Column(
         children: [
-          CustomeAppBar(title: 'Post a Product', back: false),
+          CustomeAppBar(title: viewModel.postProduct, back: false),
           Expanded(
             child: SingleChildScrollView(
               child: Padding(
@@ -100,17 +100,17 @@ class PostView extends StackedView<PostViewModel> {
                             borderRadius: BorderRadius.circular(5),
                             color: kcVeryLightGrey,
                           ),
-                          child: const Column(
+                          child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
+                              const Icon(
                                 FontAwesomeIcons.plus,
                                 color: kcPrimaryColor,
                               ),
                               verticalSpaceSmall,
                               Text(
-                                'Add Pictures',
+                                viewModel.addPictures,
                                 style: AppTextStyle.h4Normal,
                               )
                             ],
@@ -129,13 +129,13 @@ class PostView extends StackedView<PostViewModel> {
                           error: viewModel.formError
                               .containsKey(viewModel.productNameController),
                           controller: viewModel.productNameController,
-                          hint: 'Enter product name',
+                          hint: viewModel.nameHint,
                           height: 50,
                         ),
                       ),
                       verticalSpaceMiddle,
                       CustomeFormField(
-                        title: 'Top Category',
+                        title: viewModel.topCategory,
                         widget: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -143,7 +143,7 @@ class PostView extends StackedView<PostViewModel> {
                               height: 50,
                               child: DropdownButtonFormField<String>(
                                 value: viewModel.selectedCategory,
-                                hint: const Text('Choose category'),
+                                hint: Text(viewModel.topCategoryHint),
                                 onChanged: viewModel.onCategoryChanged,
                                 items: viewModel.topCategories.values
                                     .map((Category category) {
@@ -172,7 +172,7 @@ class PostView extends StackedView<PostViewModel> {
                       verticalSpaceMiddle,
                       if (viewModel.selectedCategory != null)
                         CustomeFormField(
-                          title: 'Sub Category',
+                          title: viewModel.subCategory,
                           widget: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -180,7 +180,7 @@ class PostView extends StackedView<PostViewModel> {
                                 height: 50,
                                 child: DropdownButtonFormField<String>(
                                   value: viewModel.selectedSubCategory,
-                                  hint: const Text('Choose sub category'),
+                                  hint: Text(viewModel.subCategoryHint),
                                   onChanged: viewModel.onSubCategoryChanged,
                                   items: viewModel.subCategories
                                       .map((Category subCategory) {
@@ -209,7 +209,7 @@ class PostView extends StackedView<PostViewModel> {
                       verticalSpaceMiddle,
                       if (viewModel.selectedSubCategory != null)
                         CustomeFormField(
-                          title: 'Sub Sub Category',
+                          title: viewModel.subSubCategory,
                           widget: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -217,7 +217,7 @@ class PostView extends StackedView<PostViewModel> {
                                 height: 50,
                                 child: DropdownButtonFormField<String>(
                                   value: viewModel.selectedSubSubCategory,
-                                  hint: const Text('Choose sub sub category'),
+                                  hint:  Text(viewModel.subSubCategoryHint),
                                   onChanged: viewModel.onSubSubCategoryChanged,
                                   items: viewModel.subSubCategories
                                       .map((Category subSubCategory) {
@@ -247,14 +247,14 @@ class PostView extends StackedView<PostViewModel> {
                         verticalSpaceMiddle
                       ],
                       CustomeFormField(
-                        title: 'Sales Price',
+                        title: viewModel.salesPrice,
                         widget: InputField(
                           validator: (value) => viewModel.validateText(value,
                               viewModel.salesPriceController, 'Sales price'),
                           error: viewModel.formError
                               .containsKey(viewModel.salesPriceController),
                           controller: viewModel.salesPriceController,
-                          hint: 'Enter sales price',
+                          hint: viewModel.salesPriceHint,
                           height: 50,
                           inputType: TextInputType.number,
                           inputFormatter: [
@@ -262,26 +262,10 @@ class PostView extends StackedView<PostViewModel> {
                           ],
                         ),
                       ),
-                      // verticalSpaceMiddle,
-                      // CustomeFormField(
-                      //   title: 'Quantity',
-                      //   widget: InputField(
-                      //     validator: (value) => viewModel.validateText(value,
-                      //         viewModel.quantityController, 'Quantity'),
-                      //     error: viewModel.formError
-                      //         .containsKey(viewModel.quantityController),
-                      //     controller: viewModel.quantityController,
-                      //     hint: 'Enter uantity',
-                      //     inputType: TextInputType.number,
-                      //     inputFormatter: [
-                      //       FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                      //     ], // keyboardType: TextInputType.number,
-                      //     height: 50.0,
-                      //   ),
-                      // ),
+                     
                       verticalSpaceMiddle,
                       CustomeFormField(
-                        title: 'Details',
+                        title: viewModel.detailsMsg,
                         widget: InputField(
                           validator: (value) => viewModel.validateText(
                               value,
@@ -290,7 +274,8 @@ class PostView extends StackedView<PostViewModel> {
                           error: viewModel.formError
                               .containsKey(viewModel.detailsController),
                           controller: viewModel.detailsController,
-                          hint: 'Enter details (comma separated)',
+                          hint: viewModel.detailsMsgHint,
+                          // hint: 'Enter details (comma separated)',
                           extendable: true,
                           charLength: 1500,
                           height: 100.0,
@@ -298,14 +283,14 @@ class PostView extends StackedView<PostViewModel> {
                       ),
                       verticalSpaceMiddle,
                       CustomeFormField(
-                        title: 'Description',
+                        title: viewModel.description,
                         widget: InputField(
                           validator: (value) => viewModel.validateText(value,
                               viewModel.descriptionController, 'Description'),
                           error: viewModel.formError
                               .containsKey(viewModel.descriptionController),
                           controller: viewModel.descriptionController,
-                          hint: 'Enter description',
+                          hint: viewModel.descriptionHint,
                           extendable: true,
                           charLength: 1500,
                           height: 100.0,
@@ -327,7 +312,7 @@ class PostView extends StackedView<PostViewModel> {
                         verticalSpaceSmall,
                       ],
                       CustomeButton(
-                        text: 'Submit',
+                        text: viewModel.submit,
                         onTap: viewModel.onPostProduct,
                         width: double.infinity,
                         loading: viewModel.isBusy,

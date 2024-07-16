@@ -6,13 +6,15 @@ class SearchWidget extends StatelessWidget {
   final TextEditingController searchController;
   final double? width;
   final VoidCallback? onFilter;
+  String? search;
 
-  const SearchWidget({
-    super.key,
-    required this.searchController,
-    this.width,
-    this.onFilter,
-  });
+   SearchWidget(
+      {super.key,
+      required this.searchController,
+      this.width,
+      this.onFilter,
+      this.search
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class SearchWidget extends StatelessWidget {
                     color: Colors.white.withOpacity(0.8),
                     size: 30,
                   ),
-                  hintText: "Search",
+                  hintText: search,
                   hintStyle: AppTextStyle.withColor(
                     color: kcWhite,
                     style: AppTextStyle.h3Bold,

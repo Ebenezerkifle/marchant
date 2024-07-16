@@ -34,12 +34,13 @@ class MydetailView extends StackedView<MydetailViewModel> {
                       children: [
                         verticalSpaceLarge,
                         CustomeFormField(
-                          title: 'First Name',
+                          title: viewModel.firstName,
                           widget: InputField(
                             validator: (value) => viewModel.validateText(
                                 value ?? '',
                                 viewModel.firstNameController,
-                                viewModel.fristName),
+                                viewModel.firstName
+                                ),
                             controller: viewModel.firstNameController,
                             hint: '',
                             // error: viewModel.formError
@@ -53,7 +54,7 @@ class MydetailView extends StackedView<MydetailViewModel> {
                         ),
                         verticalSpaceMedium,
                         CustomeFormField(
-                          title: 'Last Name',
+                          title: viewModel.lastName,
                           widget: InputField(
                             validator: (value) => viewModel.validateText(
                                 value ?? '',
@@ -73,7 +74,7 @@ class MydetailView extends StackedView<MydetailViewModel> {
                         verticalSpaceMedium,
                         // Phone number field
                         CustomeFormField(
-                          title: 'Phone Number',
+                          title: viewModel.phoneNumFieldHint,
                           widget: InputField(
                             validator: (value) => viewModel.validatePhoneNumber(
                                 value ?? '', viewModel.phoneNumController),
@@ -96,7 +97,7 @@ class MydetailView extends StackedView<MydetailViewModel> {
                         ),
                         verticalSpaceMedium,
                         CustomeFormField(
-                          title: 'Location',
+                          title: viewModel.location,
                           widget: InputField(
                             validator: (value) => viewModel.validateText(
                                 value ?? '',
@@ -115,7 +116,7 @@ class MydetailView extends StackedView<MydetailViewModel> {
                         ),
                         verticalSpaceMedium,
                         CustomeFormField(
-                          title: 'Tin',
+                          title: viewModel.tin,
                           widget: InputField(
                             validator: (value) => viewModel.validateText(
                                 value ?? '',
@@ -134,7 +135,7 @@ class MydetailView extends StackedView<MydetailViewModel> {
                         ),
                         verticalSpaceMedium,
                         CustomeFormField(
-                          title: 'City',
+                          title: viewModel.city,
                           widget: InputField(
                             validator: (value) => viewModel.validateText(
                                 value ?? '',
@@ -153,12 +154,12 @@ class MydetailView extends StackedView<MydetailViewModel> {
                         ),
                         verticalSpaceMedium,
                         CustomeFormField(
-                          title: 'Sub City',
+                          title: viewModel.subCity,
                           widget: InputField(
                             validator: (value) => viewModel.validateText(
                                 value ?? '',
                                 viewModel.subCityController,
-                                viewModel.fristName),
+                                viewModel.firstName),
                             controller: viewModel.subCityController,
                             hint: '',
                             // error: viewModel.formError
@@ -172,7 +173,7 @@ class MydetailView extends StackedView<MydetailViewModel> {
                         ),
                         verticalSpaceMedium,
                         CustomeFormField(
-                          title: 'Woreda',
+                          title: viewModel.woreda,
                           widget: InputField(
                             validator: (value) => viewModel.validateText(
                                 value ?? '',
@@ -191,7 +192,7 @@ class MydetailView extends StackedView<MydetailViewModel> {
                         ),
                         verticalSpaceMedium,
                         CustomeFormField(
-                          title: 'ID Number',
+                          title:viewModel.idNumber,
                           widget: InputField(
                             validator: (value) => viewModel.validateText(
                                 value ?? '',
@@ -271,7 +272,7 @@ class MydetailView extends StackedView<MydetailViewModel> {
                               )
                             : verticalSpaceMedium,
                         CustomeButton(
-                          text: 'Change',
+                          text: viewModel.change,
                           onTap: viewModel.onSubmit,
                           width: double.infinity,
                           btnColor: kcPrimaryColorDark,

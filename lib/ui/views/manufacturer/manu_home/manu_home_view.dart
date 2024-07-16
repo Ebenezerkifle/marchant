@@ -35,7 +35,7 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomeAppBar(
-                    title: 'Bale Suk',
+                    title: viewModel.baleSuk,
                     back: false,
                     phoneIcon: Icons.phone,
                     phoneNumber: '889',
@@ -50,6 +50,7 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                     ),
                     child: SearchWidget(
                       searchController: viewModel.searchController,
+                      search: viewModel.search,
                     ),
                   ),
                   verticalSpaceSmall,
@@ -99,11 +100,11 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                                     children: [
                                       verticalSpaceMiddle,
                                       // Our Products Section Title
-                                      const Row(
+                                    Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: [
-                                          Text('Your Products',
+                                          Text(viewModel.ourProducts,
                                               style: AppTextStyle.h2Bold),
                                         ],
                                       ),

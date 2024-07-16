@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 // import 'package:marchant/services/state_service/landing_state_servic.dart';
 import 'package:stacked/stacked.dart';
@@ -35,17 +36,18 @@ class MydetailViewModel extends ReactiveViewModel {
   String? get errorMessage => _errorMessage;
   String get role => _userService.user?.role ?? '';
 
-  String get title => 'Change Profile';
+  String get title => 'change_profile'.tr();
   double get iconSize => 15;
-  String get phoneNumFieldHint => 'Phone number';
-  String get fristName => 'First Name';
-  String get lastName => 'Last Name';
-  String get location => 'Location';
-  String get tin => 'Tin';
-  String get city => 'City';
-  String get subCity => 'Sub City';
-  String get woreda => 'Woreda';
-  String get idNumber => 'ID Number';
+  String get phoneNumFieldHint => 'phone_number'.tr();
+  String get firstName => 'first_name'.tr();
+  String get lastName => 'last_name'.tr();
+  String get location => 'location'.tr();
+  String get tin => 'tin'.tr();
+  String get city => 'city'.tr();
+  String get subCity => 'sub_city'.tr();
+  String get woreda => 'woreda'.tr();
+  String get idNumber => 'id_number'.tr();
+  String get change => 'change'.tr();
 
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();

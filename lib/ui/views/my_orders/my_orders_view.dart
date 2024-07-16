@@ -22,16 +22,16 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
-          title: const Text(
-            'My Orders',
+          title: Text(
+            viewModel.ordersHeader,
             style: AppTextStyle.h1Bold,
           ),
           bottom: TabBar(
             indicatorColor:
                 kcPrimaryColor, // Setting the underline color to kcPrimaryColor
-            tabs: const [
-              Tab(child: Text('Pending', style: AppTextStyle.h2Bold)),
-              Tab(child: Text('Delivered', style: AppTextStyle.h2Bold)),
+            tabs: [
+              Tab(child: Text(viewModel.pendingTab, style: AppTextStyle.h2Bold)),
+              Tab(child: Text(viewModel.deliveredTab, style: AppTextStyle.h2Bold)),
             ],
             onTap: (index) {
               if (index == 1) {

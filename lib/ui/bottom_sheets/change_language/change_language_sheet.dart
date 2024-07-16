@@ -102,7 +102,7 @@ class ChangeLanguageSheet extends StackedView<ChangeLanguageSheetModel> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            tr(request.title ?? 'change_language'),
+            tr(request.title ?? 'change_language'.tr()),
             style: AppTextStyle.h2Bold,
           ),
           verticalSpaceMiddle,
@@ -135,7 +135,7 @@ class ChangeLanguageSheet extends StackedView<ChangeLanguageSheetModel> {
           ),
           verticalSpaceMiddle,
           CustomeButton(
-              text: 'done',
+              text: 'done'.tr(),
               onTap: () {
                 completer!(SheetResponse(confirmed: true));
               },

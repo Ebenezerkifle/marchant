@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/models/cart_model.dart';
 import 'package:marchant/models/product_model.dart';
@@ -7,6 +8,10 @@ import 'package:stacked/stacked.dart';
 class CartSheetModel extends ReactiveViewModel {
   final _cartService = locator<CartStateService>();
   ProductModel product;
+
+  String get totalPriceText => "total_price_text".tr();
+  String get addText => "add_text".tr();
+  String get cancelText => "cancel_text".tr();
 
   @override
   List<ListenableServiceMixin> get listenableServices => [_cartService];

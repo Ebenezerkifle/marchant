@@ -16,10 +16,10 @@ class CartSheet extends StackedView<CartSheetModel> {
   final Function(SheetResponse response)? completer;
   final SheetRequest request;
   const CartSheet({
-    Key? key,
+    super.key,
     required this.completer,
     required this.request,
-  }) : super(key: key);
+  });
 
   @override
   Widget builder(
@@ -62,8 +62,9 @@ class CartSheet extends StackedView<CartSheetModel> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  'Total price:',
+                Text(
+                  viewModel.totalPriceText,
+                  // 'Total price:',
                   style: AppTextStyle.h3Normal,
                 ),
                 Text(
@@ -75,7 +76,8 @@ class CartSheet extends StackedView<CartSheetModel> {
             verticalSpaceLarge,
             MultipleButtonsWidget(buttons: [
               CustomeButton(
-                text: 'Cancel',
+                // text: 'Cancel',
+                text: viewModel.cancelText,
                 onTap: () => completer!(
                   SheetResponse(confirmed: false),
                 ),
@@ -85,7 +87,8 @@ class CartSheet extends StackedView<CartSheetModel> {
                 stroke: true,
               ),
               CustomeButton(
-                text: 'Add',
+                // text: 'Add',
+                text: viewModel.addText,
                 textColor: kcPrimaryColor,
                 onTap: () => completer!(
                   SheetResponse(

@@ -64,9 +64,9 @@ class ChooseCatagoryView extends StackedView<ChooseCategoryViewModel> {
                             onPressed: () => viewModel.onBack(),
                           ),
                           const SizedBox(width: 20),
-                          const Expanded(
+                          Expanded(
                             child: Text(
-                              'Choose the business category \nyou are involved in',
+                              viewModel.regHeader,
                               style: AppTextStyle.h2Bold,
                               textAlign: TextAlign.center,
                             ),
@@ -95,7 +95,7 @@ class ChooseCatagoryView extends StackedView<ChooseCategoryViewModel> {
               verticalSpaceSmall,
             ],
             Expanded(
-              child: viewModel.isBusy
+              child: viewModel.loading
                   ? const Center(child: spinkit)
                   : viewModel.errorMessage != null
                       ? Center(
@@ -172,7 +172,7 @@ class ChooseCatagoryView extends StackedView<ChooseCategoryViewModel> {
         padding: const EdgeInsets.symmetric(
             horizontal: middleSize, vertical: smallSize),
         child: CustomeButton(
-          text: 'Submit',
+          text: viewModel.submit,
           onTap: viewModel.onSubmit,
           loading: viewModel.isBusy,
         ),

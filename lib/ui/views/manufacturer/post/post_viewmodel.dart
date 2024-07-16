@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:http/http.dart';
 import 'package:flutter/material.dart';
 import 'package:marchant/app/app.locator.dart';
@@ -70,14 +71,31 @@ class PostViewModel extends ReactiveViewModel {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   GlobalKey<FormState> get formKey => _formKey;
 
-  String get name => 'Product name';
+  String get postProduct => 'post_product'.tr();
+  String get nameHint => 'product_name_hint'.tr();
+  String get name => 'product_name'.tr();
+  String get addPictures => 'add_pictures'.tr();
+  String get topCategory => "top_category".tr();
+  String get topCategoryHint => "top_category_hint".tr();
+  String get subCategory => "sub_category".tr();
+  String get subCategoryHint => "sub_category_hint".tr();
+  String get subSubCategory => "sub_sub_category".tr();
+  String get subSubCategoryHint => "sub_sub_category_hint".tr();
+ 
+
+  String get salesPrice => 'sales_price'.tr();
+  String get salesPriceHint => 'sales_price_hint'.tr();
+  String get detailsMsg => 'details'.tr();
+  String get detailsMsgHint => 'details_hint'.tr();
+  String get description => 'description'.tr();
+  String get descriptionHint => 'description_hint'.tr();
+  String get submit => 'submit'.tr();
 
   // Controllers for text fields
   TextEditingController productNameController = TextEditingController();
   TextEditingController salesPriceController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
-  // TextEditingController quantityController = TextEditingController();
   TextEditingController companyNameController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController tinController = TextEditingController();

@@ -37,7 +37,7 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
         child: Column(
           children: [
             CustomeAppBar(
-              title: 'Subcategories',
+              title: viewModel.subCategory,
               back: true,
             ),
             verticalSpaceSmall,
@@ -149,10 +149,10 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                         child: Text(
                                             "No Sub Categories avaliable")),
                         verticalSpaceMedium,
-                        const Row(
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text('Our Products', style: AppTextStyle.h2Bold),
+                            Text(viewModel.ourProducts, style: AppTextStyle.h2Bold),
                           ],
                         ),
                         viewModel.isProductsBusy

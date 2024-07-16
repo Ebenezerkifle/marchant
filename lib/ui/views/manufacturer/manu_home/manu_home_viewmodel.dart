@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/app/app.router.dart';
@@ -15,6 +16,11 @@ class ManuHomeViewModel extends ReactiveViewModel {
   final _phoneService = locator<PhoneServiceService>();
 
   String? errorMessage;
+
+   String get baleSuk => "bale_suk".tr();
+  String get search => "search".tr();
+  String get ourProducts => "our_products".tr();
+
 
   @override
   List<ListenableServiceMixin> get listenableServices => [_postService];

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stacked/stacked.dart';
@@ -61,7 +62,7 @@ class SettingItem extends StackedView<SettingItemModel> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(title,
+                    Text(title.tr(),
                         style: AppTextStyle.withColor(
                           color: forgroundColor ?? kcDarkGreyColor,
                           style: AppTextStyle.h2Bold,

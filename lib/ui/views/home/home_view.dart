@@ -37,7 +37,7 @@ class HomeView extends StackedView<HomeViewModel> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomeAppBar(
-                    title: 'Bale Suk',
+                    title: viewModel.baleSuk,
                     back: false,
                     phoneIcon: Icons.phone,
                     phoneNumber: '889',
@@ -52,6 +52,7 @@ class HomeView extends StackedView<HomeViewModel> {
                     ),
                     child: SearchWidget(
                       searchController: viewModel.searchController,
+                      search: viewModel.search,
                     ),
                   ),
                   verticalSpaceSmall,
@@ -151,10 +152,10 @@ class HomeView extends StackedView<HomeViewModel> {
                                       child: Text("No Categories avaliable")),
                       verticalSpaceMedium,
                       // Our Products Section Title
-                      const Row(
+                    Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text('Our Products', style: AppTextStyle.h2Bold),
+                          Text(viewModel.ourProducts, style: AppTextStyle.h2Bold),
                         ],
                       ),
 

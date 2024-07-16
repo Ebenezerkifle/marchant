@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marchant/app/app.bottomsheets.dart';
 import 'package:marchant/app/app.locator.dart';
@@ -27,9 +28,11 @@ class ManuProfileViewModel extends ReactiveViewModel {
 
   String get image => 'assets/images/user.png';
 
+  String get profileHeader => 'profile'.tr();
+
   Map<SettingOptions, SettingModel> settings = {
     SettingOptions.myDetail: SettingModel(
-      title: 'My detail',
+      title: 'my_detail',
       icon: FontAwesomeIcons.user,
     ),
     SettingOptions.shortCode: SettingModel(
@@ -41,15 +44,15 @@ class ManuProfileViewModel extends ReactiveViewModel {
       icon: FontAwesomeIcons.globe,
     ),
     SettingOptions.changePass: SettingModel(
-      title: 'Change password',
+      title: 'change_password',
       icon: FontAwesomeIcons.lock,
     ),
     SettingOptions.about: SettingModel(
-      title: 'About',
+      title: 'about',
       icon: FontAwesomeIcons.info,
     ),
     SettingOptions.logout: SettingModel(
-      title: 'Logout',
+      title: 'logout',
       icon: FontAwesomeIcons.rightFromBracket,
     ),
   };

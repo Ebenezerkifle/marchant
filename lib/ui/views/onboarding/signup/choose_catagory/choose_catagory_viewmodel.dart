@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/app/app.router.dart';
@@ -23,6 +24,11 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
   Map<String, String> selected = {};
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
+ bool _loading = false;
+  bool get loading => _loading;
+
+  String get submit => "submit".tr();
+  String get regHeader => "registration_header".tr();
 
   final Map<dynamic, String> _formError = {};
   Map<dynamic, String> get formError => _formError;
@@ -39,7 +45,7 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
   }
 
   Future<void> _loadCategories() async {
-    setBusy(true);
+    setLoading(true);
     try {
       await _enrollmentService.getTopCategories();
       topCategories = _enrollmentService.topCategories;
@@ -48,12 +54,16 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
       print(e);
       _errorMessage = 'Failed to load categories';
     }
-    setBusy(false);
+    setLoading(false);
     notifyListeners();
   }
 
   Future<void> refresh() async {
     await _loadCategories();
+  }
+void setLoading(bool value) {
+    _loading = value;
+    notifyListeners();
   }
 
   @override

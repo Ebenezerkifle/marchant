@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:marchant/services/api_service/authentication.dart';
@@ -19,9 +20,9 @@ class ChangePasswordsViewModel extends BaseViewModel {
 
   final _navigation = locator<NavigationService>();
 
-  String get title => 'change password';
+  String get title => 'change_password'.tr();
 
-  String get password => 'previous password';
+  String get password => 'previous_password'.tr();
   TextEditingController passwordController = TextEditingController();
   String get passwordHint => '******';
 
@@ -34,7 +35,7 @@ class ChangePasswordsViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  String get newPassword => 'new password';
+  String get newPassword => 'new_password'.tr();
   TextEditingController newPasswordController = TextEditingController();
   String get newPasswordHint => '******';
 
@@ -47,7 +48,7 @@ class ChangePasswordsViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  String get confirmPassword => 'confirm password';
+  String get confirmPassword => 'confirm_password'.tr();
   TextEditingController confirmPasswordController = TextEditingController();
   String get confirmPasswordHint => '******';
 

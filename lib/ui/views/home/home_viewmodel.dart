@@ -117,6 +117,7 @@
 //   }
 // }
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marchant/app/app.locator.dart';
@@ -140,6 +141,10 @@ class HomeViewModel extends ReactiveViewModel {
   String? productErrorMessage;
   final IconData _moreIcon = FontAwesomeIcons.ellipsisVertical;
   IconData get moreIcon => _moreIcon;
+
+  String get baleSuk => "bale_suk".tr();
+  String get search => "search".tr();
+  String get ourProducts => "our_products".tr();
 
   bool _isCategoriesBusy = false;
   bool _isProductsBusy = false;

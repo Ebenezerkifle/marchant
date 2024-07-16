@@ -20,14 +20,14 @@ class ManuProfileView extends StackedView<ManuProfileViewModel> {
         top: true,
         child: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(
+            Padding(
+              padding: const EdgeInsets.symmetric(
                   vertical: mediumSize, horizontal: middleSize),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Profile',
+                    viewModel.profileHeader,
                     style: AppTextStyle.h1Bold,
                   ),
                 ],
