@@ -85,7 +85,7 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                                 ),
                                 const SizedBox(height: 20),
                                 CustomeButton(
-                                  text: 'Retry',
+                                  text: viewModel.retry,
                                   onTap: viewModel.refresh,
                                 ),
                               ],
@@ -194,9 +194,9 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                                 children: [
                                   NothingFound(
                                     message:
-                                        'You have no product which is live.',
+                                        viewModel.noProductsFound,
                                     child: CustomeButton(
-                                      text: 'Post Product',
+                                      text: viewModel.postProductsText,
                                       onTap: viewModel.onPostProduct,
                                     ),
                                   ),

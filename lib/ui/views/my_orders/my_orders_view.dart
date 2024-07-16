@@ -149,7 +149,7 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
                               ),
                               const SizedBox(height: 20),
                               CustomeButton(
-                                text: 'Retry',
+                                text:viewModel.retry,
                                 onTap: viewModel.refreshDelivered,
                               ),
                             ],

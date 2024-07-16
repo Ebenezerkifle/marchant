@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/models/cart_model.dart';
@@ -10,6 +11,16 @@ import '../../../services/state_service/orders_state_service.dart';
 class CartViewModel extends ReactiveViewModel {
   final _cartService = locator<CartStateService>();
   final OrderStateService _orderState = locator<OrderStateService>();
+  
+String get orderDetails => 'order_details'.tr();
+String get items => 'items'.tr();
+String get totalPriceText => 'total_price'.tr();
+String get cartDetails => 'cart_details'.tr();
+String get details => 'details'.tr();
+String get itemCount => 'item_count'.tr();
+String get clearCart => 'clear_cart'.tr();
+String get placeOrder => 'place_order'.tr();
+
 
   @override
   List<ListenableServiceMixin> get listenableServices =>
@@ -59,7 +70,7 @@ class CartViewModel extends ReactiveViewModel {
   onClearCart() {
     // clear the cart items.
     _cartService.clearCart();
-    SnackBarService.showSnackBar(content: 'Successfully cleared.');
+    SnackBarService.showSnackBar(content: 'successfully_cleared'.tr());
   }
 
   onPlaceOrder() async {

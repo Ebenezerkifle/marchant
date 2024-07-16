@@ -132,6 +132,10 @@ class SubCategoryViewModel extends ReactiveViewModel {
 
   String get subCategory => "subCategory".tr();
     String get ourProducts => "our_products".tr();
+     String get retry => "retry".tr();
+  String get noProductsFound => "no_products_found".tr();
+    String get noCategoriesFound => "no_categories_found".tr();
+
 
 
   final IconData _moreIcon = FontAwesomeIcons.ellipsisVertical;

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/app/app.router.dart';
@@ -13,9 +14,11 @@ class MyOrdersViewModel extends ReactiveViewModel {
   String? errorMessage;
 
 
-  String get ordersHeader => "my_orders";
-  String get pendingTab => "pending_tab";
-  String get deliveredTab => "delivered_tab";
+  String get ordersHeader => "my_orders".tr();
+  String get pendingTab => "pending_tab".tr();
+  String get deliveredTab => "delivered_tab".tr();
+  String get retry => "retry".tr();
+
 
   @override
   List<ListenableServiceMixin> get listenableServices => [_orderState];

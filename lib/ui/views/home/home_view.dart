@@ -96,7 +96,7 @@ class HomeView extends StackedView<HomeViewModel> {
                                       ),
                                       const SizedBox(height: 20),
                                       CustomeButton(
-                                        text: 'Retry',
+                                        text: viewModel.retry,
                                         onTap: viewModel.categoryRefresh,
                                       ),
                                     ],
@@ -148,8 +148,8 @@ class HomeView extends StackedView<HomeViewModel> {
                                         );
                                       },
                                     )
-                                  : const Center(
-                                      child: Text("No Categories avaliable")),
+                                  : Center(
+                                      child: Text(viewModel.noCategoriesFound)),
                       verticalSpaceMedium,
                       // Our Products Section Title
                     Row(
@@ -185,7 +185,7 @@ class HomeView extends StackedView<HomeViewModel> {
                                         ),
                                         const SizedBox(height: 20),
                                         CustomeButton(
-                                          text: 'Retry',
+                                          text: viewModel.retry,
                                           onTap: viewModel.refresh,
                                         ),
                                       ],
@@ -214,7 +214,8 @@ class HomeView extends StackedView<HomeViewModel> {
                                                           .isNotEmpty
                                                       ? e.value.productImage
                                                           .first
-                                                      : 'assets/images/category.jpg',
+                                                      : 'https://via.placeholder.com/100',
+                                                      // 'assets/images/category.jpg',
                                                   widget: Text(
                                                     '${e.value.salesPrice} ETB',
                                                     style: AppTextStyle.h4Bold,
@@ -240,7 +241,8 @@ class HomeView extends StackedView<HomeViewModel> {
                                                           .isNotEmpty
                                                       ? e.value.productImage
                                                           .first
-                                                      : 'assets/images/category.jpg',
+                                                      : 'https://via.placeholder.com/100',
+                                                      // 'assets/images/category.jpg',
                                                   widget: Text(
                                                     '${e.value.salesPrice} ETB',
                                                     style: AppTextStyle.h4Bold,
@@ -252,10 +254,10 @@ class HomeView extends StackedView<HomeViewModel> {
                                   : SizedBox(
                                       height: screenHeight(context) * .4,
                                       width: double.infinity,
-                                      child: const Center(
+                                      child: Center(
                                         child: Text(
-                                          'No products found',
-                                          style: TextStyle(
+                                          viewModel.noProductsFound,
+                                          style: const TextStyle(
                                             fontSize: 18,
                                             color: Colors.grey,
                                           ),

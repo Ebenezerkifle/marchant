@@ -95,7 +95,10 @@ class MydetailView extends StackedView<MydetailViewModel> {
                             hint: viewModel.phoneNumFieldHint,
                           ),
                         ),
-                        verticalSpaceMedium,
+                       
+                        // Category dropdown field
+                        if (viewModel.role == "Retailer") ...[
+                           verticalSpaceMedium,
                         CustomeFormField(
                           title: viewModel.location,
                           widget: InputField(
@@ -211,8 +214,6 @@ class MydetailView extends StackedView<MydetailViewModel> {
                         ),
 
                         verticalSpaceMedium,
-                        // Category dropdown field
-                        if (viewModel.role == "Retailer") ...[
                           CustomeFormField(
                             title: 'Top Category',
                             widget: Column(

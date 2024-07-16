@@ -77,7 +77,7 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                         ),
                                         const SizedBox(height: 20),
                                         CustomeButton(
-                                          text: 'Retry',
+                                          text: viewModel.retry,
                                           onTap: viewModel.refresh,
                                         ),
                                       ],
@@ -145,9 +145,10 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                           ),
                                         ),
                                       )
-                                    : const Center(
+                                    : Center(
                                         child: Text(
-                                            "No Sub Categories avaliable")),
+                                            viewModel.noCategoriesFound
+                                            )),
                         verticalSpaceMedium,
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -178,7 +179,7 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                           ),
                                           const SizedBox(height: 20),
                                           CustomeButton(
-                                            text: 'Retry',
+                                            text: viewModel.retry,
                                             onTap: viewModel.subProductRefresh,
                                           ),
                                         ],
@@ -189,10 +190,10 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                     ? SizedBox(
                                         height: screenHeight(context) * .4,
                                         width: double.infinity,
-                                        child: const Center(
+                                        child: Center(
                                           child: Text(
-                                            'No products found',
-                                            style: TextStyle(
+                                           viewModel.noProductsFound,
+                                            style: const TextStyle(
                                               fontSize: 18,
                                               color: Colors.grey,
                                             ),

@@ -35,7 +35,9 @@ class CartView extends StackedView<CartViewModel> {
         child: Column(
           children: [
             CustomeAppBar(
-              title: order != null ? 'Order details' : 'Cart details',
+              title: order != null
+                  ? viewModel.orderDetails
+                  : viewModel.cartDetails,
               back: order != null,
             ),
             Expanded(
@@ -84,7 +86,7 @@ class CartView extends StackedView<CartViewModel> {
                                                   // price: value.totalPrice ?? 0,
 
                                                   widget: order != null
-                                                      ? Text('${value.product!.quantity} Items',
+                                                      ? Text('${value.product!.quantity} ${viewModel.items}',
                                                           style: AppTextStyle.h4Bold)
                                                       : Container(),
                                                   noPrice: false,
@@ -108,7 +110,7 @@ class CartView extends StackedView<CartViewModel> {
                                                           padding: const EdgeInsets.only(top: smallSize),
                                                           child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                                                             Text(
-                                                                '${value.count} Items',
+                                                                '${value.count} ${viewModel.items}',
                                                                 style: AppTextStyle
                                                                     .thinSmall),
                                                             CartCalculator(
@@ -148,7 +150,7 @@ class CartView extends StackedView<CartViewModel> {
                                         BorderRadius.all(Radius.circular(5))),
                                 child: Column(
                                   children: [
-                                    Text('Details',
+                                    Text(viewModel.details,
                                         style: AppTextStyle.withColor(
                                           color: kcWhite,
                                           style: AppTextStyle.h3Bold,
@@ -156,9 +158,9 @@ class CartView extends StackedView<CartViewModel> {
                                     const Divider(
                                       color: kcPrimaryColor,
                                     ),
-                                    _details('Total Price',
+                                    _details(viewModel.totalPriceText,
                                         '${order != null ? order!.products!.first.totalAmount?.toStringAsFixed(2) : viewModel.totalPrice.toStringAsFixed(2)} ETB'),
-                                    _details('Item Count',
+                                    _details(viewModel.itemCount,
                                         '${order != null ? order!.products?.fold(0, (sum, product) => sum + (product.quantity?.toInt() ?? 0)) : viewModel.totalCount}'),
                                   ],
                                 ),
@@ -169,7 +171,7 @@ class CartView extends StackedView<CartViewModel> {
                                   : MultipleButtonsWidget(
                                       buttons: [
                                         CustomeButton(
-                                          text: 'Clear Cart',
+                                          text: viewModel.clearCart,
                                           onTap: viewModel.onClearCart,
                                           textColor: kcDarkGreyColor,
                                           width: MediaQuery.of(context)
@@ -179,7 +181,7 @@ class CartView extends StackedView<CartViewModel> {
                                           stroke: true,
                                         ),
                                         CustomeButton(
-                                          text: 'Place Order',
+                                          text: viewModel.placeOrder,
                                           onTap: viewModel.onPlaceOrder,
                                           loading: viewModel.isBusy,
                                           iconOnly: viewModel.isBusy,

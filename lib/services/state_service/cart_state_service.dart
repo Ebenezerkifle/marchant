@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/models/cart_model.dart';
 import 'package:marchant/models/product_model.dart';
@@ -80,7 +81,7 @@ class CartStateService with ListenableServiceMixin {
       _productStateService
           .placeOrder(order); // Store the order in the product state service
       clearCart(); // Clear cart after successful order placement
-      SnackBarService.showSnackBar(content: 'Successfully Ordered.');
+      SnackBarService.showSnackBar(content: 'successfully_ordered'.tr());
       // _navigation.clearStackAndShow(Routes.myOrdersView);
 
       _landingService.setIndex(2);

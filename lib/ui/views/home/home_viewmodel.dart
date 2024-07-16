@@ -145,6 +145,10 @@ class HomeViewModel extends ReactiveViewModel {
   String get baleSuk => "bale_suk".tr();
   String get search => "search".tr();
   String get ourProducts => "our_products".tr();
+  String get retry => "retry".tr();
+  String get noProductsFound => "no_products_found".tr();
+    String get noCategoriesFound => "no_categories_found".tr();
+
 
   bool _isCategoriesBusy = false;
   bool _isProductsBusy = false;

@@ -24,7 +24,7 @@ class ManuProductDetailView extends StackedView<ManuProductDetailViewModel> {
         top: true,
         child: Column(
           children: [
-            CustomeAppBar(title: 'Product detail'),
+            CustomeAppBar(title: viewModel.productDetailHeader),
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
@@ -32,13 +32,7 @@ class ManuProductDetailView extends StackedView<ManuProductDetailViewModel> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // verticalSpaceMiddle,
-                      // ImageBuilder(
-                      //   image: product.productImage.first,
-                      //   height: screenWidth(context) * .7,
-                      //   width: double.infinity,
-                      //   fit: BoxFit.cover,
-                      // ),
+                   
                       verticalSpaceMiddle,
                       // Horizontally scrollable list of images with a clue icon
                       PageBuilderView(product: product),
@@ -54,7 +48,7 @@ class ManuProductDetailView extends StackedView<ManuProductDetailViewModel> {
                         textAlign: TextAlign.justify,
                       ),
                       verticalSpaceMiddle,
-                      const Text('More Details', style: AppTextStyle.h2Bold),
+                      Text(viewModel.productDetalistext, style: AppTextStyle.h2Bold),
                       verticalSpaceSmall,
                       if (product.description != null)
                         Column(
@@ -95,8 +89,8 @@ class ManuProductDetailView extends StackedView<ManuProductDetailViewModel> {
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const Text(
-                            'Status: ',
+                          Text(
+                            viewModel.statusText,
                             style: AppTextStyle.h2Bold,
                           ),
                           horizontalSpaceSmall, // Add some space between Text and Flexible
@@ -127,98 +121,3 @@ class ManuProductDetailView extends StackedView<ManuProductDetailViewModel> {
   ) =>
       ManuProductDetailViewModel();
 }
-
-// class _ImageCarousel extends StatefulWidget {
-//   const _ImageCarousel({required this.product});
-//   final ProductModel product;
-
-//   @override
-//   __ImageCarouselState createState() => __ImageCarouselState();
-// }
-
-// class __ImageCarouselState extends State<_ImageCarousel> {
-//   late PageController _pageController;
-//   int _currentPage = 0;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _pageController = PageController();
-//   }
-
-//   @override
-//   void dispose() {
-//     _pageController.dispose();
-//     super.dispose();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return SizedBox(
-//       height: screenWidth(context) * .7,
-//       child: Stack(
-//         children: [
-//           PageView.builder(
-//             controller: _pageController,
-//             itemCount: widget.product.productImage.length,
-//             onPageChanged: (index) {
-//               setState(() {
-//                 _currentPage = index;
-//               });
-//             },
-//             itemBuilder: (context, index) {
-//               return ImageBuilder(
-//                 image: widget.product.productImage[index],
-//                 height: screenWidth(context) * .7,
-//                 width: double.infinity,
-//                 fit: BoxFit.cover,
-//               );
-//             },
-//           ),
-//           if (_currentPage > 0)
-//             Positioned(
-//               left: 10.0,
-//               top: screenWidth(context) * .35 - 20, // Vertically centered
-//               child: GestureDetector(
-//                 onTap: () {
-//                   if (_pageController.hasClients) {
-//                     _pageController.previousPage(
-//                       duration: const Duration(milliseconds: 300),
-//                       curve: Curves.easeIn,
-//                     );
-//                   }
-//                 },
-//                 child: Icon(
-//                   Icons.arrow_back_ios,
-//                   color:
-//                       kcPrimaryColor.withOpacity(0.7), // Slightly transparent
-//                   size: 40,
-//                 ),
-//               ),
-//             ),
-//           if (_currentPage < widget.product.productImage.length - 1)
-//             Positioned(
-//               right: 10.0,
-//               top: screenWidth(context) * .35 - 20, // Vertically centered
-//               child: GestureDetector(
-//                 onTap: () {
-//                   if (_pageController.hasClients) {
-//                     _pageController.nextPage(
-//                       duration: const Duration(milliseconds: 300),
-//                       curve: Curves.easeIn,
-//                     );
-//                   }
-//                 },
-//                 child: Icon(
-//                   Icons.arrow_forward_ios,
-//                   color:
-//                       kcPrimaryColor.withOpacity(0.7), // Slightly transparent
-//                   size: 40,
-//                 ),
-//               ),
-//             ),
-//         ],
-//       ),
-//     );
-//   }
-// }

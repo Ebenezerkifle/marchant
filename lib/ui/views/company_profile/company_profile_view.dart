@@ -38,7 +38,7 @@ class CompanyProfileView extends StackedView<CompanyProfileViewModel> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomeAppBar(title: 'Company Profile'),
+                  CustomeAppBar(title: viewModel.companyProfileHeader),
                   verticalSpaceMedium,
                   Center(
                     child: CircleAvatar(
@@ -51,7 +51,7 @@ class CompanyProfileView extends StackedView<CompanyProfileViewModel> {
                   const SizedBox(height: mediumSize),
                   Center(
                     child: Text(
-                      product.companyName ?? "Unknown Company",
+                      product.companyName ?? viewModel.unknown,
                       style: AppTextStyle.h1Bold,
                       textAlign: TextAlign.center,
                     ),
@@ -83,7 +83,7 @@ class CompanyProfileView extends StackedView<CompanyProfileViewModel> {
                                       color: Colors.red,
                                     ),
                                   ),
-                                  SizedBox(height: 20),
+                                  const SizedBox(height: 20),
                                   CustomeButton(
                                     text: 'Retry',
                                     onTap: viewModel.refresh,
@@ -95,8 +95,8 @@ class CompanyProfileView extends StackedView<CompanyProfileViewModel> {
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text(
-                                      'Products:',
+                                    Text(
+                                      viewModel.productText,
                                       style: AppTextStyle.h2Bold,
                                     ),
                                     const Divider(thickness: 2),

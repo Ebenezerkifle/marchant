@@ -26,7 +26,7 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
         top: true,
         child: Column(
           children: [
-            CustomeAppBar(title: 'Product detail'),
+            CustomeAppBar(title: viewModel.productDetailHeader),
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
@@ -49,7 +49,7 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                         textAlign: TextAlign.justify,
                       ),
                       verticalSpaceMiddle,
-                      const Text('More Details', style: AppTextStyle.h2Bold),
+                      Text(viewModel.productDetalistext, style: AppTextStyle.h2Bold),
                       verticalSpaceSmall,
                       if (product.description != null)
                         Column(
@@ -89,14 +89,15 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const Text(
-                            'Manufacturer: ',
+                          Text(
+                            viewModel.manufacturerText,
+                            // 'Manufacturer: ',
                             style: AppTextStyle.h2Bold,
                           ),
                           horizontalSpaceSmall, // Add some space between Text and Flexible
                           Expanded(
                             child: Text(
-                              product.companyName ?? 'Unknown Provider',
+                              product.companyName ?? viewModel.unKnownText,
                               style: AppTextStyle.h4Bold,
                               maxLines: 1, // Limit to one line
                               overflow: TextOverflow
@@ -109,7 +110,7 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
-                                  'See More',
+                                  viewModel.seeMoreText,
                                   style: AppTextStyle.h4Bold
                                       .copyWith(color: kcPrimaryColor),
                                 ),
@@ -138,8 +139,8 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                         ),
                         child: Column(
                           children: [
-                            const Text(
-                              'Total Price',
+                             Text(
+                              viewModel.totalPriceText,
                               style: AppTextStyle.h4Normal,
                             ),
                             Text(
@@ -167,7 +168,7 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
           horizontal: smallSize,
         ),
         child: CustomeButton(
-          text: 'Add to Cart',
+          text: viewModel.addToCartText,
           onTap: viewModel.onAddToCart,
           loading: viewModel.isBusy,
           icon: const Padding(
