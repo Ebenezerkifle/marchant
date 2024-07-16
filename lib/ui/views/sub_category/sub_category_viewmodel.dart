@@ -131,20 +131,24 @@ class SubCategoryViewModel extends ReactiveViewModel {
   bool get isProductsBusy => _isProductsBusy;
 
   String get subCategory => "subCategory".tr();
-    String get ourProducts => "our_products".tr();
-     String get retry => "retry".tr();
+  String get ourProducts => "our_products".tr();
+  String get retry => "retry".tr();
   String get noProductsFound => "no_products_found".tr();
-    String get noCategoriesFound => "no_categories_found".tr();
-
-
+  String get noCategoriesFound => "no_categories_found".tr();
+  String get search => "search".tr();
 
   final IconData _moreIcon = FontAwesomeIcons.ellipsisVertical;
   IconData get moreIcon => _moreIcon;
 
+  Map<String, ProductModel> filteredProducts = {};
+  String? filterQuery;
+
+  final TextEditingController searchController = TextEditingController();
+
   SubCategoryViewModel({required this.categoryId, this.subSubCategoryId}) {
     loadSubCategories();
     getSubProducts();
-    notifyListeners();
+    searchController.addListener(_onSearchChanged);
   }
 
   @override
@@ -242,6 +246,24 @@ class SubCategoryViewModel extends ReactiveViewModel {
   void toggleSelection(String id) {
     _selected.clear(); // Clear all selections
     _selected[id] = true; // Select the tapped item
+    notifyListeners();
+  }
+
+  void _onSearchChanged() {
+    filterProducts(searchController.text);
+  }
+
+  void filterProducts(String query) {
+    filterQuery = query.toLowerCase();
+    if (filterQuery?.isEmpty ?? true) {
+      filteredProducts.clear();
+    } else {
+      filteredProducts = Map.fromEntries(subProducts.entries.where((entry) {
+        final productName = entry.value.productName?.toLowerCase() ?? '';
+        final searchLower = filterQuery!.toLowerCase();
+        return productName.contains(searchLower);
+      }));
+    }
     notifyListeners();
   }
 }

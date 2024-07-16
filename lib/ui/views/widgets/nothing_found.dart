@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marchant/ui/common/app_colors.dart';
@@ -31,7 +32,7 @@ class NothingFound extends StatelessWidget {
         ),
         verticalSpaceSmall,
         Text(
-          message ?? 'Nothing found!',
+          message?.tr() ?? 'nothing_found'.tr(),
           style: AppTextStyle.h4Normal,
         ),
         if (child != null) ...[

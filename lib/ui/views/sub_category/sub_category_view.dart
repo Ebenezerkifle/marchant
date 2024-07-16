@@ -9,6 +9,7 @@ import 'package:marchant/ui/views/widgets/custome_card_widget.dart';
 import 'package:marchant/ui/views/widgets/custome_circular_card_widget.dart';
 import 'package:marchant/ui/views/widgets/custome_grid_widget.dart';
 import 'package:marchant/ui/views/widgets/fading_circle.dart';
+import 'package:marchant/ui/views/widgets/search_widget.dart';
 
 import 'package:stacked/stacked.dart';
 
@@ -38,8 +39,20 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
         child: Column(
           children: [
             CustomeAppBar(
-title: viewModel.subCategory,              back: true,
+              title: viewModel.subCategory,
+              back: true,
             ),
+            //  Padding(
+            //         padding: const EdgeInsets.symmetric(
+            //           horizontal: middleSize,
+            //           vertical: middleSize,
+            //         ),
+            //         child: SearchWidget(
+            //           searchController: viewModel.searchController,
+            //           search: viewModel.search,
+            //         ),
+            //       ),
+                  // verticalSpaceSmall,
             verticalSpaceSmall,
             Expanded(
               child: RefreshIndicator(
@@ -87,17 +100,23 @@ title: viewModel.subCategory,              back: true,
                                     ? GridView.builder(
                                         gridDelegate:
                                             const SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 4, // Number of columns in the grid
-                                          crossAxisSpacing: 10.0, // Space between columns
-                                          mainAxisSpacing: 10.0, // Space between rows
-                                          childAspectRatio: 1.0, // Aspect ratio of each item
+                                          crossAxisCount:
+                                              4, // Number of columns in the grid
+                                          crossAxisSpacing:
+                                              10.0, // Space between columns
+                                          mainAxisSpacing:
+                                              10.0, // Space between rows
+                                          childAspectRatio:
+                                              1.0, // Aspect ratio of each item
                                         ),
                                         itemCount:
                                             viewModel.subCategories.length > 3
                                                 ? 4
-                                                : viewModel.subCategories.length,
+                                                : viewModel
+                                                    .subCategories.length,
                                         shrinkWrap: true,
-                                        physics: const NeverScrollableScrollPhysics(),
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
                                         itemBuilder: (context, index) {
                                           if (index == 3) {
                                             // "More" button with circular shape
@@ -105,30 +124,43 @@ title: viewModel.subCategory,              back: true,
                                               onTap: viewModel.onMoreCategory,
                                               child: const CircularCardWidget(
                                                 title: 'More',
-                                                icon: FontAwesomeIcons.ellipsisVertical,
+                                                icon: FontAwesomeIcons
+                                                    .ellipsisVertical,
                                               ),
                                             );
                                           }
                                           return CircularCardWidget(
-                                            title: viewModel.subCategories[index].name ?? '',
-                                            image: viewModel.subCategories[index].image ??
+                                            title: viewModel
+                                                    .subCategories[index]
+                                                    .name ??
+                                                '',
+                                            image: viewModel
+                                                    .subCategories[index]
+                                                    .image ??
                                                 'assets/images/menu.png',
                                             onTap: () {
                                               viewModel.toggleSelection(
-                                                  viewModel.subCategories[index].id ?? '');
+                                                  viewModel.subCategories[index]
+                                                          .id ??
+                                                      '');
                                               viewModel.getSubProducts(
-                                                  category: viewModel.subCategories[index].id ?? '');
+                                                  category: viewModel
+                                                          .subCategories[index]
+                                                          .id ??
+                                                      '');
                                             },
                                           );
                                         },
                                       )
                                     : Center(
-                                        child: Text(viewModel.noCategoriesFound)),
+                                        child:
+                                            Text(viewModel.noCategoriesFound)),
                         verticalSpaceMedium,
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text(viewModel.ourProducts, style: AppTextStyle.h2Bold),
+                            Text(viewModel.ourProducts,
+                                style: AppTextStyle.h2Bold),
                           ],
                         ),
                         viewModel.isProductsBusy
@@ -179,12 +211,16 @@ title: viewModel.subCategory,              back: true,
                                         widgets: viewModel.subProducts.entries
                                             .map(
                                               (e) => CustomeCardWidget(
-                                                size: screenWidth(context) * .38,
-                                                onTap: () => viewModel.onItemSelected(e.value),
-                                                title: e.value.productName ?? '',
+                                                size:
+                                                    screenWidth(context) * .38,
+                                                onTap: () => viewModel
+                                                    .onItemSelected(e.value),
+                                                title:
+                                                    e.value.productName ?? '',
                                                 details: e.value.details ?? [],
                                                 detailLimit: 3,
-                                                image: e.value.productImage.isNotEmpty
+                                                image: e.value.productImage
+                                                        .isNotEmpty
                                                     ? e.value.productImage.first
                                                     : 'assets/images/mark.png',
                                                 widget: Text(
@@ -209,7 +245,8 @@ title: viewModel.subCategory,              back: true,
   }
 
   @override
-  SubCategoryViewModel viewModelBuilder(BuildContext context) => SubCategoryViewModel(
+  SubCategoryViewModel viewModelBuilder(BuildContext context) =>
+      SubCategoryViewModel(
         categoryId: categoryValue,
         subSubCategoryId: subSubCategoryValue,
       );

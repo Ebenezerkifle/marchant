@@ -45,7 +45,7 @@ class CartView extends StackedView<CartViewModel> {
                   ? const Column(
                       children: [
                         verticalSpaceLarge,
-                        NothingFound(message: 'Nothing found on your cart!'),
+                        NothingFound(message: "nothing_found_cart"),
                       ],
                     )
                   : Column(
