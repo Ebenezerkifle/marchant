@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/app/app.router.dart'; // Import the generated Routes class
 import 'package:marchant/models/category_model.dart';
@@ -10,6 +11,7 @@ class CategoryListViewModel extends ReactiveViewModel {
   final _navigation = locator<NavigationService>();
   Map<String, Category> get allCategories => _productState.categories;
   Map<String, bool> get selected => _productState.selected;
+ String get allCategoriesText => "all_categories".tr();
 
   // onSelected(String key) {
   //   _productState.onCategorySelected(key, reOrder: true);

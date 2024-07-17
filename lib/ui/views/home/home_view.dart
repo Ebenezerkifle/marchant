@@ -30,7 +30,7 @@ class HomeView extends StackedView<HomeViewModel> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+                    Container(
               color: kcPrimaryColorDark,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

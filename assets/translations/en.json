@@ -110,6 +110,9 @@
   "no_products_found": "No products found",
   "no_categories_found": "No categoriess found",
   "successfully_cleared": "Successfully cleared",
-  "successfully_ordered": "Successfully ordered"
+  "successfully_ordered": "Successfully ordered",
+  "all_categories": "All categories",
+  "all_sub_categories": "All sub-categories",
+  "success_profile_change": "Your profile changed successfully"
 
 }

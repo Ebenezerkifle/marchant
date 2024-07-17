@@ -85,7 +85,6 @@ class MydetailViewModel extends ReactiveViewModel {
   void _loadUserDetails() {
     var user = _userService.user;
     if (user != null) {
-      print(user);
 
       firstNameController.text = user.firstName ?? '';
       lastNameController.text = user.lastName ?? '';
@@ -125,7 +124,6 @@ class MydetailViewModel extends ReactiveViewModel {
             idNumber: idNumberController.text,
           ),
         );
-        print(response.body);
 
         if (response.statusCode == 200 || response.statusCode == 201) {
           var body = jsonDecode(response.body);
@@ -141,7 +139,7 @@ class MydetailViewModel extends ReactiveViewModel {
             notifyListeners();
 
             SnackBarService.showSnackBar(
-              content: 'Your profile changed successfully',
+              content: "success_profile_change",
             );
 
             _navigation.back();

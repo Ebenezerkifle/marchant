@@ -104,7 +104,6 @@ class LoginViewModel extends BaseViewModel {
       // Show progress indicator
       setBusy(true);
       notifyListeners();
-      SessionService.setBool(SessionKey.newUser, false);
 
       // Backend call to login the user
       var response = await _authentication.loginUser(
@@ -120,6 +119,8 @@ class LoginViewModel extends BaseViewModel {
           var body = jsonDecode(response.body);
           var merchant = body['userLogged'];
           var token = body['token'];
+          var role = body['userLogged']['token'];
+          print(role);
 
           // Validate and parse user data
           if (merchant != null && merchant is Map<String, dynamic>) {
@@ -128,6 +129,11 @@ class LoginViewModel extends BaseViewModel {
 
             // Save the token
             SessionService.setString(SessionKey.token, token);
+
+            // Save the role if it's not null
+            if (role != null) {
+              await SessionService.setString(SessionKey.role, role);
+            }
 
             // Set landing page index based on user role
             UserRole? userRoleEnum = userRoleFromString(user.role);

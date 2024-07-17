@@ -92,12 +92,17 @@ void setLoading(bool value) {
         var body = jsonDecode(response.body);
         var retailer = body['data']['retailer'];
         var token = body['token'];
+        var role = body['data']['retailer']['role'];
 
         if (retailer != null && token != null) {
           var newUserData = UserModel.fromMap(retailer);
 
           _userService.setUserData(newUserData);
           SessionService.setString(SessionKey.token, token);
+          // Save the role if it's not null
+            if (role != null) {
+              await SessionService.setString(SessionKey.role, role);
+            }
           _landingStateService.setIndex(0);
           _navigation.clearStackAndShow(Routes.landingView);
         } else {

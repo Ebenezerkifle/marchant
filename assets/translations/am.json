@@ -113,7 +113,11 @@
   "no_products_found": "ምንም ምርቶች አልተገኙም",
   "no_categories_found": "ምንም ምድቦች አልተገኙም",
   "successfully_cleared": "በተሳካ ሁኔታ ጸድቷል",
-  "successfully_ordered": "በተሳካ ሁኔታ ታዝዟል።"
+  "successfully_ordered": "በተሳካ ሁኔታ ታዝዟል።",
+  "all_categories": "ሁሉም ምድቦች",
+  "all_sub_categories": "ሁሉም ንዑስ ምድቦች",
+  "success_profile_change": "መገለጫዎ በተሳካ ሁኔታ ተቀይሯል"
+
 
 
 }

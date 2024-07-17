@@ -17,3 +17,7 @@ const phoneCheckerUrl = '/phoneChecker/';
 const updateUrl = '/updateFields';
 const getApprovedProductsByManufacturer =
     '/api/product/ProductsByManufacturer/';
+const tokenLoginUrl = '/loginToken';
+const retaUrl = '/api/retalier';
+const manuUrl = '/api/manufacturer';
+

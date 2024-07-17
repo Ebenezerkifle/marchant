@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../ui/common/app_colors.dart';
@@ -24,7 +25,7 @@ class SnackBarService {
         // elevation: 8.0,
         backgroundColor: kcPrimaryColor,
         content: Text(
-          content,
+          content.tr(),
           style: AppTextStyle.withColor(
             color: kcWhite,
             style: AppTextStyle.h4Normal,

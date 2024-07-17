@@ -93,4 +93,17 @@ class Authentication {
       needToken: false,
     );
   }
+
+
+  // token login
+  Future<Response> tokenLogin(role) {
+   String url;
+    if (role == "Retailer") {
+      url = '$baseUrl$retaUrl$tokenLoginUrl';
+    } else {
+      url = '$baseUrl$manuUrl$tokenLoginUrl';
+    }
+    return ApiCallService.postCall(url, {}, needToken: true);
+  }
+  
 }

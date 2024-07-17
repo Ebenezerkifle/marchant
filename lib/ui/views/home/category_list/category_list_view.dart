@@ -21,7 +21,7 @@ class CategoryListView extends StackedView<CategoryListViewModel> {
         body: SafeArea(
       top: true,
       child: Column(children: [
-        CustomeAppBar(title: 'All category'),
+        CustomeAppBar(title: viewModel.allCategoriesText),
         verticalSpaceMedium,
         Expanded(
           child: SingleChildScrollView(
