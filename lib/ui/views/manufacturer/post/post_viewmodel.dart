@@ -48,7 +48,7 @@ class PostViewModel extends ReactiveViewModel {
     try {
       await _enrollmentService.getTopCategories();
     } catch (e) {
-      _errorMessage = 'Failed to load categories';
+      _errorMessage = "something_went_wrong".tr();
     } finally {
       _loading = false;
       notifyListeners();
@@ -205,7 +205,7 @@ class PostViewModel extends ReactiveViewModel {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         SnackBarService.showSnackBar(
-          content: 'Your Product is successfuly uploaded',
+          content: "successfully_uploaded".tr(),
         );
         _clearFields();
         refresh();

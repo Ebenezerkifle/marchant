@@ -85,7 +85,7 @@ class ChangePasswordsViewModel extends BaseViewModel {
         // success
         // show snakbar here
         SnackBarService.showSnackBar(
-          content: 'password changed successfuly'.trim(),
+          content: "password_changed_success".tr(),
         );
         // clear all fields for security reason.
         _clearFields();

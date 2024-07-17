@@ -35,8 +35,7 @@ class ImageBuilder extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         shape: circle ? BoxShape.circle : BoxShape.rectangle,
-        borderRadius:
-            circle ? null : const BorderRadius.all(Radius.circular(8)),
+        borderRadius: circle ? null : const BorderRadius.all(Radius.circular(8)),
         image: !_isUrl(image) && image.isNotEmpty
             ? DecorationImage(
                 image: AssetImage(image),
@@ -53,11 +52,13 @@ class ImageBuilder extends StatelessWidget {
               height: height,
               width: width ?? height,
               errorBuilder: (context, error, stackTrace) {
-                return Image.asset(
-                  'assets/images/mark.png',
+                return Center(
+                  child: Image.asset(
+                    'assets/images/mark.png',
                     fit: BoxFit.contain,
                     height: height * 0.25,
-                  width: width ?? height,
+                    width: (width ?? height) * 0.25,
+                  ),
                 );
               },
             )
@@ -68,11 +69,13 @@ class ImageBuilder extends StatelessWidget {
                   height: height,
                   width: width ?? height,
                 )
-              : Image.asset(
-                  'assets/images/mark.png',
+              : Center(
+                  child: Image.asset(
+                    'assets/images/mark.png',
                     fit: BoxFit.contain,
                     height: height * 0.25,
-                  width: width ?? height,
+                    width: (width ?? height) * 0.25,
+                  ),
                 ),
     );
   }
@@ -84,14 +87,16 @@ class ImageBuilder extends StatelessWidget {
         decoration: BoxDecoration(color: Colors.white.withOpacity(0.0)),
         child: ImageBuilder(
           image: 'assets/images/mark.png',
-          fit: BoxFit.contain,
-                    height: height * 0.25,
+          height: height,
+          fit: BoxFit.cover,
           errorBuilder: (context, error, stackTrace) {
-            return Image.asset(
-              'assets/images/mark.png',
+            return Center(
+              child: Image.asset(
+                'assets/images/mark.png',
                 fit: BoxFit.contain,
-                    height: height * 0.25,
-              width: width ?? height,
+                height: height * 0.25,
+                width: (width ?? height) * 0.25,
+              ),
             );
           },
         ),

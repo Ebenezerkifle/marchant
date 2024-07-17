@@ -9,7 +9,6 @@ import 'package:marchant/ui/views/widgets/custome_card_widget.dart';
 import 'package:marchant/ui/views/widgets/custome_circular_card_widget.dart';
 import 'package:marchant/ui/views/widgets/custome_grid_widget.dart';
 import 'package:marchant/ui/views/widgets/fading_circle.dart';
-import 'package:marchant/ui/views/widgets/search_widget.dart';
 
 import 'package:stacked/stacked.dart';
 
