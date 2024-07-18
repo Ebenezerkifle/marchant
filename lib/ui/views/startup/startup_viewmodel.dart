@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:marchant/services/state_service/landing_state_servic.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:marchant/enums/user_role.dart';
 import 'package:marchant/models/user_model.dart';
 import 'package:marchant/services/api_service/authentication.dart';
 import 'package:marchant/services/state_service/user_service.dart';
@@ -21,47 +20,39 @@ class StartupViewModel extends BaseViewModel {
     var token = await SessionService.getString(SessionKey.token);
     var role = await SessionService.getString(SessionKey.role);
 
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
 
-    if (token != null) {
+    if (token != null && role != null) {
+      print(role);
       try {
         // Get user data using the token
         var response = await _authentication.tokenLogin(role);
         var body = jsonDecode(response.body);
-        var merchant = body['user'];
-        var token = body['token'];
-        // Validate and parse user data
-        if (merchant != null && merchant is Map<String, dynamic>) {
-          UserModel user = UserModel.fromMap(merchant);
+
+        print('Response body: $body');
+        
+        if (body != null) {
+          // Validate and parse user data
+          UserModel user = UserModel.fromMap(body);
           _userService.setUserData(user);
-
-          // Save the token
-          await SessionService.setString(SessionKey.token, token);
-
-          // Set landing page index based on user role
-          UserRole? userRoleEnum = userRoleFromString(user.role);
-          if (userRoleEnum == UserRole.retailor) {
-            _landingStateService.setIndex(0);
-          } else if (userRoleEnum == UserRole.manufacturer) {
-            _landingStateService.setIndex(1);
-          }
-
-          // Set user role in landing state service
+          print(user.role);
           _landingStateService.setUserRole(user.role);
-
           // Navigate to the landing view after successful login
           _navigationService.clearStackAndShow(Routes.landingView);
           return;
+        } else {
+          print('User data is null');
         }
       } catch (e) {
         print('Error during token login: $e');
       }
+    } else {
+      // Always navigate to the login view if no valid token or in case of an error
+      _navigationService.replaceWithLoginView();
     }
-
-    // Always navigate to the login view if no valid token or in case of an error
-    _navigationService.replaceWithLoginView();
   }
 }
+
 
 
 // import 'package:stacked/stacked.dart';

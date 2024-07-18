@@ -43,7 +43,7 @@ class FileViewDialog extends StackedView<FileViewDialogModel> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          request.title ?? 'Upload File',
+                          request.title ?? viewModel.upload,
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w900,
@@ -94,7 +94,7 @@ class FileViewDialog extends StackedView<FileViewDialogModel> {
                 children: [
                   CustomeButton(
                     width: screenHeightFraction(context, dividedBy: 7),
-                    text: 'Cancle',
+                    text: viewModel.cancelText,
                     stroke: true,
                     textColor: kcPrimaryColor,
                     btnColor: kcPrimaryColor,
@@ -103,7 +103,7 @@ class FileViewDialog extends StackedView<FileViewDialogModel> {
                   ),
                   CustomeButton(
                     width: screenHeightFraction(context, dividedBy: 7),
-                    text: 'Upload',
+                    text: viewModel.upload,
                     btnColor: kcPrimaryColor,
                     onTap: () =>
                         completer(DialogResponse(confirmed: true, data: [

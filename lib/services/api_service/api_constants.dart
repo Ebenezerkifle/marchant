@@ -18,6 +18,6 @@ const updateUrl = '/updateFields';
 const getApprovedProductsByManufacturer =
     '/api/product/ProductsByManufacturer/';
 const tokenLoginUrl = '/loginToken';
-const retaUrl = '/api/retalier';
+const retaUrl = '/api/retailer';
 const manuUrl = '/api/manufacturer';
 

@@ -53,7 +53,7 @@ class FilePickerService with ListenableServiceMixin {
       // users response on the dialog.
       if (compeleter?.data[0] == true) {
         // upload file
-        SnackBarService.showSnackBar(content: 'Uploading the file...');
+        SnackBarService.showSnackBar(content: "uploading");
         final storageRef = FirebaseStorage.instance.ref();
         try {
           if (file != null) {
@@ -71,13 +71,13 @@ class FilePickerService with ListenableServiceMixin {
               },
               onError: (dynamic error) {
                 SnackBarService.showSnackBar(
-                    content: 'an error occured while uploading...');
+                    content: "error_uploading");
                 if (kDebugMode) {
                   print('Error: $error');
                 }
               },
               onDone: () async {
-                SnackBarService.showSnackBar(content: 'Successfully uploaded!');
+                SnackBarService.showSnackBar(content: "successfully_uploaded");
                 final downloadUrl = await childRef.getDownloadURL();
                 _progress.value = 1.0;
                 _downloadLink.value = downloadUrl;

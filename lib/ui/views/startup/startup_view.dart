@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:marchant/ui/views/widgets/image_builder.dart';
 import 'package:stacked/stacked.dart';
 import 'package:marchant/ui/common/ui_helpers.dart';
 
@@ -14,16 +15,17 @@ class StartupView extends StackedView<StartupViewModel> {
     StartupViewModel viewModel,
     Widget? child,
   ) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              'Bale Suk',
-              style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
+            ImageBuilder(
+              image: 'assets/logo/logo_icon.png',
+              height: screenWidth(context) * .7,
             ),
-            Row(
+            verticalSpaceMiddle,
+            const Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text('Loading ...', style: TextStyle(fontSize: 16)),

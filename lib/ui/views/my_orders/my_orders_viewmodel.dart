@@ -18,7 +18,10 @@ class MyOrdersViewModel extends ReactiveViewModel {
   String get pendingTab => "pending_tab".tr();
   String get deliveredTab => "delivered_tab".tr();
   String get retry => "retry".tr();
-
+  String get productText => "products".tr();
+  String get noOrdersAvail => "no_orders_available".tr();
+  String get noDeliverOrders => "no_delivered_orders_available".tr();
+  
 
   @override
   List<ListenableServiceMixin> get listenableServices => [_orderState];

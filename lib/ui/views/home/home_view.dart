@@ -30,7 +30,7 @@ class HomeView extends StackedView<HomeViewModel> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-                    Container(
+            Container(
               color: kcPrimaryColorDark,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -151,10 +151,11 @@ class HomeView extends StackedView<HomeViewModel> {
                                       child: Text(viewModel.noCategoriesFound)),
                       verticalSpaceMedium,
                       // Our Products Section Title
-                    Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text(viewModel.ourProducts, style: AppTextStyle.h2Bold),
+                          Text(viewModel.ourProducts,
+                              style: AppTextStyle.h2Bold),
                         ],
                       ),
 
@@ -214,7 +215,7 @@ class HomeView extends StackedView<HomeViewModel> {
                                                       ? e.value.productImage
                                                           .first
                                                       : 'https://via.placeholder.com/100',
-                                                      // 'assets/images/category.jpg',
+                                                  // 'assets/images/category.jpg',
                                                   widget: Text(
                                                     '${e.value.salesPrice} ETB',
                                                     style: AppTextStyle.h4Bold,
@@ -241,7 +242,7 @@ class HomeView extends StackedView<HomeViewModel> {
                                                       ? e.value.productImage
                                                           .first
                                                       : 'https://via.placeholder.com/100',
-                                                      // 'assets/images/category.jpg',
+                                                  // 'assets/images/category.jpg',
                                                   widget: Text(
                                                     '${e.value.salesPrice} ETB',
                                                     style: AppTextStyle.h4Bold,

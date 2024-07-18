@@ -116,8 +116,17 @@
   "successfully_ordered": "በተሳካ ሁኔታ ታዝዟል።",
   "all_categories": "ሁሉም ምድቦች",
   "all_sub_categories": "ሁሉም ንዑስ ምድቦች",
-  "success_profile_change": "መገለጫዎ በተሳካ ሁኔታ ተቀይሯል"
-
+  "success_profile_change": "መገለጫዎ በተሳካ ሁኔታ ተቀይሯል",
+  "check_internet": "እባክዎ ኢንተርኔት ያረጋግጡ!",
+  "request_time_out": "የመጠየቂያ ጊዜ ተጠናቋል ኢንተርኔት ያረጋግጡ!",
+  "upload_image": "እባክዎት ቢያንስ አንድ ምስል ያስገቡ",
+  "can_not_empty": "ባዶ ሊሆን አይችልም",
+  "provide_valid": "እባክዎ ትክክለኛ ያስገቡ",
+  "password_mismatch": "የይለፍ ቃል አለመዛመድ ተፈጥሯል",
+  "invalid_phoneNumber": "ልክ ያልሆነ ስልክ ቁጥር",
+  "error_uploading": "በመስቀል ላይ ስህተት ተፈጥሯል...",
+  "no_orders_available": "ምንም ትዕዛዞች የሉም",
+  "no_delivered_orders_available": "እስካሁን ምንም አይነት ትዕዛዝ የለም"
 
 
 }

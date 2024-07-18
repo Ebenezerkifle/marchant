@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:http/http.dart';
 import 'package:marchant/services/storage_service.dart/session.dart';
 
@@ -18,11 +19,11 @@ class ApiCallService {
 
   // timeout response.
   static Response timeoutResponse =
-      Response('Request timeout check your connection', 500);
+      Response("request_time_out".tr(), 500);
 
   // connection problem response.
   static Response connectionProblem =
-      Response('Please check your internet connection!', 500);
+      Response("check_internet".tr(), 500);
 
   // // post call
   // static Future<Response> postCall(

@@ -81,7 +81,6 @@ class PostViewModel extends ReactiveViewModel {
   String get subCategoryHint => "sub_category_hint".tr();
   String get subSubCategory => "sub_sub_category".tr();
   String get subSubCategoryHint => "sub_sub_category_hint".tr();
- 
 
   String get salesPrice => 'sales_price'.tr();
   String get salesPriceHint => 'sales_price_hint'.tr();
@@ -177,7 +176,7 @@ class PostViewModel extends ReactiveViewModel {
         _formError.isEmpty &&
         validateDropdowns()) {
       if (images.isEmpty) {
-        _formError['images'] = 'Please upload at least one image';
+        _formError['images'] = "upload_image".tr();
         notifyListeners();
         return;
       }
@@ -205,7 +204,7 @@ class PostViewModel extends ReactiveViewModel {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         SnackBarService.showSnackBar(
-          content: "successfully_uploaded".tr(),
+          content: "successfully_uploaded",
         );
         _clearFields();
         refresh();
@@ -281,21 +280,21 @@ class PostViewModel extends ReactiveViewModel {
     bool isValid = true;
 
     if (selectedCategory == null) {
-      _formError['category'] = 'Choose a category';
+      _formError['category'] = "top_category_hint".tr();
       isValid = false;
     } else {
       _formError.remove('category');
     }
 
     if (selectedSubCategory == null) {
-      _formError['subCategory'] = 'Choose a sub category';
+      _formError['subCategory'] = "sub_category_hint".tr();
       isValid = false;
     } else {
       _formError.remove('subCategory');
     }
 
     if (selectedSubSubCategory == null) {
-      _formError['subSubCategory'] = 'Choose a sub sub category';
+      _formError['subSubCategory'] = "sub_sub_category_hint".tr();
       isValid = false;
     } else {
       _formError.remove('subSubCategory');

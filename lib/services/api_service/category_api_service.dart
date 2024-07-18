@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/services/state_service/user_service.dart';
-import 'package:marchant/services/storage_service.dart/session.dart';
 import 'api_call_service.dart';
 import 'api_constants.dart';
 import 'package:marchant/models/category_model.dart';

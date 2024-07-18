@@ -30,8 +30,8 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
             indicatorColor:
                 kcPrimaryColor, // Setting the underline color to kcPrimaryColor
             tabs: [
-              Tab(child: Text(viewModel.pendingTab, style: AppTextStyle.h2Bold)),
-              Tab(child: Text(viewModel.deliveredTab, style: AppTextStyle.h2Bold)),
+              Tab(child: Text(viewModel.pendingTab, style: AppTextStyle.h3Bold)),
+              Tab(child: Text(viewModel.deliveredTab, style: AppTextStyle.h3Bold)),
             ],
             onTap: (index) {
               if (index == 1) {
@@ -80,7 +80,7 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
                               ),
                               const SizedBox(height: 20),
                               CustomeButton(
-                                text: 'Retry',
+                                text: viewModel.retry,
                                 onTap: viewModel.refreshPending,
                               ),
                             ],
@@ -111,7 +111,7 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
                                               0)
                                           .toStringAsFixed(2)),
                                       widget: Text(
-                                        '${e.value.products?.length} Products',
+                                        '${e.value.products?.length} ${viewModel.productText}',
                                         style: AppTextStyle.h4Bold,
                                       ),
                                     ),
@@ -119,7 +119,7 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
                                 }).toList(),
                               ),
                             )
-                          : const Center(child: Text("No Orders available")),
+                          : Center(child: Text(viewModel.noOrdersAvail)),
             ),
             RefreshIndicator(
               key: viewModel.refreshIndicatorKeyDelivered,
@@ -161,10 +161,10 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
                                 SizedBox(
                                   height: screenHeight(context) * .4,
                                   width: double.infinity,
-                                  child: const Center(
+                                  child: Center(
                                     child: Text(
-                                      'No delivered orders yet',
-                                      style: TextStyle(
+                                      viewModel.noDeliverOrders,
+                                      style: const TextStyle(
                                           fontSize: 18, color: Colors.grey),
                                     ),
                                   ),
@@ -195,7 +195,7 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
                                               0)
                                           .toStringAsFixed(2)),
                                       widget: Text(
-                                        '${e.value.products?.length} Products',
+                                        '${e.value.products?.length} ${viewModel.productText}',
                                         style: AppTextStyle.h4Bold,
                                       ),
                                     ),

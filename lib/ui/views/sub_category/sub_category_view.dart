@@ -9,6 +9,7 @@ import 'package:marchant/ui/views/widgets/custome_card_widget.dart';
 import 'package:marchant/ui/views/widgets/custome_circular_card_widget.dart';
 import 'package:marchant/ui/views/widgets/custome_grid_widget.dart';
 import 'package:marchant/ui/views/widgets/fading_circle.dart';
+import 'package:marchant/ui/views/widgets/search_widget.dart';
 
 import 'package:stacked/stacked.dart';
 
@@ -36,22 +37,33 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
       body: SafeArea(
         top: true,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomeAppBar(
-              title: viewModel.subCategory,
-              back: true,
+            Container(
+              color: kcPrimaryColorDark,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomeAppBar(
+                    title: viewModel.subCategory,
+                    back: true,
+                    bgColor: kcPrimaryColorDark,
+                    textColor: kcPrimaryColor,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: middleSize,
+                      vertical: middleSize,
+                    ),
+                    child: SearchWidget(
+                      searchController: viewModel.searchController,
+                      search: viewModel.search,
+                    ),
+                  ),
+                  verticalSpaceSmall,
+                ],
+              ),
             ),
-            //  Padding(
-            //         padding: const EdgeInsets.symmetric(
-            //           horizontal: middleSize,
-            //           vertical: middleSize,
-            //         ),
-            //         child: SearchWidget(
-            //           searchController: viewModel.searchController,
-            //           search: viewModel.search,
-            //         ),
-            //       ),
-                  // verticalSpaceSmall,
             verticalSpaceSmall,
             Expanded(
               child: RefreshIndicator(
@@ -207,7 +219,31 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                         ),
                                       )
                                     : CustomeGrideWidget(
-                                        widgets: viewModel.subProducts.entries
+                                        widgets: viewModel.filterQuery != null &&
+                                              viewModel.filterQuery!.isNotEmpty
+                                          ? viewModel.filteredProducts.entries
+                                              .map(
+                                              (e) => CustomeCardWidget(
+                                                size:
+                                                    screenWidth(context) * .38,
+                                                onTap: () => viewModel
+                                                    .onItemSelected(e.value),
+                                                title:
+                                                    e.value.productName ?? '',
+                                                details: e.value.details ?? [],
+                                                detailLimit: 3,
+                                                image: e.value.productImage
+                                                        .isNotEmpty
+                                                    ? e.value.productImage.first
+                                                    : 'assets/images/mark.png',
+                                                widget: Text(
+                                                  '${e.value.salesPrice} ETB',
+                                                  style: AppTextStyle.h4Bold,
+                                                ),
+                                              ),
+                                            )
+                                            .toList()
+                                            : viewModel.subProducts.entries
                                             .map(
                                               (e) => CustomeCardWidget(
                                                 size:
@@ -228,7 +264,7 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                                 ),
                                               ),
                                             )
-                                            .toList(),
+                                            .toList()
                                       ),
                         verticalSpaceLarge,
                       ],

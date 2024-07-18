@@ -1,5 +1,7 @@
 import 'dart:core';
 
+import 'package:easy_localization/easy_localization.dart';
+
 class FrontValidation {
   static final emailPattern = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
@@ -23,15 +25,15 @@ class FrontValidation {
     }
 
     if (value.isEmpty) {
-      msg = '$fieldName can not be empty';
+msg =  '$fieldName ${("can_not_empty").tr()}';
     }
     // a value should not be lessthan a specific length
     else if (minLength != null && value.length < minLength) {
-      msg = 'Please provide a valid $fieldName';
+      msg = '${'${"provide_valid".tr()} '} $fieldName';
     }
     // a valud should not be greaterthan a specific length
     else if (maxLength != null && value.length > maxLength) {
-      msg = 'Please provide a valid $fieldName';
+      msg = '${'${"provide_valid".tr()} '} $fieldName';
     }
     return email && msg.isEmpty ? emailValidation(value, msg) : msg;
   }
@@ -40,7 +42,7 @@ class FrontValidation {
       {required String password, required String confirmPass}) {
     String msg = '';
     if (password != confirmPass) {
-      msg = "Password mismatch occured";
+      msg = "password_mismatch".tr();
     }
     return msg;
   }
@@ -52,6 +54,6 @@ class FrontValidation {
 
   // validate phone number
   static String phoneValidation(String value, String msg) {
-    return phoneNumPattern.hasMatch(value) ? msg : "Invalid phone number";
+    return phoneNumPattern.hasMatch(value) ? msg : "invalid_phoneNumber".tr();
   }
 }
