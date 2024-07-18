@@ -23,25 +23,21 @@ class StartupViewModel extends BaseViewModel {
     await Future.delayed(const Duration(seconds: 1));
 
     if (token != null && role != null) {
-      print(role);
       try {
         // Get user data using the token
         var response = await _authentication.tokenLogin(role);
         var body = jsonDecode(response.body);
 
-        print('Response body: $body');
         
         if (body != null) {
           // Validate and parse user data
           UserModel user = UserModel.fromMap(body);
           _userService.setUserData(user);
-          print(user.role);
           _landingStateService.setUserRole(user.role);
           // Navigate to the landing view after successful login
           _navigationService.clearStackAndShow(Routes.landingView);
           return;
         } else {
-          print('User data is null');
         }
       } catch (e) {
         print('Error during token login: $e');

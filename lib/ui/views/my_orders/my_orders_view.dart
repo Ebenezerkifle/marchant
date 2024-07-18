@@ -30,8 +30,8 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
             indicatorColor:
                 kcPrimaryColor, // Setting the underline color to kcPrimaryColor
             tabs: [
-              Tab(child: Text(viewModel.pendingTab, style: AppTextStyle.h3Bold)),
-              Tab(child: Text(viewModel.deliveredTab, style: AppTextStyle.h3Bold)),
+              Tab(child: Text(viewModel.pendingTab, style: AppTextStyle.h4Bold)),
+              Tab(child: Text(viewModel.deliveredTab, style: AppTextStyle.h4Bold)),
             ],
             onTap: (index) {
               if (index == 1) {
