@@ -100,7 +100,7 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                                     children: [
                                       verticalSpaceMiddle,
                                       // Our Products Section Title
-                                    Row(
+                                      Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: [
@@ -193,8 +193,7 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   NothingFound(
-                                    message:
-                                        viewModel.noProductsFound,
+                                    message: viewModel.noProductsFound,
                                     child: CustomeButton(
                                       text: viewModel.postProductsText,
                                       onTap: viewModel.onPostProduct,

@@ -13,7 +13,6 @@ class MyOrdersViewModel extends ReactiveViewModel {
   final _navigation = locator<NavigationService>();
   String? errorMessage;
 
-
   String get ordersHeader => "my_orders".tr();
   String get pendingTab => "pending_tab".tr();
   String get deliveredTab => "delivered_tab".tr();
@@ -21,7 +20,6 @@ class MyOrdersViewModel extends ReactiveViewModel {
   String get productText => "products".tr();
   String get noOrdersAvail => "no_orders_available".tr();
   String get noDeliverOrders => "no_delivered_orders_available".tr();
-  
 
   @override
   List<ListenableServiceMixin> get listenableServices => [_orderState];

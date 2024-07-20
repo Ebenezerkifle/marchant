@@ -25,7 +25,7 @@ class FrontValidation {
     }
 
     if (value.isEmpty) {
-msg =  '$fieldName ${("can_not_empty").tr()}';
+      msg = '$fieldName ${("can_not_empty").tr()}';
     }
     // a value should not be lessthan a specific length
     else if (minLength != null && value.length < minLength) {

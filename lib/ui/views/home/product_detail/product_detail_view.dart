@@ -49,7 +49,8 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                         textAlign: TextAlign.justify,
                       ),
                       verticalSpaceMiddle,
-                      Text(viewModel.productDetalistext, style: AppTextStyle.h2Bold),
+                      Text(viewModel.productDetalistext,
+                          style: AppTextStyle.h2Bold),
                       verticalSpaceSmall,
                       if (product.description != null)
                         Column(
@@ -139,7 +140,7 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                         ),
                         child: Column(
                           children: [
-                             Text(
+                            Text(
                               viewModel.totalPriceText,
                               style: AppTextStyle.h4Normal,
                             ),

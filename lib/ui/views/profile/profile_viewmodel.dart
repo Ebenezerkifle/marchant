@@ -21,15 +21,13 @@ class ProfileViewModel extends ReactiveViewModel {
   final _productService = locator<ProductStateService>();
   final _orderService = locator<OrderStateService>();
   final _phoneService = locator<PhoneServiceService>();
-    final _bottomSheet = locator<BottomSheetService>();
-
+  final _bottomSheet = locator<BottomSheetService>();
 
   @override
   List<ListenableServiceMixin> get listenableServices => [_userService];
 
   String get image => 'assets/images/user.png';
   String get profileHeader => 'profile'.tr();
-  
 
   Map<SettingOptions, SettingModel> settings = {
     SettingOptions.myDetail: SettingModel(
@@ -102,7 +100,7 @@ class ProfileViewModel extends ReactiveViewModel {
     }
   }
 
- _showLanguageOptions() {
+  _showLanguageOptions() {
     _bottomSheet.showCustomSheet(
       variant: BottomSheetType.changeLanguage,
       title: 'change_language',

@@ -11,7 +11,7 @@ class CategoryListViewModel extends ReactiveViewModel {
   final _navigation = locator<NavigationService>();
   Map<String, Category> get allCategories => _productState.categories;
   Map<String, bool> get selected => _productState.selected;
- String get allCategoriesText => "all_categories".tr();
+  String get allCategoriesText => "all_categories".tr();
 
   // onSelected(String key) {
   //   _productState.onCategorySelected(key, reOrder: true);

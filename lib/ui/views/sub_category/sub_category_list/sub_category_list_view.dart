@@ -24,7 +24,8 @@ class SubCategoryListView extends StatelessWidget {
           top: true,
           child: Column(
             children: [
-              CustomeAppBar(title: viewModel.allCategoriesText), // Corrected widget name
+              CustomeAppBar(
+                  title: viewModel.allCategoriesText), // Corrected widget name
               verticalSpaceMedium,
               Expanded(
                 child: SingleChildScrollView(

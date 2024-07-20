@@ -217,7 +217,7 @@ class PostView extends StackedView<PostViewModel> {
                                 height: 50,
                                 child: DropdownButtonFormField<String>(
                                   value: viewModel.selectedSubSubCategory,
-                                  hint:  Text(viewModel.subSubCategoryHint),
+                                  hint: Text(viewModel.subSubCategoryHint),
                                   onChanged: viewModel.onSubSubCategoryChanged,
                                   items: viewModel.subSubCategories
                                       .map((Category subSubCategory) {
@@ -262,7 +262,7 @@ class PostView extends StackedView<PostViewModel> {
                           ],
                         ),
                       ),
-                     
+
                       verticalSpaceMiddle,
                       CustomeFormField(
                         title: viewModel.detailsMsg,

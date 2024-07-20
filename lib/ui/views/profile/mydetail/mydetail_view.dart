@@ -39,8 +39,7 @@ class MydetailView extends StackedView<MydetailViewModel> {
                             validator: (value) => viewModel.validateText(
                                 value ?? '',
                                 viewModel.firstNameController,
-                                viewModel.firstName
-                                ),
+                                viewModel.firstName),
                             controller: viewModel.firstNameController,
                             hint: '',
                             // error: viewModel.formError
@@ -95,125 +94,124 @@ class MydetailView extends StackedView<MydetailViewModel> {
                             hint: viewModel.phoneNumFieldHint,
                           ),
                         ),
-                       
+
                         // Category dropdown field
                         if (viewModel.role == "Retailer") ...[
-                           verticalSpaceMedium,
-                        CustomeFormField(
-                          title: viewModel.location,
-                          widget: InputField(
-                            validator: (value) => viewModel.validateText(
-                                value ?? '',
-                                viewModel.locationController,
-                                viewModel.location),
-                            controller: viewModel.locationController,
-                            hint: '',
-                            // error: viewModel.formError
-                            //     .containsKey(viewModel.firstNameController),
-                            prefixIcon: Icon(
-                              FontAwesomeIcons.locationPinLock,
-                              color: kcPrimaryColorDark,
-                              size: viewModel.iconSize,
+                          verticalSpaceMedium,
+                          CustomeFormField(
+                            title: viewModel.location,
+                            widget: InputField(
+                              validator: (value) => viewModel.validateText(
+                                  value ?? '',
+                                  viewModel.locationController,
+                                  viewModel.location),
+                              controller: viewModel.locationController,
+                              hint: '',
+                              // error: viewModel.formError
+                              //     .containsKey(viewModel.firstNameController),
+                              prefixIcon: Icon(
+                                FontAwesomeIcons.locationPinLock,
+                                color: kcPrimaryColorDark,
+                                size: viewModel.iconSize,
+                              ),
                             ),
                           ),
-                        ),
-                        verticalSpaceMedium,
-                        CustomeFormField(
-                          title: viewModel.tin,
-                          widget: InputField(
-                            validator: (value) => viewModel.validateText(
-                                value ?? '',
-                                viewModel.tinController,
-                                viewModel.tin),
-                            controller: viewModel.tinController,
-                            hint: '',
-                            // error: viewModel.formError
-                            //     .containsKey(viewModel.firstNameController),
-                            prefixIcon: Icon(
-                              FontAwesomeIcons.receipt,
-                              color: kcPrimaryColorDark,
-                              size: viewModel.iconSize,
+                          verticalSpaceMedium,
+                          CustomeFormField(
+                            title: viewModel.tin,
+                            widget: InputField(
+                              validator: (value) => viewModel.validateText(
+                                  value ?? '',
+                                  viewModel.tinController,
+                                  viewModel.tin),
+                              controller: viewModel.tinController,
+                              hint: '',
+                              // error: viewModel.formError
+                              //     .containsKey(viewModel.firstNameController),
+                              prefixIcon: Icon(
+                                FontAwesomeIcons.receipt,
+                                color: kcPrimaryColorDark,
+                                size: viewModel.iconSize,
+                              ),
                             ),
                           ),
-                        ),
-                        verticalSpaceMedium,
-                        CustomeFormField(
-                          title: viewModel.city,
-                          widget: InputField(
-                            validator: (value) => viewModel.validateText(
-                                value ?? '',
-                                viewModel.cityController,
-                                viewModel.city),
-                            controller: viewModel.cityController,
-                            hint: '',
-                            // error: viewModel.formError
-                            //     .containsKey(viewModel.firstNameController),
-                            prefixIcon: Icon(
-                              FontAwesomeIcons.city,
-                              color: kcPrimaryColorDark,
-                              size: viewModel.iconSize,
+                          verticalSpaceMedium,
+                          CustomeFormField(
+                            title: viewModel.city,
+                            widget: InputField(
+                              validator: (value) => viewModel.validateText(
+                                  value ?? '',
+                                  viewModel.cityController,
+                                  viewModel.city),
+                              controller: viewModel.cityController,
+                              hint: '',
+                              // error: viewModel.formError
+                              //     .containsKey(viewModel.firstNameController),
+                              prefixIcon: Icon(
+                                FontAwesomeIcons.city,
+                                color: kcPrimaryColorDark,
+                                size: viewModel.iconSize,
+                              ),
                             ),
                           ),
-                        ),
-                        verticalSpaceMedium,
-                        CustomeFormField(
-                          title: viewModel.subCity,
-                          widget: InputField(
-                            validator: (value) => viewModel.validateText(
-                                value ?? '',
-                                viewModel.subCityController,
-                                viewModel.firstName),
-                            controller: viewModel.subCityController,
-                            hint: '',
-                            // error: viewModel.formError
-                            //     .containsKey(viewModel.firstNameController),
-                            prefixIcon: Icon(
-                              FontAwesomeIcons.city,
-                              color: kcPrimaryColorDark,
-                              size: viewModel.iconSize,
+                          verticalSpaceMedium,
+                          CustomeFormField(
+                            title: viewModel.subCity,
+                            widget: InputField(
+                              validator: (value) => viewModel.validateText(
+                                  value ?? '',
+                                  viewModel.subCityController,
+                                  viewModel.firstName),
+                              controller: viewModel.subCityController,
+                              hint: '',
+                              // error: viewModel.formError
+                              //     .containsKey(viewModel.firstNameController),
+                              prefixIcon: Icon(
+                                FontAwesomeIcons.city,
+                                color: kcPrimaryColorDark,
+                                size: viewModel.iconSize,
+                              ),
                             ),
                           ),
-                        ),
-                        verticalSpaceMedium,
-                        CustomeFormField(
-                          title: viewModel.woreda,
-                          widget: InputField(
-                            validator: (value) => viewModel.validateText(
-                                value ?? '',
-                                viewModel.woredaController,
-                                viewModel.woreda),
-                            controller: viewModel.woredaController,
-                            hint: '',
-                            // error: viewModel.formError
-                            //     .containsKey(viewModel.firstNameController),
-                            prefixIcon: Icon(
-                              FontAwesomeIcons.city,
-                              color: kcPrimaryColorDark,
-                              size: viewModel.iconSize,
+                          verticalSpaceMedium,
+                          CustomeFormField(
+                            title: viewModel.woreda,
+                            widget: InputField(
+                              validator: (value) => viewModel.validateText(
+                                  value ?? '',
+                                  viewModel.woredaController,
+                                  viewModel.woreda),
+                              controller: viewModel.woredaController,
+                              hint: '',
+                              // error: viewModel.formError
+                              //     .containsKey(viewModel.firstNameController),
+                              prefixIcon: Icon(
+                                FontAwesomeIcons.city,
+                                color: kcPrimaryColorDark,
+                                size: viewModel.iconSize,
+                              ),
                             ),
                           ),
-                        ),
-                        verticalSpaceMedium,
-                        CustomeFormField(
-                          title:viewModel.idNumber,
-                          widget: InputField(
-                            validator: (value) => viewModel.validateText(
-                                value ?? '',
-                                viewModel.idNumberController,
-                                viewModel.idNumber),
-                            controller: viewModel.idNumberController,
-                            hint: '',
-                            // error: viewModel.formError
-                            //     .containsKey(viewModel.firstNameController),
-                            prefixIcon: Icon(
-                              FontAwesomeIcons.idCard,
-                              color: kcPrimaryColorDark,
-                              size: viewModel.iconSize,
+                          verticalSpaceMedium,
+                          CustomeFormField(
+                            title: viewModel.idNumber,
+                            widget: InputField(
+                              validator: (value) => viewModel.validateText(
+                                  value ?? '',
+                                  viewModel.idNumberController,
+                                  viewModel.idNumber),
+                              controller: viewModel.idNumberController,
+                              hint: '',
+                              // error: viewModel.formError
+                              //     .containsKey(viewModel.firstNameController),
+                              prefixIcon: Icon(
+                                FontAwesomeIcons.idCard,
+                                color: kcPrimaryColorDark,
+                                size: viewModel.iconSize,
+                              ),
                             ),
                           ),
-                        ),
-
-                        verticalSpaceMedium,
+                          verticalSpaceMedium,
                           CustomeFormField(
                             title: 'Top Category',
                             widget: Column(
@@ -279,6 +277,7 @@ class MydetailView extends StackedView<MydetailViewModel> {
                           btnColor: kcPrimaryColorDark,
                           loading: viewModel.isBusy,
                         ),
+                                  verticalSpaceSmall,
                       ],
                     ),
                   ),

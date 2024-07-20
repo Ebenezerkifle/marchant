@@ -1,7 +1,9 @@
+import 'package:marchant/services/state_service/auth_state_service.dart';
 import 'package:marchant/services/state_service/cart_state_service.dart';
 import 'package:marchant/services/state_service/enrollment_state_service.dart';
 import 'package:marchant/services/state_service/landing_state_servic.dart';
 import 'package:marchant/services/state_service/language_service.dart';
+import 'package:marchant/services/state_service/request_status_service.dart';
 import 'package:marchant/services/state_service/onboarding_state_service.dart';
 import 'package:marchant/services/state_service/orders_state_service.dart';
 import 'package:marchant/services/common_services/phone_service_service.dart';
@@ -39,6 +41,9 @@ import 'package:marchant/ui/views/profile/mydetail/mydetail_view.dart';
 import 'package:marchant/ui/views/manufacturer/manu_home/manu_product_detail/manu_product_detail_view.dart';
 import 'package:marchant/ui/views/page_builder/page_builder_view.dart';
 import 'package:marchant/ui/bottom_sheets/change_language/change_language_sheet.dart';
+import 'package:marchant/ui/views/onboarding/forgot_password/forgot_password_view.dart';
+import 'package:marchant/ui/views/onboarding/otp/otp_view.dart';
+import 'package:marchant/ui/dialogs/status/status_dialog.dart';
 // @stacked-import
 
 @StackedApp(
@@ -64,6 +69,8 @@ import 'package:marchant/ui/bottom_sheets/change_language/change_language_sheet.
     MaterialRoute(page: MydetailView),
     MaterialRoute(page: ManuProductDetailView),
     MaterialRoute(page: PageBuilderView),
+    MaterialRoute(page: ForgotPasswordView),
+    MaterialRoute(page: OtpView),
 // @stacked-route
   ],
   dependencies: [
@@ -81,6 +88,8 @@ import 'package:marchant/ui/bottom_sheets/change_language/change_language_sheet.
     LazySingleton(classType: RequestStatusServiceService),
     LazySingleton(classType: PhoneServiceService),
     LazySingleton(classType: LanguagesService),
+    LazySingleton(classType: AuthStateService),
+    LazySingleton(classType: RequestStatusService),
 // @stacked-service
   ],
   bottomsheets: [
@@ -93,6 +102,7 @@ import 'package:marchant/ui/bottom_sheets/change_language/change_language_sheet.
   dialogs: [
     StackedDialog(classType: InfoAlertDialog),
     StackedDialog(classType: FileViewDialog),
+    StackedDialog(classType: StatusDialog),
 // @stacked-dialog
   ],
 )

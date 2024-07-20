@@ -22,8 +22,7 @@ Future<void> main() async {
     const SystemUiOverlayStyle(statusBarColor: kcDarkGreyColor),
   );
   // runApp(const MainApp());
-    _run();
-
+  _run();
 }
 
 void _run() async {

@@ -25,10 +25,10 @@ class SignupViewModel extends FormViewModel {
 
   double get iconSize => 15;
   String get haveAccount => "already_have_account".tr();
-  
+
   String get signUpMsg => "create_an_account".tr();
- String get singinMsg => 'sign_in'.tr();
- String get next => "continue".tr();
+  String get singinMsg => 'sign_in'.tr();
+  String get next => "continue".tr();
   String get phoneNumFieldHint => 'phone_number'.tr();
   String get passHint => 'password'.tr();
   String get confirmHint => 'confirm_password'.tr();

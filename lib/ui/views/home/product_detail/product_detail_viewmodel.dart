@@ -21,7 +21,7 @@ class ProductDetailViewModel extends BaseViewModel {
   String get seeMoreText => "see_more".tr();
   String get totalPriceText => "total_price".tr();
   String get addToCartText => "add_to_cart".tr();
-  
+
   final ProductModel product;
   ProductDetailViewModel({required this.product});
 

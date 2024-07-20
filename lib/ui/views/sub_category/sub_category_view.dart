@@ -219,53 +219,64 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                         ),
                                       )
                                     : CustomeGrideWidget(
-                                        widgets: viewModel.filterQuery != null &&
-                                              viewModel.filterQuery!.isNotEmpty
-                                          ? viewModel.filteredProducts.entries
-                                              .map(
-                                              (e) => CustomeCardWidget(
-                                                size:
-                                                    screenWidth(context) * .38,
-                                                onTap: () => viewModel
-                                                    .onItemSelected(e.value),
-                                                title:
-                                                    e.value.productName ?? '',
-                                                details: e.value.details ?? [],
-                                                detailLimit: 3,
-                                                image: e.value.productImage
-                                                        .isNotEmpty
-                                                    ? e.value.productImage.first
-                                                    : 'assets/images/mark.png',
-                                                widget: Text(
-                                                  '${e.value.salesPrice} ETB',
-                                                  style: AppTextStyle.h4Bold,
-                                                ),
-                                              ),
-                                            )
-                                            .toList()
+                                        widgets: viewModel.filterQuery !=
+                                                    null &&
+                                                viewModel
+                                                    .filterQuery!.isNotEmpty
+                                            ? viewModel.filteredProducts.entries
+                                                .map(
+                                                  (e) => CustomeCardWidget(
+                                                    size: screenWidth(context) *
+                                                        .38,
+                                                    onTap: () => viewModel
+                                                        .onItemSelected(
+                                                            e.value),
+                                                    title:
+                                                        e.value.productName ??
+                                                            '',
+                                                    details:
+                                                        e.value.details ?? [],
+                                                    detailLimit: 3,
+                                                    image: e.value.productImage
+                                                            .isNotEmpty
+                                                        ? e.value.productImage
+                                                            .first
+                                                        : 'assets/images/mark.png',
+                                                    widget: Text(
+                                                      '${e.value.salesPrice} ETB',
+                                                      style:
+                                                          AppTextStyle.h4Bold,
+                                                    ),
+                                                  ),
+                                                )
+                                                .toList()
                                             : viewModel.subProducts.entries
-                                            .map(
-                                              (e) => CustomeCardWidget(
-                                                size:
-                                                    screenWidth(context) * .38,
-                                                onTap: () => viewModel
-                                                    .onItemSelected(e.value),
-                                                title:
-                                                    e.value.productName ?? '',
-                                                details: e.value.details ?? [],
-                                                detailLimit: 3,
-                                                image: e.value.productImage
-                                                        .isNotEmpty
-                                                    ? e.value.productImage.first
-                                                    : 'assets/images/mark.png',
-                                                widget: Text(
-                                                  '${e.value.salesPrice} ETB',
-                                                  style: AppTextStyle.h4Bold,
-                                                ),
-                                              ),
-                                            )
-                                            .toList()
-                                      ),
+                                                .map(
+                                                  (e) => CustomeCardWidget(
+                                                    size: screenWidth(context) *
+                                                        .38,
+                                                    onTap: () => viewModel
+                                                        .onItemSelected(
+                                                            e.value),
+                                                    title:
+                                                        e.value.productName ??
+                                                            '',
+                                                    details:
+                                                        e.value.details ?? [],
+                                                    detailLimit: 3,
+                                                    image: e.value.productImage
+                                                            .isNotEmpty
+                                                        ? e.value.productImage
+                                                            .first
+                                                        : 'assets/images/mark.png',
+                                                    widget: Text(
+                                                      '${e.value.salesPrice} ETB',
+                                                      style:
+                                                          AppTextStyle.h4Bold,
+                                                    ),
+                                                  ),
+                                                )
+                                                .toList()),
                         verticalSpaceLarge,
                       ],
                     ),

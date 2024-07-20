@@ -18,12 +18,10 @@ class ApiCallService {
   static const Duration timeout = Duration(seconds: 15);
 
   // timeout response.
-  static Response timeoutResponse =
-      Response("request_time_out".tr(), 500);
+  static Response timeoutResponse = Response("request_time_out".tr(), 500);
 
   // connection problem response.
-  static Response connectionProblem =
-      Response("check_internet".tr(), 500);
+  static Response connectionProblem = Response("check_internet".tr(), 500);
 
   // // post call
   // static Future<Response> postCall(

@@ -85,7 +85,6 @@ class MydetailViewModel extends ReactiveViewModel {
   void _loadUserDetails() {
     var user = _userService.user;
     if (user != null) {
-
       firstNameController.text = user.firstName ?? '';
       lastNameController.text = user.lastName ?? '';
       locationController.text = user.location ?? '';

@@ -32,7 +32,6 @@ class ManuProductDetailView extends StackedView<ManuProductDetailViewModel> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                   
                       verticalSpaceMiddle,
                       // Horizontally scrollable list of images with a clue icon
                       PageBuilderView(product: product),
@@ -48,7 +47,8 @@ class ManuProductDetailView extends StackedView<ManuProductDetailViewModel> {
                         textAlign: TextAlign.justify,
                       ),
                       verticalSpaceMiddle,
-                      Text(viewModel.productDetalistext, style: AppTextStyle.h2Bold),
+                      Text(viewModel.productDetalistext,
+                          style: AppTextStyle.h2Bold),
                       verticalSpaceSmall,
                       if (product.description != null)
                         Column(
@@ -85,27 +85,26 @@ class ManuProductDetailView extends StackedView<ManuProductDetailViewModel> {
                               .toList(),
                         ),
                       verticalSpaceSmall,
-                        if (viewModel.role != "Retailer") ...[
-
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            viewModel.statusText,
-                            style: AppTextStyle.h2Bold,
-                          ),
-                          horizontalSpaceSmall, // Add some space between Text and Flexible
-                          Expanded(
-                            child: Text(
-                              product.status ?? '',
-                              style: AppTextStyle.h3Bold,
-                              maxLines: 1,
-                              overflow: TextOverflow.clip,
+                      if (viewModel.role != "Retailer") ...[
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              viewModel.statusText,
+                              style: AppTextStyle.h2Bold,
                             ),
-                          ),
-                        ],
-                      ),
-                        ]
+                            horizontalSpaceSmall, // Add some space between Text and Flexible
+                            Expanded(
+                              child: Text(
+                                product.status ?? '',
+                                style: AppTextStyle.h3Bold,
+                                maxLines: 1,
+                                overflow: TextOverflow.clip,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ]
                     ],
                   ),
                 ),

@@ -12,6 +12,7 @@ import 'package:stacked_services/src/navigation/navigation_service.dart';
 import 'package:stacked_shared/stacked_shared.dart';
 
 import '../services/common_services/phone_service_service.dart';
+import '../services/state_service/auth_state_service.dart';
 import '../services/state_service/cart_state_service.dart';
 import '../services/state_service/enrollment_state_service.dart';
 import '../services/state_service/landing_state_servic.dart';
@@ -20,6 +21,7 @@ import '../services/state_service/onboarding_state_service.dart';
 import '../services/state_service/orders_state_service.dart';
 import '../services/state_service/post_state_service.dart';
 import '../services/state_service/product_state_service.dart';
+import '../services/state_service/request_status_service.dart';
 import '../services/state_service/request_status_service_service.dart';
 import '../services/state_service/user_service.dart';
 
@@ -48,4 +50,6 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => RequestStatusServiceService());
   locator.registerLazySingleton(() => PhoneServiceService());
   locator.registerLazySingleton(() => LanguagesService());
+  locator.registerLazySingleton(() => AuthStateService());
+  locator.registerLazySingleton(() => RequestStatusService());
 }

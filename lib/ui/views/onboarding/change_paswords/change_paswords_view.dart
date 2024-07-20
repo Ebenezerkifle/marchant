@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marchant/ui/views/onboarding/change_paswords/change_paswords_viewmodel.dart';
@@ -12,7 +13,8 @@ import '../../widgets/custome_form_field.dart';
 import '../../widgets/input_field.dart';
 
 class ChangePasswordView extends StackedView<ChangePasswordsViewModel> {
-  const ChangePasswordView({super.key});
+  const ChangePasswordView({super.key, this.forget = false});
+  final bool forget;
 
   @override
   Widget builder(
@@ -25,7 +27,7 @@ class ChangePasswordView extends StackedView<ChangePasswordsViewModel> {
         top: true,
         child: Column(
           children: [
-            CustomeAppBar(title: viewModel.title.trim()),
+            CustomeAppBar(title: viewModel.title),
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
@@ -35,37 +37,70 @@ class ChangePasswordView extends StackedView<ChangePasswordsViewModel> {
                     child: Column(
                       children: [
                         verticalSpaceLarge,
-                        CustomeFormField(
-                          title: viewModel.password,
-                          widget: InputField(
-                            validator: (value) => viewModel.validateText(
-                              value,
-                              viewModel.passwordController,
-                              viewModel.password.trim(),
-                              minLength: 6,
-                              maxLength: 12,
-                            ),
-                            controller: viewModel.passwordController,
-                            hint: viewModel.passwordHint,
-                            prefixIcon: Icon(
-                              FontAwesomeIcons.lock,
-                              color: kcPrimaryColorDark.withOpacity(.5),
-                              size: iconSize,
-                            ),
-                            suffixIcon: GestureDetector(
-                              onTap: viewModel.togglePrevPass,
-                              child: viewModel.prevPassVisible
-                                  ? const Icon(Icons.visibility, size: iconSize)
-                                  : const Icon(Icons.visibility_off,
-                                      size: iconSize),
-                            ),
-                            hideText: !viewModel.prevPassVisible,
-                            error: viewModel.formError.containsKey(
-                              viewModel.passwordController,
+                        if (!forget) ...[
+                          CustomeFormField(
+                            title: viewModel.password,
+                            widget: InputField(
+                              validator: (value) => viewModel.validateText(
+                                value,
+                                viewModel.passwordController,
+                                viewModel.password.tr(),
+                                minLength: 6,
+                                maxLength: 12,
+                              ),
+                              controller: viewModel.passwordController,
+                              hint: viewModel.passwordHint,
+                              prefixIcon: Icon(
+                                FontAwesomeIcons.lock,
+                                color: kcPrimaryColorDark.withOpacity(.5),
+                                size: iconSize,
+                              ),
+                              suffixIcon: GestureDetector(
+                                onTap: viewModel.togglePrevPass,
+                                child: viewModel.prevPassVisible
+                                    ? const Icon(Icons.visibility,
+                                        size: iconSize)
+                                    : const Icon(Icons.visibility_off,
+                                        size: iconSize),
+                              ),
+                              hideText: !viewModel.prevPassVisible,
+                              error: viewModel.formError.containsKey(
+                                viewModel.passwordController,
+                              ),
                             ),
                           ),
-                        ),
-                        verticalSpaceMedium,
+                          verticalSpaceMedium,
+                        ],
+                        // CustomeFormField(
+                        //   title: viewModel.password,
+                        //   widget: InputField(
+                        //     validator: (value) => viewModel.validateText(
+                        //       value,
+                        //       viewModel.passwordController,
+                        //       viewModel.password.trim(),
+                        //       minLength: 6,
+                        //       maxLength: 12,
+                        //     ),
+                        //     controller: viewModel.passwordController,
+                        //     hint: viewModel.passwordHint,
+                        //     prefixIcon: Icon(
+                        //       FontAwesomeIcons.lock,
+                        //       color: kcPrimaryColorDark.withOpacity(.5),
+                        //       size: iconSize,
+                        //     ),
+                        //     suffixIcon: GestureDetector(
+                        //       onTap: viewModel.togglePrevPass,
+                        //       child: viewModel.prevPassVisible
+                        //           ? const Icon(Icons.visibility, size: iconSize)
+                        //           : const Icon(Icons.visibility_off,
+                        //               size: iconSize),
+                        //     ),
+                        //     hideText: !viewModel.prevPassVisible,
+                        //     error: viewModel.formError.containsKey(
+                        //       viewModel.passwordController,
+                        //     ),
+                        //   ),
+                        // ),
                         CustomeFormField(
                           title: viewModel.newPassword,
                           widget: InputField(
@@ -164,5 +199,6 @@ class ChangePasswordView extends StackedView<ChangePasswordsViewModel> {
   ChangePasswordsViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      ChangePasswordsViewModel();
+      // ChangePasswordsViewModel();
+      ChangePasswordsViewModel(forget: forget);
 }

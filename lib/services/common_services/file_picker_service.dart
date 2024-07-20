@@ -70,8 +70,7 @@ class FilePickerService with ListenableServiceMixin {
                 notifyListeners();
               },
               onError: (dynamic error) {
-                SnackBarService.showSnackBar(
-                    content: "error_uploading");
+                SnackBarService.showSnackBar(content: "error_uploading");
                 if (kDebugMode) {
                   print('Error: $error');
                 }

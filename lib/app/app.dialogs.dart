@@ -9,10 +9,12 @@ import 'package:stacked_services/stacked_services.dart';
 import 'app.locator.dart';
 import '../ui/dialogs/file_view/file_view_dialog.dart';
 import '../ui/dialogs/info_alert/info_alert_dialog.dart';
+import '../ui/dialogs/status/status_dialog.dart';
 
 enum DialogType {
   infoAlert,
   fileView,
+  status,
 }
 
 void setupDialogUi() {
@@ -23,6 +25,8 @@ void setupDialogUi() {
         InfoAlertDialog(request: request, completer: completer),
     DialogType.fileView: (context, request, completer) =>
         FileViewDialog(request: request, completer: completer),
+    DialogType.status: (context, request, completer) =>
+        StatusDialog(request: request, completer: completer),
   };
 
   dialogService.registerCustomDialogBuilders(builders);

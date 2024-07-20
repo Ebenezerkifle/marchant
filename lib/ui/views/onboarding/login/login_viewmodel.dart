@@ -38,7 +38,7 @@ class LoginViewModel extends BaseViewModel {
   TextEditingController passwordController = TextEditingController();
 
   onForgotPassword() {
-    // todo
+    _navigationService.navigateToForgotPasswordView();
   }
 
   onRegister() {
@@ -119,7 +119,7 @@ class LoginViewModel extends BaseViewModel {
           var body = jsonDecode(response.body);
           var merchant = body['userLogged'];
           var token = body['token'];
-          var role = body['userLogged']['token'];
+          var role = body['userLogged']['role'];
           print(role);
 
           // Validate and parse user data

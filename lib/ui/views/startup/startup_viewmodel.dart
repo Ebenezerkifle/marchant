@@ -19,6 +19,7 @@ class StartupViewModel extends BaseViewModel {
   Future runStartupLogic() async {
     var token = await SessionService.getString(SessionKey.token);
     var role = await SessionService.getString(SessionKey.role);
+    print(role);
 
     await Future.delayed(const Duration(seconds: 1));
 
@@ -28,7 +29,6 @@ class StartupViewModel extends BaseViewModel {
         var response = await _authentication.tokenLogin(role);
         var body = jsonDecode(response.body);
 
-        
         if (body != null) {
           // Validate and parse user data
           UserModel user = UserModel.fromMap(body);
@@ -37,8 +37,7 @@ class StartupViewModel extends BaseViewModel {
           // Navigate to the landing view after successful login
           _navigationService.clearStackAndShow(Routes.landingView);
           return;
-        } else {
-        }
+        } else {}
       } catch (e) {
         print('Error during token login: $e');
       }
@@ -48,8 +47,6 @@ class StartupViewModel extends BaseViewModel {
     }
   }
 }
-
-
 
 // import 'package:stacked/stacked.dart';
 // import 'package:marchant/app/app.locator.dart';

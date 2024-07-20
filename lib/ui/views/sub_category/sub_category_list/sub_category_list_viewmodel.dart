@@ -7,7 +7,7 @@ import 'package:stacked_services/stacked_services.dart';
 class SubCategoryListViewModel extends ReactiveViewModel {
   final _navigation = locator<NavigationService>();
   final String categoryId;
-   String get allCategoriesText => "all_sub_categories".tr();
+  String get allCategoriesText => "all_sub_categories".tr();
 
   SubCategoryListViewModel({required this.categoryId});
 // Method to navigate to SubCategoryView

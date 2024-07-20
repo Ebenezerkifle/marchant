@@ -56,29 +56,18 @@ class Authentication {
     );
   }
 
-  // // change password
-  // Future<Response> changePassword(
-  //   String userId,
-  //   String prevPassword,
-  //   String newPassword,
-  // ) async {
-  //   return ApiCallService.patchCall(
-  //     '$baseUrl$changePassUrl',
-  //     {
-  //       'oldPassword': prevPassword,
-  //       'newPassword': newPassword,
-  //     },
-  //     needToken: true,
-  //   );
-  // }
-
   // reset password
   Future<Response> resetPassword(
-    String userId,
-    String newPassword,
-  ) async {
+      String userId, String newPassword, String role) async {
+    String url;
+    if (role == "Retailer") {
+      url = '$baseUrl$retaUrl$passResetUrl$userId';
+    } else {
+      url = '$baseUrl$manuUrl$passResetUrl$userId';
+    }
     return ApiCallService.patchCall(
-      '$baseUrl$singUpUrl$passResetUrl$userId',
+      // '$baseUrl$singUpUrl$passResetUrl$userId',
+      url,
       {'password': newPassword},
       needToken: false,
     );
@@ -94,10 +83,9 @@ class Authentication {
     );
   }
 
-
   // token login
   Future<Response> tokenLogin(role) {
-   String url;
+    String url;
     if (role == "Retailer") {
       url = '$baseUrl$retaUrl$tokenLoginUrl';
     } else {
@@ -105,5 +93,4 @@ class Authentication {
     }
     return ApiCallService.postCall(url, {}, needToken: true);
   }
-  
 }

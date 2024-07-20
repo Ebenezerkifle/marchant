@@ -1,5 +1,3 @@
-
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -30,8 +28,7 @@ class HomeViewModel extends ReactiveViewModel {
   String get ourProducts => "our_products".tr();
   String get retry => "retry".tr();
   String get noProductsFound => "no_products_found".tr();
-    String get noCategoriesFound => "no_categories_found".tr();
-
+  String get noCategoriesFound => "no_categories_found".tr();
 
   bool _isCategoriesBusy = false;
   bool _isProductsBusy = false;
@@ -83,7 +80,6 @@ class HomeViewModel extends ReactiveViewModel {
       await _productState.getCategories();
     } catch (e) {
       categoryErrorMessage = "something_went_wrong".tr();
-
     } finally {
       _isCategoriesBusy = false;
       notifyListeners();

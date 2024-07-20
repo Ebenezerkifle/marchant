@@ -35,7 +35,8 @@ class ImageBuilder extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         shape: circle ? BoxShape.circle : BoxShape.rectangle,
-        borderRadius: circle ? null : const BorderRadius.all(Radius.circular(8)),
+        borderRadius:
+            circle ? null : const BorderRadius.all(Radius.circular(8)),
         image: !_isUrl(image) && image.isNotEmpty
             ? DecorationImage(
                 image: AssetImage(image),

@@ -24,7 +24,7 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
   Map<String, String> selected = {};
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
- bool _loading = false;
+  bool _loading = false;
   bool get loading => _loading;
 
   String get submit => "submit".tr();
@@ -61,7 +61,8 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
   Future<void> refresh() async {
     await _loadCategories();
   }
-void setLoading(bool value) {
+
+  void setLoading(bool value) {
     _loading = value;
     notifyListeners();
   }
@@ -100,9 +101,9 @@ void setLoading(bool value) {
           _userService.setUserData(newUserData);
           SessionService.setString(SessionKey.token, token);
           // Save the role if it's not null
-            if (role != null) {
-              await SessionService.setString(SessionKey.role, role);
-            }
+          if (role != null) {
+            await SessionService.setString(SessionKey.role, role);
+          }
           _landingStateService.setIndex(0);
           _navigation.clearStackAndShow(Routes.landingView);
         } else {

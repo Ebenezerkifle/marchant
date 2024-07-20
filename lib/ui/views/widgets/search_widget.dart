@@ -8,13 +8,12 @@ class SearchWidget extends StatelessWidget {
   final VoidCallback? onFilter;
   String? search;
 
-   SearchWidget(
+  SearchWidget(
       {super.key,
       required this.searchController,
       this.width,
       this.onFilter,
-      this.search
-      });
+      this.search});
 
   @override
   Widget build(BuildContext context) {

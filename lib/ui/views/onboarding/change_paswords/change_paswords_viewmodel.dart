@@ -3,13 +3,17 @@ import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:marchant/app/app.dialogs.dart';
+import 'package:marchant/app/app.router.dart';
 import 'package:marchant/services/api_service/authentication.dart';
+import 'package:marchant/services/state_service/request_status_service.dart';
 
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../../../../app/app.locator.dart';
 
+import '../../../../services/state_service/auth_state_service.dart';
 import '../../../../services/state_service/snackbar_service.dart';
 import '../../../../services/state_service/user_service.dart';
 import '../../../../services/validation_service/front_validation.dart';
@@ -17,8 +21,66 @@ import '../../../../services/validation_service/front_validation.dart';
 class ChangePasswordsViewModel extends BaseViewModel {
   final _apiCall = Authentication();
   final _userService = locator<UserService>();
-
+  final _statusService = locator<RequestStatusService>();
   final _navigation = locator<NavigationService>();
+  final _stateService = locator<AuthStateService>();
+  final _dialog = locator<DialogService>();
+  String _userId = '';
+  String _role = '';
+
+  final bool forget;
+
+  ChangePasswordsViewModel({required this.forget}) // initialization
+  {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      forget ? _init() : null;
+    });
+  }
+
+  _init() async {
+    // initialization
+    // send phone number for verification.
+    setBusy(true);
+    _statusService.changeStatus(
+      status: RequestStatuss.loading,
+      description: "checking_phone_num".tr(),
+    );
+    _dialog.showCustomDialog(variant: DialogType.status);
+    var response =
+        await _apiCall.checkPhoneNumber(_stateService.phoneNum.substring(4));
+    var status = RequestStatuss.none;
+    var title = '';
+    var description = '';
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      status = RequestStatuss.success;
+      title = 'success'.tr();
+      description = 'found_phone_msg'.tr();
+      var body = jsonDecode(response.body);
+      _userId = body['id'];
+      _role = body['role'];
+
+      notifyListeners();
+      // close dialog
+      await Future.delayed(const Duration(seconds: 2), () {
+        _dialog.completeDialog(DialogResponse(confirmed: true));
+      });
+    } else {
+      status = RequestStatuss.error;
+      title = 'error'.tr();
+      description = "not_found_phone_msg".tr();
+      // navigate to login page.
+      Future.delayed(const Duration(seconds: 2), () {
+        _navigation.clearStackAndShow(Routes.loginView);
+      });
+    }
+    _statusService.changeStatus(
+      status: status,
+      title: title,
+      description: description,
+    );
+    setBusy(false);
+  }
 
   String get title => 'change_password'.tr();
 
@@ -65,48 +127,39 @@ class ChangePasswordsViewModel extends BaseViewModel {
 
   onSubmit() async {
     errorMsg = '';
-    _formError.remove('response');
-
     // on submit.
     if (_formKey.currentState!.validate() && _formError.isEmpty) {
-      // here we are.
       setBusy(true);
 
       Response response;
-
-      var userId = _userService.user?.id ?? '';
-      response = await _apiCall.changePassword(
-        userId,
-        passwordController.text,
-        newPasswordController.text,
-      );
-      // print(response.body);
+      if (forget) {
+        response =
+            await _apiCall.resetPassword(_userId, newPasswordController.text, _role);
+      } else {
+        var userId = _userService.user?.id ?? '';
+        response = await _apiCall.changePassword(
+          userId,
+          passwordController.text,
+          newPasswordController.text,
+        );
+      }
       if (response.statusCode == 200 || response.statusCode == 201) {
         // success
         // show snakbar here
         SnackBarService.showSnackBar(
-          content: "password_changed_success".tr(),
+          content: 'password_changed_success'.tr(),
         );
         // clear all fields for security reason.
         _clearFields();
-
-        _navigation.back();
+        forget
+            ? _navigation.clearStackAndShow(Routes.loginView)
+            : _navigation.back();
       } else {
-        // not successful
-        if (response.body.contains('{')) {
-          try {
-            var body = jsonDecode(response.body);
-            var message = body['message'];
-            _formError['response'] = message;
-          } catch (e) {
-            _formError['response'] = response.body.toString();
-          }
-        } else {
-          _formError['response'] = response.body.toString();
-        }
+        setError(true);
+        errorMsg = "something_went_wrong".tr();
+        notifyListeners();
       }
       setBusy(false);
-      notifyListeners();
     }
   }
 

@@ -20,4 +20,3 @@ const getApprovedProductsByManufacturer =
 const tokenLoginUrl = '/loginToken';
 const retaUrl = '/api/retailer';
 const manuUrl = '/api/manufacturer';
-

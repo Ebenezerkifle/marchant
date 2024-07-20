@@ -11,16 +11,15 @@ import '../../../services/state_service/orders_state_service.dart';
 class CartViewModel extends ReactiveViewModel {
   final _cartService = locator<CartStateService>();
   final OrderStateService _orderState = locator<OrderStateService>();
-  
-String get orderDetails => 'order_details'.tr();
-String get items => 'items'.tr();
-String get totalPriceText => 'total_price'.tr();
-String get cartDetails => 'cart_details'.tr();
-String get details => 'details'.tr();
-String get itemCount => 'item_count'.tr();
-String get clearCart => 'clear_cart'.tr();
-String get placeOrder => 'place_order'.tr();
 
+  String get orderDetails => 'order_details'.tr();
+  String get items => 'items'.tr();
+  String get totalPriceText => 'total_price'.tr();
+  String get cartDetails => 'cart_details'.tr();
+  String get details => 'details'.tr();
+  String get itemCount => 'item_count'.tr();
+  String get clearCart => 'clear_cart'.tr();
+  String get placeOrder => 'place_order'.tr();
 
   @override
   List<ListenableServiceMixin> get listenableServices =>
