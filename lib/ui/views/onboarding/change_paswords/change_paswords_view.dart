@@ -71,36 +71,6 @@ class ChangePasswordView extends StackedView<ChangePasswordsViewModel> {
                           ),
                           verticalSpaceMedium,
                         ],
-                        // CustomeFormField(
-                        //   title: viewModel.password,
-                        //   widget: InputField(
-                        //     validator: (value) => viewModel.validateText(
-                        //       value,
-                        //       viewModel.passwordController,
-                        //       viewModel.password.trim(),
-                        //       minLength: 6,
-                        //       maxLength: 12,
-                        //     ),
-                        //     controller: viewModel.passwordController,
-                        //     hint: viewModel.passwordHint,
-                        //     prefixIcon: Icon(
-                        //       FontAwesomeIcons.lock,
-                        //       color: kcPrimaryColorDark.withOpacity(.5),
-                        //       size: iconSize,
-                        //     ),
-                        //     suffixIcon: GestureDetector(
-                        //       onTap: viewModel.togglePrevPass,
-                        //       child: viewModel.prevPassVisible
-                        //           ? const Icon(Icons.visibility, size: iconSize)
-                        //           : const Icon(Icons.visibility_off,
-                        //               size: iconSize),
-                        //     ),
-                        //     hideText: !viewModel.prevPassVisible,
-                        //     error: viewModel.formError.containsKey(
-                        //       viewModel.passwordController,
-                        //     ),
-                        //   ),
-                        // ),
                         CustomeFormField(
                           title: viewModel.newPassword,
                           widget: InputField(
@@ -148,7 +118,7 @@ class ChangePasswordView extends StackedView<ChangePasswordsViewModel> {
                               size: iconSize,
                             ),
                             suffixIcon: GestureDetector(
-                              onTap: viewModel.toggleconfirmPass,
+                              onTap: viewModel.toggleConfirmPass,
                               child: viewModel.confirmPassVisible
                                   ? const Icon(Icons.visibility, size: iconSize)
                                   : const Icon(Icons.visibility_off,

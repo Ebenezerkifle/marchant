@@ -77,8 +77,8 @@ class ApiCallService {
   // patch call
   static Future<Response> patchCall(String url, Map<String, dynamic> body,
       {required bool needToken}) async {
-    String token = await _getToken();
-    needToken ? header[_auth] = 'Bearer $token' : null;
+    // String token = await _getToken();
+    needToken ? header[_auth] = 'Bearer ${await _getToken()}' : null;
     try {
       Response response =
           await patch(Uri.parse(url), headers: header, body: jsonEncode(body))
@@ -86,9 +86,14 @@ class ApiCallService {
         timeout,
         onTimeout: () => timeoutResponse,
       );
+      print("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+      print(response.body);
 
       return response;
     } catch (e) {
+      print(
+          "lsssssssssssssssssssssssssssssssssssssssssssssssssssskdslkfsfsafa");
+      print(e);
       return connectionProblem;
     }
   }

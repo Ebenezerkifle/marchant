@@ -13,13 +13,6 @@ class CategoryListViewModel extends ReactiveViewModel {
   Map<String, bool> get selected => _productState.selected;
   String get allCategoriesText => "all_categories".tr();
 
-  // onSelected(String key) {
-  //   _productState.onCategorySelected(key, reOrder: true);
-  //   notifyListeners();
-  //   _navigation.navigateTo(Routes
-  //       .subCategoryView); // Navigate to SubcategoryPage using the generated Routes class
-  // }
-
   void navigateToSubCategory(String categoryId) {
     _navigation.navigateToSubCategoryView(
         categoryValue: categoryId, subSubCategoryValue: '');

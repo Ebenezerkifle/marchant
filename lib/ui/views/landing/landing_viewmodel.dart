@@ -178,15 +178,10 @@ class LandingViewModel extends IndexTrackingViewModel {
       userRole == UserRole.manufacturer ? manufacturerItems : retailerItems;
 
   @override
-  @override
   int get currentIndex => _landingService.currentIndex;
 
   @override
   void setIndex(int value) {
     _landingService.setIndex(value);
-  }
-
-  void dispose() {
-    super.dispose();
   }
 }

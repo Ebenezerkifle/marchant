@@ -13,7 +13,7 @@ const getProductsByManufacturer = '/api/product/byManufacturer';
 const changePassRetailerUrl = '/api/retailer/updatePassword';
 const changePassManufacturerUrl = '/api/manufacturer/updatePassword/';
 const passResetUrl = '/passwordReset/';
-const phoneCheckerUrl = '/phoneChecker/';
+const phoneCheckerUrl = '/phoneChecker';
 const updateUrl = '/updateFields';
 const getApprovedProductsByManufacturer =
     '/api/product/ProductsByManufacturer/';

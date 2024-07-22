@@ -19,7 +19,6 @@ class StartupViewModel extends BaseViewModel {
   Future runStartupLogic() async {
     var token = await SessionService.getString(SessionKey.token);
     var role = await SessionService.getString(SessionKey.role);
-    print(role);
 
     await Future.delayed(const Duration(seconds: 1));
 
@@ -47,20 +46,3 @@ class StartupViewModel extends BaseViewModel {
     }
   }
 }
-
-// import 'package:stacked/stacked.dart';
-// import 'package:marchant/app/app.locator.dart';
-// import 'package:marchant/app/app.router.dart';
-// import 'package:stacked_services/stacked_services.dart';
-
-// class StartupViewModel extends BaseViewModel {
-//   final _navigationService = locator<NavigationService>();
-
-//   // Place anything here that needs to happen before we get into the application
-//   Future runStartupLogic() async {
-//     await Future.delayed(const Duration(seconds: 2));
-
-//     // Always navigate to the login view
-//     _navigationService.replaceWithLoginView();
-//   }
-// }

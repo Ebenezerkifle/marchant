@@ -32,7 +32,7 @@ class MydetailView extends StackedView<MydetailViewModel> {
                     key: viewModel.formKey,
                     child: Column(
                       children: [
-                        verticalSpaceLarge,
+                        verticalSpaceMedium,
                         CustomeFormField(
                           title: viewModel.firstName,
                           widget: InputField(
@@ -277,7 +277,7 @@ class MydetailView extends StackedView<MydetailViewModel> {
                           btnColor: kcPrimaryColorDark,
                           loading: viewModel.isBusy,
                         ),
-                                  verticalSpaceSmall,
+                        verticalSpaceSmall,
                       ],
                     ),
                   ),
