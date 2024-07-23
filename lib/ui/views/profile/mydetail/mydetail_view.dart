@@ -213,13 +213,13 @@ class MydetailView extends StackedView<MydetailViewModel> {
                           ),
                           verticalSpaceMedium,
                           CustomeFormField(
-                            title: 'Top Category',
+                            title: "top_category".tr(),
                             widget: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 DropdownButtonFormField<String>(
                                   value: viewModel.selectedCategory,
-                                  hint: const Text('Choose category'),
+                                  hint: const Text("top_category_hint".tr()),
                                   onChanged: viewModel.setSelectedCategory,
                                   items: viewModel.topCategories.values
                                       .map((Category category) {
