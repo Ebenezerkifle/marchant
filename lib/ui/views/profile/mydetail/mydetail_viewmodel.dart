@@ -2,19 +2,16 @@ import 'dart:convert';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-// import 'package:marchant/services/state_service/landing_state_servic.dart';
 import 'package:stacked/stacked.dart';
 import 'package:http/http.dart';
 import 'package:marchant/services/api_service/authentication.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../../../../app/app.locator.dart';
-// import '../../../../app/app.router.dart';
-import '../../../../models/category_model.dart'; // Use MyCategory here
+import '../../../../models/category_model.dart'; 
 import '../../../../models/user_model.dart';
 import '../../../../services/state_service/enrollment_state_service.dart';
 import '../../../../services/state_service/snackbar_service.dart';
 import '../../../../services/state_service/user_service.dart';
-// import '../../../../services/storage_service.dart/session.dart';
 import '../../../../services/validation_service/front_validation.dart';
 
 class MydetailViewModel extends ReactiveViewModel {

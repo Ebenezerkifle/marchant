@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:stacked/stacked.dart';
@@ -219,7 +220,7 @@ class MydetailView extends StackedView<MydetailViewModel> {
                               children: [
                                 DropdownButtonFormField<String>(
                                   value: viewModel.selectedCategory,
-                                  hint: const Text("top_category_hint".tr()),
+                                  hint: Text("top_category_hint".tr()),
                                   onChanged: viewModel.setSelectedCategory,
                                   items: viewModel.topCategories.values
                                       .map((Category category) {
