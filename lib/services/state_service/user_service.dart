@@ -8,7 +8,6 @@ class UserService with ListenableServiceMixin {
     _userData = user;
     notifyListeners();
 
-    // print('User data set: ${_userData?.CategoryId}, ${_userData?.phoneNumber}');
   }
 
   UserModel? get user => _userData;

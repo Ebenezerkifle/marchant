@@ -81,7 +81,7 @@ class ForgotPasswordView extends StackedView<ForgotPasswordViewModel> {
                     verticalSpaceSmall,
                   ],
                   CustomeButton(
-                    text: 'continue',
+                    text: 'continue'.tr(),
                     onTap: viewModel.onNext,
                     width: double.infinity,
                     btnColor: kcPrimaryColor,

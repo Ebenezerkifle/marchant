@@ -61,7 +61,7 @@ class ProductModel {
       'status': status,
       'details': details
     };
-  }
+  }  
 
   List<ProductModel> productsFromMap(List<dynamic> map) {
     List<ProductModel> products = [];

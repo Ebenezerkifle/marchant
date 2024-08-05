@@ -121,12 +121,13 @@
   "request_time_out": "የመጠየቂያ ጊዜ ተጠናቋል ኢንተርኔት ያረጋግጡ!",
   "upload_image": "እባክዎት ቢያንስ አንድ ምስል ያስገቡ",
   "can_not_empty": "ባዶ ሊሆን አይችልም",
-  "provide_valid": "እባክዎ ትክክለኛ ያስገቡ",
+  "provide_valid": "እባክዎ የሚሰራ ስልክ ቁጥር ያቅርቡ",
   "password_mismatch": "የይለፍ ቃል አለመዛመድ ተፈጥሯል",
   "invalid_phoneNumber": "ልክ ያልሆነ ስልክ ቁጥር",
   "error_uploading": "በመስቀል ላይ ስህተት ተፈጥሯል...",
   "no_orders_available": "ምንም ትዕዛዞች የሉም",
-  "no_delivered_orders_available": "እስካሁን ምንም አይነት ትዕዛዝ የለም"
-
+  "no_delivered_orders_available": "እስካሁን ምንም አይነት ትዕዛዝ የለም",
+  "valid_phoneNumber": "እባክዎ የሚሰራ ስልክ ቁጥር ያስገቡ",
+  "faild_fetch": "ምርቶችን ማምጣት አልተሳካም"
 
 }

@@ -147,7 +147,7 @@ class ChangePasswordView extends StackedView<ChangePasswordsViewModel> {
                           verticalSpaceSmall,
                         ],
                         CustomeButton(
-                          text: 'submit',
+                          text: 'submit'.tr(),
                           onTap: viewModel.onSubmit,
                           width: double.infinity,
                           btnColor: kcPrimaryColorDark,

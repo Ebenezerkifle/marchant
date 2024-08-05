@@ -15,14 +15,7 @@ class SnackBarService {
           vertical: middleSize,
           horizontal: smallSize,
         ),
-        // margin: const EdgeInsets.symmetric(
-        //   vertical: middleSize,
-        //   horizontal: smallSize,
-        // ),
-        // shape: RoundedRectangleBorder(
-        //   borderRadius: BorderRadius.circular(10.0),
-        // ),
-        // elevation: 8.0,
+       
         backgroundColor: kcPrimaryColor,
         content: Text(
           content.tr(),

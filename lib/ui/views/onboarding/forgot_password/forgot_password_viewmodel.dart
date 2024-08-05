@@ -31,7 +31,7 @@ class ForgotPasswordViewModel extends BaseViewModel {
     } else {
       _hasError = true;
       _errorMsg =
-          'Invalid phone number. Must be 10 digits and start with 09 or 07.';
+          'provide_valid'.tr();
     }
     notifyListeners();
   }
@@ -43,7 +43,7 @@ class ForgotPasswordViewModel extends BaseViewModel {
       _stateService.setPhoneNum(_phoneNum);
       _pushToOtpPage();
     } else {
-      _errorMsg = 'Please enter a valid phone number.';
+      _errorMsg = 'valid_phoneNumber'.tr();
       _hasError = true;
       notifyListeners();
     }

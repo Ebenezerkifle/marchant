@@ -40,7 +40,7 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                       verticalSpaceMiddle,
                       Text(
                         product.productName ?? '',
-                        style: AppTextStyle.big,
+                        style: AppTextStyle.h1Bold,
                       ),
                       verticalSpaceSmall,
                       Text(

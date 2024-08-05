@@ -32,10 +32,10 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
             tabs: [
               Tab(
                   child:
-                      Text(viewModel.pendingTab, style: AppTextStyle.h4Bold)),
+                      Text(viewModel.pendingTab, style: AppTextStyle.h3Bold)),
               Tab(
                   child:
-                      Text(viewModel.deliveredTab, style: AppTextStyle.h4Bold)),
+                      Text(viewModel.deliveredTab, style: AppTextStyle.h3Bold)),
             ],
             onTap: (index) {
               if (index == 1) {

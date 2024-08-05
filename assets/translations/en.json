@@ -118,12 +118,11 @@
   "request_time_out": "Request timeout check your connection",
   "can_not_empty": "Can not be empty",
   "upload_image": "Please upload at least one image",
-  "provide_valid": "Please provid a valid",
+  "provide_valid": "Please provid a valid phone number",
   "password_mismatch": "Password mismatch occured",
   "invalid_phoneNumber": "Invalid phone number",
   "error_uploading": "an error occured while uploading...",
   "no_orders_available": "No Orders available",
-  "no_delivered_orders_available": "No delivered orders yet"
-
-  
+  "no_delivered_orders_available": "No delivered orders yet",
+  "faild_fetch": "Failed to fetch products"
 }

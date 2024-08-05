@@ -28,7 +28,6 @@ class CompanyProfileViewModel extends ReactiveViewModel {
   CompanyProfileViewModel({required ProductModel product}) {
     _manufacturer = product.manufacturer; // Initialize the manufacturer
     _getApprovedProductsByManufacturer(_manufacturer);
-    print(_manufacturer);
   }
 
   void onItemSelected(ProductModel product) {
@@ -50,7 +49,7 @@ class CompanyProfileViewModel extends ReactiveViewModel {
       errorMessage = null; // Clear any existing error message
       await _postService.getApprovedProducts(manufacturer);
     } catch (e) {
-      errorMessage = 'Failed to fetch products. Please try again later.';
+      errorMessage = 'faild_fetch'.tr();
     }
     setBusy(false);
     notifyListeners(); // Notify listeners after state changes

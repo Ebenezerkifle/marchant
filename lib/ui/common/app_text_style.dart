@@ -30,61 +30,61 @@ class AppTextStyle {
   static const TextStyle h1Bold = TextStyle(
     //fontFamily: 'Helvetica',
     fontFamily: 'Inter',
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: FontWeight.bold,
     color: kcDarkGreyColor,
   );
   static const TextStyle h2Bold = TextStyle(
     //fontFamily: 'Helvetica',
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: FontWeight.bold,
     color: kcDarkGreyColor,
   );
   static const TextStyle h3Bold = TextStyle(
     //fontFamily: 'Helvetica',
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: FontWeight.bold,
     color: kcDarkGreyColor,
   );
   static const TextStyle h3Normal = TextStyle(
     //fontFamily: 'Helvetica',
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: FontWeight.normal,
     color: kcDarkGreyColor,
   );
   static const TextStyle h4Bold = TextStyle(
     //fontFamily: 'Helvetica',
-    fontSize: 14,
+    fontSize: 10,
     fontWeight: FontWeight.bold,
     color: kcDarkGreyColor,
   );
   static const TextStyle h4Normal = TextStyle(
     //fontFamily: 'Helvetica',
-    fontSize: 14,
+    fontSize: 10,
     fontWeight: FontWeight.normal,
     color: kcDarkGreyColor,
   );
   static const TextStyle h5Normal = TextStyle(
     //fontFamily: 'Helvetica',
-    fontSize: 12,
+    fontSize: 8,
     fontWeight: FontWeight.normal,
     color: kcDarkGreyColor,
   );
   static const TextStyle thinSmall = TextStyle(
     //fontFamily: 'Helvetica',
-    fontSize: 11,
+    fontSize: 9,
     fontWeight: FontWeight.normal,
     color: kcDarkGreyColor,
   );
   static const TextStyle boldSmall = TextStyle(
     //fontFamily: 'Helvetica',
-    fontSize: 12,
+    fontSize: 8,
     fontWeight: FontWeight.bold,
     color: kcDarkGreyColor,
   );
   static const TextStyle verySmall = TextStyle(
     //fontFamily: 'Helvetica',
-    fontSize: 9,
+    fontSize: 7,
     fontWeight: FontWeight.normal,
     color: kcDarkGreyColor,
   );

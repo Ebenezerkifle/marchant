@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:marchant/ui/common/app_colors.dart';
 import 'package:marchant/ui/common/app_text_style.dart';
@@ -10,6 +11,7 @@ import 'package:marchant/ui/views/widgets/fading_circle.dart';
 import 'package:stacked/stacked.dart';
 import './company_profile_viewmodel.dart';
 import 'package:marchant/models/product_model.dart';
+
 
 class CompanyProfileView extends StackedView<CompanyProfileViewModel> {
   const CompanyProfileView({super.key, required this.product});
@@ -123,11 +125,11 @@ class CompanyProfileView extends StackedView<CompanyProfileViewModel> {
                                     const SizedBox(height: largeSize),
                                   ],
                                 )
-                              : const Column(
+                              : Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Center(child: Text('No Product Found.')),
+                                    Center(child: Text('no_products_found'.tr())),
                                   ],
                                 ),
                 ],
