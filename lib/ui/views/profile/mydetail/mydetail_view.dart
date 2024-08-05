@@ -249,7 +249,7 @@ class MydetailView extends StackedView<MydetailViewModel> {
                               ],
                             ),
                           ),
-                          verticalSpaceMedium,
+                          verticalSpaceLarge,
                         ],
                         // error message widget
                         viewModel.formError.isNotEmpty
@@ -270,7 +270,7 @@ class MydetailView extends StackedView<MydetailViewModel> {
                                   verticalSpaceSmall,
                                 ],
                               )
-                            : verticalSpaceMedium,
+                            : verticalSpaceLarge,
                         CustomeButton(
                           text: viewModel.change,
                           onTap: viewModel.onSubmit,
