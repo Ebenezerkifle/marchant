@@ -47,7 +47,7 @@ class MyOrdersViewModel extends ReactiveViewModel {
       await _orderState.getOrders();
       errorMessage = null; // Clear any existing error message
     } catch (e) {
-      errorMessage = 'Failed to fetch orders';
+      errorMessage = "faild_fetch".tr();
     }
     setBusy(false);
     notifyListeners();
@@ -59,7 +59,7 @@ class MyOrdersViewModel extends ReactiveViewModel {
       await _orderState.getDeliveredOrders();
       errorMessage = null; // Clear any existing error message
     } catch (e) {
-      errorMessage = 'Failed to fetch orders';
+      errorMessage = "faild_fetch".tr();
     }
     setBusy(false);
     notifyListeners();
@@ -76,12 +76,9 @@ class MyOrdersViewModel extends ReactiveViewModel {
     String title = '';
     List<String> images = [];
     if (cartList != null) {
-      // print('-------------here we are------------------');
       for (int i = 0; i < cartList.length; i++) {
-        // print('**************');
-        // print(cartList[i].product?.productImage.isNotEmpty);
+      
         String img = cartList[i].product?.productImage.first ?? '';
-        // print(img);
         if (i == 1) {
           images.add(cartList[i].product?.productImage.first ?? "");
         }

@@ -23,23 +23,6 @@ class ApiCallService {
   // connection problem response.
   static Response connectionProblem = Response("check_internet".tr(), 500);
 
-  // // post call
-  // static Future<Response> postCall(
-  //     String url, String token, Map<String, dynamic> body,
-  //     {required bool needToken}) async {
-  //   needToken ? header[_auth] = 'Bearer $token' : null; //'Bearer $token'
-  //   try {
-  //     Response response =
-  //         await post(Uri.parse(url), headers: header, body: jsonEncode(body))
-  //             .timeout(
-  //       timeout,
-  //       onTimeout: () => timeoutResponse,
-  //     );
-  //     return response;
-  //   } catch (e) {
-  //     return connectionProblem;
-  //   }
-  // }
 
 // post call
   static Future<Response> postCall(String url, Map<String, dynamic> body,
@@ -86,14 +69,11 @@ class ApiCallService {
         timeout,
         onTimeout: () => timeoutResponse,
       );
-      print("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
-      print(response.body);
+     
 
       return response;
     } catch (e) {
-      print(
-          "lsssssssssssssssssssssssssssssssssssssssssssssssssssskdslkfsfsafa");
-      print(e);
+     
       return connectionProblem;
     }
   }

@@ -120,7 +120,6 @@ class LoginViewModel extends BaseViewModel {
           var merchant = body['userLogged'];
           var token = body['token'];
           var role = body['userLogged']['role'];
-          print(role);
 
           // Validate and parse user data
           if (merchant != null && merchant is Map<String, dynamic>) {

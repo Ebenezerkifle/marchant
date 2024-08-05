@@ -73,6 +73,7 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                 backgroundColor: kcPrimaryColor,
                 onRefresh: viewModel.refresh,
                 child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: middleSize),
                     child: Column(

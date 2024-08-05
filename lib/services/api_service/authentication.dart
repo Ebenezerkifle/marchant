@@ -62,11 +62,9 @@ class Authentication {
     String url;
     if (role == "Retailer") {
       url = '$baseUrl$retaUrl$passResetUrl$userId';
-      print(url);
     } else {
       url = '$baseUrl$manuUrl$passResetUrl$userId';
     }
-    print(url);
     return ApiCallService.patchCall(
       // '$baseUrl$singUpUrl$passResetUrl$userId',
       url,

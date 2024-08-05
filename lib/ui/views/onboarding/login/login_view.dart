@@ -33,14 +33,6 @@ class LoginView extends StackedView<LoginViewModel> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // Welcome messages.
-                  // Text(
-                  //   viewModel.welcomeMsg,
-                  //   style: AppTextStyle.withSize(
-                  //     style: AppTextStyle.h3Bold,
-                  //     weight: FontWeight.bold,
-                  //   ),
-                  // ),
                   Stack(
                     children: [
                       ImageBuilder(

@@ -43,15 +43,6 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
                     .getDeliveredOrders(); // Fetch delivered orders when the delivered tab is tapped
               }
             },
-
-            // onTap: (index) {
-            //   if (index ==1) {
-            //     viewModel
-            //         .getDeliveredOrders(); // Fetch delivered orders when the delivered tab is tapped
-            //   } else if (index == 0) {
-            //     viewModel.getOrders();
-            //   }
-            // },
           ),
         ),
         body: TabBarView(
@@ -92,6 +83,7 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
                         )
                       : viewModel.pendingOrders.isNotEmpty
                           ? SingleChildScrollView(
+                              physics: const AlwaysScrollableScrollPhysics(),
                               child: Column(
                                 children:
                                     viewModel.pendingOrders.entries.map((e) {
@@ -176,6 +168,7 @@ class MyOrdersView extends StackedView<MyOrdersViewModel> {
                               ],
                             )
                           : SingleChildScrollView(
+                              physics: const AlwaysScrollableScrollPhysics(),
                               child: Column(
                                 children:
                                     viewModel.deliveredOrders.entries.map((e) {

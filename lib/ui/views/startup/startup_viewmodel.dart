@@ -20,7 +20,7 @@ class StartupViewModel extends BaseViewModel {
     var token = await SessionService.getString(SessionKey.token);
     var role = await SessionService.getString(SessionKey.role);
 
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(milliseconds: 10));
 
     if (token != null && role != null) {
       try {

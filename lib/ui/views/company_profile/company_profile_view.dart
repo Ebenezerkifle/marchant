@@ -12,7 +12,6 @@ import 'package:stacked/stacked.dart';
 import './company_profile_viewmodel.dart';
 import 'package:marchant/models/product_model.dart';
 
-
 class CompanyProfileView extends StackedView<CompanyProfileViewModel> {
   const CompanyProfileView({super.key, required this.product});
   final ProductModel product;
@@ -35,6 +34,7 @@ class CompanyProfileView extends StackedView<CompanyProfileViewModel> {
           backgroundColor: kcPrimaryColor,
           onRefresh: viewModel.refresh,
           child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: middleSize),
               child: Column(
@@ -129,7 +129,8 @@ class CompanyProfileView extends StackedView<CompanyProfileViewModel> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Center(child: Text('no_products_found'.tr())),
+                                    Center(
+                                        child: Text('no_products_found'.tr())),
                                   ],
                                 ),
                 ],

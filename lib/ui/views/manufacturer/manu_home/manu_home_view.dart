@@ -93,6 +93,7 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                           )
                         : viewModel.products.isNotEmpty
                             ? SingleChildScrollView(
+                                physics: const AlwaysScrollableScrollPhysics(),
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: middleSize),

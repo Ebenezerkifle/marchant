@@ -67,6 +67,7 @@ class HomeView extends StackedView<HomeViewModel> {
                 backgroundColor: kcPrimaryColor,
                 onRefresh: viewModel.refresh,
                 child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
                   padding: const EdgeInsets.symmetric(horizontal: middleSize),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
