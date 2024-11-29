@@ -1,4 +1,4 @@
-package com.example.marchant
+package com.balesuk.balesukapp
 
 import io.flutter.embedding.android.FlutterActivity
 
