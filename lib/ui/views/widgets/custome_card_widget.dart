@@ -76,8 +76,8 @@ class CustomeCardWidget extends StatelessWidget {
         onTap: onTap,
         child: Card(
           child: Container(
-            padding:
-                elevation ? const EdgeInsets.all(10) : const EdgeInsets.all(0),
+            // padding:
+            //     elevation ? const EdgeInsets.all(10) : const EdgeInsets.all(0),
             decoration: BoxDecoration(
               color: kcCardColor,
               borderRadius: const BorderRadius.all(Radius.circular(10)),
