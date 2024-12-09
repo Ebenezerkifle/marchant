@@ -29,6 +29,8 @@ class ManuHomeViewModel extends ReactiveViewModel {
   List<ListenableServiceMixin> get listenableServices => [_postService];
 
   Map<String, ProductModel> get products => _postService.products;
+  bool get isLoadingCategories => _postService.isLoading;
+  String? get categoriesError => _postService.errorMessage;
 
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   get scaffoldKey => _key;
@@ -52,13 +54,16 @@ class ManuHomeViewModel extends ReactiveViewModel {
 
   Future<void> _getMyProducts() async {
     try {
-      setBusy(true);
+      // setBusy(true);
       errorMessage = null; // Clear any existing error message
       await _postService.getProducts();
     } catch (e) {
+      print(
+          "--------------------------------manu home view-------------------------------------");
+      print(e);
       errorMessage = "something_went_wrong".tr();
     }
-    setBusy(false);
+    // setBusy(false);
     notifyListeners();
   }
 
@@ -77,30 +82,6 @@ class ManuHomeViewModel extends ReactiveViewModel {
   Future<void> makePhoneCall() async {
     await _phoneService.makePhoneCall();
   }
-
-  // void filterProducts(String query) {
-  //   filterQuery = query
-  //       .toLowerCase(); // Convert the query to lowercase and assign to filterQuery
-
-  //   if (filterQuery?.isEmpty ?? true) {
-  //     // Check if filterQuery is null or empty
-  //     filteredProducts
-  //         .clear(); // If filterQuery is empty, clear filteredProducts map
-  //   } else {
-  //     // Perform custom fuzzy search on productName
-  //     filteredProducts = Map.fromEntries(products.entries.where((entry) {
-  //       final status = entry.value.status?.toLowerCase() ??
-  //           ''; // Get lowercase status or empty string if null
-  //       final searchLower = filterQuery!
-  //           .toLowerCase(); // Get lowercase filterQuery (forced non-null assertion)
-
-  //       // Check if productName contains searchLower
-  //       return status.contains(searchLower);
-  //     }));
-  //   }
-
-  //   notifyListeners(); // Notify listeners that filteredProducts have been updated
-  // }
 
   void filterProducts(String query) {
     filterQuery = query

@@ -1,29 +1,29 @@
+
 import 'dart:convert';
-import 'package:marchant/services/state_service/landing_state_servic.dart';
-import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
-import 'package:marchant/models/user_model.dart';
-import 'package:marchant/services/api_service/authentication.dart';
-import 'package:marchant/services/state_service/user_service.dart';
+
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/app/app.router.dart';
-import '../../../services/storage_service.dart/session.dart';
+import 'package:marchant/models/user_model.dart';
+import 'package:marchant/services/api_service/authentication.dart';
+import 'package:marchant/services/state_service/landing_state_servic.dart';
+import 'package:marchant/services/state_service/user_service.dart';
+import 'package:marchant/services/storage_service.dart/session.dart';
+import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
-class StartupViewModel extends BaseViewModel {
+class NoConnectionViewModel extends ReactiveViewModel {
   final _navigationService = locator<NavigationService>();
-  final _userService = locator<UserService>();
   final _authentication = Authentication();
+  final _userService = locator<UserService>();
   final _landingStateService = locator<LandingStateService>();
 
-  // Place anything here that needs to happen before we get into the application
-  Future runStartupLogic() async {
+  Future<void> runStartupLogic() async {
+    setBusy(true);
     var token = await SessionService.getString(SessionKey.token);
     var role = await SessionService.getString(SessionKey.role);
-
-    await Future.delayed(const Duration(milliseconds: 15));
-
-    if (token != null && role != null) {
+    if (token != null) {
       try {
+        // Get user data using the token
         // Get user data using the token
         var response = await _authentication.tokenLogin(role);
 
@@ -38,11 +38,10 @@ class StartupViewModel extends BaseViewModel {
           _navigationService.clearStackAndShow(Routes.landingView);
           return;
         } else {
-          _navigationService.clearStackAndShow(Routes.noConnectionView);
+          setBusy(false);
         }
       } catch (e) {
-        print('Error during token login: $e');
-        _navigationService.clearStackAndShow(Routes.noConnectionView);
+        setBusy(false);
       }
     } else {
       // Always navigate to the login view if no valid token or in case of an error

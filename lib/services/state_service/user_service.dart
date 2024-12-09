@@ -7,7 +7,6 @@ class UserService with ListenableServiceMixin {
   void setUserData(UserModel user) {
     _userData = user;
     notifyListeners();
-
   }
 
   UserModel? get user => _userData;

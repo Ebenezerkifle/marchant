@@ -15,7 +15,6 @@ class SnackBarService {
           vertical: middleSize,
           horizontal: smallSize,
         ),
-       
         backgroundColor: kcPrimaryColor,
         content: Text(
           content.tr(),

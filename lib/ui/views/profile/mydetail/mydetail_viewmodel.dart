@@ -7,7 +7,7 @@ import 'package:http/http.dart';
 import 'package:marchant/services/api_service/authentication.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../../../../app/app.locator.dart';
-import '../../../../models/category_model.dart'; 
+import '../../../../models/category_model.dart';
 import '../../../../models/user_model.dart';
 import '../../../../services/state_service/enrollment_state_service.dart';
 import '../../../../services/state_service/snackbar_service.dart';

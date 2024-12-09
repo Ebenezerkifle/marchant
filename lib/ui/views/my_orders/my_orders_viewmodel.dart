@@ -77,7 +77,6 @@ class MyOrdersViewModel extends ReactiveViewModel {
     List<String> images = [];
     if (cartList != null) {
       for (int i = 0; i < cartList.length; i++) {
-      
         String img = cartList[i].product?.productImage.first ?? '';
         if (i == 1) {
           images.add(cartList[i].product?.productImage.first ?? "");

@@ -53,4 +53,3 @@ class EnrollmentStateService with ListenableServiceMixin {
     notifyListeners();
   }
 }
-

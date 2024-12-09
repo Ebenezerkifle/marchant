@@ -23,7 +23,7 @@ class StartupView extends StackedView<StartupViewModel> {
             ImageBuilder(
               image: 'assets/logo/logo_icon.png',
               height: screenWidth(context) * .15,
-              width: screenWidth(context)* .2,
+              width: screenWidth(context) * .2,
             ),
             verticalSpaceMiddle,
             const Row(

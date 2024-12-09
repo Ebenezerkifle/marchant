@@ -43,6 +43,7 @@ import 'package:marchant/ui/bottom_sheets/change_language/change_language_sheet.
 import 'package:marchant/ui/views/onboarding/forgot_password/forgot_password_view.dart';
 import 'package:marchant/ui/views/onboarding/otp/otp_view.dart';
 import 'package:marchant/ui/dialogs/status/status_dialog.dart';
+import 'package:marchant/ui/views/no_connection/no_connection_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -70,6 +71,7 @@ import 'package:marchant/ui/dialogs/status/status_dialog.dart';
     MaterialRoute(page: PageBuilderView),
     MaterialRoute(page: ForgotPasswordView),
     MaterialRoute(page: OtpView),
+    MaterialRoute(page: NoConnectionView),
 // @stacked-route
   ],
   dependencies: [

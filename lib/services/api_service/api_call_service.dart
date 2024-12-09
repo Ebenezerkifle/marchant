@@ -23,7 +23,6 @@ class ApiCallService {
   // connection problem response.
   static Response connectionProblem = Response("check_internet".tr(), 500);
 
-
 // post call
   static Future<Response> postCall(String url, Map<String, dynamic> body,
       {required bool needToken}) async {
@@ -69,11 +68,9 @@ class ApiCallService {
         timeout,
         onTimeout: () => timeoutResponse,
       );
-     
 
       return response;
     } catch (e) {
-     
       return connectionProblem;
     }
   }

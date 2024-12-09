@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:marchant/app/app.locator.dart';
 import 'package:marchant/services/state_service/user_service.dart';
+import 'package:marchant/services/storage_service.dart/session.dart';
 import 'api_call_service.dart';
 import 'api_constants.dart';
 import 'package:marchant/models/category_model.dart';
@@ -9,8 +10,8 @@ class CategoryApiCallService {
   final _userService = locator<UserService>();
 
   Future<String> _getToken() async {
-    // return await SessionService.getString(SessionKey.token);
-    return 'your token';
+    return await SessionService.getString(SessionKey.token);
+    // return 'your token';
   }
 
   // Get Top Categories
@@ -47,6 +48,10 @@ class CategoryApiCallService {
       needToken: false,
     );
     Map<String, Category> categories = {};
+    print(
+        "---------------------------------------------fixing errors-----------------------------");
+    print(response.body);
+    print(response.statusCode);
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       var body = jsonDecode(response.body);

@@ -5,11 +5,11 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i25;
+import 'package:flutter/material.dart' as _i26;
 import 'package:flutter/material.dart';
-import 'package:marchant/models/category_model.dart' as _i28;
-import 'package:marchant/models/order_model.dart' as _i27;
-import 'package:marchant/models/product_model.dart' as _i26;
+import 'package:marchant/models/category_model.dart' as _i29;
+import 'package:marchant/models/order_model.dart' as _i28;
+import 'package:marchant/models/product_model.dart' as _i27;
 import 'package:marchant/ui/views/cart/cart_view.dart' as _i9;
 import 'package:marchant/ui/views/company_profile/company_profile_view.dart'
     as _i17;
@@ -26,6 +26,8 @@ import 'package:marchant/ui/views/manufacturer/manu_home/manu_product_detail/man
     as _i21;
 import 'package:marchant/ui/views/manufacturer/post/post_view.dart' as _i15;
 import 'package:marchant/ui/views/my_orders/my_orders_view.dart' as _i11;
+import 'package:marchant/ui/views/no_connection/no_connection_view.dart'
+    as _i25;
 import 'package:marchant/ui/views/onboarding/change_paswords/change_paswords_view.dart'
     as _i18;
 import 'package:marchant/ui/views/onboarding/forgot_password/forgot_password_view.dart'
@@ -43,7 +45,7 @@ import 'package:marchant/ui/views/sub_category/sub_category_list/sub_category_li
     as _i19;
 import 'package:marchant/ui/views/sub_category/sub_category_view.dart' as _i16;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i29;
+import 'package:stacked_services/stacked_services.dart' as _i30;
 
 class Routes {
   static const homeView = '/home-view';
@@ -92,6 +94,8 @@ class Routes {
 
   static const otpView = '/otp-view';
 
+  static const noConnectionView = '/no-connection-view';
+
   static const all = <String>{
     homeView,
     startupView,
@@ -116,6 +120,7 @@ class Routes {
     pageBuilderView,
     forgotPasswordView,
     otpView,
+    noConnectionView,
   };
 }
 
@@ -213,48 +218,52 @@ class StackedRouter extends _i1.RouterBase {
       Routes.otpView,
       page: _i24.OtpView,
     ),
+    _i1.RouteDef(
+      Routes.noConnectionView,
+      page: _i25.NoConnectionView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.HomeView: (data) {
-      return _i25.MaterialPageRoute<dynamic>(
+      return _i26.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.HomeView(),
         settings: data,
       );
     },
     _i3.StartupView: (data) {
-      return _i25.MaterialPageRoute<dynamic>(
+      return _i26.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartupView(),
         settings: data,
       );
     },
     _i4.LoginView: (data) {
-      return _i25.MaterialPageRoute<dynamic>(
+      return _i26.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.LoginView(),
         settings: data,
       );
     },
     _i5.SignupView: (data) {
-      return _i25.MaterialPageRoute<dynamic>(
+      return _i26.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.SignupView(),
         settings: data,
       );
     },
     _i6.ChooseCatagoryView: (data) {
-      return _i25.MaterialPageRoute<dynamic>(
+      return _i26.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.ChooseCatagoryView(),
         settings: data,
       );
     },
     _i7.CategoryListView: (data) {
-      return _i25.MaterialPageRoute<dynamic>(
+      return _i26.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.CategoryListView(),
         settings: data,
       );
     },
     _i8.ProductDetailView: (data) {
       final args = data.getArgs<ProductDetailViewArguments>(nullOk: false);
-      return _i25.MaterialPageRoute<dynamic>(
+      return _i26.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i8.ProductDetailView(key: args.key, product: args.product),
         settings: data,
@@ -264,50 +273,50 @@ class StackedRouter extends _i1.RouterBase {
       final args = data.getArgs<CartViewArguments>(
         orElse: () => const CartViewArguments(),
       );
-      return _i25.MaterialPageRoute<dynamic>(
+      return _i26.MaterialPageRoute<dynamic>(
         builder: (context) => _i9.CartView(key: args.key, order: args.order),
         settings: data,
       );
     },
     _i10.SideBarView: (data) {
-      return _i25.MaterialPageRoute<dynamic>(
+      return _i26.MaterialPageRoute<dynamic>(
         builder: (context) => const _i10.SideBarView(),
         settings: data,
       );
     },
     _i11.MyOrdersView: (data) {
-      return _i25.MaterialPageRoute<dynamic>(
+      return _i26.MaterialPageRoute<dynamic>(
         builder: (context) => const _i11.MyOrdersView(),
         settings: data,
       );
     },
     _i12.LandingView: (data) {
-      return _i25.MaterialPageRoute<dynamic>(
+      return _i26.MaterialPageRoute<dynamic>(
         builder: (context) => const _i12.LandingView(),
         settings: data,
       );
     },
     _i13.ProfileView: (data) {
-      return _i25.MaterialPageRoute<dynamic>(
+      return _i26.MaterialPageRoute<dynamic>(
         builder: (context) => const _i13.ProfileView(),
         settings: data,
       );
     },
     _i14.ManuHomeView: (data) {
-      return _i25.MaterialPageRoute<dynamic>(
+      return _i26.MaterialPageRoute<dynamic>(
         builder: (context) => const _i14.ManuHomeView(),
         settings: data,
       );
     },
     _i15.PostView: (data) {
-      return _i25.MaterialPageRoute<dynamic>(
+      return _i26.MaterialPageRoute<dynamic>(
         builder: (context) => const _i15.PostView(),
         settings: data,
       );
     },
     _i16.SubCategoryView: (data) {
       final args = data.getArgs<SubCategoryViewArguments>(nullOk: false);
-      return _i25.MaterialPageRoute<dynamic>(
+      return _i26.MaterialPageRoute<dynamic>(
         builder: (context) => _i16.SubCategoryView(
             key: args.key,
             categoryValue: args.categoryValue,
@@ -317,7 +326,7 @@ class StackedRouter extends _i1.RouterBase {
     },
     _i17.CompanyProfileView: (data) {
       final args = data.getArgs<CompanyProfileViewArguments>(nullOk: false);
-      return _i25.MaterialPageRoute<dynamic>(
+      return _i26.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i17.CompanyProfileView(key: args.key, product: args.product),
         settings: data,
@@ -327,7 +336,7 @@ class StackedRouter extends _i1.RouterBase {
       final args = data.getArgs<ChangePasswordViewArguments>(
         orElse: () => const ChangePasswordViewArguments(),
       );
-      return _i25.MaterialPageRoute<dynamic>(
+      return _i26.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i18.ChangePasswordView(key: args.key, forget: args.forget),
         settings: data,
@@ -335,7 +344,7 @@ class StackedRouter extends _i1.RouterBase {
     },
     _i19.SubCategoryListView: (data) {
       final args = data.getArgs<SubCategoryListViewArguments>(nullOk: false);
-      return _i25.MaterialPageRoute<dynamic>(
+      return _i26.MaterialPageRoute<dynamic>(
         builder: (context) => _i19.SubCategoryListView(
             key: args.key,
             subCategories: args.subCategories,
@@ -344,14 +353,14 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i20.MydetailView: (data) {
-      return _i25.MaterialPageRoute<dynamic>(
+      return _i26.MaterialPageRoute<dynamic>(
         builder: (context) => const _i20.MydetailView(),
         settings: data,
       );
     },
     _i21.ManuProductDetailView: (data) {
       final args = data.getArgs<ManuProductDetailViewArguments>(nullOk: false);
-      return _i25.MaterialPageRoute<dynamic>(
+      return _i26.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i21.ManuProductDetailView(key: args.key, product: args.product),
         settings: data,
@@ -359,21 +368,27 @@ class StackedRouter extends _i1.RouterBase {
     },
     _i22.PageBuilderView: (data) {
       final args = data.getArgs<PageBuilderViewArguments>(nullOk: false);
-      return _i25.MaterialPageRoute<dynamic>(
+      return _i26.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i22.PageBuilderView(product: args.product, key: args.key),
         settings: data,
       );
     },
     _i23.ForgotPasswordView: (data) {
-      return _i25.MaterialPageRoute<dynamic>(
+      return _i26.MaterialPageRoute<dynamic>(
         builder: (context) => const _i23.ForgotPasswordView(),
         settings: data,
       );
     },
     _i24.OtpView: (data) {
-      return _i25.MaterialPageRoute<dynamic>(
+      return _i26.MaterialPageRoute<dynamic>(
         builder: (context) => const _i24.OtpView(),
+        settings: data,
+      );
+    },
+    _i25.NoConnectionView: (data) {
+      return _i26.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i25.NoConnectionView(),
         settings: data,
       );
     },
@@ -392,9 +407,9 @@ class ProductDetailViewArguments {
     required this.product,
   });
 
-  final _i25.Key? key;
+  final _i26.Key? key;
 
-  final _i26.ProductModel product;
+  final _i27.ProductModel product;
 
   @override
   String toString() {
@@ -419,9 +434,9 @@ class CartViewArguments {
     this.order,
   });
 
-  final _i25.Key? key;
+  final _i26.Key? key;
 
-  final _i27.OrderModel? order;
+  final _i28.OrderModel? order;
 
   @override
   String toString() {
@@ -447,7 +462,7 @@ class SubCategoryViewArguments {
     required this.subSubCategoryValue,
   });
 
-  final _i25.Key? key;
+  final _i26.Key? key;
 
   final String categoryValue;
 
@@ -478,9 +493,9 @@ class CompanyProfileViewArguments {
     required this.product,
   });
 
-  final _i25.Key? key;
+  final _i26.Key? key;
 
-  final _i26.ProductModel product;
+  final _i27.ProductModel product;
 
   @override
   String toString() {
@@ -505,7 +520,7 @@ class ChangePasswordViewArguments {
     this.forget = false,
   });
 
-  final _i25.Key? key;
+  final _i26.Key? key;
 
   final bool forget;
 
@@ -533,9 +548,9 @@ class SubCategoryListViewArguments {
     this.categoryValue,
   });
 
-  final _i25.Key? key;
+  final _i26.Key? key;
 
-  final List<_i28.Category> subCategories;
+  final List<_i29.Category> subCategories;
 
   final String? categoryValue;
 
@@ -564,9 +579,9 @@ class ManuProductDetailViewArguments {
     required this.product,
   });
 
-  final _i25.Key? key;
+  final _i26.Key? key;
 
-  final _i26.ProductModel product;
+  final _i27.ProductModel product;
 
   @override
   String toString() {
@@ -591,9 +606,9 @@ class PageBuilderViewArguments {
     this.key,
   });
 
-  final _i26.ProductModel product;
+  final _i27.ProductModel product;
 
-  final _i25.Key? key;
+  final _i26.Key? key;
 
   @override
   String toString() {
@@ -612,7 +627,7 @@ class PageBuilderViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i29.NavigationService {
+extension NavigatorStateExtension on _i30.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -698,8 +713,8 @@ extension NavigatorStateExtension on _i29.NavigationService {
   }
 
   Future<dynamic> navigateToProductDetailView({
-    _i25.Key? key,
-    required _i26.ProductModel product,
+    _i26.Key? key,
+    required _i27.ProductModel product,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -715,8 +730,8 @@ extension NavigatorStateExtension on _i29.NavigationService {
   }
 
   Future<dynamic> navigateToCartView({
-    _i25.Key? key,
-    _i27.OrderModel? order,
+    _i26.Key? key,
+    _i28.OrderModel? order,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -816,7 +831,7 @@ extension NavigatorStateExtension on _i29.NavigationService {
   }
 
   Future<dynamic> navigateToSubCategoryView({
-    _i25.Key? key,
+    _i26.Key? key,
     required String categoryValue,
     required String subSubCategoryValue,
     int? routerId,
@@ -837,8 +852,8 @@ extension NavigatorStateExtension on _i29.NavigationService {
   }
 
   Future<dynamic> navigateToCompanyProfileView({
-    _i25.Key? key,
-    required _i26.ProductModel product,
+    _i26.Key? key,
+    required _i27.ProductModel product,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -854,7 +869,7 @@ extension NavigatorStateExtension on _i29.NavigationService {
   }
 
   Future<dynamic> navigateToChangePasswordView({
-    _i25.Key? key,
+    _i26.Key? key,
     bool forget = false,
     int? routerId,
     bool preventDuplicates = true,
@@ -871,8 +886,8 @@ extension NavigatorStateExtension on _i29.NavigationService {
   }
 
   Future<dynamic> navigateToSubCategoryListView({
-    _i25.Key? key,
-    required List<_i28.Category> subCategories,
+    _i26.Key? key,
+    required List<_i29.Category> subCategories,
     String? categoryValue,
     int? routerId,
     bool preventDuplicates = true,
@@ -906,8 +921,8 @@ extension NavigatorStateExtension on _i29.NavigationService {
   }
 
   Future<dynamic> navigateToManuProductDetailView({
-    _i25.Key? key,
-    required _i26.ProductModel product,
+    _i26.Key? key,
+    required _i27.ProductModel product,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -923,8 +938,8 @@ extension NavigatorStateExtension on _i29.NavigationService {
   }
 
   Future<dynamic> navigateToPageBuilderView({
-    required _i26.ProductModel product,
-    _i25.Key? key,
+    required _i27.ProductModel product,
+    _i26.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -961,6 +976,20 @@ extension NavigatorStateExtension on _i29.NavigationService {
         transition,
   ]) async {
     return navigateTo<dynamic>(Routes.otpView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToNoConnectionView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.noConnectionView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -1052,8 +1081,8 @@ extension NavigatorStateExtension on _i29.NavigationService {
   }
 
   Future<dynamic> replaceWithProductDetailView({
-    _i25.Key? key,
-    required _i26.ProductModel product,
+    _i26.Key? key,
+    required _i27.ProductModel product,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1069,8 +1098,8 @@ extension NavigatorStateExtension on _i29.NavigationService {
   }
 
   Future<dynamic> replaceWithCartView({
-    _i25.Key? key,
-    _i27.OrderModel? order,
+    _i26.Key? key,
+    _i28.OrderModel? order,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1170,7 +1199,7 @@ extension NavigatorStateExtension on _i29.NavigationService {
   }
 
   Future<dynamic> replaceWithSubCategoryView({
-    _i25.Key? key,
+    _i26.Key? key,
     required String categoryValue,
     required String subSubCategoryValue,
     int? routerId,
@@ -1191,8 +1220,8 @@ extension NavigatorStateExtension on _i29.NavigationService {
   }
 
   Future<dynamic> replaceWithCompanyProfileView({
-    _i25.Key? key,
-    required _i26.ProductModel product,
+    _i26.Key? key,
+    required _i27.ProductModel product,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1208,7 +1237,7 @@ extension NavigatorStateExtension on _i29.NavigationService {
   }
 
   Future<dynamic> replaceWithChangePasswordView({
-    _i25.Key? key,
+    _i26.Key? key,
     bool forget = false,
     int? routerId,
     bool preventDuplicates = true,
@@ -1225,8 +1254,8 @@ extension NavigatorStateExtension on _i29.NavigationService {
   }
 
   Future<dynamic> replaceWithSubCategoryListView({
-    _i25.Key? key,
-    required List<_i28.Category> subCategories,
+    _i26.Key? key,
+    required List<_i29.Category> subCategories,
     String? categoryValue,
     int? routerId,
     bool preventDuplicates = true,
@@ -1260,8 +1289,8 @@ extension NavigatorStateExtension on _i29.NavigationService {
   }
 
   Future<dynamic> replaceWithManuProductDetailView({
-    _i25.Key? key,
-    required _i26.ProductModel product,
+    _i26.Key? key,
+    required _i27.ProductModel product,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1277,8 +1306,8 @@ extension NavigatorStateExtension on _i29.NavigationService {
   }
 
   Future<dynamic> replaceWithPageBuilderView({
-    required _i26.ProductModel product,
-    _i25.Key? key,
+    required _i27.ProductModel product,
+    _i26.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1315,6 +1344,20 @@ extension NavigatorStateExtension on _i29.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.otpView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithNoConnectionView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.noConnectionView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

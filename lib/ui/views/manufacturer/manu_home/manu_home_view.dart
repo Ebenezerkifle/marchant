@@ -65,19 +65,19 @@ class ManuHomeView extends StackedView<ManuHomeViewModel> {
                 color: Colors.white,
                 backgroundColor: kcPrimaryColor,
                 onRefresh: viewModel.refresh,
-                child: viewModel.isBusy
+                child: viewModel.isLoadingCategories
                     ? SizedBox(
                         height: screenHeight(context) * .4,
                         width: double.infinity,
                         child: const Center(child: spinkit),
                       )
-                    : viewModel.errorMessage != null
+                    : viewModel.categoriesError != null
                         ? Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  viewModel.errorMessage!,
+                                  viewModel.categoriesError!,
                                   style: const TextStyle(
                                     fontSize: 18,
                                     color: Colors.red,

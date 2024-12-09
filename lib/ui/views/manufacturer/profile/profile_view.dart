@@ -43,6 +43,7 @@ class ManuProfileView extends StackedView<ManuProfileViewModel> {
                         image: viewModel.image,
                         height: 100,
                         fit: BoxFit.cover,
+                        width: 100,
                       ),
                       verticalSpaceSmall,
                       if (viewModel.fullName.isNotEmpty) ...[

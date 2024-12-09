@@ -21,7 +21,6 @@ class ManuProductDetailViewModel extends BaseViewModel {
   String get productDetalistext => "more_details".tr();
   String get statusText => "status".tr();
 
-
   String get manufacturerText => "manufacturer".tr();
   String get unKnownText => "unknown".tr();
   String get seeMoreText => "see_more".tr();

@@ -78,6 +78,9 @@ class FilePickerService with ListenableServiceMixin {
               onDone: () async {
                 SnackBarService.showSnackBar(content: "successfully_uploaded");
                 final downloadUrl = await childRef.getDownloadURL();
+                print(
+                    "-------------------------------download url -------------------------------------");
+                print(downloadUrl);
                 _progress.value = 1.0;
                 _downloadLink.value = downloadUrl;
                 _loading.value = false;

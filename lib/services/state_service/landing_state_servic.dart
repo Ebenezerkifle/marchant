@@ -1,5 +1,3 @@
-
-
 import 'package:marchant/enums/user_role.dart';
 import 'package:stacked/stacked.dart';
 
@@ -40,7 +38,10 @@ class LandingStateService with ListenableServiceMixin {
 
     // Convert roleString to UserRole enum
     UserRole? role;
-    if (roleString.toLowerCase() == 'retailor') {
+    print(
+        "------------------------------------role to lowercase-------------------------------");
+    print(roleString.toLowerCase());
+    if (roleString.toLowerCase() == 'retailer') {
       role = UserRole.retailor;
     } else if (roleString.toLowerCase() == 'manufacturer') {
       role = UserRole.manufacturer;
@@ -50,6 +51,10 @@ class LandingStateService with ListenableServiceMixin {
     }
 
     _userRole.value = role;
+
+    print(
+        "====================================user role in the landing state service=====================");
+    print(role);
     notifyListeners();
   }
 

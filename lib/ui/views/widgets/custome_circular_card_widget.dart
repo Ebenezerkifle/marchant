@@ -67,7 +67,7 @@ class CircularCardWidget extends StatelessWidget {
               child: Text(
                 title,
                 overflow: TextOverflow.ellipsis,
-                maxLines: 2,  // Limits the text to a maximum of 2 lines
+                maxLines: 2, // Limits the text to a maximum of 2 lines
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 10.0,

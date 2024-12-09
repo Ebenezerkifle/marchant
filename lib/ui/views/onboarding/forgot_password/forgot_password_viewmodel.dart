@@ -30,8 +30,7 @@ class ForgotPasswordViewModel extends BaseViewModel {
       _phoneNum = '+251${phone.substring(1)}';
     } else {
       _hasError = true;
-      _errorMsg =
-          'provide_valid'.tr();
+      _errorMsg = 'provide_valid'.tr();
     }
     notifyListeners();
   }
