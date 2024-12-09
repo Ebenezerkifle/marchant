@@ -2,112 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-// class ImageBuilder extends StatelessWidget {
-//   const ImageBuilder({
-//     super.key,
-//     required this.image,
-//     this.fit = BoxFit.cover,
-//     required this.height,
-//     this.width,
-//     this.circle = false,
-//     this.blured = false,
-//     this.errorBuilder,
-//   });
-
-//   final String image;
-//   final BoxFit fit;
-//   final double height;
-//   final double? width;
-//   final bool circle;
-//   final bool blured;
-//   final Widget Function(BuildContext, Object, StackTrace?)? errorBuilder;
-
-//   bool _isUrl(String? string) {
-//     if (string == null) return false;
-//     final RegExp urlExp = RegExp(
-//       r'^((ftp|http|https)://|(www))[a-z0-9-]+(.[a-z0-9-]+)+(:[0-9]{1,5})?(/.*)?$',
-//     );
-//     return urlExp.hasMatch(string);
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       decoration: BoxDecoration(
-//         shape: circle ? BoxShape.circle : BoxShape.rectangle,
-//         borderRadius:
-//             circle ? null : const BorderRadius.all(Radius.circular(8)),
-//         image: !_isUrl(image) && image.isNotEmpty
-//             ? DecorationImage(
-//                 image: AssetImage(image),
-//                 fit: fit,
-//               )
-//             : null,
-//       ),
-//       height: height,
-//       width: width ?? height,
-//       child: _isUrl(image)
-//           ? Image.network(
-//               image,
-//               fit: fit,
-//               height: height,
-//               width: width ?? height,
-//               errorBuilder: (context, error, stackTrace) {
-//                 return Center(
-//                   child: Image.asset(
-//                     'assets/images/placeholder.png',
-//                     fit: BoxFit.contain,
-//                     height: height * 0.25,
-//                     width: (width ?? height) * 0.25,
-//                   ),
-//                 );
-//               },
-//             )
-//           : image.isNotEmpty
-//               ? Image.asset(
-//                   image,
-//                   fit: fit,
-//                   height: height,
-//                   width: width ?? height,
-//                 )
-//               : Center(
-//                   child: Image.asset(
-//                     'assets/images/placeholder.png',
-//                     fit: BoxFit.contain,
-//                     height: height * 0.25,
-//                     width: (width ?? height) * 0.25,
-//                   ),
-//                 ),
-//     );
-//   }
-
-//   Widget bluredImage() {
-//     return BackdropFilter(
-//       filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-//       child: Container(
-//         decoration: BoxDecoration(color: Colors.white.withOpacity(0.0)),
-//         child: ImageBuilder(
-//           image: 'assets/images/placeholder.png',
-//           height: height,
-//           fit: BoxFit.cover,
-//           errorBuilder: (context, error, stackTrace) {
-//             return Center(
-//               child: Image.asset(
-//                 'assets/images/placeholder.png',
-//                 fit: BoxFit.contain,
-//                 height: height * 0.25,
-//                 width: (width ?? height) * 0.25,
-//               ),
-//             );
-//           },
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-
-
 class ImageBuilder extends StatelessWidget {
   const ImageBuilder({
     super.key,
@@ -151,20 +45,21 @@ class ImageBuilder extends StatelessWidget {
             : null,
       ),
       height: height,
-      width: width ?? double.infinity,  // Full width for the image
+      width: width ?? double.infinity, // Full width for the image
       child: _isUrl(image)
           ? Image.network(
               image,
               fit: fit,
               height: height,
-              width: width ?? double.infinity,  // Full width for the image
+              width: width ?? double.infinity, // Full width for the image
               errorBuilder: (context, error, stackTrace) {
                 return Center(
                   child: Image.asset(
                     'assets/images/placeholder.png',
                     fit: BoxFit.contain,
-                    height: height,  // Increase the height of the placeholder
-                    width: width ?? double.infinity,  // Full width for the placeholder
+                    height: height, // Increase the height of the placeholder
+                    width: width ??
+                        double.infinity, // Full width for the placeholder
                   ),
                 );
               },
@@ -174,14 +69,15 @@ class ImageBuilder extends StatelessWidget {
                   image,
                   fit: fit,
                   height: height,
-                  width: width ?? double.infinity,  // Full width for the image
+                  width: width ?? double.infinity, // Full width for the image
                 )
               : Center(
                   child: Image.asset(
                     'assets/images/placeholder.png',
                     fit: BoxFit.contain,
-                    height: height,  // Increase the height of the placeholder
-                    width: width ?? double.infinity,  // Full width for the placeholder
+                    height: height, // Increase the height of the placeholder
+                    width: width ??
+                        double.infinity, // Full width for the placeholder
                   ),
                 ),
     );

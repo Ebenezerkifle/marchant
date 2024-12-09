@@ -54,6 +54,7 @@ class CustomeCardWidget extends StatelessWidget {
               // crossAxisAlignment: centerText
               //     ? CrossAxisAlignment.center
               //     : CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 ImageBuilder(
                   image: image,

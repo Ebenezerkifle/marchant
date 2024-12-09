@@ -45,6 +45,7 @@ class ProfileView extends StackedView<ProfileViewModel> {
                         image: viewModel.image,
                         height: 100,
                         fit: BoxFit.cover,
+                        width: 100,
                       ),
                       verticalSpaceSmall,
                       if (viewModel.fullName.isNotEmpty) ...[
