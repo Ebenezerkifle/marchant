@@ -45,9 +45,16 @@ class CompanyProfileView extends StackedView<CompanyProfileViewModel> {
                   Center(
                     child: CircleAvatar(
                       radius: 50,
-                      backgroundImage: NetworkImage(
-                        product.logoImage ?? 'https://via.placeholder.com/100',
-                      ),
+                      backgroundImage: product.logoImage != null &&
+                              Uri.tryParse(product.logoImage!)
+                                      ?.hasAbsolutePath ==
+                                  true
+                          ? NetworkImage(
+                              product.logoImage!,
+                            )
+                          : const AssetImage('assets/images/placeholder.png')
+                              as ImageProvider,
+                      backgroundColor: Colors.transparent,
                     ),
                   ),
                   const SizedBox(height: mediumSize),

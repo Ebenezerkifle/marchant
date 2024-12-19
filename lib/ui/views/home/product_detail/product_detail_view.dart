@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marchant/models/product_model.dart';
 import 'package:marchant/ui/common/app_colors.dart';
@@ -61,6 +62,8 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                                   padding:
                                       const EdgeInsets.only(bottom: smallSize),
                                   child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       horizontalSpaceSmall,
                                       Container(
@@ -76,7 +79,7 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                                         child: Text(
                                           e,
                                           style: AppTextStyle.h3Normal,
-                                          maxLines: 1,
+                                          maxLines: 100,
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),

@@ -79,7 +79,8 @@ class HomeViewModel extends ReactiveViewModel {
       notifyListeners();
       await _productState.getCategories();
     } catch (e) {
-      categoryErrorMessage = "something_went_wrong".tr();
+      categoryErrorMessage = "change_your_internet_connection".tr();
+      // categoryErrorMessage = "something_went_wrong".tr();
     } finally {
       _isCategoriesBusy = false;
       notifyListeners();
@@ -97,7 +98,8 @@ class HomeViewModel extends ReactiveViewModel {
         // productErrorMessage = 'No Products found';
         _productState.products.clear(); // Clear the products list
       } else {
-        productErrorMessage = "something_went_wrong".tr();
+        productErrorMessage = "change_your_internet_connection".tr();
+        // productErrorMessage = "something_went_wrong".tr();
       }
     } finally {
       _isProductsBusy = false;

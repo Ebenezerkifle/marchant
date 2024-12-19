@@ -14,7 +14,7 @@ class CustomeCardWidget extends StatelessWidget {
     this.details = const [],
     this.onTap,
     this.centerText = false,
-    this.image = 'assets/images/mark.png',
+    this.image = 'assets/images/placeholder.png',
     // this.image = 'assets/images/category.jpg',
     this.elevation = true,
     this.widget = const SizedBox(),
@@ -41,124 +41,99 @@ class CustomeCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = size ?? MediaQuery.of(context).size.width * .05;
+    double width = size ?? MediaQuery.of(context).size.width * .06;
 
-    if (isCategory) {
-      return InkWell(
-        onTap: onTap,
-        child: Card(
-          child: Container(
-            // padding:
-            //     elevation ? const EdgeInsets.all(10) : const EdgeInsets.all(0),
-            child: Column(
-              // crossAxisAlignment: centerText
-              //     ? CrossAxisAlignment.center
-              //     : CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                ImageBuilder(
-                  image: image,
-                  width: width,
-                  height: width,
-                  // circle: false,
-                ),
-                // const SizedBox(height: smallSize),
-              ],
-            ),
+    // if (isCategory) {
+    //   return InkWell(
+    //     onTap: onTap,
+    //     child: Card(
+    //       child: Container(
+    //         padding: const EdgeInsets.all(10),
+    //         child: Column(
+    //           // crossAxisAlignment: centerText
+    //           //     ? CrossAxisAlignment.center
+    //           //     : CrossAxisAlignment.start,
+    //           mainAxisAlignment: MainAxisAlignment.start,
+    //           children: [
+    //             ImageBuilder(
+    //               image: image,
+    //               width: width,
+    //               height: width,
+    //               // circle: false,
+    //             ),
+    //             // const SizedBox(height: smallSize),
+    //           ],
+    //         ),
+    //       ),
+    //     ),
+    //   );
+    // } else {
+    return InkWell(
+      onTap: onTap,
+      child: Card(
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: kcCardColor,
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            boxShadow: [
+              BoxShadow(
+                color: elevation
+                    ? Colors.black.withOpacity(.05)
+                    : Colors.black.withOpacity(0.0),
+                blurRadius: 3.0,
+                offset: const Offset(1, 2),
+                spreadRadius: 1,
+              )
+            ],
           ),
-        ),
-      );
-    } else {
-      // int limit = (detailLimit != null && details.length > detailLimit!)
-      //     ? detailLimit!
-      //     : details.length;
-
-      return InkWell(
-        onTap: onTap,
-        child: Card(
-          child: Container(
-            // padding:
-            //     elevation ? const EdgeInsets.all(10) : const EdgeInsets.all(0),
-            decoration: BoxDecoration(
-              color: kcCardColor,
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-              boxShadow: [
-                BoxShadow(
-                  color: elevation
-                      ? Colors.black.withOpacity(.05)
-                      : Colors.black.withOpacity(0.0),
-                  blurRadius: 3.0,
-                  offset: const Offset(1, 2),
-                  spreadRadius: 1,
-                )
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: centerText
-                  ? CrossAxisAlignment.center
-                  : CrossAxisAlignment.start,
-              children: [
-                ImageBuilder(
-                  image: image,
-                  width: width,
-                  height: width,
-                  circle: false,
-                ),
-                const SizedBox(height: smallSize),
-                small
-                    ? Text(title, style: AppTextStyle.thinSmall)
-                    : SizedBox(
-                        width: width,
-                        child: Column(
-                          crossAxisAlignment: centerText
-                              ? CrossAxisAlignment.center
-                              : CrossAxisAlignment.start,
-                          children: [
+          child: Column(
+            crossAxisAlignment: centerText
+                ? CrossAxisAlignment.center
+                : CrossAxisAlignment.start,
+            children: [
+              ImageBuilder(
+                image: image,
+                width: width,
+                height: width,
+                circle: false,
+              ),
+              const SizedBox(height: smallSize),
+              small
+                  ? Text(title, style: AppTextStyle.thinSmall)
+                  : SizedBox(
+                      width: width,
+                      child: Column(
+                        crossAxisAlignment: centerText
+                            ? CrossAxisAlignment.center
+                            : CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            title,
+                            style: AppTextStyle.h3Bold,
+                            maxLines: 1,
+                            overflow: TextOverflow.clip,
+                          ),
+                          if (description != null) ...[
                             Text(
-                              title,
-                              style: AppTextStyle.h3Bold,
+                              description!,
+                              style: AppTextStyle.h4Normal,
                               maxLines: 1,
-                              overflow: TextOverflow.clip,
+                              // overflow: TextOverflow.clip,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            if (description != null) ...[
-                              Text(
-                                description!,
-                                style: AppTextStyle.h4Normal,
-                                maxLines: 1,
-                                // overflow: TextOverflow.clip,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              verticalSpaceSmall,
-                            ],
-                            // Column(
-                            //   crossAxisAlignment: CrossAxisAlignment.start,
-                            //   children: List.generate(
-                            //     limit,
-                            //     (index) => Text(
-                            //       details[index],
-                            //       style: AppTextStyle.thinSmall,
-                            //       maxLines: 2,
-                            //       overflow: TextOverflow.ellipsis,
-                            //     ),
-                            //   ).toList(),
-                            // ),
-                            const SizedBox(height: 5),
-                            widget,
-                            // const SizedBox(height: 10),
-                            // Text(
-                            //   status??'',
-                            //   style: AppTextStyle.h3Bold,
-                            //   maxLines: 1,
-                            //   overflow: TextOverflow.clip,
-                            // ),
+                            // verticalSpaceSmall,
                           ],
-                        ),
+                          const SizedBox(height: 5),
+                          widget,
+                        ],
                       ),
-              ],
-            ),
+                    ),
+            ],
           ),
         ),
-      );
-    }
+      ),
+    );
+    // }
   }
 }

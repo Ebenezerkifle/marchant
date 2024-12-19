@@ -215,7 +215,7 @@ class HomeView extends StackedView<HomeViewModel> {
                                                           .isNotEmpty
                                                       ? e.value.productImage
                                                           .first
-                                                      : 'https://via.placeholder.com/100',
+                                                      : 'assets/images/placeholder.png',
                                                   // 'assets/images/category.jpg',
                                                   widget: Text(
                                                     '${e.value.salesPrice} ETB',
@@ -242,7 +242,7 @@ class HomeView extends StackedView<HomeViewModel> {
                                                           .isNotEmpty
                                                       ? e.value.productImage
                                                           .first
-                                                      : 'https://via.placeholder.com/100',
+                                                      : 'assets/images/placeholder.png',
                                                   // 'assets/images/category.jpg',
                                                   widget: Text(
                                                     '${e.value.salesPrice} ETB',

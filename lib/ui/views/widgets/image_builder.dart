@@ -32,54 +32,37 @@ class ImageBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        shape: circle ? BoxShape.circle : BoxShape.rectangle,
-        borderRadius:
-            circle ? null : const BorderRadius.all(Radius.circular(8)),
-        image: !_isUrl(image) && image.isNotEmpty
-            ? DecorationImage(
-                image: AssetImage(image),
-                fit: fit,
-              )
-            : null,
-      ),
+    return SizedBox(
       height: height,
-      width: width ?? double.infinity, // Full width for the image
-      child: _isUrl(image)
-          ? Image.network(
-              image,
-              fit: fit,
-              height: height,
-              width: width ?? double.infinity, // Full width for the image
-              errorBuilder: (context, error, stackTrace) {
-                return Center(
-                  child: Image.asset(
-                    'assets/images/placeholder.png',
-                    fit: BoxFit.contain,
-                    height: height, // Increase the height of the placeholder
-                    width: width ??
-                        double.infinity, // Full width for the placeholder
+      width: width ?? MediaQuery.of(context).size.width, // Use bounded width
+      child: ClipRRect(
+        borderRadius: circle
+            ? BorderRadius.circular(height / 2)
+            : BorderRadius.circular(8),
+        child: _isUrl(image)
+            ? Image.network(
+                image,
+                fit: fit,
+                errorBuilder: errorBuilder ??
+                    (context, error, stackTrace) {
+                      return Image.asset(
+                        'assets/images/placeholder.png',
+                        fit: BoxFit.fitHeight,
+                      );
+                    },
+              )
+            : image.isNotEmpty
+                ? Image.asset(
+                    image,
+                    fit: fit,
+                  )
+                : Center(
+                    child: Image.asset(
+                      'assets/images/placeholder.png',
+                      fit: BoxFit.fitHeight,
+                    ),
                   ),
-                );
-              },
-            )
-          : image.isNotEmpty
-              ? Image.asset(
-                  image,
-                  fit: fit,
-                  height: height,
-                  width: width ?? double.infinity, // Full width for the image
-                )
-              : Center(
-                  child: Image.asset(
-                    'assets/images/placeholder.png',
-                    fit: BoxFit.contain,
-                    height: height, // Increase the height of the placeholder
-                    width: width ??
-                        double.infinity, // Full width for the placeholder
-                  ),
-                ),
+      ),
     );
   }
 }

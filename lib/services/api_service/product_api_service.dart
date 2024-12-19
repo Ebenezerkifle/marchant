@@ -17,7 +17,8 @@ class ProductApiCallService {
   Future<Map<String, ProductModel>> getProducts() async {
     final String categoryId = _userService.user?.CategoryId ?? '';
 
-    String token = await _getToken(); // Get the token
+    String token = ''; // Get the token
+    // String token = await _getToken(); // Get the token
 
     var response = await ApiCallService.getCall(
       '$baseUrl$productUrl/$categoryId',
@@ -47,7 +48,8 @@ class ProductApiCallService {
 
   // Get sub products
   Future<Map<String, ProductModel>> getSubProducts(categoryId) async {
-    String token = await _getToken(); // Get the token
+    String token = ""; // Get the token
+    // String token = await _getToken(); // Get the token
 
     var response = await ApiCallService.getCall(
       '$baseUrl$productUrl/$categoryId',

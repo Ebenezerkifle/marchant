@@ -242,7 +242,7 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                                             .isNotEmpty
                                                         ? e.value.productImage
                                                             .first
-                                                        : 'assets/images/mark.png',
+                                                        : 'assets/images/placeholder.png',
                                                     widget: Text(
                                                       '${e.value.salesPrice} ETB',
                                                       style:
@@ -269,7 +269,7 @@ class SubCategoryView extends StackedView<SubCategoryViewModel> {
                                                             .isNotEmpty
                                                         ? e.value.productImage
                                                             .first
-                                                        : 'assets/images/mark.png',
+                                                        : 'assets/images/placeholder.png',
                                                     widget: Text(
                                                       '${e.value.salesPrice} ETB',
                                                       style:

@@ -16,12 +16,14 @@ class CategoryApiCallService {
 
   // Get Top Categories
   Future<Map<String, Category>> getTopCategories() async {
-    String token = await _getToken();
+    String token = "";
+    // String token = await _getToken();
     var response = await ApiCallService.getCall(
       '$baseUrl$categoryUrl',
       token,
       needToken: false,
     );
+
     Map<String, Category> topCategories = {};
 
     if (response.statusCode == 200 || response.statusCode == 201) {
@@ -40,7 +42,8 @@ class CategoryApiCallService {
   Future<Map<String, Category>> getCategories() async {
     final String categoryId = _userService.user?.CategoryId ?? '';
 
-    String token = await _getToken(); // Get the token
+    // String token = await _getToken(); // Get the token
+    String token = "";
 
     var response = await ApiCallService.getCall(
       '$baseUrl$categoryUrl/$categoryId',
@@ -48,10 +51,6 @@ class CategoryApiCallService {
       needToken: false,
     );
     Map<String, Category> categories = {};
-    print(
-        "---------------------------------------------fixing errors-----------------------------");
-    print(response.body);
-    print(response.statusCode);
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       var body = jsonDecode(response.body);

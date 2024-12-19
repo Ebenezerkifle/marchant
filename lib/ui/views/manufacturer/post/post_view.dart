@@ -143,6 +143,7 @@ class PostView extends StackedView<PostViewModel> {
                               height: 50,
                               child: DropdownButtonFormField<String>(
                                 value: viewModel.selectedCategory,
+                                style: AppTextStyle.h4Normal,
                                 hint: Text(viewModel.topCategoryHint),
                                 onChanged: viewModel.onCategoryChanged,
                                 items: viewModel.topCategories.values
@@ -180,6 +181,7 @@ class PostView extends StackedView<PostViewModel> {
                                 height: 50,
                                 child: DropdownButtonFormField<String>(
                                   value: viewModel.selectedSubCategory,
+                                  style: AppTextStyle.h4Normal,
                                   hint: Text(viewModel.subCategoryHint),
                                   onChanged: viewModel.onSubCategoryChanged,
                                   items: viewModel.subCategories
@@ -217,6 +219,7 @@ class PostView extends StackedView<PostViewModel> {
                                 height: 50,
                                 child: DropdownButtonFormField<String>(
                                   value: viewModel.selectedSubSubCategory,
+                                  style: AppTextStyle.h4Normal,
                                   hint: Text(viewModel.subSubCategoryHint),
                                   onChanged: viewModel.onSubSubCategoryChanged,
                                   items: viewModel.subSubCategories

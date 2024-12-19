@@ -29,7 +29,7 @@ class PageBuilderView extends StackedView<PageBuilderViewModel> {
                 image: product.productImage[index],
                 height: screenWidth(context) * .7,
                 width: double.infinity,
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
               );
             },
           ),

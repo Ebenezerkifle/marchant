@@ -46,8 +46,10 @@ class ChooseCategoryViewModel extends ReactiveViewModel {
 
   Future<void> _loadCategories() async {
     setLoading(true);
+
     try {
       await _enrollmentService.getTopCategories();
+
       topCategories = _enrollmentService.topCategories;
       _errorMessage = null;
     } catch (e) {

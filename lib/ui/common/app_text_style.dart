@@ -30,37 +30,37 @@ class AppTextStyle {
   static const TextStyle h1Bold = TextStyle(
     //fontFamily: 'Helvetica',
     fontFamily: 'Inter',
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: FontWeight.bold,
     color: kcDarkGreyColor,
   );
   static const TextStyle h2Bold = TextStyle(
     //fontFamily: 'Helvetica',
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: FontWeight.bold,
     color: kcDarkGreyColor,
   );
   static const TextStyle h3Bold = TextStyle(
     //fontFamily: 'Helvetica',
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: FontWeight.bold,
     color: kcDarkGreyColor,
   );
   static const TextStyle h3Normal = TextStyle(
     //fontFamily: 'Helvetica',
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: FontWeight.normal,
     color: kcDarkGreyColor,
   );
   static const TextStyle h4Bold = TextStyle(
     //fontFamily: 'Helvetica',
-    fontSize: 10,
+    fontSize: 12,
     fontWeight: FontWeight.bold,
     color: kcDarkGreyColor,
   );
   static const TextStyle h4Normal = TextStyle(
     //fontFamily: 'Helvetica',
-    fontSize: 10,
+    fontSize: 12,
     fontWeight: FontWeight.normal,
     color: kcDarkGreyColor,
   );
